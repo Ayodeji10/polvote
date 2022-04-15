@@ -1,0 +1,5038 @@
+/* resets  */
+body #root > .container-fluid {
+    padding: 0;
+    background-image: url('../src/bg-img/Rectangle\ 32.png');
+    /* min-height: 100vh; */
+}
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+p,
+span,
+button, 
+select,
+label {
+    font-family: 'Nunito', sans-serif;  
+    text-decoration: none !important;
+    color: #FFF;
+    outline: none !important;
+    border: none !important;
+}
+
+a:hover {
+    outline: none !important;
+    color: #FFF;
+    text-decoration: none !important;
+}
+
+input {
+    outline: none !important;
+    border: none;
+}
+
+.login-form input {
+    background-color: #36425E;
+    color: #FFF !important;
+    border: 0;
+    text-decoration: none !important;
+    outline: none !important;
+}
+
+.login-form input::placeholder {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  opacity: 0.25;
+  font-family: 'Questrial', sans-serif;
+  opacity: 40%;
+}
+
+/* presets  */
+.ReactModal__Overlay {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* landing page */
+.container-fluid.landing-page {
+    height: 100vh;
+    background-image: url('../src/bg-img//back2.png'), url('../src/bg-img//back1.png') !important;
+    background-position:center;
+    background-size: cover;
+}
+
+.container-fluid.landing-page nav li a {
+    font-size: 16px;
+    font-weight: 400;
+    color: black !important;
+    font-family: 'Questrial', sans-serif;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+.container-fluid.landing-page nav li button {
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 50px;
+    padding: 12px 20px;
+    margin-left: 20px;
+}
+
+.container-fluid.landing-page nav li button#login {
+    color: rgba(0, 122, 243, 1);
+    background-color: transparent;
+    border: solid 1px rgba(0, 122, 243, 1) !important
+}
+
+.container-fluid.landing-page nav li button#sign-up {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+}
+
+.container-fluid.landing-page .content {
+    margin-top: 130px
+}
+
+.container-fluid.landing-page h1 {
+    font-size: 49px;
+    font-weight: 700;
+    line-height: 58px;
+    max-width: 587px;
+    color: rgba(10, 24, 61, 1);
+    margin-bottom: 14px;
+}
+
+.container-fluid.landing-page p {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 28px;
+    max-width: 564px;
+    color: rgba(10, 24, 61, 0.6);
+    margin-bottom: 20px;
+}
+
+.container-fluid.landing-page button {
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 14px 60px;
+    border-radius: 50px;
+}
+
+.container-fluid.landing-page footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 22px 0;
+    border-top: solid 2px rgba(255, 255, 255, 0.2) !important;
+}
+
+.container-fluid.landing-page footer p {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+}
+
+.container-fluid.landing-page footer img {
+    margin-left: 12px
+}
+
+/* signup modal  */
+#signup {
+    top: 5% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 803px;
+    height: 680px;
+    background-color: rgba(4, 19, 54, 1) !important;
+    border-radius: 10px !important;
+    padding: 16px 14px !important;
+}
+
+#signup i {
+    float: right;
+}
+
+#signup h1 {
+    color: #FFF;
+    text-align: center;;
+    margin: 16px 0 8px 0;
+    font-size: 22px;
+    font-weight: 600;
+    max-width: none;
+    line-height: 24px;
+}
+
+#signup h4 {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 344px;
+    margin: 0 auto 20px;
+    line-height: 20px;
+}
+
+#signup .form {
+    width: 627px;
+    margin: 0 auto
+}
+
+#signup .form button {
+    width: 100%;
+    background-color: #FFF !important;
+    padding: 0 15px !important;
+    border-radius: 100px !important;
+    color: rgba(10, 24, 61, 1) !important;
+    text-transform: lowercase;
+}
+
+#signup .form button.kep-login-facebook {
+    padding: 12px !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#signup .form button.kep-login-facebook i {
+    float: unset
+}
+
+#signup .form button span {
+    color: rgba(10, 24, 61, 1) !important;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#signup .form span {
+    width: 100%;
+    border: solid 1px rgba(255, 255, 255, 0.2) !important;
+}
+
+#signup .form h5 {
+    line-height: 20px;
+    margin: 0 16px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#signup .form label {
+    display: block;
+    color: #FFF;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#signup .form input {
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    color: #FFF;
+    padding: 18px 20px;
+    margin-bottom: 26px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#signup .form button#create {
+    width: unset;
+    display: block;
+    margin: 0px auto;
+    color: #FFF !important;
+    background-color: rgba(0, 122, 243, 1) !important;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 135px !important
+}
+
+#signup .form h6 {
+    /* margin-bottom: 31px; */
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#signup .form h6 span {
+    color: rgba(0, 122, 243, 1);
+}
+
+
+
+/* verification  */
+#verification {
+    top: 30% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 591px;
+    height: 375px;
+    background-color: rgba(4, 19, 54, 1) !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+    text-align: center;
+}
+
+#verification i {
+    float: right
+}
+
+#verification img {
+    margin: 48px 0 12px 0
+}
+
+#verification h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 700;
+    color: #FFF
+}
+
+#verification p {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 329px;
+    margin: 0 auto;
+    margin-bottom: 48px;
+}
+
+#verification p span {
+    color: #007AF3
+}
+
+
+
+
+/* login modal  */
+#login-modal {
+    top: 3% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 588px;
+    height: 740px;
+    background-color: rgba(4, 19, 54, 1) !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+}
+
+#login-modal i {
+    float: right;
+}
+
+#login-modal form {
+    width: 386px;
+    margin: 36px auto;
+}
+
+#login-modal form h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 24px;
+    color: #FFF;
+    text-align: center;
+}
+
+#login-modal form h2 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    max-width: 345px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+#login-modal form button {
+    width: 287px;
+    background-color: #FFF;
+    color: rgba(10, 24, 61, 1);
+    border-radius: 100px !important;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 0 15px !important
+}
+
+#login-modal form button span {
+    color: rgba(10, 24, 61, 1)
+}
+
+#login-modal form button.metro {
+    padding: 10px 15px !important;
+    text-transform: lowercase;
+}
+
+#login-modal form button.metro i {
+    float: unset;
+}
+
+#login-modal form .or {
+    margin-bottom: 30px;
+}
+
+#login-modal form .or span  {
+    border: solid 1px rgba(255, 255, 255, 1) !important;
+    width: 100%
+}
+
+#login-modal form .or h6  {
+    margin: 0 16px
+}
+
+#login-modal form label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+#login-modal form input {
+    width: 100%;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFF;
+    padding: 18px 24px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+#login-modal form input:last-child {
+    margin-bottom: 24px;
+}
+
+#login-modal form .remember label, #login-modal form .remember input {
+    display: inline;
+    margin: unset;
+    padding: 0;
+    width: unset;
+    color: rgba(82, 169, 255, 1)
+}
+
+#login-modal form .remember a {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(1, 147, 222, 1)
+}
+
+#login-modal form button#login-btn {
+    width: 100%;
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding: 16px !important;
+    border-radius: 100px;
+}
+
+#login-modal form h6 {
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+}
+
+#login-modal form h6 span {
+    color: #52A9FF
+}
+
+
+
+/* forgot password modal */
+#forgot-password {
+    position: relative !important;
+    top: 20% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 588px;
+    height: 509px;
+    background-color: rgba(4, 19, 54, 1) !important;
+    border-radius: 10px !important;
+    padding: 12px !important;
+}
+
+#forgot-password i {
+    float: right;
+}
+
+#forgot-password .content {
+    width: 446px;
+    position: absolute;
+    top: 50%;
+    left: 50%; 
+    transform: translate(-50%, -50%);
+}
+
+#forgot-password .content h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 58px;
+    text-align: center;
+}
+
+#forgot-password .content label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 14px;
+    display: block;
+}
+
+#forgot-password .content input {
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+    padding: 18px 24px;
+    margin-bottom: 51px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    display: block;
+}
+
+#forgot-password .content button {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 0;
+    width: 100%;
+    border-radius: 100px;
+    display: block;
+}
+
+#forgot-password .content h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 13px;
+    text-align: center;
+}
+
+#forgot-password .content h3 {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 51px;
+    text-align: center;
+}
+
+#forgot-password .content p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 auto;
+    margin-bottom: 63px;
+    text-align: center;
+    max-width: 249px
+}
+
+#forgot-password .content .otp-input input {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 17px 0;
+    width: 61px;
+    display: block;
+    text-align: center;
+    margin: 0 8px;
+    margin-bottom: 51px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* navbar  */
+.navigation-container {
+    box-shadow: 0px 4px 4px 0px #FFFFFF0D;
+}
+
+.navigation-container .container-fluid {
+    padding: 0 !important
+}
+
+.navbar {
+    padding: 20px 0;
+    margin-bottom: 47px;
+}
+
+.navbar-brand {
+    padding: 0 !important;
+    margin-right: 135px;
+}
+
+nav li a {
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF !important;
+    font-family: 'Questrial', sans-serif;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+}
+
+nav li a#course {
+    color: rgba(39, 229, 8, 1) !important;
+}
+
+.dropdown li a img {
+    margin-right: 9px;
+}
+
+.dropdown li a {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 0, 0, 0.8) !important;
+    font-family: 'Questrial', sans-serif;
+}
+
+nav .nav2 {
+    padding-left: 38px;
+    border-left: solid 2px rgba(255, 255, 255, 0.2)
+}
+
+nav .profile-img {
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 12px;
+}
+
+nav .profile-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position:top;
+}
+
+nav .profile-img a {
+    padding: 0 !important
+}
+
+/* toggle  */
+.navbar-toggler {
+  background: #007AF3 !important;
+  border: none;
+  padding: 10px 6px !important;
+  outline: none !important;
+}
+
+.navbar-toggler span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  border: 1px;
+  background: white;
+  border: solid 1px white;
+}
+
+.navbar-toggler span + span {
+  width: 18px;
+  margin: 4px 0 0 4px;
+  width: 22px;
+}
+
+.navbar-toggler span + span + span {
+  width: 10px;
+  margin-left: 4px;
+}
+
+
+
+
+
+
+
+/* home  */
+/* aside  */
+.home-feed .user p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 2px;
+}
+
+.home-feed .user h3 {
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.home-feed .avatar {
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.home-feed .aside .course {
+    margin-bottom: 25px;
+}
+
+.home-feed .aside .course h3 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.home-feed .aside .course .card {
+    border-radius: 10px;
+    border: solid 1px rgba(255, 255, 255, 0.1);
+    background-color: rgba(4, 19, 54, 1);
+}
+
+.home-feed .aside .course .card .header {
+    height: 103px;
+    background-image: url('../src/bg-img/unsplash_Co1Y7NxclgY.png');
+    /* background-image: url('img/unsplash_Co1Y7NxclgY.png'); */
+    border-radius: 10px 10px 0 0 ;
+}
+
+.home-feed .aside .course .card .body {
+    padding: 18px
+}
+
+.home-feed .aside .course .card h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.home-feed .aside .course .card span i {
+    font-size: 10px;
+}
+
+.home-feed .aside .course .card span h5, .home-feed .aside .course .card span h4, .home-feed .aside .course .card p {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.home-feed .aside .course .card span h4, .home-feed .aside .course .card span i {
+    color: rgba(254, 192, 6, 1);
+    margin-right: 8px;
+}
+
+.home-feed .aside .course button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.home-feed .aside .content {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 26px 17px;
+}
+
+.home-feed .aside .content img {
+    margin-right: 17px;
+}
+
+.home-feed .aside .content span {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.home-feed .aside .courses {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    margin-bottom: 24px;
+    padding: 20px;
+}
+
+.home-feed .aside .courses h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 18px;
+}
+
+.home-feed .aside .courses img {
+    margin-right: 14px;
+}
+
+.home-feed .aside .courses h4 {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.home-feed .aside .polls {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    margin-bottom: 72px;
+    padding: 26px 16px 26px 26px;
+}
+
+.home-feed .aside .polls .active-polls {
+    overflow-y: scroll;
+    max-height: 270px;
+}
+
+.home-feed .aside .polls .active-polls::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+.home-feed .aside .polls .active-polls::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.home-feed .aside .polls .active-polls::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.home-feed .aside .polls .active-polls > * {
+    margin: 0 10px 24px 0
+}
+
+.home-feed .aside .polls h3 {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 27px;
+}
+
+.home-feed .aside .polls h4 {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+/* main  */
+/* header  */
+.home-feed .main .header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 13px;
+    text-align: center;
+}
+
+.home-feed .main .searchbar {
+    padding: 11px 34px;
+    background-color: #FFF;
+    border-radius: 80px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+    margin-bottom: 32px;
+}
+
+.home-feed .main .header input {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 500;
+    background-color: transparent;
+}
+
+.home-feed .main .header input::placeholder {
+    color: rgba(0, 0, 0, 0.25)
+}
+
+/* add  */
+.home-feed .main .banner-add {
+    width: 100%;
+    height: auto;
+    margin-bottom: 28px;
+}
+
+/* polls  */
+.home-feed .main .poll {
+    border-radius: 5px;
+    background-color: rgba(4, 19, 54, 1);
+    margin-bottom: 30px;
+}
+
+.home-feed .main .poll .main {
+    padding: 33px 37px
+}
+
+.home-feed .main .poll .main .header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.home-feed .main .poll .main .header p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.home-feed .main .poll .main .header button {
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 12px;
+    margin: 0;
+    background-color: rgba(8, 29, 67, 1);
+    color: rgba(255, 255, 255, 0.3)
+}
+
+.home-feed .main .poll .main .header {
+    margin-bottom: 44px;
+}
+
+.home-feed .main .poll .main .header button.active {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
+}
+
+.home-feed .main .poll .main .header button#chart-btn {
+    border-radius: 10px 0 0 10px;
+}
+
+.home-feed .main .poll .main .header button#leaderboerd-btn {
+    border-radius: 0 10px 10px 0;
+}
+
+.home-feed .main .poll .main .header img {
+    margin-right: 7px;
+}
+
+.home-feed .main .poll .main .candidate img {
+    border-radius: 5px;
+    min-width: 100%;
+}
+
+.home-feed .main .poll .main .candidate h4 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.home-feed .main .poll .main .candidate p {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.home-feed .main .poll .main .candidate .bar {
+    height: 6px;
+    background-color: rgba(0, 122, 243, 0.3);
+    border-radius: 60px;
+}
+
+.home-feed .main .poll .main .candidate .indicator {
+    height: 6px;
+    width: 50% !important;
+    background-color: #FFF;
+    border-radius: 60px;
+}
+
+.home-feed .main .poll .main .candidate h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.home-feed .main .poll .main .candidate h6 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.home-feed .main .poll .main .candidate .vote {
+    background-color: rgba(0, 122, 243, 1);
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    padding: 10.4px
+}
+
+.home-feed .main .poll footer {
+    background-color: rgba(6, 25, 71, 1);
+    padding: 14px 38px
+}
+
+.home-feed .main .poll footer a {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.home-feed .main .poll footer a i {
+    margin-right: 17px;
+}
+
+.home-feed .main .poll footer button {
+    padding: 11px 13px;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 5px;
+}
+
+.home-feed .main .poll footer button i {
+    margin-left: 15px;
+}
+
+/* stories  */
+.home-feed .main .stories {
+    margin-bottom: 30px;
+}
+
+.home-feed .main .stories .header {
+    margin-bottom: 22px;
+}
+
+.home-feed .main .stories .header h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.home-feed .main .stories .header h4 {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 0 12px
+}
+
+.home-feed .main .stories .header h4:first-child {
+    border-right: solid 1px #FFF !important;
+}
+
+.home-feed .main .stories .header h4 i {
+    margin-right: 10px
+}
+
+.home-feed .main .stories .carousel {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.home-feed .main .stories .carousel .story {
+    position: relative;
+    margin-right: 20px;
+    min-width: 284px;
+    max-width: 284px;
+}
+
+.home-feed .main .stories .carousel .story img {
+    border-radius: 20px;
+    width: 100%;
+    height: auto
+}
+
+.home-feed .main .stories .carousel .story .like-btn {
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: #FFF;
+    position: absolute;
+    top: 12px;
+    right: 12px
+}
+
+.home-feed .main .stories .carousel .story .like-btn i {
+    color: rgba(255, 0, 0, 1)
+}
+
+.home-feed .main .stories .carousel .story p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.home-feed .main .stories .carousel::-webkit-scrollbar {
+    height: 5px
+}
+ 
+.home-feed .main .stories .carousel::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.home-feed .main .stories .carousel::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+/* profiles  */
+.home-feed .main .profiles {
+    margin-bottom: 33px;
+}
+
+.home-feed .main .profiles .header h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.home-feed .main .profiles .header p {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.home-feed .main .profiles .header p i {
+    margin-right: 10px
+}
+
+.home-feed .main .profiles .profile {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 27px 52px 17px 27px;
+    margin-bottom: 20px;
+}
+
+.home-feed .main .profiles .profile img#profile-img {
+    border-radius: 8px;
+}
+
+.home-feed .main .profiles .profile h3 {
+    color: rgba(135, 195, 254, 1);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.home-feed .main .profiles .profile p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 67px;
+}
+
+.home-feed .main .profiles .profile h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.home-feed .main .profiles .profile .fa-eye {
+    color: #FFF;
+    margin-right: 10px;
+}
+
+.home-feed .main .profiles .profile .fa-share-alt {
+    color: rgba(0, 122, 243, 1);
+}
+
+.home-feed .main .profiles button {
+    margin-left: 20px;
+    padding: 11px 14px;
+    border-radius: 5px;
+}
+
+.home-feed .main .profiles button:nth-child(1) {
+    background-color: #FFF;
+    color: rgba(0, 122, 243, 1)
+}
+
+.home-feed .main .profiles button:nth-child(2) {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1)
+}
+
+/* adds  */
+.home-feed .main .adds {
+    margin-bottom: 37px;
+}
+
+.home-feed .main .adds p {
+    text-align: right;
+    font-size: 12px;
+    font-weight: 400px;
+    margin-bottom: 6px;
+}
+
+.home-feed .main .adds p i {
+    margin-left: 5px
+}
+
+/* courses  */
+.home-feed .main .courses {
+    margin-bottom: 64px;
+}
+
+.home-feed .main .courses .header h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.home-feed .main .courses .header a {
+    font-size: 14px;
+    font-weight: 700;
+    color: rgba(0, 122, 243, 1)
+}
+
+.home-feed .main .courses .header a i {
+    margin-left: 10px;
+}
+
+.home-feed .main .courses .carousel {
+    display: flex;
+    overflow-x: scroll;
+    padding-bottom: 30px;
+}
+
+.home-feed .main .courses .carousel::-webkit-scrollbar {
+    height: 5px
+}
+ 
+.home-feed .main .courses .carousel::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+.home-feed .main .courses .carousel::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.home-feed .main .courses .carousel .course {
+    min-width: 272px;
+    max-width: 272px;
+    border-radius: 10px;
+    background-color: #FFF;
+    margin-right: 40px;
+}
+
+.home-feed .main .courses .carousel .course img {
+    width: 100%;
+    height: 148px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+.home-feed .main .courses .carousel .course .body {
+    padding: 11px 20px;
+}
+
+.home-feed .main .courses .carousel .course h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: rgba(6, 25, 71, 1);
+    margin-bottom: 34px;
+}
+
+.home-feed .main .courses .carousel .course .rating i {
+    color: rgba(254, 192, 6, 1)
+}
+
+.home-feed .main .courses .carousel .course .rating span {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 20px;
+}
+
+.home-feed .main .courses .carousel .course .rating span#r1 {
+    color: rgba(254, 192, 6, 1);
+    margin: 0 8px;
+}
+
+.home-feed .main .courses .carousel .course .rating span#r2 {
+    color: rgba(6, 25, 71, 1) ;
+    margin-right: 8px;
+}
+
+.home-feed .main .courses .carousel .course a {
+    color: rgba(0, 122, 243, 1) !important;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.home-feed .main .courses .carousel .course a i {
+    margin-left: 10px;
+}
+
+footer#footer {
+    margin-top: 250px
+}
+
+footer#footer p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 18px;
+}
+
+footer#footer .top {
+    margin-bottom: 28px;
+}
+
+footer#footer .top img#logo {
+    margin-right: 25px
+}
+
+footer#footer .top h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+
+footer#footer .top h1 span {
+    color: #007AF3
+}
+
+footer#footer .top h5 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+footer#footer .bottom {
+    padding: 22px 0;
+    border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
+}
+
+footer#footer .bottom h4 {
+    color: rgba(255, 255, 255, 1);
+    font-size: 12px;
+    font-weight: 400;
+    margin-right: 60px;
+}
+
+footer#footer .bottom h4:last-child {
+    margin-right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* polls  */
+.polls .searchbar {
+    background-color: #FFF;
+    padding: 14px 24px;
+    border-radius: 80px;
+    width: 377px
+}
+
+.polls .searchbar input {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    width: 100%
+}
+
+.polls .searchbar input::placeholder {
+    color: rgba(0, 0, 0, 0.25) !important
+}
+
+.polls button {
+    background-color: rgba(0, 122, 243, 1);
+    font-size: 16px;
+    font-weight: 400;
+    padding: 15px 19px;
+    border-radius: 80px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+    margin-left: 20px
+}
+
+.polls button i {
+    margin-right: 10px
+}
+
+.polls h1 {
+    margin-bottom: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.polls .header {
+    padding: 11px 27px;
+    margin-bottom: 19px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 5px;
+}
+
+.polls .header p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.polls .poll {
+    background-color: rgba(10, 24, 61, 1);
+    padding: 30px 27px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+    position: relative;
+}
+
+.polls .poll h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.polls .poll h6 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0;
+}
+
+.polls .poll .fa-circle {
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.polls .options {
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    width: 110px;
+    background-color: #FFF;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.1);
+    z-index: 1;
+    padding: 9px 18px
+}
+
+.polls .options p {
+    color: rgba(6, 25, 71, 1);
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    line-height: 25px;
+    cursor: pointer;;
+}
+
+/* filter modal  */
+#polls-modal {
+    width: 674px;
+    height: 550px;
+    border-radius: 10px !important;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(6, 25, 71, 1) !important;
+    top: 10% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 45px 55px !important;
+}
+
+#polls-modal .header {
+    background-color: transparent;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 41px;
+    padding: 0 0 25px 0
+}
+
+#polls-modal .header h3 {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+#polls-modal h6 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+#polls-modal input {
+    margin-right: 13px
+}
+
+#polls-modal label {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#polls-modal button {
+    display: block !important;
+    margin: 0 auto;
+    margin-top: 55px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 145px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 50px;    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* single polls  */
+.single-poll header {
+    margin-bottom: 39px;
+}
+
+.single-poll header h1 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.single-poll header h1 i {
+    margin-right: 19px
+}
+
+.single-poll header h1 i {
+    margin-right: 19px
+}
+
+.single-poll header .searchbar {
+    padding: 14px 24px;
+    border-radius: 80px;
+    width: 377px;
+    background-color: #FFF;
+}
+
+.single-poll header input {
+    font-size: 16px;
+    font-weight: 400;
+    color: #000;
+    width: 100%
+}
+
+.single-poll header input::placeholder {
+    color: rgba(0, 0, 0, 0.25)
+}
+
+.single-poll .poll .body {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px 10px 0 0;
+    padding: 33px 37px
+}
+
+.single-poll .poll .header {
+    margin-bottom: 44px;
+}
+
+.single-poll .poll .header button {
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 12px;
+    margin: 0;
+    background-color: rgba(8, 29, 67, 1);
+    color: rgba(255, 255, 255, 0.3)
+}
+
+.single-poll .poll .header button img {
+    margin-right: 7px;
+}
+
+.single-poll .poll button.active {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
+}
+
+.single-poll .poll button#chart-btn {
+    border-radius: 10px 0 0 10px;
+}
+
+.single-poll .poll button#leaderboerd-btn {
+    border-radius: 0 10px 10px 0;
+}
+
+.single-poll .poll .candidate img {
+    border-radius: 10px;
+}
+
+.single-poll .poll .candidate h3 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.single-poll .poll .candidate p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+}
+
+.single-poll .poll .candidate .bar {
+    height: 7px;
+    border-radius: 60px;
+    background-color: rgba(0, 122, 243, 0.3);
+}
+
+.single-poll .poll .candidate .indicator {
+    height: 100%;
+    width: 50%;
+    background-color: #FFF;
+    border-radius: 60px;
+}
+
+.single-poll .poll .candidate h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.single-poll .poll .candidate h5 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.single-poll .poll footer {
+    padding: 22px 37px;
+    background-color: rgba(6, 25, 71, 1);
+    border-radius: 0 0 10px 10px;
+}
+
+.single-poll .poll footer p {
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.single-poll .poll footer p .fa-angle-down {
+    margin-left: 10px;
+}
+
+.single-poll .poll footer p .fa-share-alt {
+    margin-right: 10px;
+}
+
+/* share modal  */
+#poll-share-modal {
+    top: 10% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 668px;
+    height: 480px;
+    background-color: rgba(10, 24, 61, 1) !important;
+    border-radius: 20px !important;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 60px 82px !important;
+}
+
+#poll-share-modal .fa-times {
+    float: right;
+    cursor: pointer;
+}
+
+#poll-share-modal h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 13px;
+}
+
+#poll-share-modal p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 62px;
+}
+
+#poll-share-modal h3 {
+    font-size: 14px;
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+#poll-share-modal .sm {
+    margin-bottom: 45px;
+}
+
+#poll-share-modal .link {
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 12px 6px 12px 19px
+}
+
+#poll-share-modal .link input {
+    width: 100%;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+/* vote modal  */
+#vote-modal {
+    top: 20% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 442px;
+    height: 310px;
+    background-color: rgba(6, 25, 71, 1) !important;
+    border-radius: 20px !important;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 42px 50px !important;
+    text-align: center;
+}
+
+#vote-modal h3 {
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 19px;
+}
+
+#vote-modal p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 47px;
+}
+
+#vote-modal div {
+    width: 100%
+}
+
+#vote-modal button {
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+#vote-modal button#cancel {
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+    padding: 12.5px 48px
+}
+
+#vote-modal button#proceed {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    padding: 12.5px 18px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* story  */
+.story .create-story {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-bottom: 37px;
+} 
+
+.story .create-story h3 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 14px;
+}
+
+.story .create-story .img-container,
+.story .story .img-container,
+.story .story .comment .img-container,
+.search .story .img-container {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.story .create-story .img-container img.profile-img,
+.story .story .img-container img.profile-img,
+.story .story .comment .img-container img.profile-img,
+.search .story .comment .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.story .create-story input {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 17px 24px;
+    background-color: #FFF;
+    border-radius: 30px;
+    width: 100%
+}
+
+.story .create-story p {
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 33px;
+}
+
+.story .create-story p img {
+    margin-right: 10px
+}
+
+.story .story {
+    position: relative;
+    border-radius: 10px;
+    background-color: rgba(10, 24, 61, 1);
+    margin-bottom: 24px;
+}
+
+.story .story .body {
+    padding: 24px
+}
+
+.story .story h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.story .story p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 40px
+}
+
+.story .story .options {
+    position: absolute;
+    top: 60px;
+    right: 50px;
+    background-color: #FFF;
+    border-radius: 5px;
+    padding: 13px 15px;
+}
+
+.story .story .options i {
+    color: rgba(6, 25, 71, 1);
+    font-size: 16px;
+    margin-right: 12px
+}
+
+.story .story .options h4 {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(6, 25, 71, 1);
+    margin-bottom: 5px;
+}
+
+.story .story .options p {
+    font-size: 9px;
+    font-weight: 400;
+    color: rgba(6, 25, 71, 0.5);
+    margin-right: 0;
+    margin-bottom: 17px;
+}
+
+.story .story h4 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 24px
+}
+
+.story .story img#story-img {
+    border-radius: 5px;
+}
+
+.story .story .shareStory {
+    border-radius: 20px;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 10px 16px
+}
+
+.story .story .shareStory h4 {
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 24px;
+    margin-bottom: 8px;
+}
+
+.story .story .shareStory img#story-img {
+    border-radius: 20px;
+}
+
+.story .story .widget {
+    border-top: solid 1px rgba(255, 255, 255, 0.1) !important;
+    border-bottom : solid 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 20px 0
+}
+
+.story .story .widget img {
+    margin-right: 12px
+}
+
+.story .story .widget i {
+    font-size: 24px;
+    margin-right: 12px
+}
+
+.story .story .widget i.fa-solid {
+    color: #ED4956
+}
+
+.story .story .widget span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.story .story .comment {
+    padding: 22px 24px;
+}
+
+.story .story .comment .input {
+    padding: 14px 19px;
+    border-radius: 5px;
+    background-color: #FFF;
+}
+
+.story .story .comment .input input {
+    font-size: 14px;
+    font-weight: 400;
+    /* padding: 14px 19px; */
+    width: 100%;
+}
+
+.story .story .comment .input i {
+    font-size: 20px;
+}
+
+.story .story .comment button {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 13px;
+    border-radius: 5px;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.story .story .comment button img,
+.story .comments .comment .replies button img {
+    margin-right: 10px;
+}
+
+/* .replies */
+.story .comments .comment .replies {
+    /* background-color: red; */
+    margin-left: 70px;
+}
+
+.story .comments .comment .replies .img-container {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.story .comments .comment .replies .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.story .comments .comment .replies input {
+    padding: 7px 19px;
+    width: 100%;
+    background-color: #FFF;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+}
+
+.story .comments .comment .replies button {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+/* write story modal  */
+.story-write-modal {
+    position: absolute;
+    top: 20% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 684px;
+    overflow-y: scroll;
+    max-height: 430px;
+    background-color: rgba(10, 24, 61, 1) !important;
+    border-radius: 10px !important;
+    padding: 19px 35px !important;
+}
+
+.story-write-modal::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+.story-write-modal::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+}
+
+.story-write-modal .fa-times-circle {
+    float: right
+}
+
+.story-write-modal h2 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    padding-bottom: 16px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;
+    margin-bottom: 12px;
+}
+
+.story-write-modal .img-container {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px
+}
+
+.story-write-modal img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.story-write-modal h3 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.story-write-modal h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.story-write-modal select {
+    padding: 14px 20px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.story-write-modal textarea {
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #FFF;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.story-write-modal img#post-img {
+    border-radius: 5px;
+    max-height: 50px
+}
+
+.story-write-modal textarea::placeholder {
+    color: rgba(255, 255, 255, 0.25)
+}
+
+.story-write-modal span {
+    font-size: 16px;
+    font-weight: 600;
+    margin-right: 9px;
+}
+
+.story-write-modal .fa-smile,
+.story-write-modal .fa-microphone {
+    margin-left: 14px;
+    cursor: pointer;
+}
+
+.story-write-modal .fa-camera {
+    font-size: 25px;
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+}
+
+.story-write-modal .fa-microphone {
+    font-size: 25px;
+    color: rgba(255, 0, 0, 1)
+}
+
+.story-write-modal .fa-smile {
+    font-size: 25px;
+    color: rgba(254, 192, 6, 1)
+}
+
+.story-write-modal button#draft {
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 15px;
+    background-color: rgba(0, 122, 243, 0.09);
+    color: rgba(0, 122, 243, 1);
+    margin-right: 15px !important;
+}
+
+.story-write-modal button#post {
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 15px;
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
+}
+
+/* share story modal  */
+#share-story-modal {
+    top: 5% !important;
+    width: 684px;
+    min-height: 650px;
+}
+
+.story-write-modal .story {
+    border-radius: 20px;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 10px 16px;
+    margin-bottom: 15px;
+}
+
+.story-write-modal .story .img-container {
+    height: 41px;
+    width: 41px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px
+}
+
+.story-write-modal .story img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.story-write-modal .story h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.story-write-modal .story h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.story-write-modal .story p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 7px;
+    margin-bottom: 8px;
+}
+
+.story-write-modal .story img {
+    border-radius: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* single story */
+img#return-btn {
+    margin-bottom: 17px;
+}
+
+.story .comments {
+    border-radius: 10px;
+    background-color: rgba(10, 24, 61, 1);
+    padding: 19px 24px;
+    margin-top: 21px;
+}
+
+.story .comments .img-container {
+    height: 41px;
+    width: 41px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.story .comments .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.story .comments .comment-body {
+    display: inline-block;
+    padding: 14px 20px;
+    background-color: rgba(6, 25, 71, 1);
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.story .comments .comment-body h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-right: 24px;
+}
+
+.story .comments .comment-body h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.story .comments .comment-body p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.story .comments h5 {
+    font-size: 12px;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.5);
+    margin-right: 20px
+}
+
+.story .comments h6 {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* profile */
+.profile .header .searchbar {
+    padding: 18px 27px;
+    background-color: #FFF;
+    border-radius: 80px;
+}
+
+.profile .header .searchbar input {
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%
+}
+
+.profile .header button {
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 80px;
+}
+
+.profile .header button i {
+    margin-right: 10px;
+}
+
+.profile .profile {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 27px 52px 17px 27px;
+    margin-bottom: 25px;
+}
+
+.profile .profile img#profile-img {
+    border-radius: 8px;
+}
+
+.profile .profile h3 {
+    color: rgba(135, 195, 254, 1);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.profile .profile p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 35px;
+}
+
+.profile .profile h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.profile .profile .fa-eye {
+    color: #FFF;
+    margin-right: 10px;
+}
+
+.profile .profile .fa-share-alt {
+    color: rgba(0, 122, 243, 1);
+}
+
+/* filter modal  */
+#polls-modal {
+    top: 10% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 674px;
+    height: 655px;
+    background-color: rgba(6, 25, 71, 1) !important;
+    border-radius: 10px !important;
+    border: solid 1px rgba(255, 255, 255, 0.1);
+    padding: 45px 55px !important;
+    /* position: absolute; */
+}
+
+#polls-modal .header {
+    background-color: transparent;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 41px;
+    padding: 0 0 25px 0
+}
+
+#polls-modal .header h3 {
+    font-size: 26px;
+    font-weight: 400;
+}
+
+#polls-modal h6 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+#polls-modal input {
+    margin-right: 13px
+}
+
+#polls-modal label {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+#polls-modal button {
+    display: block !important;
+    margin: 0 auto;
+    margin-top: 55px;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 145px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 50px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* single profile  */
+.single-profile .aside .return span {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.single-profile .aside .return i {
+    margin-right: 13px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.single-profile .aside .return i {
+    margin-right: 13px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.single-profile .aside img#profile-img {
+    border-radius: 10px;
+    margin-bottom: 35px;
+    width: 100%;
+    height: auto
+}
+
+.single-profile .aside .poll-active,
+.single-profile .aside .history {
+    padding: 26px;
+    border-radius: 10px;
+    background-color: rgba(6, 25, 71, 1);
+    margin-bottom: 40px;
+}
+
+.single-profile .aside .poll-active h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 13px;
+}
+
+.single-profile .aside .poll-active p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.single-profile .aside .poll-active span {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    margin-right: 14px
+}
+
+.single-profile .aside .poll-active i.fa-circle {
+    font-size: 6px;
+    color: rgba(0, 122, 243, 1);
+    margin-right: 14px
+}
+
+/* add to poll modal  */
+#addToPoll {
+    top: 30% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 364px;
+    height: 405px;
+    background-color: rgba(6, 25, 71, 1) !important;
+    border-radius: 10px !important;
+    padding: 31px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#addToPoll i {
+    float: right
+}
+
+#addToPoll h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 21px;
+}
+
+#addToPoll .input {
+    padding: 7px 22px;
+    border-radius: 5px;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    margin-bottom: 22px;
+}
+
+#addToPoll label {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 1px;
+    display: block;
+}
+
+#addToPoll select {
+    width: 100%;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+}
+
+#addToPoll button {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 11px 33px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 40px;
+    display: block;
+    margin: 0 auto
+}
+/* end add to poll modal  */
+
+.single-profile .aside .poll-active button {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1);
+    background-color: transparent;
+    padding: 0
+}
+
+.single-profile .aside .poll-active img {
+    margin-right: 13px;
+}
+
+.single-profile .aside .poll-active i {
+    margin-right: 23px;
+    font-size: 28px;
+    color: rgba(255, 0, 0, 1)
+}
+
+.single-profile .aside .poll-active h6 {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 20px;
+}
+
+.single-profile .aside .history h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.single-profile .aside .history .poll {
+    margin-bottom: 40px;
+}
+
+.single-profile .aside .history .poll:last-child {
+    margin-bottom: 0;
+}
+
+.single-profile .aside .history h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.single-profile .aside .history p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 6px;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.single-profile .main .searchbar {
+    width: 250px;
+    background-color: #FFF;
+    border-radius: 80px;
+    padding: 15px 21px;
+    margin-bottom: 30px;
+}
+
+.single-profile .main .searchbar input {
+    width: 100%
+}
+
+.single-profile .main h2 {
+    font-size: 32px;
+    font-weight: 400;
+}
+
+.single-profile .main button#edit {
+    font-size: 16px;
+    font-weight: 700;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 12px 22px;
+    border-radius: 40px;
+    max-width: 127px;
+}
+
+.single-profile .main button#manage-profile {
+    font-size: 14px;
+    font-weight: 700;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.single-profile .main .info {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    padding: 29px;
+    margin-bottom: 49px;
+}
+
+.single-profile .main .info h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.single-profile .main .info p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 50px;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 24px;
+}
+
+.single-profile .main .info p:last-child {
+    margin-bottom: 0px;
+}
+
+.single-profile .main .others h2 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+
+.single-profile .main .profile {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 32px;
+    margin-bottom: 16px;
+}
+
+.single-profile .main .profile img#profile-img {
+    border-radius: 8px;
+}
+
+.single-profile .main .profile h3 {
+    color: rgba(135, 195, 254, 1);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.single-profile .main .profile p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.single-profile .main .profile h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form button, .form2 button, .preview button, .submit-profile button, .single-profile .main button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 5px;
+}
+
+.form button#draft, .form2 button#draft, .preview button#back, .submit-profile button#draft, .single-profile .main button#back { 
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+    margin-right: 22px
+}
+
+.form button#proceed, .form2 button#proceed, .preview button#proceed, .submit-profile button#proceed, .single-profile .main button#proceed {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* create aspirant 1 */
+.form h1 {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.form p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 40px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.form .input {
+    width: 343px;
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 7px 15px;
+    margin-bottom: 60px;
+}
+
+.form .input label {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.form .input input, .form .input select {
+    font-size: 14px;
+    font-weight: 400;
+    background-color: transparent;
+    width: 100%;
+    color: #FFF;
+    outline: none
+}
+
+.form .input .img-container {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.form .input .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.form .input .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.form h6, .form2 h6, .submit-profile h6 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.form button, .form2 button, .preview button, .submit-profile button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 5px;
+}
+
+.form button#draft, .form2 button#draft, .preview button#back, .submit-profile button#draft { 
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+    margin-right: 22px
+}
+
+.form button#proceed, .form2 button#proceed, .preview button#proceed, .submit-profile button#proceed {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* create aspirant 2 */
+/* .form2 {
+    max-width: 650px;
+    margin: 0 auto
+} */
+
+.form2 .fa-arrow-left, .submit-profile .fa-arrow-left  {
+    margin-right: 45px;
+}
+
+.form2 h1 {
+    line-height: 20px;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.form2 p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 41px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.form2 .input {
+    background-color: rgba(10, 24, 61, 1);
+    padding: 13px 24px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.form2 .input label {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 9px;
+}
+
+.form2 .input textarea {
+    font-size: 12px;
+    font-weight: 400;
+    width: 100%;
+    height: 120px;
+    color: #FFF;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin-bottom: 0 !important;
+}
+
+.form2 .history h2 {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.form2 .history .input label {
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.form2 .history .input input {
+    font-size: 14px;
+    font-weight: 400;
+    background-color: transparent;
+    width: 100%;
+    color: #FFF
+}
+
+.form2 .history .fa-trash-alt {
+    float: right;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.form2 button#add-history {
+    color: rgba(0, 122, 243, 1);
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.form2 button#add-history i {
+    margin-right: 12px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* create aspirant 3  */
+.submit-profile h1 {
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 70px;
+}
+
+.submit-profile .poll {
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;
+    background-color: unset !important;
+    border-radius: 0 !important;
+    padding-bottom: 24px;
+}
+
+.submit-profile .poll input {
+    margin-right: 15px
+}
+
+.submit-profile .poll label, .submit-profile .owner label {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.submit-profile .input {
+    border-radius: 10px;
+    background-color: rgba(6, 25, 71, 1);
+    padding: 7px 15px;
+    margin-bottom: 20px;
+}
+
+.submit-profile .poll .input label {
+    font-size: 10px;
+    font-weight: 400;
+    /* margin-bottom: 20px; */
+}
+
+.submit-profile .input select {
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    width: 100%;
+}
+
+.submit-profile .input input {
+    background-color: transparent;
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    width: 100%;
+}
+
+.submit-profile .owner, .submit-profile .transfer {
+    border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;
+    background-color: unset !important;
+    border-radius: 0 !important;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+}
+
+.submit-profile p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+.submit-profile h6 {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 215px;
+    /* margin-bottom: 5px; */
+}
+
+.submit-profile .transfer .input {
+    width: 86px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* search page */
+.search .searchbar {
+    background-color: #FFF;
+    padding: 11px 30px;
+    border-radius: 80px;
+}
+
+.search .searchbar input {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 40px;
+}
+
+.search button#filter {
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    padding: 18px 25px;
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    border-radius: 80px;
+}
+
+.search button#filter i {
+    margin-right: 10px
+}
+
+.search .toggle {
+    border-bottom: solid 1px rgba(255, 255, 255, 0.5) !important;
+    margin-top: 45px;
+    margin-bottom: 40px;
+}
+
+.search .toggle button {
+    margin-right: 64px;
+    padding-bottom: 30px;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.6)
+}
+
+.search .toggle button:last-child {
+    margin-right: 0;
+}
+
+.search .toggle img {
+    margin-right: 10px;
+}
+
+.search .toggle button.active {
+    border-bottom: solid 3px rgba(0, 122, 243, 1) !important;
+    color: rgba(0, 122, 243, 1)
+}
+
+.search .toggle p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.search .profile {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
+.search .profile img#profile-img {
+    border-radius: 8px;
+}
+
+.search .profile h3 {
+    color: rgba(135, 195, 254, 1);
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.search .profile p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 34px;
+}
+
+.search .profile h4 {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.search .profile .fa-eye {
+    color: #FFF;
+    margin-right: 10px;
+}
+
+.search .profile .fa-share-alt {
+    color: rgba(0, 122, 243, 1);
+}
+
+
+
+
+
+/* polls search */
+.search .polls-page > p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 25px;
+}
+
+.search .polls .header {
+    padding: 11px 27px;
+    margin-bottom: 19px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 5px;
+}
+
+.search .polls .header p {
+    margin-bottom: 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.search .polls .poll {
+    background-color: rgba(10, 24, 61, 1);
+    padding: 30px 27px;
+    border-radius: 10px;
+    margin-bottom: 14px;
+}
+
+.search .polls .poll h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.search .polls .poll h6 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0;
+}
+
+.search .polls .poll .fa-circle {
+    margin-right: 10px;
+    font-size: 10px;
+}
+
+.search .polls .poll a {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1)
+}
+
+.search .polls .poll a i {
+    margin-left: 10px
+}
+
+
+
+
+
+
+/* stories search */
+.search .story {
+    border-radius: 10px;
+    background-color: rgba(10, 24, 61, 1);
+    margin-bottom: 24px;
+}
+
+.search .story .body {
+    padding: 24px
+}
+
+.search .story h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.search .story p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 40px
+}
+
+.search .story button#open {
+    font-size: 16px;
+    font-weight: 700;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 9px 12px;
+    border-radius: 10px;
+}
+
+.search .story h4 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 24px
+}
+
+.search .story .widget {
+    border-top: solid 1px rgba(255, 255, 255, 0.1) !important;
+    border-bottom : solid 1px rgba(255, 255, 255, 0.1) !important;
+    padding: 20px 0
+}
+
+.search .story .widget img {
+    margin-right: 12px
+}
+
+.search .story .widget span {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.search .story .comment {
+    padding: 22px 24px;
+}
+
+.search .story .comment input {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 14px 19px;
+    width: 100%;
+    border-radius: 5px;
+}
+
+.search .story .comment button {
+    font-size: 16px;
+    font-weight: 700;
+    padding: 13px;
+    border-radius: 5px;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.search .story .comment button img {
+    margin-right: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* user-profile */
+.user-widget {
+    border-radius: 10px;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 13px 25px;
+    margin-bottom: 27px;
+}
+
+.user-widget .img-container {
+    height: 173px;
+    width: 173px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 4px #FFF !important
+}
+
+.user-widget .img-container img#profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.user-widget .img-container img#change-img {
+    position: absolute; 
+    bottom: 0px;
+    right: 60px
+}
+
+.user-widget h1 {
+    font-size: 44px;
+    font-weight: 700;
+    line-height: 40px;
+}
+
+.user-widget h4 {
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.user-widget button {
+    font-size: 16px;
+    font-weight: 700;
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+    padding: 12px 20px;
+    border-radius: 40px;
+}
+
+.user-aside section {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    padding: 30px 0;
+    margin-bottom: 25px;
+}
+
+.user-aside section:last-child {
+    margin-bottom: 0;
+}
+
+.user-aside button {
+    background-color: transparent;
+    margin-bottom: 24px;
+    width: 100%;
+    text-align: left;
+}
+
+.user-aside button:last-child {
+    margin-bottom: 0;
+}
+
+.user-aside button.active {
+    border-left: solid 5px rgba(0, 122, 243, 1) !important;
+    color: rgba(0, 122, 243, 1);
+}
+
+.user-aside button img {
+    margin-left: 25px;
+    margin-right: 29px
+}
+
+.user-aside button.active img {
+    margin-left: 20px
+}
+
+.story-header, .aspirant-header {
+    padding: 23px 19px;
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 5px;
+    margin-bottom: 28px;
+}
+
+.story-header h1, .aspirant-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.story-header a {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.story-header img, .aspirant-header img {
+    margin-right: 8px;
+}
+
+.story-header button, .aspirant-header button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 5px;
+}
+
+.story-header button, .aspirant-header button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 11px;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 5px;
+}
+
+.settings header {
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 22px 45px
+}
+
+.settings header h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.settings .body {
+    border-radius: 0 0 10px 10px;
+    background-color: rgba(10, 24, 61, 1);
+    padding: 40px 45px
+}
+
+.settings .body label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.settings .body input {
+    display: block;
+    /* width: 329px; */
+    width: 100%;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 19px 17px;
+    margin-bottom: 43px;
+    color: #FFF
+}
+
+.settings .body input::placeholder {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.settings .body button {
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    border-radius: 40px;
+    background-color: rgba(0, 122, 243, 1);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 42px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* wallet */
+.wallet .header section {
+    padding: 0 15px;
+    border-radius: 5px;
+    background-color: rgba(6, 25, 71, 1);
+}
+
+.wallet .header section.withdrawl {
+    padding: 6px 15px;
+}
+
+.wallet .header section.category button {
+    width: 100%;
+    height: 60px;
+    background-color: transparent;
+    font-size: 10px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.wallet .header section.category button.active {
+    color: #FFF;
+    border-bottom: solid 2px rgba(0, 122, 243, 1) !important;
+}
+
+.wallet .header section.category button img {
+    margin-right: 11px
+}
+
+.wallet .header section.history {
+    border-radius: 5px;
+    background-color: rgba(6, 25, 71, 1);
+    height: 60px;
+    padding: 6px
+}
+
+.wallet .header section.history button {
+    width: 100%;
+    padding: 5px 0;
+    background-color: transparent;
+}
+
+.wallet .header section.history button.active {
+    border-bottom: solid 3px rgba(0, 122, 243, 1) !important;
+}
+
+.wallet .header section.history button i {
+    font-size: 20px;
+    color: rgba(0, 122, 243, 1)
+}
+
+.wallet .header section.history button.active i {
+    color: #FFF
+}
+
+.wallet .header section.withdrawl p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 2px;
+}
+
+.wallet .header section.withdrawl h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.wallet .header section.withdrawl button {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1);
+    background-color: transparent;
+}
+
+.wallet .header section.withdrawl button img {
+    margin-right: 10px
+}
+
+.wallet .stories {
+    border-radius: 10px;
+    background-color: rgba(10, 24, 61, 1);
+    padding: 0 17px
+}
+
+.wallet .stories .story {
+    padding: 25px 0;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.05) !important;
+}
+
+.wallet .stories .story:last-child {
+    border-bottom: unset !important;
+}
+
+.wallet .stories .story p {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.wallet .stories .story span {
+    display: inline-block;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 25px;
+}
+
+.wallet .stories .story span:last-child {
+    margin-bottom: 0;
+}
+
+.wallet .stories .story span img {
+    margin-right: 11px;
+}
+
+/* profile  */
+.wallet .profiles .head {
+    border-radius: 10px 10px 0 0;
+    padding: 15px 46px;
+    background-color: rgba(10, 24, 61, 1);
+}
+
+.wallet .profiles .body {
+    border-radius: 0 0 10px 10px;
+    padding: 0 46px;
+    background-color: rgba(10, 24, 61, 1);
+}
+
+.wallet .profiles h4 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.wallet .profiles p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.wallet .profiles p img {
+    margin-right: 10px;
+}
+
+.wallet .profile {
+    padding: 30px 0
+}
+
+/* history */
+.wallet .history h1 {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 38px;
+    color: rgba(255, 255, 255, 0.5);
+    padding-bottom: 11px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.wallet .history .header {
+    padding: 0 27px;
+}
+
+.wallet .history p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.wallet .history .transactions {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 20px;
+    padding: 40px 27px
+}
+
+.wallet .history .transactions .row {
+    margin-bottom: 32px;
+}
+
+.wallet .history .transactions .row:last-child {
+    margin-bottom: 0;
+}
+
+.wallet .history .transactions h3 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 0;
+}
+
+.wallet .history .transactions h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    margin-bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* course-home */
+.courses-page .header button {
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 80px;
+    margin-right: 23px;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 16px
+}
+
+.courses-page .header button img {
+    margin-right: 10px;
+}
+
+.courses-page .header .searchbar {
+    background-color: #FFF;
+    width: 346px;
+    padding: 16px;
+    border-radius: 80px;
+}
+
+.courses-page .header .searchbar input {
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    color:#000
+}
+
+.courses-page .header .searchbar input::placeholder {
+    color: rgba(0, 0, 0, 0.25);
+}
+
+.courses-page section > h1 {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.courses-page section > h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.courses-page section > p {
+    font-size: 20px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 20px;
+}
+
+.courses-page .carousel {
+    overflow-x: scroll;
+    display: flex;
+    margin-bottom: 60px;
+}
+
+.courses-page .carousel::-webkit-scrollbar {
+    display: none;
+}
+
+.courses-page .carousel .card {
+    min-width: 272px;
+    width: 272px;
+    margin-right: 40px;
+    border-radius: 10px;
+}
+
+.courses-page .carousel .card .top-img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 20px;
+}
+
+.courses-page .carousel .card h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: rgba(6, 25, 71, 1)
+}
+
+.courses-page .carousel .card i {
+    color: grey;
+    font-size: 12px;
+}
+
+.courses-page .carousel .card i.fa-star:last-child{
+    display: inline-block;
+    margin-right: 20px
+}
+
+.courses-page .carousel .card i.active {
+    color: rgba(254, 192, 6, 1)
+}
+
+.courses-page .carousel .card span {
+    color: rgba(254, 192, 6, 1);
+    font-size: 10px;
+    font-weight: 400;
+    margin-right: 9px;
+}
+
+.courses-page .carousel .card span.ratings {
+    color: rgba(6, 25, 71, 1);
+    margin-right: 0
+}
+
+.courses-page .carousel .card p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(6, 25, 71, 0.6);
+}
+
+.courses-page .carousel .card p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(6, 25, 71, 0.6);
+    position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* single course page  */
+.courses-page .single-page .header i.fa-arrow-left {
+    color: grey;
+    margin-right: 23px;
+    font-size: 30px;
+}
+
+.courses-page .single-page .header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 11px;
+}
+
+.courses-page .single-page .header i {
+    font-size: 14px;
+    color: rgba(254, 192, 6, 1);
+    margin-right: 7px;
+}
+
+.courses-page .single-page .header span {
+    color: rgba(254, 192, 6, 1);
+    font-size: 14px;
+    font-weight: 400;
+    margin-right: 19px;
+}
+
+.courses-page .single-page .header span.ratings {
+    color: #FFF;
+    margin-right: 0
+}
+
+.courses-page .single-page .header button {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 19px;
+    width: 100%
+}
+
+.courses-page .single-page .header button i {
+    margin-left: 28px;
+    color: #FFF
+}
+
+.courses-page .single-page .video .widget {
+    border: solid 1px rgba(255, 255, 255, 0.5) !important;
+    border-radius: 33px;
+    padding: 25px 20px;
+    background-color: rgba(0, 9, 32, 0.9);
+}
+
+.courses-page .single-page .video .widget section {
+    margin-bottom: 40px;
+}
+
+.courses-page .single-page .video .widget section:last-child {
+    margin-bottom: 0;
+}
+
+.courses-page .single-page .video .widget i,
+.courses-page .single-page .video .widget img {
+    color: #FFF;
+    margin-right: 18px;
+}
+
+.courses-page .single-page .video .widget h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.courses-page .single-page .video .widget p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6)
+}
+
+.courses-page .single-page .details h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 9px;
+}
+
+.courses-page .single-page .details p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 44px;
+    color: rgba(255, 255, 255, 0.9);
+    line-height: 24px
+}
+
+.courses-page .single-page .details li {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.9)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* dashboard in progress */
+.dashboard .header span {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.dashboard .header span img {
+    margin-right: 17px
+}
+
+.dashboard .header i {
+    font-size: 40px;
+    margin-right: 14px
+}
+
+.dashboard .header p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.dashboard .board {
+    border-radius: 10px;
+    background-color: rgba(6, 25, 71, 1);
+    padding: 30px;
+    margin-bottom: 141px;
+}
+
+.dashboard .board section {
+    border-radius: 10px;
+    background-color: rgba(4, 19, 54, 1);
+    padding: 8px;
+    margin-bottom: 44px;
+}
+
+.dashboard .board section button {
+    width: 100%;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 13px 0;
+    border-radius: 10px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.4)
+}
+
+.dashboard .board section button.active {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
+}
+
+.dashboard .board .course {
+    margin-bottom: 42px;
+}
+
+.dashboard .board .course:last-child {
+    margin-bottom: 0;
+}
+
+.dashboard .board .course img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.dashboard .board .course h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.dashboard .board .course span {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 20px;
+    margin-bottom: 0;
+}
+
+.dashboard .board .course p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.dashboard .board .course .bar {
+    width: 173px;
+    height: 5px;
+    background-color: rgba(0, 122, 243, 0.5);
+    border-radius: 80px;
+    margin-right: 23px
+}
+
+.dashboard .board .course .bar .indicator {
+    width: 50%;
+    height: 5px;
+    border-radius: 80px;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.dashboard .board .course .footer span {
+    display: inline-block;
+    margin-right: 13px;
+}
+
+.dashboard .board .course .footer span:last-child {
+    margin-right: 0;
+}
+
+.dashboard .board .course button {
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 5px;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 10px
+}
+
+.dashboard section h1 {
+    font-size: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* single course page in progress */
+.course-page .widget {
+    background-color: rgba(6, 25, 71, 1);
+    padding: 21px 23px
+}
+
+.course-page .widget h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.course-page .widget h3 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: rgba(82, 169, 255, 1)
+}
+
+.course-page .widget .bar {
+    height: 3px;
+    width: 18%;
+    background-color: rgba(82, 169, 255, 0.3);
+    margin-bottom: 24px;
+}
+
+.course-page .widget .bar .indicator.done {
+    height: 3px;
+    /* width: 100%; */
+    background-color: rgba(82, 169, 255, 1);
+}
+
+.course-page .widget .bar .indicator.current {
+    height: 3px;
+    width: 30%;
+    background-color: rgba(82, 169, 255, 1);
+}
+
+.course-page .widget .chapters {
+    padding-bottom: 23px;
+    border-bottom: solid 2px rgba(255, 255, 255, 0.2) !important;
+    margin-bottom: 24px;
+}
+
+.course-page .widget .chapter {
+    margin-bottom: 15px;
+}
+
+.course-page .widget .chapter .index {
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    border-radius: 50%;
+    border: solid 2px rgba(255, 255, 255, 0.5) !important;
+    margin-right: 11px;
+}
+
+.course-page .widget .chapter.done .index {
+    border: solid 2px rgba(82, 169, 255, 1) !important;
+}
+
+.course-page .widget .chapter.current .index {
+    border-top: solid 2px rgba(82, 169, 255, 1) !important;
+    border-right: solid 2px rgba(82, 169, 255, 1) !important;
+}
+
+.course-page .widget .chapter .index span {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.course-page .widget .chapter.done .index span,
+.course-page .widget .chapter.current .index span {
+    color: rgba(82, 169, 255, 1)
+}
+
+.course-page .widget .chapter h2 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 16px;
+}
+
+.course-page .widget .chapter.done h2,
+.course-page .widget .chapter.current h2 {
+    color: rgba(82, 169, 255, 0.6)
+}
+
+.course-page .widget .chapter i {
+    color: rgba(255, 255, 255, 0.4)
+}
+
+.course-page .widget .discuss h3 {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.course-page .widget .comment {
+    margin-bottom: 50px;
+}
+
+.course-page .widget .comment:last-child {
+    margin-bottom: 0;
+}
+
+.course-page .widget .comment .img-container {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 14px;
+}
+
+.course-page .widget .comment .img-container img, 
+.course-page .widget .comment .replies .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.course-page .widget .comment h4 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.course-page .widget .comment p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 18px;
+}
+
+.course-page .widget .comment .reply img {
+    margin-right: 13px
+}
+
+.course-page .widget .comment .reply span {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.course-page .widget .comment .reply i {
+    font-size: 4px;
+    color: rgba(196, 196, 196, 1);
+    margin: 0 18px
+}
+
+.course-page .widget .comment .replies {
+    border-left: solid 1px rgba(255, 255, 255, 0.5) !important;
+    margin-top: 25px;
+    padding-left: 17px;
+}
+
+.course-page .widget .comment .replies .img-container {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 14px;
+}
+
+.course-page .main {
+    padding-top: 48px
+}
+
+.course-page .main h6 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 36px;
+}
+
+.course-page .main h6 i {
+    margin-right: 14px
+}
+
+.course-page .main .header {
+    margin-bottom: 40px
+}
+
+.course-page .main .header p {
+    font-size: 20px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.course-page .main .header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    margin-bottom: 4px;
+}
+
+.course-page .main .header h5 {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.course-page .main .header span {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.8);
+    margin-left: 10px
+}
+
+.course-page .main .header span button {
+    padding: 5px 0;
+    font-size: 10px;
+    height: 19px;
+    width: 19px;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: rgba(0, 122, 243, 0.4);
+}
+
+.course-page .main .header span button.active {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1)
+}
+
+.course-page .main .header span button#left {
+    border-radius: 50% 0 0 50%;
+}
+
+.course-page .main .header span button#right {
+    border-radius: 0 50% 50% 0;
+}
+
+.course-page .main iframe {
+    margin-bottom: 19px;
+    border-radius: 5px;
+}
+
+.course-page .main .page button {
+    margin-right: 39px;
+    background-color: transparent;
+}
+
+.course-page .main .page button span {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 24px;
+    margin-bottom: 4px;
+}
+
+.course-page .main .page button.active span {
+    color: rgba(0, 122, 243, 1)
+}
+
+.course-page .main .page button i {
+    font-size: 8px;
+    color: rgba(0, 122, 243, 1);
+}
+
+/* .course-page .main .page select {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 40px;
+    padding: 11px 20px;
+    width: 317px
+} */
+
+.course-page .main .page h4 {
+    color: rgba(0, 122, 243, 1);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.course-page .main .chapter-text p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+}
+
+
+
+/* resources  */
+.course-page .ebooks  {
+    margin: 25px 0 98px 0
+}
+
+.course-page .ebooks h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 36px;
+}
+
+.course-page .ebooks img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.course-page .ebooks h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.course-page .ebooks p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 16px;
+}
+
+.course-page .ebooks .bar {
+    height: 3px;
+    width: 75%;
+    background-color: rgba(0, 122, 243, 0.5);
+}
+
+.course-page .ebooks .indicator {
+    height: 3px;
+    width: 48%;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.course-page .ebooks span {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.6)
+}
+
+.course-page .videos h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+.course-page .videos img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+.course-page .videos i {
+    color: rgba(0, 122, 243, 0.3);
+    font-size: 32px;
+    margin-right: 10px    
+}
+
+.course-page .videos h4 {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 20px;
+    margin-bottom: 6px;
+}
+
+.course-page .videos p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 0;
+}
+
+
+
+/* quiz */
+.course-page .quiz p {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.course-page .quiz .body {
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 10px;
+    padding: 17px 21px 44px 42px;
+    /* margin-bottom: 56px; */
+}
+
+.course-page .quiz h5 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0;
+    text-align: right;
+    color: rgba(255, 255, 255, 0.3)
+}
+
+.course-page .quiz .body p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.course-page .quiz .body .input {
+    margin-bottom: 23px;
+}
+
+.course-page .quiz .body .input:last-child {
+    margin-bottom: 0;
+}
+
+.course-page .quiz .body .input input {
+    margin-right: 19px;
+}
+
+.course-page .quiz .body label {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 30px
+}
+
+.course-page .quiz .indicators div {
+    width: 100%;
+    height: 3px;
+    background-color: rgba(82, 169, 255, 0.3);
+    margin-right: 10px;
+}
+
+.course-page .quiz .indicators div.check {
+    background-color: rgba(82, 169, 255, 1)
+}
+
+.course-page .quiz button {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 60px;
+    padding: 10px 18px
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* admin course page  */
+.admin .button-container {
+    border-radius: 50px;
+    background-color: rgba(6, 25, 71, 1);
+    padding: 8px;
+    margin-bottom: 48px;
+}
+
+.admin .button-container button {
+    width: 100%;
+    border-radius: 50px;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    background-color: transparent;
+}
+
+.admin .button-container button img {
+    margin-right: 10px
+}
+
+.admin .button-container button.active {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.admin .courses select {
+    font-size: 18px;
+    font-weight: 600;
+    padding: 10px 18px;
+    border-radius: 40px;
+    border: solid 1px rgba(255, 255, 255, 1) !important;
+    background-color: transparent;
+    color: #FFF;
+    margin-bottom: 38px;
+}
+
+.admin .courses .course {
+    border-radius: 10px;
+    border: solid 1px rgba(255, 255, 255, 0.2) !important;
+    padding: 10px;
+    margin-bottom: 22px;
+}
+
+.admin .courses .course img {
+    width: 100%;
+    height: auto;
+    border: 10px 0 0 10px;
+}
+
+.admin .courses .course h2 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 23px;
+}
+
+.admin .courses .course .bar {
+    height: 8px;
+    background-color: rgba(0, 122, 243, 0.5);
+    border-radius: 80px;
+    margin-bottom: 29px;
+}
+
+.admin .courses .course .indicator {
+    height: 8px;
+    width: 50%;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 80px;
+}
+
+.admin .courses .course p {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.admin .courses .course button {
+    background-color: rgba(0, 122, 243, 1);
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 700;
+    border-radius: 5px;
+}
+
+.admin .courses .course h4 {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#edit {
+    width: 100%;
+    height: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* create course  */
+.create-course {
+    background-color: rgba(6, 25, 71, 1);
+    border-radius: 10px;
+    padding: 40px 63px
+}
+
+.create-course h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 32px;
+}
+
+.create-course label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.create-course input, textarea {
+    font-size: 14px;
+    font-weight: 400;
+    padding: 17px 21px;
+    color: #FFF;
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    margin-bottom: 51px;
+    border: none;
+    outline: none;
+}
+
+.create-course input::placeholder, textarea::placeholder {
+    color: rgba(255, 255, 255, 0.6)
+}
+
+.create-course input {
+    border-radius: 100px;
+}
+
+.create-course textarea {
+    border-radius: 20px;
+    height: 114px;
+}
+
+.create-course .input {
+    background-color: rgba(255, 255, 255, 0.2);
+    width: 100%;
+    padding: 17px 21px;
+    border-radius: 100px;
+}
+
+.create-course .input input {
+    background-color: transparent;
+    padding: unset;
+    border-radius: unset;
+    margin-bottom: 0;
+}
+
+.create-course i.fa-circle-plus {
+    margin-top: 10px;
+    color: rgba(0, 122, 243, 1);
+    font-size: 32px
+}
+
+.create-course h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.create-course p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    max-width: 407px
+}
+
+.create-course button {
+    font-size: 14px;
+    font-weight: 700;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 5px;
+    padding: 10px
+}
+
+.create-course button#save {
+    font-size: 16px;
+    border-radius: 100px;
+    padding: 12px 14px
+}
+
+
+
+
+
+/* on completion  */
+.create-course .pdf {
+    padding-bottom: 54px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.create-course .pdf h2,
+.create-course .videos h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.create-course .pdf button,
+.create-course .videos button {
+    font-size: 14px;
+    font-weight: 600;
+    background-color: transparent;
+    padding: 0
+}
+
+.create-course .pdf button i,
+.create-course .videos button i {
+    font-size: 16px;
+    margin-right: 12px;
+}
+
+.create-course .pdf .book h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 9px;
+}
+
+.create-course .pdf .book h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 30px;
+}
+
+.create-course .pdf .book h4 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 15px;
+}
+
+.create-course .pdf .book button,
+.create-course .videos .video button {
+    color: rgba(0, 122, 243, 1);
+    padding: 0;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* video */
+.create-course .videos {
+    padding-bottom: 35px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.create-course .videos .video iframe {
+    width: 100%;
+    height: 135px;
+    margin-bottom: 18px;
+}
+
+.create-course .videos .video h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.create-course .videos .video p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.create-course .videos .video i {
+    color: rgba(0, 122, 243, 0.3)
+}
+
+/* quiz  */
+.create-course .quiz {
+    padding: 30px 0;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
+}
+
+.create-course .quiz h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.create-course .quiz p {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.create-course .quiz button {
+    padding: 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1);
+    background-color: transparent;
+}
+
+/* facilitator */
+.create-course .instructor {
+    padding: 30px 0 90px
+}
+
+.create-course .instructor h3 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.create-course .instructor .img-container {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 43px
+}
+
+.create-course .instructor .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.create-course .instructor h4 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 9px;
+}
+
+.create-course .instructor p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* admin course quiz, ebook and resourses  */
+.admin .quiz .header,
+.admin .ebook .header,
+.admin .videos .header {
+    margin-bottom: 46px;
+}
+
+.admin .quiz .header select,
+.admin .ebook .header select,
+.admin .videos .header select {
+    background-color: transparent;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.admin .quiz .header button,
+.admin .ebook .header button,
+.admin .videos .header button {
+    background-color: transparent;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 0;
+    margin-right: 0;
+}
+
+.admin .quiz .header button i,
+.admin .ebook .header button i,
+.admin .videos .header button i {
+    margin-right: 13px
+}
+
+.admin .quiz .quizes {
+    border-radius: 10px;
+    padding: 29px 23px;
+    background-color: rgba(6, 25, 71, 1);
+}
+
+.admin .quiz .quizes h3 {
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 25px;
+}
+
+.admin .quiz .quizes #quiz {
+    margin-right: 19px;
+}
+
+.admin .quiz .quizes h4 {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 14px;
+    margin-bottom: 25px;
+}
+
+
+
+
+
+
+
+/* ebook  */
+.book {
+    margin-bottom: 25px;
+}
+
+.book img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+.book h1 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.book p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+
+
+
+
+
+
+/* video  */
+.videos .video h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 13px;
+}
+
+.videos .video p {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 25px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* admin instructorr  */
+.admin .instructor h2 {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.admin .instructor button {
+    font-size: 16px;
+    font-weight: 700;
+    background-color: transparent;
+}
+
+.admin .instructor button i {
+    margin-right: 13px;
+}
+
+.admin .instructor .instructor {
+    border-radius: 10px;
+    background-color: rgba(6, 25, 71, 1);
+    padding: 15px 20px;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.admin .instructor .instructor .img-container {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0 auto 7px;
+}
+
+.admin .instructor .instructor .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.admin .instructor .instructor h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.admin .instructor .instructor h4 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 14px;
+}
+
+.admin .instructor .instructor p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6)
+}
