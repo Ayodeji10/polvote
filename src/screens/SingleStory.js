@@ -242,7 +242,7 @@ function SingleStory() {
                                                     {story.storyinfo[0].image.map((each, index) => {
                                                         return (
                                                             <div className="col-6" key={index}>
-                                                                <img src={`https://olf.online/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                                <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
                                                             </div>
                                                         )
                                                     })}
@@ -312,7 +312,7 @@ function SingleStory() {
                                                         {story.image.map((each, index) => {
                                                             return (
                                                                 <div className="col-6" key={index}>
-                                                                    <img src={`https://olf.online/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                                    <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
                                                                 </div>
                                                             )
                                                         })}
@@ -322,7 +322,7 @@ function SingleStory() {
                                                         {story.storyinfo[0].image.map((each, index) => {
                                                             return (
                                                                 <div className="col-6" key={index}>
-                                                                    <img src={`https://olf.online/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                                    <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
                                                                 </div>
                                                             )
                                                         })}
