@@ -37,6 +37,20 @@ function SingleProfile() {
     // fetch countries and fetch polls
     const [countries, setCountries] = useState([])
     const [polls, setPolls] = useState([])
+    const [randomAspirants, setRandomAspirant] = useState([])
+
+    const fetchAspirants = async () => {
+        const response = await axios
+            .get(`${API.API_ROOT}/aspirant`)
+            .catch((error) => [
+                console.log('Err', error)
+            ]);
+        const filtered = response.data.filter(aspirant => aspirant._id !== id)
+        // console.log(filtered)
+        let n = 2;
+        var shuffled = filtered.sort(function () { return .5 - Math.random() });
+        setRandomAspirant(shuffled.slice(0, n))
+    }
 
     const fetchCountries = async () => {
         const response = await axios
@@ -59,6 +73,7 @@ function SingleProfile() {
     useEffect(() => {
         fetchCountries()
         fetchPolls()
+        fetchAspirants()
     }, [])
 
     const [countrySelected, setCountrySelected] = useState("")
@@ -250,76 +265,78 @@ function SingleProfile() {
                             </div>
                             <div className="others">
                                 <h2>See other profile</h2>
-                                <div className="profile">
-                                    <div className="row">
-                                        <div className="col-lg-1">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" alt="profile-img" id="profile-img" className="img-fluid" />
-                                        </div>
-                                        <div className="col-lg-11">
-                                            <h3>Ahmed Bola Tinubu</h3>
-                                            <div className="row justify-content-between mb-4">
-                                                <div className="col-8">
-                                                    <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                        Nullam vitae
-                                                        dignissim leo dis viverra scelerisque volutpat
-                                                        quam. Ornare tellus, egestas amet posuere at est tellus, auctor.
-                                                        Lobortis ante cursus enim, neque ipsum.</p>
-                                                </div>
-                                                <div className="col-1 d-flex align-items-end">
-                                                    <img src="/img/Group 516.png" alt="vote" />
+                                {randomAspirants.map((aspirant, index) => {
+                                    return (
+                                        // <div className="profile">
+                                        //     <div className="row">
+                                        //         <div className="col-lg-1">
+                                        //             <img src="/img/pexels-george-ikwegbu-2379429 1.png" alt="profile-img" id="profile-img" className="img-fluid" />
+                                        //         </div>
+                                        //         <div className="col-lg-11">
+                                        //             <h3>Ahmed Bola Tinubu</h3>
+                                        //             <div className="row justify-content-between mb-4">
+                                        //                 <div className="col-8">
+                                        //                     <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        //                         Nullam vitae
+                                        //                         dignissim leo dis viverra scelerisque volutpat
+                                        //                         quam. Ornare tellus, egestas amet posuere at est tellus, auctor.
+                                        //                         Lobortis ante cursus enim, neque ipsum.</p>
+                                        //                 </div>
+                                        //                 <div className="col-1 d-flex align-items-end">
+                                        //                     <img src="/img/Group 516.png" alt="vote" />
+                                        //                 </div>
+                                        //             </div>
+                                        //             <footer>
+                                        //                 <div className="row align-items-center">
+                                        //                     <div className="col-lg-4">
+                                        //                         <h4 className="mb-0">Born: 14th March 1903</h4>
+                                        //                     </div>
+                                        //                     <div className="col-lg-4 d-flex justify-content-center">
+                                        //                         <h4 className="mb-0">Party: Alliance for Justice</h4>
+                                        //                     </div>
+                                        //                     <div className="col-lg-4 d-flex justify-content-end">
+                                        //                         <p className="mb-0">Ifedore Constituency Poll</p>
+                                        //                     </div>
+                                        //                 </div>
+                                        //             </footer>
+                                        //         </div>
+                                        //     </div>
+                                        // </div>
+                                        <Link to={`/profiles/single/${aspirant._id}`} key={index}>
+                                            <div className="profile">
+                                                <div className="row">
+                                                    <div className="col-lg-2">
+                                                        <img src={aspirant.image === null || aspirant.image == undefined ? `img/user (1) 1.png` : `https://polvote.com/ballot/${aspirant.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
+                                                    </div>
+                                                    <div className="col-lg-10">
+                                                        <h3>{aspirant.firstname} {aspirant.lastname}</h3>
+                                                        <p>{aspirant.overview}</p>
+                                                        <footer>
+                                                            <div className="row align-items-center">
+                                                                <div className="col-lg-3">
+                                                                    <h4 className="mb-0">Born: {aspirant.dob.substring(0, 15)}</h4>
+                                                                </div>
+                                                                <div className="col-lg-3">
+                                                                    <h4 className="mb-0">Party: {aspirant.pparty}</h4>
+                                                                </div>
+                                                                <div className="col-lg-2">
+                                                                    <p className="mb-0"><i className="far fa-eye" />204</p>
+                                                                </div>
+                                                                <div className="col-lg-1">
+                                                                    <i className="fas fa-share-alt" id="views" />
+                                                                </div>
+                                                                <div className="col-lg-3 d-flex justify-content-between align-items-center">
+                                                                    <p className="mb-0">No Active Poll</p>
+                                                                    <img src="img/Group 515.png" alt="" />
+                                                                </div>
+                                                            </div>
+                                                        </footer>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <footer>
-                                                <div className="row align-items-center">
-                                                    <div className="col-lg-4">
-                                                        <h4 className="mb-0">Born: 14th March 1903</h4>
-                                                    </div>
-                                                    <div className="col-lg-4 d-flex justify-content-center">
-                                                        <h4 className="mb-0">Party: Alliance for Justice</h4>
-                                                    </div>
-                                                    <div className="col-lg-4 d-flex justify-content-end">
-                                                        <p className="mb-0">Ifedore Constituency Poll</p>
-                                                    </div>
-                                                </div>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="profile">
-                                    <div className="row">
-                                        <div className="col-lg-1">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" alt="profile-img" id="profile-img" className="img-fluid" />
-                                        </div>
-                                        <div className="col-lg-11">
-                                            <h3>Ahmed Bola Tinubu</h3>
-                                            <div className="row justify-content-between mb-4">
-                                                <div className="col-8">
-                                                    <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                                        Nullam vitae
-                                                        dignissim leo dis viverra scelerisque volutpat
-                                                        quam. Ornare tellus, egestas amet posuere at est tellus, auctor.
-                                                        Lobortis ante cursus enim, neque ipsum.</p>
-                                                </div>
-                                                <div className="col-1 d-flex align-items-end">
-                                                    <img src="/img/Group 516.png" alt="vote" />
-                                                </div>
-                                            </div>
-                                            <footer>
-                                                <div className="row align-items-center">
-                                                    <div className="col-lg-4">
-                                                        <h4 className="mb-0">Born: 14th March 1903</h4>
-                                                    </div>
-                                                    <div className="col-lg-4 d-flex justify-content-center">
-                                                        <h4 className="mb-0">Party: Alliance for Justice</h4>
-                                                    </div>
-                                                    <div className="col-lg-4 d-flex justify-content-end">
-                                                        <p className="mb-0">Ifedore Constituency Poll</p>
-                                                    </div>
-                                                </div>
-                                            </footer>
-                                        </div>
-                                    </div>
-                                </div>
+                                        </Link>
+                                    )
+                                })}
                             </div>
                             {/* footer  */}
                             <Footer />

@@ -21,7 +21,7 @@ function Profiles() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        console.log(response)
+        // console.log(response)
         setAspirantList(response.data)
         setAspirants(response.data)
     }
@@ -31,9 +31,9 @@ function Profiles() {
     }, [])
 
     const searchProfile = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         const people = aspirantList.filter(aspirant => `${aspirant.firstname} ${aspirant.lastname}`.toLowerCase().includes(e.target.value.toLowerCase()) && aspirant.status == 1)
-        console.log(people)
+        // console.log(people)
         setAspirants(people)
     }
 
