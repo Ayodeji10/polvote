@@ -13,34 +13,35 @@ function PreviewAspirant() {
     // navigate 
     const navigate = useNavigate()
 
-    const [previewImg, setPreviewImg] = useState(null)
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
 
-    // // image previewer
-    // useEffect((() => {
-    //     if (context.newAspirant.profileImg !== null) {
-    //         const reader = new FileReader();
-    //         reader.onloadend = () => {
-    //             setPreviewImg(reader.result)
-    //         }
-    //         reader.readAsDataURL(context.newAspirant.profileImg)
-    //     } else {
-    //         setPreviewImg()
-    //     }
-    // }), [context.newAspirant.profileImg])
+    const [previewImg, setPreviewImg] = useState(null)
 
     // fetch intending poll 
     const [poll, setPoll] = useState({})
     const [pageLoading, setPageLoading] = useState(true)
+    const [pollTItle, setPollTitle] = useState("")
     const fetchPoll = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/polls/getsinglepoll/${context.newAspirant.pollid}`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        console.log(`${API.API_ROOT}/polls/getsinglepoll/${context.newAspirant.pollid}`)
-        // console.log(response.data)
-        setPoll(response.data)
-        // setPageLoading(false)
+        if (context.newAspirant.pollid === null) {
+            setPollTitle("No Poll")
+            setPageLoading(false)
+        } else {
+            const response = await axios
+                .get(`${API.API_ROOT}/polls/getsinglepoll/${context.newAspirant.pollid}`)
+                .catch((error) => [
+                    console.log('Err', error)
+                ]);
+            // console.log(`${API.API_ROOT}/polls/getsinglepoll/${context.newAspirant.pollid}`)
+            // console.log(response.data)
+            // setPoll(response.data)
+            setPollTitle(response.data.polltitle)
+            setPageLoading(false)
+        }
     }
 
     useEffect(() => {
@@ -80,13 +81,14 @@ function PreviewAspirant() {
             data: fd
         }).then((response) => {
             setLoading(false)
-            // console.log(response)
+            console.log(response)
             setContext({
                 ...context, newAspirant: { firstName: "", lastName: "", link: "", profileImg: null, DOB: "", party: "", overview: "", education: "", politics: "", business: "", activism: "", history: [{ pollTitle: "", pollYear: "", position: "", numberOfVotes: "" }], ownership: "Writer", transfer: "No", amount: "", pollid: null }
             })
+            localStorage.removeItem('profileImg')
             navigate('/profiles')
         }, (error) => {
-            // console.log(error)
+            console.log(error)
             setLoading(false)
             setError('Something went wrong, please try again')
         })
@@ -104,12 +106,14 @@ function PreviewAspirant() {
                             <Link to={"/create-aspirant/submit-profile"}><i className="fas fa-arrow-left" /><span>Back</span></Link>
                         </div>
                         {/* profile-img  */}
-                        <img src="/img/persona.png" alt="profile-img" id="profile-img" />
-                        {/* <img src={previewImg === "" ? "/img/persona.png" : `${previewImg}`} alt="profile-img" id="profile-img" /> */}
+                        {localStorage.getItem("profileImg") ?
+                            <img src={localStorage.getItem("profileImg")} className="img-fluid" alt="profile-img" id="profile-img" /> :
+                            <img src="/img/persona.png" alt="profile-img" id="profile-img" />
+                        }
                         {/* active poll  */}
                         <div className="poll-active">
                             <h3>Active Participating Poll</h3>
-                            {pageLoading ? 'loading...' : <p className="mb-0">{poll.polltitle}</p>}
+                            {pageLoading ? 'loading...' : <p className="mb-0">{pollTItle}</p>}
                         </div>
                         {/* history  */}
                         <div className="history">

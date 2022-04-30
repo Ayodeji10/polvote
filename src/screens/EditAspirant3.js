@@ -6,13 +6,21 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { DataContext } from "../dataContext";
 import { API } from "../components/apiRoot";
 import axios from "axios";
+import Loader from '../components/loader';
 
 function EditAspirant3() {
     // context 
-    const { context, setContext } = useContext(DataContext)
+    const { context } = useContext(DataContext)
 
     // history
     const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
 
     // params 
     const { id } = useParams()
@@ -89,7 +97,9 @@ function EditAspirant3() {
                     <div className="col-lg-1" />
                     {/* main  */}
                     <div className="col-lg-8 main">
-                        {loading ? "loading" :
+                        {loading ?
+                            <Loader pageLoading={loading} />
+                            :
                             <div className="submit-profile">
                                 <div className="d-flex">
                                     <Link to={`/edit-aspirant/setup-aspirant/${aspirant._id}`}><i className="fas fa-arrow-left" /></Link>

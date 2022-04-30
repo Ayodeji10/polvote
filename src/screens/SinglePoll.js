@@ -1,22 +1,48 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useParams } from "react-router-dom";
+import React, { useState, useEffect, useRef, useContext } from 'react'
+import { Link, useParams, useNavigate } from "react-router-dom";
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
 import axios from "axios";
 import { API } from "../components/apiRoot";
+import { DataContext } from "../dataContext";
+import Loader from '../components/loader';
 import Modal from 'react-modal'
+import SinglePollCard from '../components/singlePollCard';
 Modal.setAppElement('#root')
 
 function SinglePoll() {
+    // context 
+    const { context } = useContext(DataContext)
+
+    // history 
+    const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
+
     // params 
     const { id } = useParams()
 
+    // modals 
     const [shareModal, setShareModal] = useState(false)
-    const [voteModal, setVoteModal] = useState(false)
 
-    // current poll 
-    const [currentPoll, setCurrentPoll] = useState(null)
+    // use ref 
+    const inputRef = useRef()
+
+    const [shareLink, setShareLink] = useState(`http://localhost:3000/polls/${id}`)
+
+    const copy = () => {
+        navigator.clipboard.writeText(shareLink)
+        inputRef.current.select()
+    }
+
+    // current poll and parties
+    const [currentPoll, setCurrentPoll] = useState({ aspirant: [] })
     const [parties, setParties] = useState([])
     const [pageLoading, setPageLoadig] = useState(true)
     // fetch current poll and parties
@@ -41,6 +67,17 @@ function SinglePoll() {
         if (id && id !== '') fetchcurrentPollAndParties()
     }, [id])
 
+    // get total votes 
+    const [pollToTal, setPollTotal] = useState()
+    let pollVotes = currentPoll.aspirant.reduce((total, aspirant) => {
+        let increament = aspirant.votes.length
+        total += (increament)
+        return total
+    }, 0)
+    useEffect(() => {
+        setPollTotal(pollVotes)
+    }, [currentPoll])
+
     return (
         <div className="container-fluid">
             <Nav />
@@ -54,7 +91,7 @@ function SinglePoll() {
                     <div className="col-lg-1" />
                     {/* main  */}
                     <div className="col-lg-8 single-poll">
-                        {pageLoading ? "" :
+                        {pageLoading ? <Loader pageLoading={pageLoading} /> :
                             <div>
                                 <header className="d-flex justify-content-between align-items-center">
                                     <h1 className="mb-0"><Link to={"/polls"}><i className="fas fa-arrow-left" /></Link>{currentPoll.polltitle}</h1>
@@ -68,39 +105,16 @@ function SinglePoll() {
                                         <div className="header d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h3>{currentPoll.polltitle}</h3>
-                                                <p className="mb-0">9,875 Total Polls</p>
+                                                <p className="mb-0">{pollToTal} Total Votes</p>
                                             </div>
                                             <div className="d-flex">
-                                                <button id="chart-btn"><img src="/img/_3295429435616.svg" alt="Chart" />Chart</button>
-                                                <button id="leaderboerd-btn" className="active"><img src="/img/Group 376.svg" alt="Leaderboard" />Leaderboard</button>
+                                                {/* <button id="chart-btn"><img src="/img/_3295429435616.svg" alt="Chart" />Chart</button> */}
+                                                {/* <button id="leaderboerd-btn" className="active"><img src="/img/Group 376.svg" alt="Leaderboard" />Leaderboard</button> */}
                                             </div>
                                         </div>
                                         {currentPoll.aspirant.map((aspirant, index) => {
                                             return (
-                                                <div className="candidate mb-3" key={index}>
-                                                    <div className="row align-items-center">
-                                                        <div className="col-lg-1">
-                                                            <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `https://polvote.com/ballot/${aspirant.image}`} alt="candidate-img" className="img-fluid" />
-                                                        </div>
-                                                        <div className="col-lg-1">
-                                                            <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `https://polvote.com/ballot/${parties.filter(party => party.partyname === aspirant.politparty)[0].image}`} alt="party" className="img-fluid" />
-                                                        </div>
-                                                        <div className="col-lg-7">
-                                                            <h3 className="mb-0">{aspirant.firstname} {aspirant.lastname}</h3>
-                                                            <p>{aspirant.politparty}</p>
-                                                            <div className="bar">
-                                                                <div className="indicator" />
-                                                            </div>
-                                                        </div>
-                                                        <div className="col-lg-2 d-flex flex-column justify-content-between align-items-end">
-                                                            <h2>25%</h2>
-                                                            <h5 className="mb-0">302,209 Votes</h5>
-                                                        </div>
-                                                        <div className="col-lg-1">
-                                                            <img src="/img/Group 516.png" alt="vote" onClick={() => setVoteModal(true)} />
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                <SinglePollCard aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} id={id} />
                                             )
                                         })}
                                     </div>
@@ -121,7 +135,7 @@ function SinglePoll() {
             <Modal isOpen={shareModal} onRequestClose={() => setShareModal(false)} id="poll-share-modal">
                 <i className="fas fa-times" onClick={() => setShareModal(false)} />
                 <h1>See who’s Leading the Poll</h1>
-                <p>You can explore Politics, Learn and Share Insights Online on Ballot Box</p>
+                <p>You can explore Politics, Learn and Share Insights Online on Polvote</p>
                 <h3>Share on:</h3>
                 <div className="d-flex justify-content-between sm">
                     <img src="/img/facebook.png" alt="facebook" />
@@ -131,19 +145,8 @@ function SinglePoll() {
                 </div>
                 <h3>Copy Link</h3>
                 <div className="link d-flex justify-content-between align-items-center">
-                    <input type="text" placeholder="https://www.ballotbox.com/share-poll/presidential/share_92029" />
-                    <img src="/img/Group 111.png" alt="copy" />
-                </div>
-            </Modal>
-
-            {/* vote modal  */}
-            <Modal isOpen={voteModal} onRequestClose={() => setVoteModal(false)} id="vote-modal" className="">
-                <h3>Proceed to Vote</h3>
-                <p>Once you click on proceed, you wont be able to vote for another for another aspirant in the
-                    same category</p>
-                <div className="d-flex justify-content-between">
-                    <button id="cancel" onClick={() => setVoteModal(false)}>Cancel</button>
-                    <button id="proceed">Proceed to Vote</button>
+                    <input type="text" ref={inputRef} placeholder="https://www.polvote.com/share-poll/presidential/share_92029" value={shareLink} />
+                    <img src="/img/Group 111.png" alt="copy" onClick={copy} />
                 </div>
             </Modal>
         </div>

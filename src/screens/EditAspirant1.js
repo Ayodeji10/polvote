@@ -8,13 +8,21 @@ import { useNavigate, useParams, Link } from "react-router-dom";
 import DatePicker from "react-datepicker"
 import "react-datepicker/dist/react-datepicker.css";
 import { DataContext } from "../dataContext";
+import Loader from '../components/loader';
 
 function EditAspirant1() {
     // context 
-    const { context, setContext } = useContext(DataContext)
+    const { context } = useContext(DataContext)
 
     // history
     const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
 
     // parties 
     const [parties, setParties] = useState([])
@@ -107,7 +115,9 @@ function EditAspirant1() {
                     <div className="col-lg-1" />
                     {/* main  */}
                     <div className="col-lg-8 main">
-                        {loading ? "loading..." :
+                        {loading ?
+                            <Loader pageLoading={loading} />
+                            :
                             <div className="form">
                                 <div className="row">
                                     <div className="col-1">

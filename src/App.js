@@ -28,7 +28,9 @@ function App() {
   // context 
   const [context, setContext] = useState({
     user: {},
-    newAspirant: { firstName: "", lastName: "", link: "", profileImg: null, DOB: "", party: "", overview: "", education: "", politics: "", business: "", activism: "", history: [{ pollTitle: "", pollYear: "", position: "", numberOfVotes: "" }], ownership: "Writer", transfer: "No", amount: "", pollid: null },
+    newAspirant: { firstName: "", lastName: "", link: "", DOB: "", party: "", overview: "", education: "", politics: "", business: "", activism: "", history: [{ pollTitle: "", pollYear: "", position: "", numberOfVotes: "" }], ownership: "Writer", transfer: "No", amount: "", pollid: null },
+    homeSearchKey: "",
+    profileView: "aspirants"
   })
 
   // save context to local storage
@@ -61,7 +63,7 @@ function App() {
           <Route exact path="/edit-aspirant/:id" element={<EditAspirant1 />} />
           <Route exact path="/edit-aspirant/setup-aspirant/:id" element={<EditAspirant2 />} />
           <Route exact path="/edit-aspirant/submit-profile/:id" element={<EditAspirant3 />} />
-          <Route exact path="/search" element={<Search />} />
+          <Route exact path="/search=:param" element={<Search />} />
           <Route exact path="/user-profile" element={<UserProfile />} />
           <Route exact path="/courses" element={<Courses />} />
           <Route exact path="/courses/single" element={<SingleCourse />} />

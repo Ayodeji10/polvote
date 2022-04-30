@@ -1,18 +1,36 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
 import axios from "axios";
 import { API } from "../components/apiRoot";
+import { useNavigate } from "react-router-dom";
+import { DataContext } from "../dataContext";
 import PollCard from '../components/pollCard';
+import Loader from '../components/loader';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
 function Polls() {
+    // context 
+    const { context } = useContext(DataContext)
+
+    // history
+    const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
+
     const [filterModal, setFilterModal] = useState(false)
+    const [pageLoading, setPageLoading] = useState(true)
 
     // fetch polls 
     const [polls, setPolls] = useState([])
+    const [pollsList, setPollsList] = useState([])
     const fetchPolls = async () => {
         const response = await axios
             .get(`${API.API_ROOT}/polls`)
@@ -20,10 +38,19 @@ function Polls() {
                 console.log('Err', error)
             ]);
         setPolls(response.data)
+        setPollsList(response.data)
+        setPageLoading(false)
     }
     useEffect(() => {
         fetchPolls()
     }, [])
+
+    const searchPolls = (e) => {
+        // console.log(e.target.value)
+        const polls = pollsList.filter(poll => poll.polltitle.toLowerCase().includes(e.target.value.toLowerCase()) && poll.status == 0)
+        // console.log(people)
+        setPolls(polls)
+    }
 
     return (
         <div className="container-fluid">
@@ -40,33 +67,38 @@ function Polls() {
                     <div className="col-lg-8 polls">
                         <div className="d-flex justify-content-end align-items-center mb-5">
                             <div className="searchbar d-flex align-items-center">
-                                <input type="text" placeholder="Search Poll" />
+                                <input type="text" placeholder="Search Poll" onChange={(e) => searchPolls(e)} />
                                 <img src="img/search-normal.png" alt="search" />
                             </div>
-                            <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button>
+                            {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
                         </div>
                         <h1>All Polls</h1>
-                        <div className="header">
-                            <div className="row">
-                                <div className="col-lg-6">
-                                    <p>Polls</p>
+                        {pageLoading ?
+                            <Loader pageLoading={pageLoading} /> :
+                            <>
+                                <div className="header">
+                                    <div className="row">
+                                        <div className="col-lg-6">
+                                            <p>Polls</p>
+                                        </div>
+                                        <div className="col-lg-2">
+                                            <p>Open Date</p>
+                                        </div>
+                                        <div className="col-lg-2">
+                                            <p>End Date</p>
+                                        </div>
+                                        <div className="col-lg-2">
+                                            <p>Status</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="col-lg-2">
-                                    <p>Open Date</p>
-                                </div>
-                                <div className="col-lg-2">
-                                    <p>End Date</p>
-                                </div>
-                                <div className="col-lg-2">
-                                    <p>Status</p>
-                                </div>
-                            </div>
-                        </div>
-                        {polls.map((poll, index) => {
-                            return (
-                                <PollCard poll={poll} key={index} />
-                            )
-                        })}
+                                {polls.map((poll, index) => {
+                                    return (
+                                        <PollCard poll={poll} key={index} />
+                                    )
+                                })}
+                            </>
+                        }
                         {/* footer  */}
                         <Footer />
                     </div>

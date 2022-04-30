@@ -3,16 +3,27 @@ import Nav from '../components/nav'
 import Aside from '../components/aside'
 import Footer from '../components/footer'
 import Comment from '../components/comments'
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
+import Loader from '../components/loader';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
 function SingleStory() {
     // context 
-    const { context, setContext } = useContext(DataContext)
+    const { context } = useContext(DataContext)
+
+    // history
+    const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
 
     // params 
     const { id } = useParams()
@@ -84,9 +95,9 @@ function SingleStory() {
             data: fd
         }).then((response) => {
             setLoading(false)
-            // setText("")
-            console.log(response)
-            // window.location.reload()
+            setText("")
+            // console.log(response)
+            window.location.reload()
         }, (error) => {
             console.log(error)
             setLoading(false)
@@ -188,14 +199,19 @@ function SingleStory() {
                     {/* main  */}
                     <div className="col-lg-8 story">
                         <Link to={"/stories"}><img src="/img/back.png" id="return-btn" alt="return to stories" /></Link>
-                        {!pageLoading &&
+                        {pageLoading ?
+                            <Loader pageLoading={pageLoading} /> :
                             <>
                                 <div className="story">
                                     <div className="body">
                                         <div className="row mb-5 align-items-center">
                                             <div className="col-1">
                                                 <div className="img-container">
-                                                    <img src="/img/Candidate.png" className="profile-img" alt="profile-img" />
+                                                    {story.userimage !== null && story.userimage !== undefined ?
+                                                        <img src={context.user.image} alt="avatar" id='profile-img' /> :
+                                                        <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
+                                                    }
+                                                    {/* <img src="/img/Candidate.png" className="profile-img" alt="profile-img" /> */}
                                                 </div>
                                             </div>
                                             <div className="col-10 d-flex flex-column justify-content-center">
@@ -206,7 +222,7 @@ function SingleStory() {
                                                 </div>
                                             </div>
                                             <div className="col-1">
-                                                <i className="fas fa-ellipsis-h" />
+                                                <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                                             </div>
                                         </div>
                                         <h4>{story.story}</h4>
@@ -214,7 +230,7 @@ function SingleStory() {
                                             {story.image.map((each, index) => {
                                                 return (
                                                     <div className="col-6" key={index}>
-                                                        <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                        <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                                     </div>
                                                 )
                                             })}
@@ -233,7 +249,7 @@ function SingleStory() {
                                                         <h3>{story.storyinfo[0].fullname}</h3>
                                                         <div className="d-flex">
                                                             <p className="mb-0">{story.storyinfo[0].username}</p>
-                                                            <p className="mb-0">23 Hours Ago</p>
+                                                            {/* <p className="mb-0">23 Hours Ago</p> */}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,7 +258,7 @@ function SingleStory() {
                                                     {story.storyinfo[0].image.map((each, index) => {
                                                         return (
                                                             <div className="col-6" key={index}>
-                                                                <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                                <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                                             </div>
                                                         )
                                                     })}
@@ -312,7 +328,7 @@ function SingleStory() {
                                                         {story.image.map((each, index) => {
                                                             return (
                                                                 <div className="col-6" key={index}>
-                                                                    <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                                    <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                                                 </div>
                                                             )
                                                         })}
@@ -322,7 +338,7 @@ function SingleStory() {
                                                         {story.storyinfo[0].image.map((each, index) => {
                                                             return (
                                                                 <div className="col-6" key={index}>
-                                                                    <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                                                    <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                                                 </div>
                                                             )
                                                         })}
@@ -348,7 +364,11 @@ function SingleStory() {
                                         <div className="row">
                                             <div className="col-1">
                                                 <div className="img-container">
-                                                    <img src="/img/Candidate.png" className="profile-img" alt="profile-img" />
+                                                    {context.user.image !== null && context.user.image !== undefined ?
+                                                        <img src={context.user.image} alt="profile-img" id='profile-img' /> :
+                                                        <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
+                                                    }
+                                                    {/* <img src="/img/Candidate.png" className="profile-img" alt="profile-img" /> */}
                                                 </div>
                                             </div>
                                             <div className="col-9">
@@ -361,6 +381,7 @@ function SingleStory() {
                                             </div>
                                             <div className="col-2">
                                                 <button onClick={comment}><img src="/img/send.png" alt="send" />{loading ? "loading..." : "Send"}</button>
+                                                {/* <button onClick={comment}>{loading ? <Loader pageLoading={loading} /> : <> <img src="/img/send.png" alt="send" />Send </>}</button> */}
                                             </div>
                                         </div>
                                     </div>

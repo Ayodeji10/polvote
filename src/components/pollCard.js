@@ -12,7 +12,7 @@ function PollCard({ poll }) {
 
     const [options, setOptons] = useState(false)
     const [shareModal, setShareModal] = useState(false)
-    const [shareLink, setShareLink] = useState(`http://localhost:3001/polls/${poll._id}`)
+    const [shareLink, setShareLink] = useState(`http://localhost:3000/polls/${poll._id}`)
 
     const copy = () => {
         navigator.clipboard.writeText(shareLink)
@@ -27,7 +27,7 @@ function PollCard({ poll }) {
                     <h6>{poll.category}</h6>
                 </div>
                 <div className="col-lg-2">
-                    <h6>383 Polls</h6>
+                    {/* <h6>383 Polls</h6> */}
                 </div>
                 <div className="col-lg-2">
                     <h6>{poll.startdate.substring(0, 10)}</h6>
@@ -39,7 +39,7 @@ function PollCard({ poll }) {
                     <i className="fas fa-circle" style={{ color: poll.status == 0 ? 'rgba(50, 186, 124, 1)' : 'rgba(135, 195, 254, 1)' }} />
                     <h6>{poll.status == 0 ? "Ongoing" : "Concluded"}</h6>
                 </div>
-                <div className="col-lg-1 d-flex justify-content-end" onClick={() => setOptons(!options)}>
+                <div className="col-lg-1 d-flex justify-content-end" onMouseOver={() => setOptons(true)} onMouseLeave={() => setOptons(false)}>
                     <i className="fas fa-ellipsis-v" />
                     {options &&
                         <div className="options">
@@ -64,7 +64,7 @@ function PollCard({ poll }) {
                 </div>
                 <h3>Copy Link</h3>
                 <div className="link d-flex justify-content-between align-items-center">
-                    <input type="text" ref={inputRef} placeholder="https://www.ballotbox.com/share-poll/presidential/share_92029" value={shareLink} />
+                    <input type="text" ref={inputRef} placeholder="https://www.polvote.com/share-poll/presidential/share_92029" value={shareLink} />
                     <img src="/img/Group 111.png" alt="copy" onClick={copy} />
                 </div>
             </Modal>

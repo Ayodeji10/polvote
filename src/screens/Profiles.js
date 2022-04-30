@@ -1,15 +1,33 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../components/apiRoot";
+import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
+import Loader from '../components/loader';
+import SingleProfileCard from '../components/singleProfileCard';
 Modal.setAppElement('#root')
 
+
 function Profiles() {
+    // context 
+    const { context } = useContext(DataContext)
+
+    // navigate 
+    const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
+
     const [filterModal, setFilterModal] = useState(false)
+    const [pageLoading, setPageLoading] = useState(true)
 
     // fetch aspirants 
     const [aspirantList, setAspirantList] = useState([])
@@ -21,9 +39,9 @@ function Profiles() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        // console.log(response)
         setAspirantList(response.data)
         setAspirants(response.data)
+        setPageLoading(false)
     }
 
     useEffect(() => {
@@ -60,10 +78,10 @@ function Profiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
-                                    <button><i className="far fa-edit" />Create Aspirant Profile</button>
+                                    <Link to={"/create-aspirant"}><button><i className="far fa-edit" />Create Aspirant Profile</button></Link>
                                 </div>
                                 <div className="col-lg-2">
-                                    <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button>
+                                    {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
                                 </div>
                             </div>
                         </div>
@@ -133,43 +151,17 @@ function Profiles() {
                             </div>
                             <button>Show Result</button>
                         </Modal>
-                        {aspirants.filter((aspirant) => aspirant.status == 1).map((aspirant, index) => {
-                            return (
-                                <Link to={`/profiles/single/${aspirant._id}`} key={index}>
-                                    <div className="profile">
-                                        <div className="row">
-                                            <div className="col-lg-2">
-                                                <img src={aspirant.image === null || aspirant.image == undefined ? `img/user (1) 1.png` : `https://polvote.com/ballot/${aspirant.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
-                                            </div>
-                                            <div className="col-lg-10">
-                                                <h3>{aspirant.firstname} {aspirant.lastname}</h3>
-                                                <p>{aspirant.overview}</p>
-                                                <footer>
-                                                    <div className="row align-items-center">
-                                                        <div className="col-lg-3">
-                                                            <h4 className="mb-0">Born: {aspirant.dob.substring(0, 15)}</h4>
-                                                        </div>
-                                                        <div className="col-lg-3">
-                                                            <h4 className="mb-0">Party: {aspirant.pparty}</h4>
-                                                        </div>
-                                                        <div className="col-lg-2">
-                                                            <p className="mb-0"><i className="far fa-eye" />204</p>
-                                                        </div>
-                                                        <div className="col-lg-1">
-                                                            <i className="fas fa-share-alt" id="views" />
-                                                        </div>
-                                                        <div className="col-lg-3 d-flex justify-content-between align-items-center">
-                                                            <p className="mb-0">No Active Poll</p>
-                                                            <img src="img/Group 515.png" alt="" />
-                                                        </div>
-                                                    </div>
-                                                </footer>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </Link>
-                            )
-                        })}
+                        {pageLoading ?
+                            <Loader pageLoading={pageLoading} />
+                            :
+                            <>
+                                {aspirants.filter((aspirant) => aspirant.status == 1).map((aspirant, index) => {
+                                    return (
+                                        <SingleProfileCard aspirant={aspirant} key={index} />
+                                    )
+                                }).reverse()}
+                            </>
+                        }
                         {/* footer  */}
                         <Footer />
                     </div>

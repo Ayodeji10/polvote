@@ -6,10 +6,21 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
+import Loader from '../components/loader';
 
 function EditAspirant2() {
     // context 
-    const { context, setContext } = useContext(DataContext)
+    const { context } = useContext(DataContext)
+
+    // history
+    const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
 
     // add history 
     const handleAddHstory = () => {
@@ -102,9 +113,6 @@ function EditAspirant2() {
         })
     }
 
-    // history
-    const navigate = useNavigate()
-
     return (
         <div className="container-fluid">
             <Nav />
@@ -118,7 +126,9 @@ function EditAspirant2() {
                     <div className="col-lg-1" />
                     {/* main  */}
                     <div className="col-lg-8 main">
-                        {loading ? "loading" :
+                        {loading ?
+                            <Loader pageLoading={loading} />
+                            :
                             <div className="form2">
                                 <div className="d-flex">
                                     <Link to={`/edit-aspirant/${aspirant._id}`}><i className="fas fa-arrow-left" /></Link>
@@ -128,23 +138,23 @@ function EditAspirant2() {
                                     </div>
                                 </div>
                                 <div className="input">
-                                    <label htmlFor="overview">Aspirant Overview</label>
+                                    <label htmlFor="overview">Overview</label>
                                     <textarea name id="overview" cols={30} rows={10} placeholder="Type Here" value={aspirant.overview} onChange={(e) => setAspirant({ ...aspirant, overview: e.target.value })} />
                                 </div>
                                 <div className="input">
-                                    <label htmlFor="Education">Education</label>
+                                    <label htmlFor="Education">Educational Background</label>
                                     <textarea name id="Education" cols={30} rows={10} placeholder="Type Here" value={aspirant.education} onChange={(e) => setAspirant({ ...aspirant, education: e.target.value })} />
                                 </div>
                                 <div className="input">
-                                    <label htmlFor="Politics">Politics</label>
+                                    <label htmlFor="Politics">Political Career</label>
                                     <textarea name id="Politics" cols={30} rows={10} placeholder="Type Here" value={aspirant.politics} onChange={(e) => setAspirant({ ...aspirant, politics: e.target.value })} />
                                 </div>
                                 <div className="input">
-                                    <label htmlFor="interest">Business Interest</label>
+                                    <label htmlFor="interest">Professional Career/Business Interest</label>
                                     <textarea name id="interest" cols={30} rows={10} placeholder="Type Here" value={aspirant.binterest} onChange={(e) => setAspirant({ ...aspirant, binterest: e.target.value })} />
                                 </div>
                                 <div className="input">
-                                    <label htmlFor="Activism">Activism</label>
+                                    <label htmlFor="Activism">Awards</label>
                                     <textarea name id="Activism" cols={30} rows={10} placeholder="Type Here" value={aspirant.activism} onChange={(e) => setAspirant({ ...aspirant, activism: e.target.value })} />
                                 </div>
                                 {/* history  */}

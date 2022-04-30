@@ -14,6 +14,13 @@ function CreateAspirant3() {
     // history
     const navigate = useNavigate()
 
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
+
     // fetch countries and fetch polls
     const [countries, setCountries] = useState([])
     const [polls, setPolls] = useState([])
@@ -55,8 +62,13 @@ function CreateAspirant3() {
     const [error, setError] = useState("")
     const preview = () => {
         setError("")
-        if (context.newAspirant.transfer === "Yes" && context.newAspirant.education === "") {
-            setError("Please specify amount")
+        // if (context.newAspirant.transfer === "Yes" && context.newAspirant.education === "") {
+        //     setError("Please specify amount")
+        // } else {
+        //     navigate('/create-aspirant/preview')
+        // }
+        if (addToPoll === true && context.newAspirant.pollid === null) {
+            setError("Please Specify your Poll of choice")
         } else {
             navigate('/create-aspirant/preview')
         }
@@ -128,7 +140,7 @@ function CreateAspirant3() {
                                             <div className="input">
                                                 <label htmlFor="poll">Ongoing Poll</label>
                                                 <select name="cars" id="poll" onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, pollid: e.target.value } })}>
-                                                    <option value={null}>-- Select Category --</option>
+                                                    <option value={null}>-- Select Poll --</option>
                                                     {polls.filter((poll) => poll.category === categorySelected).map(poll => {
                                                         return <option value={poll._id}>{poll.polltitle}</option>
                                                     })}
@@ -156,7 +168,7 @@ function CreateAspirant3() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="transfer">
+                            {/* <div className="transfer">
                                 <div className="row">
                                     <div className="col-7">
                                         <p>Allow Profile Login Details Transfer</p>
@@ -172,8 +184,8 @@ function CreateAspirant3() {
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            {context.newAspirant.transfer === "Yes" &&
+                            </div> */}
+                            {/* {context.newAspirant.transfer === "Yes" &&
                                 <div className="owner">
                                     <div className="row">
                                         <div className="col-7">
@@ -190,7 +202,7 @@ function CreateAspirant3() {
                                         </div>
                                     </div>
                                 </div>
-                            }
+                            } */}
                             <div className="d-flex justify-content-between mt-5">
                                 <h6 className="mb-0">3 of 3</h6>
                                 <div>

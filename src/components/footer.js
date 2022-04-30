@@ -6,27 +6,20 @@ function Footer() {
         <footer id="footer">
             <div className="row justify-content-between top">
                 <div className="col-lg-8 d-flex align-items-start">
-                    <img src="/img/fingerprint 1.png" alt="logo" id="logo" />
+                    <img src="/img/p.png" alt="logo" id="logo" />
                     <div>
-                        <h1>Ballot<span>Box</span></h1>
-                        <p className="mb-0">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam
-                            vitae
-                            dignissim
-                            leo dis viverra scelerisque volutpat quam. Ornare tellus, egestas amet
-                            posuere
-                            at est tellus, auctor. Lobortis ante cursus enim, neque ipsum. Donec lorem
-                            sed
-                            nisl amet varius tellus lorem vitae. At non massa nunc, donec amet turpis.
-                            Velit eget enim, ante lectus lobortis eget amet faucibus justo. Leo volutpat
-                        </p>
+                        <h1>Pol<span>Vote</span></h1>
+                        <p className="mb-0">Polvote provides you with the ability to see profiles of Political Aspirants contesting for leadership, governance and economic positions near your locality. It also offers you a news feed which takes contributions from Political enthusiasts discussing simple to complex topics on social media including you. It also gives you the ability to vote for these aspiring leaders in contests created for the internet via Polvote.</p>
                     </div>
                 </div>
                 <div className="col-lg-2 d-flex flex-column justify-content-end">
                     <h5>FOLLOW US</h5>
                     <div className="d-flex justify-content-between">
-                        <img src="/img/_2545301958192.png" alt="facebook" />
-                        <img src="/img/insta.png" alt="insta" />
-                        <img src="/img/twitter.png" alt="twitter" />
+                        <img src="/img/linkedin.png" alt="linkedIn" className='social' />
+                        <img src="/img/fb.png" alt="facebook" className='social' />
+                        <img src="/img/insta.png" alt="instagram" className='social' />
+                        <img src="/img/twitter.png" alt="twitter" className='social' />
+                        <img src="/img/tiktok.png" alt="tiktok" className='social' />
                     </div>
                 </div>
             </div>

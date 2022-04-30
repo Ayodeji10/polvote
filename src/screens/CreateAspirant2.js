@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
@@ -8,6 +8,16 @@ import { DataContext } from "../dataContext";
 function CreateAspirant2() {
     // context 
     const { context, setContext } = useContext(DataContext)
+
+    // history
+    const navigate = useNavigate()
+
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
 
     // add history 
     const handleAddHstory = () => {
@@ -42,9 +52,6 @@ function CreateAspirant2() {
         }
     }
 
-    // history
-    const navigate = useNavigate()
-
     const [error, setError] = useState("")
 
     const handleCreateAspirant = () => {
@@ -78,23 +85,23 @@ function CreateAspirant2() {
                                 </div>
                             </div>
                             <div className="input">
-                                <label htmlFor="overview">Aspirant Overview</label>
+                                <label htmlFor="overview">Overview</label>
                                 <textarea name id="overview" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.overview} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, overview: e.target.value } })} />
                             </div>
                             <div className="input">
-                                <label htmlFor="Education">Education</label>
+                                <label htmlFor="Education">Educational Background</label>
                                 <textarea name id="Education" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.education} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, education: e.target.value } })} />
                             </div>
                             <div className="input">
-                                <label htmlFor="Politics">Politics</label>
+                                <label htmlFor="Politics">Political Career</label>
                                 <textarea name id="Politics" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.politics} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, politics: e.target.value } })} />
                             </div>
                             <div className="input">
-                                <label htmlFor="interest">Business Interest</label>
+                                <label htmlFor="interest">Professional Career/Business Interest</label>
                                 <textarea name id="interest" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.business} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, business: e.target.value } })} />
                             </div>
                             <div className="input">
-                                <label htmlFor="Activism">Activism</label>
+                                <label htmlFor="Activism">Awards</label>
                                 <textarea name id="Activism" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.activism} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, activism: e.target.value } })} />
                             </div>
                             {/* history  */}

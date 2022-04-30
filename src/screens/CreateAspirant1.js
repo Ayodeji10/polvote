@@ -32,6 +32,13 @@ function CreateAspirant1() {
     // history
     const navigate = useNavigate()
 
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
+
     const [error, setError] = useState("")
     const createAspirant2 = (e) => {
         e.preventDefault()
@@ -43,13 +50,22 @@ function CreateAspirant1() {
         }
     }
 
+    // image previewer 
+    const handleImagePreview = (e) => {
+        e.preventDefault()
+        if (e.target.files && e.target.files.length > 0) {
+            setContext({ ...context, newAspirant: { ...context.newAspirant, profileImg: e.target.files[0] } });
+            localStorage.setItem('profileImg', URL.createObjectURL(e.target.files[0]))
+        }
+    }
+
     return (
         <div className="container-fluid">
             <Nav />
-            <div class="home-feed container">
-                <div class="row">
+            <div className="home-feed container">
+                <div className="row">
                     {/* aside  */}
-                    <div class="col-lg-3 aside">
+                    <div className="col-lg-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
@@ -58,7 +74,7 @@ function CreateAspirant1() {
                     <div className="col-lg-8 main">
                         <div className="form">
                             <h1>Create an Aspirant Profile</h1>
-                            <p>Lorem ipsum dolor sit amet, consec</p>
+                            <p>Please fill all input fields</p>
                             <div className="row">
                                 <div className="col-6">
                                     <div className="input">
@@ -81,16 +97,19 @@ function CreateAspirant1() {
                                 <div className="col-6 d-flex justify-content-end">
                                     <div className="input d-flex justify-content-between align-items-center">
                                         <div className="img-container d-flex align-items-center">
-                                            <img src="img/user (1) 1.png" className="profile-img" alt="profile-img" />
+                                            {localStorage.getItem("profileImg") ?
+                                                <img src={localStorage.getItem("profileImg")} className="profile-img" alt="profile-img" /> :
+                                                <img src="/img/user (1) 1.png" className="profile-img" alt="profile-img" />
+                                            }
                                         </div>
-                                        <input type="file" accept='image/*' onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, profileImg: e.target.files[0] } })} />
+                                        <input type="file" accept='image/*' onChange={(e) => handleImagePreview(e)} />
                                     </div>
                                 </div>
                                 <div className="col-6">
                                     <div className="input d-flex justify-content-between align-items-center">
                                         <div>
                                             <label htmlFor="date">Date of Birth</label>
-                                            <DatePicker
+                                            {/* <DatePicker
                                                 selected={context.newAspirant.DOB}
                                                 onChange={(date) => setContext({ ...context, newAspirant: { ...context.newAspirant, DOB: date } })}
                                                 placeholderText='DD / MM / YYYY'
@@ -99,8 +118,8 @@ function CreateAspirant1() {
                                                 showYearDropdown
                                                 // scrollableYearDropdown
                                                 scrollableMonthYearDropdown
-                                            />
-                                            {/* <input type="date" name="date" id="" /> */}
+                                            /> */}
+                                            <input type="date" name="date" id="date" onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, DOB: e.target.value } })} />
                                         </div>
                                         <i className="fas fa-calendar-alt" />
                                     </div>

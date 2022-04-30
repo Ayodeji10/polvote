@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
@@ -8,7 +8,7 @@ Modal.setAppElement('#root')
 
 function StoryCard({ story, index }) {
     // context 
-    const { context, setContext } = useContext(DataContext)
+    const { context } = useContext(DataContext)
 
     // history 
     const navigate = useNavigate()
@@ -47,6 +47,7 @@ function StoryCard({ story, index }) {
             headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
             data: fd
         }).then((response) => {
+            console.log(response)
             setLoading(false)
             setText("")
             setCommentLenght(prev => prev + 1)
@@ -136,9 +137,11 @@ function StoryCard({ story, index }) {
                 headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
                 data: fd
             }).then((response) => {
+                console.log(response)
                 setShareLoading(false)
                 window.location.reload()
             }, (error) => {
+                console.log(error)
                 setShareLoading(false)
                 setShareError('Something went wrong, please try again')
             })
@@ -155,9 +158,11 @@ function StoryCard({ story, index }) {
                 headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
                 data: fd
             }).then((response) => {
+                console.log(response)
                 setShareLoading(false)
                 window.location.reload()
             }, (error) => {
+                console.log(error)
                 setShareLoading(false)
                 setShareError('Something went wrong, please try again')
             })
@@ -167,31 +172,35 @@ function StoryCard({ story, index }) {
     return (
         // <Link to={`/stories/${story._id}`}>
         <div className="story">
+            {/* <p>{new Date().toString()}</p> */}
             <div className="body">
                 <div className="row mb-5 align-items-center">
                     <div className="col-1">
                         <div className="img-container">
-                            <img src="img/Candidate.png" className="profile-img" alt="profile-img" />
+                            {story.userimage === null || story.userimage === undefined ?
+                                <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
+                                <img src={story.userimage} alt="avatar" id='profile-img' />
+                            }
                         </div>
                     </div>
                     <div className="col-10 d-flex flex-column justify-content-center">
                         <h3>{story.fullname}</h3>
                         <div className="d-flex">
                             <p className="mb-0">{story.username}</p>
-                            <p className="mb-0">23 Hours Ago</p>
+                            <p className="mb-0">{story.createdAt.substring(0, 10)} {parseInt(story.createdAt.substring(11, 13)) + 1}{story.createdAt.substring(13, 16)} {story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}</p>
                         </div>
                     </div>
                     <div className="col-1" onClick={() => setOptions(!options)}>
-                        <i className="fas fa-ellipsis-h" />
+                        <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                <div className="d-flex">
+                                {/* <div className="d-flex">
                                     <i className="fa-regular fa-bookmark" />
                                     <div>
                                         <h4>Save Story</h4>
                                         <p>Add story to your saved items</p>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="d-flex" onClick={() => navigator.clipboard.writeText(`http://localhost:3000/stories/${story._id}`)}>
                                     <i className="fa-solid fa-link"></i>
                                     <h4>Copy Link</h4>
@@ -205,7 +214,7 @@ function StoryCard({ story, index }) {
                     {story.image.map((each, index) => {
                         return (
                             <div className="col-6" key={index}>
-                                <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                <img src={each} alt="img" className="img-fluid" id="story-img" />
                             </div>
                         )
                     })}
@@ -217,14 +226,17 @@ function StoryCard({ story, index }) {
                         <div className="row mb-3 align-items-center">
                             <div className="col-1">
                                 <div className="img-container">
-                                    <img src="img/Candidate.png" className="profile-img" alt="profile-img" />
+                                    {story.storyinfo.length === 0 ?
+                                        <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
+                                        <img src={story.storyinfo[0].userimage} alt="avatar" id='profile-img' />
+                                    }
                                 </div>
                             </div>
                             <div className="col-10 d-flex flex-column justify-content-center">
                                 <h3>{story.storyinfo[0].fullname}</h3>
                                 <div className="d-flex">
                                     <p className="mb-0">{story.storyinfo[0].username}</p>
-                                    <p className="mb-0">23 Hours Ago</p>
+                                    {/* <p className="mb-0">23 Hours Ago</p> */}
                                 </div>
                             </div>
                         </div>
@@ -233,7 +245,7 @@ function StoryCard({ story, index }) {
                             {story.storyinfo[0].image.map((each, index) => {
                                 return (
                                     <div className="col-6" key={index}>
-                                        <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                        <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                     </div>
                                 )
                             })}
@@ -264,7 +276,10 @@ function StoryCard({ story, index }) {
                 <div className="d-flex justify-content-between align-items-center mb-3">
                     <div className="d-flex align-items-center">
                         <div className="img-container">
-                            <img src="img/Candidate.png" className="profile-img" alt="profile-img" />
+                            {context.user.image !== null && context.user.image !== undefined ?
+                                <img src={context.user.image} alt="profile-img" id='profile-img' /> :
+                                <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
+                            }
                         </div>
                         <div>
                             <h3>{context.user.firstname} {context.user.lastname}</h3>
@@ -289,7 +304,10 @@ function StoryCard({ story, index }) {
                 <div className="story">
                     <div className="d-flex">
                         <div className="img-container">
-                            <img src="img/Candidate.png" className="profile-img" alt="profile-img" />
+                            {story.storyinfo.length === 0 ?
+                                <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
+                                <img src={story.storyinfo[0].userimage} alt="avatar" id='profile-img' />
+                            }
                         </div>
                         <div>
                             <h3>{story.storyinfo.length === 0 ? story.fullname : story.storyinfo[0].fullname}</h3>
@@ -303,7 +321,7 @@ function StoryCard({ story, index }) {
                                 {story.image.map((each, index) => {
                                     return (
                                         <div className="col-6" key={index}>
-                                            <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                            <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                         </div>
                                     )
                                 })}
@@ -313,7 +331,7 @@ function StoryCard({ story, index }) {
                                 {story.storyinfo[0].image.map((each, index) => {
                                     return (
                                         <div className="col-6" key={index}>
-                                            <img src={`https://polvote.com/ballot/${each}`} alt="img" className="img-fluid" id="story-img" />
+                                            <img src={`${each}`} alt="img" className="img-fluid" id="story-img" />
                                         </div>
                                     )
                                 })}
@@ -331,7 +349,7 @@ function StoryCard({ story, index }) {
                     <div>
                         {/* <button id="draft">Save as Draft</button> */}
                         <p>{shareError}</p>
-                        <button id="post" onClick={shareStory}>{shareLoading ? "loading" : "Post Story"}</button>
+                        <button id="post" onClick={shareStory}>{shareLoading ? "loading..." : "Post Story"}</button>
                     </div>
                 </div>
             </Modal>
@@ -339,7 +357,11 @@ function StoryCard({ story, index }) {
                 <div className="row">
                     <div className="col-1">
                         <div className="img-container">
-                            <img src="img/Candidate.png" className="profile-img" alt="profile-img" />
+                            {context.user.image !== null && context.user.image !== undefined ?
+                                <img src={context.user.image} alt="profile-img" id='profile-img' /> :
+                                <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
+                            }
+                            {/* <img src="img/Candidate.png" className="profile-img" alt="profile-img" /> */}
                         </div>
                     </div>
                     <div className="col-9">

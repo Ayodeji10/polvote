@@ -1,5 +1,5 @@
 /* resets  */
-body #root > .container-fluid {
+body #root>.container-fluid {
     padding: 0;
     background-image: url('../src/bg-img/Rectangle\ 32.png');
     /* min-height: 100vh; */
@@ -15,14 +15,19 @@ h6,
 div,
 p,
 span,
-button, 
+button,
 select,
 label {
-    font-family: 'Nunito', sans-serif;  
+    font-family: 'Nunito', sans-serif;
     text-decoration: none !important;
     color: #FFF;
     outline: none !important;
     border: none !important;
+}
+
+select option {
+    background-color: #FFF;
+    color: rgba(10, 24, 61, 1)
 }
 
 a:hover {
@@ -45,17 +50,18 @@ input {
 }
 
 .login-form input::placeholder {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  opacity: 0.25;
-  font-family: 'Questrial', sans-serif;
-  opacity: 40%;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    opacity: 0.25;
+    font-family: 'Questrial', sans-serif;
+    opacity: 40%;
 }
 
 /* presets  */
 .ReactModal__Overlay {
     background-color: rgba(0, 0, 0, 0.5) !important;
+    z-index: 1031 !important;
 }
 
 
@@ -74,92 +80,302 @@ input {
 
 
 
-
-/* landing page */
-.container-fluid.landing-page {
-    height: 100vh;
-    background-image: url('../src/bg-img//back2.png'), url('../src/bg-img//back1.png') !important;
-    background-position:center;
-    background-size: cover;
+/* navbar  */
+.navigation-container {
+    box-shadow: 0px 4px 4px 0px #FFFFFF0D;
+    background-color: rgba(1, 10, 32, 1);
 }
 
-.container-fluid.landing-page nav li a {
+.navigation-container .container-fluid {
+    padding: 0 !important
+}
+
+.navbar-brand {
+    padding: 0 !important;
+    margin-right: 135px;
+}
+
+.navbar {
+    padding: 20px 0;
+    /* margin-bottom: 47px; */
+}
+
+nav li svg {
+    display: block;
+    margin: 0 auto 4px;
+}
+
+nav li a {
     font-size: 16px;
     font-weight: 400;
-    color: black !important;
+    line-height: 24px;
+    color: #80848F !important;
     font-family: 'Questrial', sans-serif;
     padding-left: 20px !important;
     padding-right: 20px !important;
 }
 
-.container-fluid.landing-page nav li button {
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: 50px;
-    padding: 12px 20px;
-    margin-left: 20px;
+nav li a#course {
+    color: rgba(39, 229, 8, 1) !important;
 }
 
-.container-fluid.landing-page nav li button#login {
-    color: rgba(0, 122, 243, 1);
-    background-color: transparent;
-    border: solid 1px rgba(0, 122, 243, 1) !important
+nav li a svg path {
+    fill: #80848F;
 }
 
-.container-fluid.landing-page nav li button#sign-up {
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF;
+nav li.active a {
+    color: rgba(0, 122, 243, 1) !important;
 }
 
-.container-fluid.landing-page .content {
-    margin-top: 130px
+nav li.active a svg path {
+    fill: rgba(0, 122, 243, 1);
 }
 
-.container-fluid.landing-page h1 {
-    font-size: 49px;
+nav .nav2 {
+    padding-left: 38px;
+    border-left: solid 2px rgba(255, 255, 255, 0.2)
+}
+
+nav .profile-img {
+    max-width: 45px;
+    max-height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-left: 12px;
+}
+
+nav .profile-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
+}
+
+nav .profile-img a {
+    padding: 0 !important;
+    height: 45px
+}
+
+/* toggle  */
+.navbar-toggler {
+    background: #007AF3 !important;
+    border: none;
+    padding: 10px 6px !important;
+    outline: none !important;
+}
+
+.navbar-toggler span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border: 1px;
+    background: white;
+    border: solid 1px white;
+}
+
+.navbar-toggler span+span {
+    width: 18px;
+    margin: 4px 0 0 4px;
+    width: 22px;
+}
+
+.navbar-toggler span+span+span {
+    width: 10px;
+    margin-left: 4px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* home  */
+.home {
+    background-color: rgba(4, 19, 54, 1);
+    min-height: 100vh
+}
+
+.home header {
+    padding-top: 43px;
+    margin-bottom: 90px;
+}
+
+.home header #country {
+    margin-left: 46px
+}
+
+.home .main #secured {
+    margin-bottom: 8px;
+    max-height: 216px;
+    max-width: 216px;
+}
+
+.home .main h1 {
+    font-size: 38px;
     font-weight: 700;
     line-height: 58px;
-    max-width: 587px;
+    margin-bottom: 6px;
+}
+
+.home .main h4 {
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px
+}
+
+.home .login {
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px;
+    padding: 34px;
+    margin-bottom: 24px;
+    /* width: 456px */
+}
+
+.home .login h1 {
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    line-height: 24px;
+    color: #FFF;
+    text-align: center;
+}
+
+.home .login h2 {
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 auto;
+    margin-bottom: 16px;
+    max-width: 345px;
+    line-height: 20px;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
+
+.home button {
+    width: 287px;
+    background-color: #FFF;
     color: rgba(10, 24, 61, 1);
+    border-radius: 100px !important;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    padding: 0 15px !important
+}
+
+.home button.metro {
+    padding: 10px 15px !important;
+    text-transform: lowercase;
+}
+
+.home button.metro i {
+    float: unset;
+}
+
+.home button span {
+    color: rgba(10, 24, 61, 1)
+}
+
+.home .login .or {
+    margin-bottom: 30px;
+}
+
+.home .login .or span {
+    border: solid 1px rgba(255, 255, 255, 1) !important;
+    width: 100%
+}
+
+.home .login .or h6 {
+    margin: 0 16px
+}
+
+.home .login label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
     margin-bottom: 14px;
 }
 
-.container-fluid.landing-page p {
-    font-size: 18px;
-    font-weight: 400;
-    line-height: 28px;
-    max-width: 564px;
-    color: rgba(10, 24, 61, 0.6);
-    margin-bottom: 20px;
-}
-
-.container-fluid.landing-page button {
-    font-size: 16px;
-    font-weight: 400;
-    color: #FFF;
-    background-color: rgba(0, 122, 243, 1);
-    padding: 14px 60px;
-    border-radius: 50px;
-}
-
-.container-fluid.landing-page footer {
-    position: absolute;
-    left: 0;
-    bottom: 0;
+.home .login input {
     width: 100%;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFF;
+    padding: 18px 24px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 30px;
+}
+
+.home .login input:last-child {
+    margin-bottom: 24px;
+}
+
+.home .login .remember label,
+.home .login .remember input {
+    display: inline;
+    margin: unset;
+    padding: 0;
+    width: unset;
+    color: rgba(82, 169, 255, 1)
+}
+
+.home .login .remember a {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(1, 147, 222, 1)
+}
+
+.home .login button#login-btn {
+    width: 100%;
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    padding: 16px !important;
+    border-radius: 100px;
+}
+
+.home h6 {
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 71px;
+}
+
+.home h6 span {
+    color: #52A9FF;
+    cursor: pointer;
+}
+
+.home footer {
     padding: 22px 0;
     border-top: solid 2px rgba(255, 255, 255, 0.2) !important;
 }
 
-.container-fluid.landing-page footer p {
+.home footer p {
     margin-bottom: 0;
     font-size: 14px;
     font-weight: 400;
     color: #FFF;
+    cursor: pointer;
 }
 
-.container-fluid.landing-page footer img {
-    margin-left: 12px
+.home footer img {
+    margin-left: 12px;
+    height: 20px;
+    width: 20px
 }
 
 /* signup modal  */
@@ -171,7 +387,7 @@ input {
     margin-left: auto !important;
     margin-right: auto !important;
     width: 803px;
-    height: 680px;
+    height: 700px;
     background-color: rgba(4, 19, 54, 1) !important;
     border-radius: 10px !important;
     padding: 16px 14px !important;
@@ -183,7 +399,8 @@ input {
 
 #signup h1 {
     color: #FFF;
-    text-align: center;;
+    text-align: center;
+    ;
     margin: 16px 0 8px 0;
     font-size: 22px;
     font-weight: 600;
@@ -193,7 +410,8 @@ input {
 
 #signup h4 {
     color: rgba(255, 255, 255, 0.7);
-    text-align: center;;
+    text-align: center;
+    ;
     font-size: 14px;
     font-weight: 400;
     max-width: 344px;
@@ -282,6 +500,8 @@ input {
 
 #signup .form h6 span {
     color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+    border: 0 !important
 }
 
 
@@ -332,149 +552,6 @@ input {
 
 
 
-
-/* login modal  */
-#login-modal {
-    top: 3% !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 588px;
-    height: 740px;
-    background-color: rgba(4, 19, 54, 1) !important;
-    border-radius: 10px !important;
-    padding: 12px !important;
-}
-
-#login-modal i {
-    float: right;
-}
-
-#login-modal form {
-    width: 386px;
-    margin: 36px auto;
-}
-
-#login-modal form h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    line-height: 24px;
-    color: #FFF;
-    text-align: center;
-}
-
-#login-modal form h2 {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0 auto;
-    margin-bottom: 16px;
-    max-width: 345px;
-    line-height: 20px;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-}
-
-#login-modal form button {
-    width: 287px;
-    background-color: #FFF;
-    color: rgba(10, 24, 61, 1);
-    border-radius: 100px !important;
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 0 15px !important
-}
-
-#login-modal form button span {
-    color: rgba(10, 24, 61, 1)
-}
-
-#login-modal form button.metro {
-    padding: 10px 15px !important;
-    text-transform: lowercase;
-}
-
-#login-modal form button.metro i {
-    float: unset;
-}
-
-#login-modal form .or {
-    margin-bottom: 30px;
-}
-
-#login-modal form .or span  {
-    border: solid 1px rgba(255, 255, 255, 1) !important;
-    width: 100%
-}
-
-#login-modal form .or h6  {
-    margin: 0 16px
-}
-
-#login-modal form label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 14px;
-}
-
-#login-modal form input {
-    width: 100%;
-    border-radius: 100px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #FFF;
-    padding: 18px 24px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-
-#login-modal form input:last-child {
-    margin-bottom: 24px;
-}
-
-#login-modal form .remember label, #login-modal form .remember input {
-    display: inline;
-    margin: unset;
-    padding: 0;
-    width: unset;
-    color: rgba(82, 169, 255, 1)
-}
-
-#login-modal form .remember a {
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(1, 147, 222, 1)
-}
-
-#login-modal form button#login-btn {
-    width: 100%;
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF;
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 24px;
-    padding: 16px !important;
-    border-radius: 100px;
-}
-
-#login-modal form h6 {
-    color: #FFF;
-    font-size: 14px;
-    font-weight: 400;
-    text-align: center;
-}
-
-#login-modal form h6 span {
-    color: #52A9FF
-}
-
-
-
 /* forgot password modal */
 #forgot-password {
     position: relative !important;
@@ -499,7 +576,7 @@ input {
     width: 446px;
     position: absolute;
     top: 50%;
-    left: 50%; 
+    left: 50%;
     transform: translate(-50%, -50%);
 }
 
@@ -576,111 +653,26 @@ input {
     margin-bottom: 51px;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-/* navbar  */
-.navigation-container {
-    box-shadow: 0px 4px 4px 0px #FFFFFF0D;
+/* terms and conditions  */
+#terms {
+    top: 5% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 591px;
+    height: 700px;
+    background-color: rgba(4, 19, 54, 1) !important;
+    border-radius: 10px !important;
+    padding: 25px 15px !important;
+    text-align: center;
 }
 
-.navigation-container .container-fluid {
-    padding: 0 !important
-}
 
-.navbar {
-    padding: 20px 0;
-    margin-bottom: 47px;
-}
 
-.navbar-brand {
-    padding: 0 !important;
-    margin-right: 135px;
-}
 
-nav li a {
-    font-size: 16px;
-    font-weight: 400;
-    color: #FFF !important;
-    font-family: 'Questrial', sans-serif;
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-}
 
-nav li a#course {
-    color: rgba(39, 229, 8, 1) !important;
-}
-
-.dropdown li a img {
-    margin-right: 9px;
-}
-
-.dropdown li a {
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(0, 0, 0, 0.8) !important;
-    font-family: 'Questrial', sans-serif;
-}
-
-nav .nav2 {
-    padding-left: 38px;
-    border-left: solid 2px rgba(255, 255, 255, 0.2)
-}
-
-nav .profile-img {
-    max-width: 45px;
-    max-height: 45px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-left: 12px;
-}
-
-nav .profile-img img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position:top;
-}
-
-nav .profile-img a {
-    padding: 0 !important
-}
-
-/* toggle  */
-.navbar-toggler {
-  background: #007AF3 !important;
-  border: none;
-  padding: 10px 6px !important;
-  outline: none !important;
-}
-
-.navbar-toggler span {
-  display: block;
-  width: 22px;
-  height: 2px;
-  border: 1px;
-  background: white;
-  border: solid 1px white;
-}
-
-.navbar-toggler span + span {
-  width: 18px;
-  margin: 4px 0 0 4px;
-  width: 22px;
-}
-
-.navbar-toggler span + span + span {
-  width: 10px;
-  margin-left: 4px;
-}
 
 
 
@@ -690,6 +682,14 @@ nav .profile-img a {
 
 /* home  */
 /* aside  */
+.home-feed {
+    padding-top: 147px
+}
+
+.home-feed .aside {
+    position: relative;
+}
+
 .home-feed .user p {
     font-size: 14px;
     font-weight: 400;
@@ -709,6 +709,92 @@ nav .profile-img a {
     margin-right: 10px;
 }
 
+.home-feed .avatar img#profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
+}
+
+/* aside settings  */
+.home-feed .aside .settings {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    padding: 9px 18px
+}
+
+.home-feed .aside .settings {
+    position: absolute;
+    right: 10px;
+    top: 50px;
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    padding: 9px 18px;
+    width: 130px
+}
+
+.home-feed .aside .settings p {
+    color: rgba(6, 25, 71, 1);
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+.home-feed .aside .settings p:last-child {
+    margin-bottom: 0;
+}
+
+/* logout modal  */
+#logoutModal {
+    width: 320px;
+    height: 180px;
+    border-radius: 10px !important;
+    background-color: rgba(6, 25, 71, 1) !important;
+    top: 40% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 26px 34px !important;
+}
+
+#logoutModal h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+#logoutModal button {
+    display: inline !important;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    padding: 6px 68px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
+
+#logoutModal button:last-child {
+    margin-bottom: 0;
+}
+
+#logoutModal button#log-out {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
+}
+
+#logoutModal button#cancel-log {
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF
+}
+
+
+
+/* aside course  */
 .home-feed .aside .course {
     margin-bottom: 25px;
 }
@@ -728,7 +814,7 @@ nav .profile-img a {
     height: 103px;
     background-image: url('../src/bg-img/unsplash_Co1Y7NxclgY.png');
     /* background-image: url('img/unsplash_Co1Y7NxclgY.png'); */
-    border-radius: 10px 10px 0 0 ;
+    border-radius: 10px 10px 0 0;
 }
 
 .home-feed .aside .course .card .body {
@@ -745,12 +831,15 @@ nav .profile-img a {
     font-size: 10px;
 }
 
-.home-feed .aside .course .card span h5, .home-feed .aside .course .card span h4, .home-feed .aside .course .card p {
+.home-feed .aside .course .card span h5,
+.home-feed .aside .course .card span h4,
+.home-feed .aside .course .card p {
     font-size: 10px;
     font-weight: 400;
 }
 
-.home-feed .aside .course .card span h4, .home-feed .aside .course .card span i {
+.home-feed .aside .course .card span h4,
+.home-feed .aside .course .card span i {
     color: rgba(254, 192, 6, 1);
     margin-right: 8px;
 }
@@ -779,6 +868,10 @@ nav .profile-img a {
     font-weight: 400;
 }
 
+.home-feed .aside .content>span {
+    cursor: pointer;
+}
+
 .home-feed .aside .courses {
     background-color: rgba(4, 19, 54, 1);
     border-radius: 10px;
@@ -801,6 +894,18 @@ nav .profile-img a {
     font-weight: 400;
 }
 
+/* aside add  */
+.home-feed .aside .ad span {
+    float: right;
+    font-size: 12px;
+}
+
+.home-feed .aside .ad img {
+    width: 100%;
+    height: auto
+}
+
+/* aside polls  */
 .home-feed .aside .polls {
     background-color: rgba(4, 19, 54, 1);
     border-radius: 10px;
@@ -816,17 +921,17 @@ nav .profile-img a {
 .home-feed .aside .polls .active-polls::-webkit-scrollbar {
     width: 5px;
 }
- 
+
 .home-feed .aside .polls .active-polls::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
- 
+
 .home-feed .aside .polls .active-polls::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
 
-.home-feed .aside .polls .active-polls > * {
+.home-feed .aside .polls .active-polls>* {
     margin: 0 10px 24px 0
 }
 
@@ -932,6 +1037,7 @@ nav .profile-img a {
 .home-feed .main .poll .main .candidate img {
     border-radius: 5px;
     min-width: 100%;
+    cursor: pointer;
 }
 
 .home-feed .main .poll .main .candidate h4 {
@@ -955,7 +1061,6 @@ nav .profile-img a {
 
 .home-feed .main .poll .main .candidate .indicator {
     height: 6px;
-    width: 50% !important;
     background-color: #FFF;
     border-radius: 60px;
 }
@@ -985,12 +1090,13 @@ nav .profile-img a {
     padding: 14px 38px
 }
 
-.home-feed .main .poll footer a {
+.home-feed .main .poll footer p {
     font-size: 14px;
     font-weight: 700;
+    cursor: pointer;
 }
 
-.home-feed .main .poll footer a i {
+.home-feed .main .poll footer p i {
     margin-right: 17px;
 }
 
@@ -1023,7 +1129,8 @@ nav .profile-img a {
 .home-feed .main .stories .header h4 {
     font-size: 14px;
     font-weight: 700;
-    padding: 0 12px
+    padding: 0 12px;
+    cursor: pointer;
 }
 
 .home-feed .main .stories .header h4:first-child {
@@ -1044,12 +1151,20 @@ nav .profile-img a {
     margin-right: 20px;
     min-width: 284px;
     max-width: 284px;
+    cursor: pointer;
+}
+
+.home-feed .main .stories .carousel .story .img-container {
+    width: 100%;
+    height: 220px
 }
 
 .home-feed .main .stories .carousel .story img {
     border-radius: 20px;
     width: 100%;
-    height: auto
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
 }
 
 .home-feed .main .stories .carousel .story .like-btn {
@@ -1059,7 +1174,7 @@ nav .profile-img a {
     background-color: #FFF;
     position: absolute;
     top: 12px;
-    right: 12px
+    right: 12px;
 }
 
 .home-feed .main .stories .carousel .story .like-btn i {
@@ -1074,11 +1189,11 @@ nav .profile-img a {
 .home-feed .main .stories .carousel::-webkit-scrollbar {
     height: 5px
 }
- 
+
 .home-feed .main .stories .carousel::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
- 
+
 .home-feed .main .stories .carousel::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -1103,60 +1218,6 @@ nav .profile-img a {
     margin-right: 10px
 }
 
-.home-feed .main .profiles .profile {
-    background-color: rgba(10, 24, 61, 1);
-    border-radius: 10px;
-    padding: 27px 52px 17px 27px;
-    margin-bottom: 20px;
-}
-
-.home-feed .main .profiles .profile img#profile-img {
-    border-radius: 8px;
-}
-
-.home-feed .main .profiles .profile h3 {
-    color: rgba(135, 195, 254, 1);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.home-feed .main .profiles .profile p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 67px;
-}
-
-.home-feed .main .profiles .profile h4 {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.home-feed .main .profiles .profile .fa-eye {
-    color: #FFF;
-    margin-right: 10px;
-}
-
-.home-feed .main .profiles .profile .fa-share-alt {
-    color: rgba(0, 122, 243, 1);
-}
-
-.home-feed .main .profiles button {
-    margin-left: 20px;
-    padding: 11px 14px;
-    border-radius: 5px;
-}
-
-.home-feed .main .profiles button:nth-child(1) {
-    background-color: #FFF;
-    color: rgba(0, 122, 243, 1)
-}
-
-.home-feed .main .profiles button:nth-child(2) {
-    color: #FFF;
-    background-color: rgba(0, 122, 243, 1)
-}
 
 /* adds  */
 .home-feed .main .adds {
@@ -1203,11 +1264,11 @@ nav .profile-img a {
 .home-feed .main .courses .carousel::-webkit-scrollbar {
     height: 5px
 }
- 
+
 .home-feed .main .courses .carousel::-webkit-scrollbar-track {
     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
- 
+
 .home-feed .main .courses .carousel::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -1255,7 +1316,7 @@ nav .profile-img a {
 }
 
 .home-feed .main .courses .carousel .course .rating span#r2 {
-    color: rgba(6, 25, 71, 1) ;
+    color: rgba(6, 25, 71, 1);
     margin-right: 8px;
 }
 
@@ -1317,6 +1378,11 @@ footer#footer .bottom h4 {
 
 footer#footer .bottom h4:last-child {
     margin-right: 0;
+}
+
+footer#footer img.social {
+    height: 20px;
+    width: 20px
 }
 
 
@@ -1429,7 +1495,8 @@ footer#footer .bottom h4:last-child {
     font-weight: 400;
     margin-bottom: 0;
     line-height: 25px;
-    cursor: pointer;;
+    cursor: pointer;
+    ;
 }
 
 /* filter modal  */
@@ -1483,7 +1550,7 @@ footer#footer .bottom h4:last-child {
     font-weight: 700;
     padding: 16px 145px;
     background-color: rgba(0, 122, 243, 1);
-    border-radius: 50px;    
+    border-radius: 50px;
 }
 
 
@@ -1578,6 +1645,7 @@ footer#footer .bottom h4:last-child {
 
 .single-poll .poll .candidate img {
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .single-poll .poll .candidate h3 {
@@ -1600,7 +1668,7 @@ footer#footer .bottom h4:last-child {
 
 .single-poll .poll .candidate .indicator {
     height: 100%;
-    width: 50%;
+    /* width: 50%; */
     background-color: #FFF;
     border-radius: 60px;
 }
@@ -1649,7 +1717,7 @@ footer#footer .bottom h4:last-child {
     background-color: rgba(10, 24, 61, 1) !important;
     border-radius: 20px !important;
     border: solid 1px rgba(255, 255, 255, 0.1) !important;
-    padding: 60px 82px !important;
+    padding: 50px 75px !important;
 }
 
 #poll-share-modal .fa-times {
@@ -1764,7 +1832,7 @@ footer#footer .bottom h4:last-child {
     border-radius: 10px;
     padding: 20px 24px;
     margin-bottom: 37px;
-} 
+}
 
 .story .create-story h3 {
     font-size: 22px;
@@ -1782,14 +1850,15 @@ footer#footer .bottom h4:last-child {
     overflow: hidden;
 }
 
-.story .create-story .img-container img.profile-img,
-.story .story .img-container img.profile-img,
+.story .create-story .img-container img#profile-img,
+.story .story .img-container img#profile-img,
 .story .story .comment .img-container img.profile-img,
 .search .story .comment .img-container img.profile-img {
     width: 100%;
     height: auto;
     object-fit: cover;
     object-position: top;
+    min-height: 100%;
 }
 
 .story .create-story input {
@@ -1805,6 +1874,7 @@ footer#footer .bottom h4:last-child {
     font-size: 16px;
     font-weight: 600;
     margin-left: 33px;
+    cursor: pointer;
 }
 
 .story .create-story p img {
@@ -1842,6 +1912,10 @@ footer#footer .bottom h4:last-child {
     background-color: #FFF;
     border-radius: 5px;
     padding: 13px 15px;
+}
+
+.story .story .options>div {
+    cursor: pointer;
 }
 
 .story .story .options i {
@@ -1893,17 +1967,19 @@ footer#footer .bottom h4:last-child {
 
 .story .story .widget {
     border-top: solid 1px rgba(255, 255, 255, 0.1) !important;
-    border-bottom : solid 1px rgba(255, 255, 255, 0.1) !important;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
     padding: 20px 0
 }
 
 .story .story .widget img {
-    margin-right: 12px
+    margin-right: 12px;
+    cursor: pointer
 }
 
 .story .story .widget i {
     font-size: 24px;
-    margin-right: 12px
+    margin-right: 12px;
+    cursor: pointer
 }
 
 .story .story .widget i.fa-solid {
@@ -2007,7 +2083,7 @@ footer#footer .bottom h4:last-child {
 .story-write-modal::-webkit-scrollbar {
     width: 5px;
 }
- 
+
 .story-write-modal::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
@@ -2034,11 +2110,12 @@ footer#footer .bottom h4:last-child {
     margin-right: 15px
 }
 
-.story-write-modal img.profile-img {
+.story-write-modal img#profile-img {
     width: 100%;
     height: auto;
     object-fit: cover;
     object-position: top;
+    min-height: 100%;
 }
 
 .story-write-modal h3 {
@@ -2220,6 +2297,7 @@ img#return-btn {
     height: auto;
     object-fit: cover;
     object-position: top;
+    min-height: 100%;
 }
 
 .story .comments .comment-body {
@@ -2251,7 +2329,8 @@ img#return-btn {
     font-size: 12px;
     font-weight: 700;
     color: rgba(255, 255, 255, 0.5);
-    margin-right: 20px
+    margin-right: 20px;
+    cursor: pointer
 }
 
 .story .comments h6 {
@@ -2302,11 +2381,25 @@ img#return-btn {
     margin-right: 10px;
 }
 
+/* loader  */
+.loaderContainer {
+    height: 30vh;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+/* .loaderContainer span span {
+    color: #FFF !important;
+    background-color: #FFF !important;
+} */
+
 .profile .profile {
     background-color: rgba(10, 24, 61, 1);
     border-radius: 10px;
     padding: 27px 52px 17px 27px;
     margin-bottom: 25px;
+    cursor: pointer;
 }
 
 .profile .profile img#profile-img {
@@ -2322,13 +2415,13 @@ img#return-btn {
 
 .profile .profile p {
     color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     margin-bottom: 35px;
 }
 
 .profile .profile h4 {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
 }
 
@@ -2526,6 +2619,7 @@ img#return-btn {
     display: block;
     margin: 0 auto
 }
+
 /* end add to poll modal  */
 
 .single-profile .aside .poll-active button {
@@ -2597,6 +2691,12 @@ img#return-btn {
     font-weight: 400;
 }
 
+.single-profile .main .fa-share-nodes {
+    font-size: 30px;
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+}
+
 .single-profile .main button#edit {
     font-size: 16px;
     font-weight: 700;
@@ -2604,14 +2704,20 @@ img#return-btn {
     padding: 12px 22px;
     border-radius: 40px;
     max-width: 127px;
+    margin-left: 10px
 }
 
 .single-profile .main button#manage-profile {
     font-size: 14px;
     font-weight: 700;
     background-color: rgba(0, 122, 243, 1);
-    padding: 10px;
-    border-radius: 5px;
+    padding: 12px 22px;
+    border-radius: 40px;
+    margin-left: 25px
+}
+
+.single-profile .main button#manage-profile>i {
+    margin-right: 10px
 }
 
 .single-profile .main .info {
@@ -2674,20 +2780,32 @@ img#return-btn {
     font-weight: 600;
 }
 
-.form button, .form2 button, .preview button, .submit-profile button, .single-profile .main button {
+.form button,
+.form2 button,
+.preview button,
+.submit-profile button,
+.single-profile .main button {
     font-size: 14px;
     font-weight: 700;
     padding: 10px 24px;
     border-radius: 5px;
 }
 
-.form button#draft, .form2 button#draft, .preview button#back, .submit-profile button#draft, .single-profile .main button#back { 
+.form button#draft,
+.form2 button#draft,
+.preview button#back,
+.submit-profile button#draft,
+.single-profile .main button#back {
     color: rgba(0, 122, 243, 1);
     background-color: #FFF;
     margin-right: 22px
 }
 
-.form button#proceed, .form2 button#proceed, .preview button#proceed, .submit-profile button#proceed, .single-profile .main button#proceed {
+.form button#proceed,
+.form2 button#proceed,
+.preview button#proceed,
+.submit-profile button#proceed,
+.single-profile .main button#proceed {
     background-color: rgba(0, 122, 243, 1);
     color: #FFF;
 }
@@ -2735,7 +2853,8 @@ img#return-btn {
     font-weight: 400;
 }
 
-.form .input input, .form .input select {
+.form .input input,
+.form .input select {
     font-size: 14px;
     font-weight: 400;
     background-color: transparent;
@@ -2765,26 +2884,37 @@ img#return-btn {
     object-position: top;
 }
 
-.form h6, .form2 h6, .submit-profile h6 {
+.form h6,
+.form2 h6,
+.submit-profile h6 {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.5)
 }
 
-.form button, .form2 button, .preview button, .submit-profile button {
+.form button,
+.form2 button,
+.preview button,
+.submit-profile button {
     font-size: 14px;
     font-weight: 700;
     padding: 10px 24px;
     border-radius: 5px;
 }
 
-.form button#draft, .form2 button#draft, .preview button#back, .submit-profile button#draft { 
+.form button#draft,
+.form2 button#draft,
+.preview button#back,
+.submit-profile button#draft {
     color: rgba(0, 122, 243, 1);
     background-color: #FFF;
     margin-right: 22px
 }
 
-.form button#proceed, .form2 button#proceed, .preview button#proceed, .submit-profile button#proceed {
+.form button#proceed,
+.form2 button#proceed,
+.preview button#proceed,
+.submit-profile button#proceed {
     background-color: rgba(0, 122, 243, 1);
     color: #FFF;
 }
@@ -2810,7 +2940,8 @@ img#return-btn {
     margin: 0 auto
 } */
 
-.form2 .fa-arrow-left, .submit-profile .fa-arrow-left  {
+.form2 .fa-arrow-left,
+.submit-profile .fa-arrow-left {
     margin-right: 45px;
 }
 
@@ -2925,7 +3056,8 @@ img#return-btn {
     margin-right: 15px
 }
 
-.submit-profile .poll label, .submit-profile .owner label {
+.submit-profile .poll label,
+.submit-profile .owner label {
     font-size: 14px;
     font-weight: 400;
 }
@@ -2959,7 +3091,8 @@ img#return-btn {
     width: 100%;
 }
 
-.submit-profile .owner, .submit-profile .transfer {
+.submit-profile .owner,
+.submit-profile .transfer {
     border-bottom: solid 1px rgba(255, 255, 255, 0.2) !important;
     background-color: unset !important;
     border-radius: 0 !important;
@@ -3107,7 +3240,7 @@ img#return-btn {
 
 
 /* polls search */
-.search .polls-page > p {
+.search .polls-page>p {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.6);
@@ -3168,7 +3301,7 @@ img#return-btn {
 
 
 /* stories search */
-.search .story {
+/* .search .story {
     border-radius: 10px;
     background-color: rgba(10, 24, 61, 1);
     margin-bottom: 24px;
@@ -3207,7 +3340,7 @@ img#return-btn {
 
 .search .story .widget {
     border-top: solid 1px rgba(255, 255, 255, 0.1) !important;
-    border-bottom : solid 1px rgba(255, 255, 255, 0.1) !important;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
     padding: 20px 0
 }
 
@@ -3242,7 +3375,7 @@ img#return-btn {
 
 .search .story .comment button img {
     margin-right: 10px;
-}
+} */
 
 
 
@@ -3282,10 +3415,11 @@ img#return-btn {
     height: auto;
     object-fit: cover;
     object-position: top;
+    min-height: 100%;
 }
 
 .user-widget .img-container img#change-img {
-    position: absolute; 
+    position: absolute;
     bottom: 0px;
     right: 60px
 }
@@ -3337,23 +3471,26 @@ img#return-btn {
     color: rgba(0, 122, 243, 1);
 }
 
-.user-aside button img {
+.user-aside button svg {
     margin-left: 25px;
     margin-right: 29px
 }
 
-.user-aside button.active img {
-    margin-left: 20px
+.user-aside button.active svg path {
+    margin-left: 20px;
+    fill: #007AF3
 }
 
-.story-header, .aspirant-header {
+.story-header,
+.aspirant-header {
     padding: 23px 19px;
     background-color: rgba(4, 19, 54, 1);
     border-radius: 5px;
     margin-bottom: 28px;
 }
 
-.story-header h1, .aspirant-header h1 {
+.story-header h1,
+.aspirant-header h1 {
     font-size: 28px;
     font-weight: 700;
 }
@@ -3363,11 +3500,13 @@ img#return-btn {
     font-weight: 400;
 }
 
-.story-header img, .aspirant-header img {
+.story-header img,
+.aspirant-header img {
     margin-right: 8px;
 }
 
-.story-header button, .aspirant-header button {
+.story-header button,
+.aspirant-header button {
     font-size: 14px;
     font-weight: 700;
     padding: 11px;
@@ -3375,7 +3514,8 @@ img#return-btn {
     border-radius: 5px;
 }
 
-.story-header button, .aspirant-header button {
+.story-header button,
+.aspirant-header button {
     font-size: 14px;
     font-weight: 700;
     padding: 11px;
@@ -3686,26 +3826,26 @@ img#return-btn {
     font-size: 18px;
     font-weight: 400;
     width: 100%;
-    color:#000
+    color: #000
 }
 
 .courses-page .header .searchbar input::placeholder {
     color: rgba(0, 0, 0, 0.25);
 }
 
-.courses-page section > h1 {
+.courses-page section>h1 {
     font-size: 34px;
     font-weight: 700;
     margin-bottom: 3px;
 }
 
-.courses-page section > h2 {
+.courses-page section>h2 {
     font-size: 24px;
     font-weight: 700;
     margin-bottom: 20px;
 }
 
-.courses-page section > p {
+.courses-page section>p {
     font-size: 20px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.8);
@@ -3748,7 +3888,7 @@ img#return-btn {
     font-size: 12px;
 }
 
-.courses-page .carousel .card i.fa-star:last-child{
+.courses-page .carousel .card i.fa-star:last-child {
     display: inline-block;
     margin-right: 20px
 }
@@ -4160,7 +4300,7 @@ img#return-btn {
     margin-right: 14px;
 }
 
-.course-page .widget .comment .img-container img, 
+.course-page .widget .comment .img-container img,
 .course-page .widget .comment .replies .img-container img {
     width: 100%;
     height: auto;
@@ -4326,7 +4466,7 @@ img#return-btn {
 
 
 /* resources  */
-.course-page .ebooks  {
+.course-page .ebooks {
     margin: 25px 0 98px 0
 }
 
@@ -4389,7 +4529,7 @@ img#return-btn {
 .course-page .videos i {
     color: rgba(0, 122, 243, 0.3);
     font-size: 32px;
-    margin-right: 10px    
+    margin-right: 10px
 }
 
 .course-page .videos h4 {
@@ -4617,7 +4757,8 @@ img#return-btn {
     margin-bottom: 8px;
 }
 
-.create-course input, textarea {
+.create-course input,
+textarea {
     font-size: 14px;
     font-weight: 400;
     padding: 17px 21px;
@@ -4629,7 +4770,8 @@ img#return-btn {
     outline: none;
 }
 
-.create-course input::placeholder, textarea::placeholder {
+.create-course input::placeholder,
+textarea::placeholder {
     color: rgba(255, 255, 255, 0.6)
 }
 
