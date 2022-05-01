@@ -54,7 +54,7 @@ function HomePollCard() {
     // use ref 
     const inputRef = useRef()
 
-    const [shareLink, setShareLink] = useState(`http://localhost:3000/polls/626d7109c44fc4e4698417c8`)
+    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/626d7109c44fc4e4698417c8`)
 
     const copy = () => {
         navigator.clipboard.writeText(shareLink)

@@ -154,7 +154,7 @@ function SingleProfile() {
     // use ref 
     const inputRef = useRef()
 
-    const [shareLink, setShareLink] = useState(`http://localhost:3000/polls/6258bbb2ef581524ef8835ba`)
+    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/6258bbb2ef581524ef8835ba`)
 
     const copy = () => {
         navigator.clipboard.writeText(shareLink)

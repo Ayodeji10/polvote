@@ -296,8 +296,8 @@ const Login = () => {
                                         <h6 className="mb-0">or</h6>
                                         <span />
                                     </div>
-                                    <label htmlFor="username">Username or Phone Number</label>
-                                    <input type="text" id="username" placeholder="Username or Phone Number" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                    <label htmlFor="username">Email</label>
+                                    <input type="text" id="username" placeholder="email" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
                                     <label htmlFor="Password">Password</label>
                                     <input type="password" id="Password" placeholder="***************" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
                                     <div className="d-flex justify-content-between align-items-center remember mb-2">

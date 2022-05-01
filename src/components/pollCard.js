@@ -12,7 +12,7 @@ function PollCard({ poll }) {
 
     const [options, setOptons] = useState(false)
     const [shareModal, setShareModal] = useState(false)
-    const [shareLink, setShareLink] = useState(`http://localhost:3000/polls/${poll._id}`)
+    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/${poll._id}`)
 
     const copy = () => {
         navigator.clipboard.writeText(shareLink)

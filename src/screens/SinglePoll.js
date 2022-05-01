@@ -34,7 +34,7 @@ function SinglePoll() {
     // use ref 
     const inputRef = useRef()
 
-    const [shareLink, setShareLink] = useState(`http://localhost:3000/polls/${id}`)
+    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/${id}`)
 
     const copy = () => {
         navigator.clipboard.writeText(shareLink)
