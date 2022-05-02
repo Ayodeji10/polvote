@@ -806,11 +806,11 @@ const Home = () => {
                             <div className="carousel">
                                 {!storyFetch &&
                                     <>
-                                        {stories.filter(story => story.image.length !== 0).slice(Math.max(stories.filter(story => story.image.length !== 0).length - 5, 1)).map((story, index) => {
+                                        {stories.filter(story => story.image.length !== 0 && story.storyinfo.length === 0).slice(Math.max(stories.filter(story => story.image.length !== 0).length - 5, 1)).map((story, index) => {
                                             return (
                                                 <HomeStoryCard story={story} key={index} />
                                             )
-                                        })}
+                                        }).reverse()}
                                     </>
                                 }
                             </div>

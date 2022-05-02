@@ -8,6 +8,7 @@ import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
 import Loader from '../components/loader';
+import NewlineText from '../components/newLineText';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -218,14 +219,16 @@ function SingleStory() {
                                                 <h3>{story.fullname}</h3>
                                                 <div className="d-flex">
                                                     <p className="mb-0">{story.username}</p>
-                                                    <p className="mb-0">23 Hours Ago</p>
+                                                    <p className="mb-0">{story.createdAt.substring(8, 10)}-{story.createdAt.substring(5, 7)}-{story.createdAt.substring(0, 4)} {parseInt(story.createdAt.substring(11, 13)) + 1}{story.createdAt.substring(13, 16)} {story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}</p>
+                                                    {/* <p className="mb-0">23 Hours Ago</p> */}
                                                 </div>
                                             </div>
                                             <div className="col-1">
                                                 <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                                             </div>
                                         </div>
-                                        <h4>{story.story}</h4>
+                                        {/* <h4>{story.story}</h4> */}
+                                        <NewlineText text={story.story} />
                                         <div className="row mb-2">
                                             {story.image.map((each, index) => {
                                                 return (
@@ -253,7 +256,8 @@ function SingleStory() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <h4>{story.storyinfo[0].story}</h4>
+                                                {/* <h4>{story.storyinfo[0].story}</h4> */}
+                                                <NewlineText text={story.storyinfo[0].story} />
                                                 <div className="row mb-2">
                                                     {story.storyinfo[0].image.map((each, index) => {
                                                         return (
