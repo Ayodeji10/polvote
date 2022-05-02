@@ -28,6 +28,33 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
     // write story 
     const [storyLoading, setStoryLoading] = useState(false)
     const [storyError, setStoryError] = useState("")
+    // const writeStory = () => {
+    //     setStoryLoading(true);
+    //     setStoryError("")
+    //     const fd = new FormData()
+    //     fd.append('ananymous', anonymous)
+    //     fd.append('story', storyText)
+    //     for (const key of Object.keys(images)) {
+    //         fd.append('image', images[key])
+    //     }
+    //     // console.log(Array.from(fd))
+    //     axios({
+    //         url: `${API.API_ROOT}/story/addstory`,
+    //         method: "POST",
+    //         headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
+    //         data: fd
+    //     }).then((response) => {
+    //         // console.log(context.user.token)
+    //         setStoryLoading(false)
+    //         // console.log(response)
+    //         window.location.reload()
+    //     }, (error) => {
+    //         setStoryLoading(false)
+    //         // console.log(error)
+    //         setStoryError('Something went wrong, please try again')
+    //     })
+    // }
+
     const writeStory = () => {
         setStoryLoading(true);
         setStoryError("")
@@ -41,10 +68,9 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
         axios({
             url: `${API.API_ROOT}/story/addstory`,
             method: "POST",
-            headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
+            headers: { "Content-Type": "application/x-www-form-urlencoded", 'Authorization': `Bearer ${context.user.token}` },
             data: fd
         }).then((response) => {
-            // console.log(context.user.token)
             setStoryLoading(false)
             // console.log(response)
             window.location.reload()

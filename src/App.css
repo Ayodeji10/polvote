@@ -1942,7 +1942,8 @@ footer#footer img.social {
 .story .story h4 {
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 24px
+    line-height: 24px
+        /* margin-bottom: 24px */
 }
 
 .story .story img#story-img {

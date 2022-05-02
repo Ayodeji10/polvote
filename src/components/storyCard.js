@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
-import Modal from 'react-modal'
+import Modal from 'react-modal';
+import NewLineText from "../components/newLineText";
 import ShareStoryModal from './shareStoryModal';
 Modal.setAppElement('#root')
 
@@ -129,8 +130,9 @@ function StoryCard({ story, index }) {
                         }
                     </div>
                 </div>
-                <h4>{story.story}</h4>
-                <div className="row mb-2">
+                {/* <h4>{story.story}</h4> */}
+                <NewLineText text={story.story} />
+                <div className="row mb-2 mt-4">
                     {story.image.map((each, index) => {
                         return (
                             <div className="col-6" key={index}>
