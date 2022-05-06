@@ -45,15 +45,13 @@ function Aside() {
     return (
         <>
             {/* user  */}
-            <div className="user d-flex justify-content-between align-items-center mb-lg-5" >
-                <div className="d-flex">
+            <div className="user d-flex justify-content-between align-items-center mb-lg-5 mb-3" >
+                <div className="d-flex" style={{ cursor: "pointer" }} onClick={() => navigate("/user-profile")}>
                     <div className="avatar">
-                        <Link to={"/user-profile"}>
-                            {context.user.image !== null && context.user.image !== undefined ?
-                                <img src={context.user.image} alt="avatar" id='profile-img' /> :
-                                <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
-                            }
-                        </Link>
+                        {context.user.image !== null && context.user.image !== undefined ?
+                            <img src={context.user.image} alt="avatar" id='profile-img' /> :
+                            <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
+                        }
                     </div>
                     <div className="d-flex flex-column justify-content-center">
                         <p>Welcome</p>

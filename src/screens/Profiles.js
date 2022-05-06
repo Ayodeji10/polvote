@@ -59,28 +59,28 @@ function Profiles() {
         <div className="container-fluid">
             <Nav />
             <div className="home-feed container">
-                <div className="row">
+                <div className="row justify-content-lg-between">
                     {/* aside  */}
-                    <div className="col-lg-3 aside">
+                    <div className="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 profile">
+                    <div className="col-lg-8 col-md-9 profile">
                         {/* header */}
                         <div className="header mb-5">
                             <div className="row">
-                                <div className="col-lg-6">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div className="searchbar d-flex align-items-center">
                                         <input type="text" placeholder="Search for Aspirant Profile" onChange={(e) => searchProfile(e)} />
                                         <img src="img/search-normal.png" alt="search" />
                                     </div>
                                 </div>
-                                <div className="col-lg-4">
+                                <div className="col-lg-4 col-md-4 col-sm-4 col-7">
                                     <Link to={"/create-aspirant"}><button><i className="far fa-edit" />Create Aspirant Profile</button></Link>
                                 </div>
-                                <div className="col-lg-2">
+                                <div className="col-lg-2 col-md-2 col-sm-2 col-5">
                                     {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
                                 </div>
                             </div>

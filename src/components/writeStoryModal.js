@@ -85,7 +85,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
         <Modal isOpen={openModal} onRequestClose={() => handleWriteStoryModal(false)} className="story-write-modal">
             <i className="far fa-times-circle" onClick={() => handleWriteStoryModal(false)} />
             <h2>Write New Story</h2>
-            <div className="d-flex justify-content-between align-items-center mb-3">
+            <div className="d-flex justify-content-between align-items-center mb-1 mb-md-2 mb-lg-3 mb-sm-3">
                 <div className="d-flex align-items-center">
                     <div className="img-container">
                         {context.user.image !== null && context.user.image !== undefined ?
@@ -114,7 +114,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
                     )
                 })}
             </div>
-            <div className="d-flex justify-content-between">
+            <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
                     <span>Add to your story</span>
                     <i className="fas fa-camera" onClick={addImage} />

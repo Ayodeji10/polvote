@@ -1,3 +1,4 @@
+import ScrollToTop from "./components/scrollToTop";
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { DataContext } from './dataContext';
@@ -47,6 +48,7 @@ function App() {
   return (
     <Router>
       <DataContext.Provider value={{ context, setContext }}>
+        <ScrollToTop />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login/:Id" element={<Login />} />

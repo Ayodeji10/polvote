@@ -82,7 +82,10 @@ function Comments({ comment, id }) {
                     <div className="row align-items-center mb-3">
                         <div className="col-1">
                             <div className="img-container">
-                                <img src="/img/Candidate.png" className="profile-img" alt="profile-img" />
+                                {context.user.image !== null && context.user.image !== undefined ?
+                                    <img src={context.user.image} alt="profile-img" id='profile-img' /> :
+                                    <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
+                                }
                             </div>
                         </div>
                         <div className="col-7">

@@ -81,7 +81,7 @@ function CreateAspirant2() {
                                 <Link to={"/create-aspirant"}><i className="fas fa-arrow-left" /></Link>
                                 <div>
                                     <h1>Set up Aspirant Profile</h1>
-                                    <p>Lorem ipsum dolor sit amet, consec</p>
+                                    <p>Please fill all input fields</p>
                                 </div>
                             </div>
                             <div className="input">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Nav from '../components/nav'
 import Footer from "../components/footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -8,6 +8,8 @@ import { DataContext } from "../dataContext";
 import Loader from '../components/loader';
 import Modal from 'react-modal'
 import SingleProfileCard from '../components/singleProfileCard';
+import ShareProfileModal from '../components/shareProfileModal';
+import NewAspirantLineText from '../components/newAspirantLineText';
 Modal.setAppElement('#root')
 
 function SingleProfile() {
@@ -37,7 +39,7 @@ function SingleProfile() {
             }).then((response) => {
                 console.log(response)
             }, (error) => {
-                console.log(error)
+                // console.log(error)
             })
         }
     }, [id])
@@ -151,15 +153,11 @@ function SingleProfile() {
     // modals 
     const [shareModal, setShareModal] = useState(false)
 
-    // use ref 
-    const inputRef = useRef()
-
-    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/6258bbb2ef581524ef8835ba`)
-
-    const copy = () => {
-        navigator.clipboard.writeText(shareLink)
-        inputRef.current.select()
+    const handleSShareProfieMOdal = (variable) => {
+        setShareModal(variable)
     }
+
+    const [shareLink] = useState(`https://polvote.com/profiles/single/${id}`)
 
     return (
         <div className="container-fluid">
@@ -169,112 +167,120 @@ function SingleProfile() {
                     <Loader pageLoading={pageLoading} />
                     :
                     <div className="single-profile container">
-                        <div className="row">
+                        <div className="row justify-content-lg-between">
                             {/* aside  */}
-                            <div className="col-lg-3 aside">
+                            <div className="col-lg-3 col-md-3 aside">
                                 {/* return btn  */}
                                 <div className="return mb-3">
                                     <Link to={"/profiles"}><i className="fas fa-arrow-left" /><span>Back</span></Link>
                                 </div>
-                                {/* profile-img  */}
-                                <img src={aspirant.image === null || aspirant.image === undefined ? `img/user (1) 1.png` : `${aspirant.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
-                                {/* active poll  */}
-                                <div className="poll-active">
-                                    <h3>Active Participating Poll</h3>
-                                    {aspirant.pollsdetails.length < 1 ?
-                                        <div className='d-flex align-items-center mb-3'>
-                                            <span>No Active Poll</span>
-                                            {aspirant.creatorid === context.user._id &&
+                                <div className="row">
+                                    <div className="col-lg-12 col-md-12 col-sm-6 col-6">
+                                        {/* profile-img  */}
+                                        <img src={aspirant.image === null || aspirant.image === undefined ? `img/user (1) 1.png` : `${aspirant.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
+                                    </div>
+                                    <div className="col-lg-12 col-md-12 col-sm-6 col-12">
+                                        {/* active poll  */}
+                                        <div className="poll-active">
+                                            <h3>Active Participating Poll</h3>
+                                            {aspirant.pollsdetails.length < 1 ?
+                                                <div className='d-flex align-items-center mb-3'>
+                                                    <span>No Active Poll</span>
+                                                    {aspirant.creatorid === context.user._id &&
+                                                        <>
+                                                            <i className="fa-solid fa-circle"></i>
+                                                            <button onClick={() => setAddToPollModal(true)}>Add to Poll</button>
+                                                        </>
+                                                    }
+                                                    {/* add to poll modal  */}
+                                                    <Modal isOpen={addToPollModal} onRequestClose={() => setAddToPollModal(false)} id="addToPoll">
+                                                        <i className="fa-solid fa-circle-xmark" onClick={() => setAddToPollModal(false)} />
+                                                        <h1>Add Profile to an ongoing Poll</h1>
+                                                        {/* country  */}
+                                                        <div className="input">
+                                                            <label htmlFor="category">Choose Country</label>
+                                                            <select name="category" id="country" value={countrySelected} onChange={(e) => setCountrySelected(e.target.value)} >
+                                                                <option value="">-- Select Country --</option>
+                                                                {countries.map((each, index) => {
+                                                                    return (
+                                                                        <option value={each.country} selected={countrySelected === each.country} key={index}>{each.country}</option>
+                                                                    )
+                                                                })}
+                                                            </select>
+                                                        </div>
+                                                        {/* category  */}
+                                                        <div className="input">
+                                                            <label htmlFor="category">Poll Category</label>
+                                                            <select name="category" id="category" value={categorySelected} onChange={(e) => setCategorySelected(e.target.value)} >
+                                                                <option value="">-- Select Category --</option>
+                                                                {countries.map((country) => {
+                                                                    if (country.country === countrySelected) {
+                                                                        return country.category.map((cat, index) => {
+                                                                            return (
+                                                                                <option value={cat.category} key={index}>{cat.category}</option>
+                                                                            )
+                                                                        })
+                                                                    }
+                                                                })}
+                                                            </select>
+                                                        </div>
+                                                        {/* poll  */}
+                                                        <div className="input">
+                                                            <label htmlFor="poll">Ongoing Poll</label>
+                                                            <select name="cars" id="poll" onChange={(e) => setPollId(e.target.value)} >
+                                                                <option value={null}>-- Select Category --</option>
+                                                                {polls.filter((poll) => poll.category === categorySelected).map(poll => {
+                                                                    return <option value={poll._id} key={poll._id}>{poll.polltitle}</option>
+                                                                })}
+                                                            </select>
+                                                        </div>
+                                                        <p>{error}</p>
+                                                        <button onClick={() => addToPoll()}>{loading ? "loading..." : "Proceed"}</button>
+                                                    </Modal>
+                                                </div> :
                                                 <>
-                                                    <i className="fa-solid fa-circle"></i>
-                                                    <button onClick={() => setAddToPollModal(true)}>Add to Poll</button>
+                                                    <p>{aspirant.pollsdetails[0].polltitle}</p>
+                                                    {aspirant.creatorid === context.user._id &&
+                                                        <button className='mb-3' onClick={removeAspirant}>Remove from Poll</button>
+                                                    }
                                                 </>
                                             }
-                                            {/* add to poll modal  */}
-                                            <Modal isOpen={addToPollModal} onRequestClose={() => setAddToPollModal(false)} id="addToPoll">
-                                                <i className="fa-solid fa-circle-xmark" onClick={() => setAddToPollModal(false)} />
-                                                <h1>Add Profile to an ongoing Poll</h1>
-                                                {/* country  */}
-                                                <div className="input">
-                                                    <label htmlFor="category">Choose Country</label>
-                                                    <select name="category" id="country" value={countrySelected} onChange={(e) => setCountrySelected(e.target.value)} >
-                                                        <option value="">-- Select Country --</option>
-                                                        {countries.map((each, index) => {
-                                                            return (
-                                                                <option value={each.country} selected={countrySelected === each.country} key={index}>{each.country}</option>
-                                                            )
-                                                        })}
-                                                    </select>
+                                            {aspirant.pollsdetails.length > 0 &&
+                                                <div className="d-flex align-items-center mb-3" onClick={() => navigate(`/polls/${aspirant.pollsdetails[0].pollid}`)} style={{ cursor: "pointer" }} >
+                                                    <img src="/img/Group 516.png" alt="vote" />
+                                                    <p className="mb-0">Tap to Vote on Polvote</p>
                                                 </div>
-                                                {/* category  */}
-                                                <div className="input">
-                                                    <label htmlFor="category">Poll Category</label>
-                                                    <select name="category" id="category" value={categorySelected} onChange={(e) => setCategorySelected(e.target.value)} >
-                                                        <option value="">-- Select Category --</option>
-                                                        {countries.map((country) => {
-                                                            if (country.country === countrySelected) {
-                                                                return country.category.map((cat, index) => {
-                                                                    return (
-                                                                        <option value={cat.category} key={index}>{cat.category}</option>
-                                                                    )
-                                                                })
-                                                            }
-                                                        })}
-                                                    </select>
-                                                </div>
-                                                {/* poll  */}
-                                                <div className="input">
-                                                    <label htmlFor="poll">Ongoing Poll</label>
-                                                    <select name="cars" id="poll" onChange={(e) => setPollId(e.target.value)} >
-                                                        <option value={null}>-- Select Category --</option>
-                                                        {polls.filter((poll) => poll.category === categorySelected).map(poll => {
-                                                            return <option value={poll._id} key={poll._id}>{poll.polltitle}</option>
-                                                        })}
-                                                    </select>
-                                                </div>
-                                                <p>{error}</p>
-                                                <button onClick={() => addToPoll()}>{loading ? "loading..." : "Proceed"}</button>
-                                            </Modal>
-                                        </div> :
-                                        <>
-                                            <p>{aspirant.pollsdetails[0].polltitle}</p>
-                                            {aspirant.creatorid === context.user._id &&
-                                                <button className='mb-3' onClick={removeAspirant}>Remove from Poll</button>
                                             }
-                                        </>
-                                    }
-                                    {aspirant.pollsdetails.length > 0 &&
-                                        <div className="d-flex align-items-center mb-3">
-                                            <img src="/img/Group 516.png" alt="" />
-                                            <p className="mb-0">Tap to Vote on Polvote</p>
-                                        </div>
-                                    }
-                                    <div className="d-flex align-items-start">
-                                        <i className="fas fa-exclamation-triangle" />
-                                        <h6 className="mb-0">Votes made on Polvote are only limited to Polvote and does not count
-                                            for the
-                                            National Election!</h6>
-                                    </div>
-                                </div>
-                                {/* history  */}
-                                <div className="history">
-                                    <h2>Participating Poll History</h2>
-                                    {aspirant.polls.map((each) => {
-                                        return (
-                                            <div className="poll" key={each._id}>
-                                                <h3>{each.pollYear}</h3>
-                                                <p>{each.pollTitle}</p>
-                                                <p>{each.numberOfVotes} Votes</p>
-                                                <p>{each.position} Position</p>
+                                            <div className="d-flex align-items-start">
+                                                <i className="fas fa-exclamation-triangle" />
+                                                <h6 className="mb-0">Votes made on Polvote are only limited to Polvote and does not count
+                                                    for the
+                                                    National Election!</h6>
                                             </div>
-                                        )
-                                    })}
+                                        </div>
+                                    </div>
+                                    <div className="col-lg-12 col-md-12 col-sm-12 col-12">
+                                        {/* history  */}
+                                        <div className="history">
+                                            <h2>Participating Poll History</h2>
+                                            {aspirant.polls.map((each) => {
+                                                return (
+                                                    <div className="poll" key={each._id}>
+                                                        <h3>{each.pollYear}</h3>
+                                                        <p>{each.pollTitle}</p>
+                                                        <p>{each.numberOfVotes} Votes</p>
+                                                        <p>{each.position} Position</p>
+                                                    </div>
+                                                )
+                                            })}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             {/* gutter  */}
-                            <div className="col-lg-1" />
+                            {/* <div className="col-lg-1" /> */}
                             {/* main  */}
-                            <div className="col-lg-8 main">
+                            <div className="col-lg-8 col-md-9 main">
                                 <div className="d-flex justify-content-end">
                                     <div className="searchbar d-flex align-items-center">
                                         <input type="text" placeholder="Search for Profile Name" />
@@ -296,24 +302,8 @@ function SingleProfile() {
                                                 <div className='d-flex align-items-center'>
                                                     <i onClick={() => setShareModal(true)} class="fa-solid fa-share-nodes"></i>
                                                     {/* share modal  */}
-                                                    <Modal isOpen={shareModal} onRequestClose={() => setShareModal(false)} id="poll-share-modal">
-                                                        <i className="fas fa-times" onClick={() => setShareModal(false)} />
-                                                        <h1>See who’s Leading the Poll</h1>
-                                                        <p>You can explore Politics, Learn and Share Insights Online on Polvote Box</p>
-                                                        <h3>Share on:</h3>
-                                                        <div className="d-flex justify-content-between sm">
-                                                            <img src="/img/facebook.png" alt="facebook" />
-                                                            <img src="/img/Whatsapp.png" alt="whatsapp" />
-                                                            <img src="/img/twit.png" alt="twitter" />
-                                                            <img src="/img/Instagram.png" alt="instagram" />
-                                                        </div>
-                                                        <h3>Copy Link</h3>
-                                                        <div className="link d-flex justify-content-between align-items-center">
-                                                            <input type="text" ref={inputRef} placeholder="https://www.polvote.com/share-poll/presidential/share_92029" value={shareLink} />
-                                                            <img src="/img/Group 111.png" alt="copy" onClick={copy} />
-                                                        </div>
-                                                    </Modal>
-                                                    <button id="manage-profile"><i class="fa-solid fa-thumbs-up"></i>Vote</button>
+                                                    {shareModal && <ShareProfileModal shareProfileModal={shareModal} shareLink={shareLink} handleShareProfileModal={handleSShareProfieMOdal} />}
+                                                    <button id="manage-profile" onClick={() => navigate(`/polls/${aspirant.pollsdetails[0].pollid}`)}><i class="fa-solid fa-thumbs-up"></i>Vote</button>
                                                 </div>
                                             }
                                         </>
@@ -321,22 +311,22 @@ function SingleProfile() {
                                 </div>
                                 <div className="info">
                                     <h3>Overview</h3>
-                                    <p>{aspirant.overview}</p>
+                                    <NewAspirantLineText text={aspirant.overview} />
                                     <h3>Educational Background</h3>
-                                    <p>{aspirant.education}.</p>
+                                    <NewAspirantLineText text={aspirant.education} />
                                     <h3>Political Career</h3>
-                                    <p>{aspirant.politics}</p>
+                                    <NewAspirantLineText text={aspirant.politics} />
                                     <h3>Professional Career/Business Interests</h3>
-                                    <p>{aspirant.binterest}</p>
+                                    <NewAspirantLineText text={aspirant.binterest} />
                                     <h3>Awards</h3>
-                                    <p>{aspirant.activism}</p>
+                                    <NewAspirantLineText text={aspirant.activism} />
                                 </div>
                                 <div className="others">
                                     <h2>See other profile</h2>
                                     <div className="profiles">
                                         {randomAspirants.map((aspirant, index) => {
                                             return (
-                                                <SingleProfileCard aspirant={aspirant} key={index} />
+                                                <SingleProfileCard aspirant={aspirant} key={index} handleSShareProfieMOdal={handleSShareProfieMOdal} />
                                             )
                                         })}
                                     </div>

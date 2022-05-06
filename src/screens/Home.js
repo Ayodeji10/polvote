@@ -14,6 +14,8 @@ import HomeStoryCard from "../components/homeStoryCard";
 import SingleProfileCard from "../components/singleProfileCard";
 import HomePollCard from "../components/homePollCard";
 import WriteStoryModal from "../components/writeStoryModal";
+import EkitiPolls from "../components/ekitiPolls";
+import OsunPolls from "../components/osunPolls"
 Modal.setAppElement('#root')
 
 
@@ -87,7 +89,7 @@ const Home = () => {
         setLoading(true)
         axios.post(`${API.API_ROOT}/users/signin`, { email: loginEmail, password: loginPassword })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 setLoading(false);
                 if (response.status === 422) {
                     setError("kindly Check your mail to verify this account")
@@ -99,9 +101,9 @@ const Home = () => {
                     navigate('/')
                 }
             }).catch(error => {
-                console.log(error)
+                // console.log(error)
                 setLoading(false)
-                if (error.status === 500) {
+                if (error.response.status === 401) {
                     setError("Invalid email or password")
                     setPassword('')
                 }
@@ -308,9 +310,9 @@ const Home = () => {
                             </div>
                         </header>
                         <div className="main">
-                            <div className="row justify-content-between">
+                            <div className="row justify-content-md-between">
                                 <div className="col-lg-5">
-                                    <div className="d-flex justify-content-end">
+                                    <div className="d-flex justify-content-lg-end justify-content-md-center justify-content-sm-start">
                                         <img src="img/secured.png" alt="secured" id="secured" />
                                     </div>
                                     <h1>Explore Politics, Learn and Share Insights Online</h1>
@@ -372,7 +374,7 @@ const Home = () => {
                                             {/* <div className="col-lg-2">
                                                 <p>Advertise with us</p>
                                             </div> */}
-                                            <div className="col-lg-2">
+                                            <div className="col-lg-3 col-md-3">
                                                 <p onClick={() => setTermsModal(true)}>Terms and Condition</p>
                                                 {/* terms and conditions modal  */}
                                                 <Modal isOpen={termsModal} onRequestClose={() => setTermsModal(false)} id="terms">
@@ -436,7 +438,7 @@ const Home = () => {
                                                     </p>
                                                 </Modal>
                                             </div>
-                                            <div className="col-lg-2">
+                                            <div className="col-lg-3 col-md-3">
                                                 <p onClick={() => setPrivacyModal(true)}>Privacy Policy</p>
                                                 {/* privacy modal */}
                                                 <Modal isOpen={privacyModal} onRequestClose={() => setPrivacyModal(false)} id="terms">
@@ -598,11 +600,15 @@ const Home = () => {
                                         </div>
                                     </div>
                                     <div className="col-lg-2 d-flex justify-content-end">
-                                        <img src="img/linkedin.png" alt="linkedIn" />
+                                        <a href="https://youtube.com/channel/UCkcn0Kv_w_Qe0MfZ7Hhe6lg" target="_blank"><img src="/img/youtube.png" alt="youtube" /></a>
+                                        <a href="https://www.facebook.com/Polvoteofficial-115809974445682/" target="_blank"><img src="/img/fb.png" alt="facebook" /></a>
+                                        <a href="https://www.instagram.com/polvoteofficial/" target="_blank"><img src="/img/insta.png" alt="instagram" /></a>
+                                        <a href="https://twitter.com/pol_vote?t=iVqZBrU9MA793b4K1-YLwQ" target="_blank"><img src="/img/twitter.png" alt="twitter" /></a>
+                                        {/* <img src="img/linkedin.png" alt="linkedIn" />
                                         <img src="img/fb.png" alt="facebook" />
                                         <img src="img/insta.png" alt="instagram" />
                                         <img src="img/twitter.png" alt="twitter" />
-                                        <img src="img/tiktok.png" alt="tiktok" />
+                                        <img src="img/tiktok.png" alt="tiktok" /> */}
                                     </div>
                                 </div>
                             </div>
@@ -617,8 +623,8 @@ const Home = () => {
                     <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
                     <div className="form">
                         <div className="row mb-3">
-                            <div className="col-lg-3"></div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-3 col-md-3 col-sm-2" />
+                            <div className="col-lg-6 col-md-6 col-sm-8 col-12">
                                 <GoogleLogin
                                     clientId="819346895976-gcbt1b49ig3svd6rosf4mu4a42misfcg.apps.googleusercontent.com"
                                     // clientId="854389897420-1big4hbsc4b05kop2femba3df4msdjh2.apps.googleusercontent.com"
@@ -628,6 +634,7 @@ const Home = () => {
                                     cookiePolicy={'single_host_origin'}
                                 />
                             </div>
+                            <div className="col-lg-3 col-md-3 col-sm-2" />
                             {/* <div className="col-lg-6">
                                 <FacebookLogin
                                     appId="1162929354518536"
@@ -639,7 +646,7 @@ const Home = () => {
                                     textButton="Signup with your Facebook Account"
                                 />
                             </div> */}
-                            <div className="col-lg-3"></div>
+                            {/* <div className="col-lg-3"></div> */}
                         </div>
                         <div className="or d-flex justify-content-between align-items-center mb-3">
                             <span />
@@ -647,27 +654,27 @@ const Home = () => {
                             <span />
                         </div>
                         <div className="row">
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label htmlFor="fname">First Name</label>
                                 <input id="fname" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label htmlFor="lname">Last Name</label>
                                 <input id="lname" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label htmlFor="Username">Username</label>
                                 <input id="Username" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label htmlFor="Email">Email</label>
                                 <input id="Email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label htmlFor="number">Phone Number</label>
                                 <input id="number" type="tel" placeholder="+234  |   700234567891" value={number} onChange={(e) => setNumber(e.target.value)} />
                             </div>
-                            <div className="col-lg-6">
+                            <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                                 <label htmlFor="pass">Create Password</label>
                                 <input id="pass" type="password" placeholder="***************" value={password} onChange={(e) => setPassword(e.target.value)} />
                             </div>
@@ -763,20 +770,20 @@ const Home = () => {
             <Nav />
             {/* feed  */}
             <div className="home-feed container">
-                <div className="row">
+                <div className="row justify-content-lg-between">
                     {/* aside  */}
-                    <div className="col-lg-3 aside">
+                    <div className="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1 col-md-0" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 main">
+                    <div className="col-lg-8 col-md-9 main">
                         {/* header  */}
                         <div className="header">
                             <h1>Explore Politics, Learn and Share Insights Online</h1>
                             <div className="searchbar d-flex align-items-center justify-content-between">
-                                <input type="text" placeholder="Search for Polls, Stories, Profiles or Courses" value={context.homeSearchKey} onChange={(e) => setContext({ ...context, homeSearchKey: e.target.value })} onKeyPress={handleKeyPress} />
+                                <input type="text" placeholder="Search for Polls, Stories, and Profiles" value={context.homeSearchKey} onChange={(e) => setContext({ ...context, homeSearchKey: e.target.value })} onKeyPress={handleKeyPress} />
                                 <img src="img/search-normal.png" alt="search" onClick={search} />
                             </div>
                         </div>
@@ -806,7 +813,7 @@ const Home = () => {
                             <div className="carousel">
                                 {!storyFetch &&
                                     <>
-                                        {stories.filter(story => story.image.length !== 0 && story.storyinfo.length === 0).slice(Math.max(stories.filter(story => story.image.length !== 0).length - 5, 1)).map((story, index) => {
+                                        {stories.filter(story => story.image.length !== 0 && story.storyinfo.length === 0).slice(Math.max(stories.filter(story => story.image.length !== 0).length - 7, 1)).map((story, index) => {
                                             return (
                                                 <HomeStoryCard story={story} key={index} />
                                             )
@@ -859,7 +866,7 @@ const Home = () => {
                         {/* profiles  */}
                         <div className="profiles">
                             <div className="header d-flex justify-content-between align-items-center mb-3">
-                                <h3 className="mb-0">Recently Added Profile</h3>
+                                <h3 className="mb-0">Recently added profiles</h3>
                                 <Link to={'/create-aspirant'}><p className="mb-0"><i className="fas fa-edit" />Write Aspirant Profile</p></Link>
                             </div>
                             {!aspirantFetch &&
@@ -872,10 +879,57 @@ const Home = () => {
                                 </div>
                             }
                             <div className="d-flex justify-content-end align-items-center mt-4">
-                                <button onClick={() => navigate('/profiles')}>Go to Profiles</button>
-                                <button onClick={() => setProfileLength(prev => prev + 1)}>Load More Profiles</button>
+                                <button onClick={() => navigate('/profiles')} id="go-to-profile">Go to Profiles</button>
+                                <button onClick={() => setProfileLength(prev => prev + 1)} id="load-more">Load More Profiles</button>
                             </div>
                         </div>
+                        {/* Ekiti polls  */}
+                        <EkitiPolls />
+                        {/* more stories  */}
+                        <div className="stories">
+                            <div className="header d-flex justify-content-between align-items-center">
+                                <h3>More Stories</h3>
+                                <div className="d-flex align-items-center">
+                                    <h4 onClick={() => setWriteStoryModal(true)}><i className="fas fa-edit" />Write New Story</h4>
+                                    {/* write story modal  */}
+                                    {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
+                                    <h4 onClick={() => navigate('/stories')}>See all Stories</h4>
+                                </div>
+                            </div>
+                            <div className="carousel">
+                                {!storyFetch &&
+                                    <>
+                                        {stories.filter(story => story.image.length !== 0 && story.storyinfo.length === 0).map((story, index) => {
+                                            return (
+                                                <HomeStoryCard story={story} key={index} />
+                                            )
+                                        })}
+                                    </>
+                                }
+                            </div>
+                        </div>
+                        {/* more profiles  */}
+                        <div className="profiles">
+                            <div className="header d-flex justify-content-between align-items-center mb-3">
+                                <h3 className="mb-0">More profiles</h3>
+                                <Link to={'/create-aspirant'}><p className="mb-0"><i className="fas fa-edit" />Write Aspirant Profile</p></Link>
+                            </div>
+                            {!aspirantFetch &&
+                                <div className="profile">
+                                    {aspirants.filter(aspirant => aspirant.status === "1").slice(0, 4).map((aspirant, index) => {
+                                        return (
+                                            <SingleProfileCard aspirant={aspirant} key={index} />
+                                        )
+                                    })}
+                                </div>
+                            }
+                            <div className="d-flex justify-content-end align-items-center mt-4">
+                                <button onClick={() => navigate('/profiles')} id="go-to-profile">Go to Profiles</button>
+                                {/* <button onClick={() => setProfileLength(prev => prev + 1)} id="load-more">Load More Profiles</button> */}
+                            </div>
+                        </div>
+                        {/* osun polls  */}
+                        <OsunPolls />
                         {/* adds  */}
                         <div className="adds mt-5">
                             <div className="row">

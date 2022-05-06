@@ -117,7 +117,7 @@ function Search() {
                     <button className={currentView === "profiles" && "active"} onClick={() => setCurrentView("profiles")} ><img src="img/profile.png" alt="profile" />Profiles</button>
                     <button className={currentView === "polls" && "active"} onClick={() => setCurrentView("polls")} ><img src="img/poll.png" alt="poll" />Polls</button>
                     <button className={currentView === "stories" && "active"} onClick={() => setCurrentView("stories")} ><img src="img/stories.png" alt="stories" />Stories</button>
-                    <button><img src="img/courses.png" alt="courses" />Courses</button>
+                    {/* <button><img src="img/courses.png" alt="courses" />Courses</button> */}
                   </div>
                   {/* <p>{currentView === "profiles" && aspirants.length}{currentView === "polls" && polls.length}{currentView === "stories" && stories.length} Search Results</p> */}
                   <p>{aspirants.length + polls.length + stories.length} Search Results</p>

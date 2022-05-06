@@ -63,7 +63,7 @@ const Nav = () => {
                                 </li>
                                 {/* <li className="nav-item br"><a className="nav-link" id="course" href="#">Take Course</a></li> */}
                             </ul>
-                            <ul className="navbar-nav nav2">
+                            <ul className="navbar-nav nav2 align-items-center">
                                 {/* <li className="nav-item d-flex align-items-center"><img src="/img/theme.png" alt="theme" /></li> */}
                                 {/* <li className="nav-item"><a className="nav-link" href="#"><img src="/img/Group 42.png" alt="country" /></a></li> */}
                                 {/* <li className="nav-item"><a href className="nav-link"><img src="/img/Notification 1.png" alt="" /></a></li> */}
@@ -73,7 +73,6 @@ const Nav = () => {
                                             <img src={context.user.image} alt="profile-img" id='profile-img' /> :
                                             <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
                                         }
-                                        {/* <img src="/img/unsplash_g7oN-4RMV_M.png" alt="profile-img" /> */}
                                     </Link>
                                 </li>
                             </ul>

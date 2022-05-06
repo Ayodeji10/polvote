@@ -56,15 +56,15 @@ function Polls() {
         <div className="container-fluid">
             <Nav />
             <div class="home-feed container">
-                <div class="row">
+                <div class="row justify-content-lg-between">
                     {/* aside  */}
-                    <div class="col-lg-3 aside">
+                    <div class="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 polls">
+                    <div className="col-lg-8 col-md-9 polls">
                         <div className="d-flex justify-content-end align-items-center mb-5">
                             <div className="searchbar d-flex align-items-center">
                                 <input type="text" placeholder="Search Poll" onChange={(e) => searchPolls(e)} />
@@ -78,23 +78,29 @@ function Polls() {
                             <>
                                 <div className="header">
                                     <div className="row">
-                                        <div className="col-lg-6">
+                                        <div className="col-6">
                                             <p>Polls</p>
                                         </div>
-                                        <div className="col-lg-2">
+                                        <div className="col-2">
                                             <p>Open Date</p>
                                         </div>
-                                        <div className="col-lg-2">
+                                        <div className="col-2">
                                             <p>End Date</p>
                                         </div>
-                                        <div className="col-lg-2">
+                                        <div className="col-2">
                                             <p>Status</p>
                                         </div>
                                     </div>
                                 </div>
                                 {polls.map((poll, index) => {
+                                    // get total votes 
+                                    let pollVotes = poll.aspirant.reduce((total, aspirant) => {
+                                        let increament = aspirant.votes.length
+                                        total += (increament)
+                                        return total
+                                    }, 0)
                                     return (
-                                        <PollCard poll={poll} key={index} />
+                                        <PollCard poll={poll} pollVotes={pollVotes} key={index} />
                                     )
                                 })}
                             </>

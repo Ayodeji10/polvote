@@ -1044,6 +1044,7 @@ nav .profile-img a {
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 5px;
+    cursor: pointer;
 }
 
 .home-feed .main .poll .main .candidate p {
@@ -1217,6 +1218,26 @@ nav .profile-img a {
 .home-feed .main .profiles .header p i {
     margin-right: 10px
 }
+
+.home-feed .main button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 14px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.home-feed .main button#go-to-profile {
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+}
+
+.home-feed .main button#load-more {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+
 
 
 /* adds  */
@@ -1457,6 +1478,7 @@ footer#footer img.social {
     border-radius: 10px;
     margin-bottom: 14px;
     position: relative;
+    cursor: pointer;
 }
 
 .polls .poll h3 {
@@ -1592,7 +1614,7 @@ footer#footer img.social {
 .single-poll header .searchbar {
     padding: 14px 24px;
     border-radius: 80px;
-    width: 377px;
+    width: 100%;
     background-color: #FFF;
 }
 
@@ -1651,6 +1673,7 @@ footer#footer img.social {
 .single-poll .poll .candidate h3 {
     font-size: 16px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .single-poll .poll .candidate p {
@@ -1948,6 +1971,11 @@ footer#footer img.social {
 
 .story .story img#story-img {
     border-radius: 5px;
+}
+
+.story .story img.single-story-img {
+    width: 100%;
+    height: auto
 }
 
 .story .story .shareStory {
@@ -2757,6 +2785,7 @@ img#return-btn {
     border-radius: 10px;
     padding: 32px;
     margin-bottom: 16px;
+    cursor: pointer;
 }
 
 .single-profile .main .profile img#profile-img {
@@ -5178,4 +5207,2655 @@ textarea::placeholder {
     font-size: 12px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.6)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* media queries */
+@media (min-width: 1400px) {}
+
+@media (min-width: 1120px) and (max-width: 1399px) {
+
+    /* home feed  */
+    .home-feed .main .stories .carousel .story {
+        min-width: 220px;
+    }
+
+    .home-feed .main .stories .carousel .story .img-container {
+        height: 150px;
+    }
+
+    .home-feed .main .stories .carousel .story .like-btn {
+        top: 8px;
+        right: 8px;
+    }
+
+    .home-feed .main .stories .carousel .story p {
+        font-size: 12px;
+    }
+
+    .home-feed .main button {
+        font-size: 10px;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    /* stories  */
+    .story .create-story h3 {
+        font-size: 18px;
+    }
+
+    .story .create-story .img-container,
+    .story .story .img-container,
+    .story .story .comment .img-container,
+    .search .story .img-container {
+        height: 30px;
+        width: 30px;
+    }
+
+    .story .create-story input {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .story .create-story p {
+        font-size: 14px;
+    }
+
+    .story .story h3 {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .story .story p {
+        font-size: 12px;
+        margin-right: 30px;
+    }
+
+    .story .story h4 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 10% !important;
+    }
+
+    /* polls  */
+    .polls .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+        width: 309px;
+    }
+
+    .polls .searchbar input {
+        font-size: 12px;
+    }
+
+    .polls h1 {
+        font-size: 25px;
+    }
+
+    .polls .poll h3 {
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 12px;
+    }
+
+    /* single polls page  */
+    .single-poll header h1 {
+        font-size: 16px;
+    }
+
+    .single-poll header .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    .single-poll header .searchbar input {
+        font-size: 12px;
+    }
+
+    /* aspirants page  */
+    .profile .header .searchbar {
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
+
+    .profile .header .searchbar input {
+        font-size: 14px;
+    }
+
+    .profile .header button {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 15px;
+    }
+
+    /* single aspirant page  */
+    .single-profile .aside .poll-active,
+    .single-profile .aside .history {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .single-profile .aside .poll-active h3 {
+        font-size: 15px;
+        margin-bottom: 9px;
+    }
+
+    .single-profile .aside .poll-active p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .single-profile .aside .poll-active img {
+        height: 30px;
+        margin-right: 23px;
+    }
+
+    .single-profile .aside .poll-active h6 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .single-profile .aside .history h2 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .main h2 {
+        font-size: 25px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1119px) {
+
+    /* login  */
+    .home .main #secured {
+        max-height: 170px;
+    }
+
+    .home .main h1 {
+        font-size: 30px;
+        line-height: 45px;
+    }
+
+    .home .main h4 {
+        font-size: 14px;
+    }
+
+    .home .login {
+        padding: 20px;
+    }
+
+    .home .login input {
+        padding: 12px 18px;
+    }
+
+    .home .login button#login-btn {
+        padding: 12px !important;
+    }
+
+    #signup .form input {
+        padding: 12px 20px;
+    }
+
+    #signup .form button#create {
+        padding: 12px 115px !important;
+    }
+
+    /* nav  */
+    nav .nav2 {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    nav .profile-img {
+        margin-left: 0;
+    }
+
+    /* home feed  */
+    .home-feed .main .stories .carousel .story {
+        min-width: 220px;
+    }
+
+    .home-feed .main .stories .carousel .story .img-container {
+        height: 150px;
+    }
+
+    .home-feed .main .stories .carousel .story .like-btn {
+        top: 8px;
+        right: 8px;
+    }
+
+    .home-feed .main .stories .carousel .story p {
+        font-size: 12px;
+    }
+
+    .home-feed .main button {
+        font-size: 10px;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    /* stories  */
+    .story .create-story h3 {
+        font-size: 18px;
+    }
+
+    .story .create-story .img-container,
+    .story .story .img-container,
+    .story .story .comment .img-container,
+    .search .story .img-container {
+        height: 40px;
+        width: 40px;
+    }
+
+    .story .create-story input {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .story .create-story p {
+        font-size: 14px;
+    }
+
+    .story .story h3 {
+        font-size: 14px;
+        margin-bottom: 2px;
+    }
+
+    .story .story p {
+        font-size: 12px;
+        margin-right: 30px;
+    }
+
+    .story .story h4 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    /* single story page (comments)  */
+    .story .comments {
+        padding: 15px;
+    }
+
+    .story .comments .img-container,
+    .story .comments .comment .replies .img-container {
+        height: 40px;
+        width: 40px;
+    }
+
+    .story .comments .comment-body {
+        padding: 10px;
+    }
+
+    .story .comments .comment-body h3 {
+        font-size: 12px;
+    }
+
+    .story .comments .comment-body h4 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment-body p {
+        font-size: 12px;
+    }
+
+    .story .comments h5 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment .replies {
+        margin-left: 40px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 10% !important;
+        width: 625px;
+        max-height: 90%;
+    }
+
+    .story-write-modal h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 50px;
+        width: 50px;
+        margin-right: 15px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    /* polls  */
+    .polls .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+        width: 309px;
+    }
+
+    .polls .searchbar input {
+        font-size: 12px;
+    }
+
+    .polls h1 {
+        font-size: 20px;
+    }
+
+    .polls .header {
+        padding: 11px 15px;
+    }
+
+    .polls .header p {
+        font-size: 14px;
+    }
+
+    .polls .poll {
+        padding: 10px 15px;
+    }
+
+    .polls .poll h3 {
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 12px;
+    }
+
+    .polls .options {
+        right: 12px;
+        top: 14px;
+        width: 60px;
+        padding: 5px;
+    }
+
+    .polls .options p {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    /* single polls page  */
+    .single-poll header h1 {
+        font-size: 16px;
+    }
+
+    .single-poll header h1 i {
+        margin-right: 10px;
+    }
+
+    .single-poll header .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    .single-poll header .searchbar input {
+        font-size: 12px;
+    }
+
+    /* aspirants page  */
+    .profile .header .searchbar {
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
+
+    .profile .header .searchbar input {
+        font-size: 14px;
+    }
+
+    .profile .header button {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 15px;
+    }
+
+    /* single aspirant page  */
+    .single-profile .aside .poll-active,
+    .single-profile .aside .history {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .single-profile .aside .poll-active h3 {
+        font-size: 15px;
+        margin-bottom: 9px;
+    }
+
+    .single-profile .aside .poll-active p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .single-profile .aside .poll-active img {
+        height: 30px;
+        margin-right: 23px;
+    }
+
+    .single-profile .aside .poll-active h6 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .single-profile .aside .history h2 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .main h2 {
+        font-size: 25px;
+    }
+
+    /* login  */
+    .home .main #secured {
+        max-height: 170px;
+    }
+
+    .home .main h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+
+    .home .main h4 {
+        font-size: 14px;
+    }
+
+    .home .login {
+        padding: 20px;
+    }
+
+    .home .login input {
+        padding: 12px 18px;
+    }
+
+    .home .login button#login-btn {
+        padding: 12px !important;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+
+    /* login  */
+    #signup {
+        top: 5% !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 640px;
+    }
+
+    #signup .form {
+        width: 100%;
+    }
+
+    #signup .form input {
+        padding: 12px 20px;
+    }
+
+    #signup .form button#create {
+        padding: 12px 90px !important;
+    }
+
+    /* nav  */
+    nav .nav2 {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    nav .profile-img {
+        margin-left: 0;
+    }
+
+    /* aside  */
+    .home-feed .avatar {
+        height: 30px;
+        width: 30px;
+    }
+
+    .home-feed .user p,
+    .home-feed .user h3,
+    .home-feed .aside .content span {
+        font-size: 10px;
+    }
+
+    .home-feed .aside .settings {
+        top: 38px;
+        width: 116px;
+        padding: 5px 10px
+    }
+
+    .home-feed .aside .settings p {
+        font-size: 11px;
+        margin-bottom: 5px;
+    }
+
+    .home-feed .aside .content {
+        padding: 10px;
+    }
+
+    .home-feed .aside .content img {
+        margin-right: 5px;
+    }
+
+    .home-feed .aside .polls {
+        padding: 10px;
+    }
+
+    .home-feed .aside .polls h3 {
+        font-size: 14px;
+        margin-bottom: 13px;
+    }
+
+    .home-feed .aside .polls .active-polls>* {
+        margin: 0 0 10px 0;
+    }
+
+    .home-feed .aside .polls h4 {
+        font-size: 10px;
+    }
+
+    /* home feed  */
+    .home-feed .main .header h1 {
+        font-size: 22px;
+    }
+
+    .home-feed .main .poll .main,
+    .single-poll .poll .body {
+        padding: 20px;
+    }
+
+    .home-feed .main .poll .main .header,
+    .single-poll .poll .header {
+        margin-bottom: 25px;
+    }
+
+    .home-feed .main .poll .main .header h3,
+    .single-poll .poll .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .poll .main .header p,
+    .single-poll .poll .header p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h4,
+    .single-poll .poll .candidate h3 {
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .home-feed .main .poll .main .candidate p,
+    .single-poll .poll .candidate p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    .home-feed .main .poll .main .candidate h3,
+    .single-poll .poll .candidate h2 {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h6,
+    .single-poll .poll .candidate h5 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll .main .candidate img.vote-img,
+    .single-poll .poll .candidate img.vote-img {
+        height: 40px;
+        width: auto;
+        min-width: unset;
+    }
+
+    .home-feed .main .poll footer,
+    .single-poll .poll footer {
+        padding: 14px 20px;
+    }
+
+    .home-feed .main .poll footer p,
+    .single-poll .poll footer p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll footer p i,
+    .single-poll .poll footer p i {
+        margin-right: 10px;
+    }
+
+    .home-feed .main .poll footer button {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll footer button i {
+        margin-left: 10px;
+    }
+
+    .home-feed .main .stories .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .stories .header h4 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .stories .carousel .story {
+        min-width: 220px;
+    }
+
+    .home-feed .main .stories .carousel .story .img-container {
+        height: 150px;
+    }
+
+    .home-feed .main .stories .carousel .story .like-btn {
+        top: 8px;
+        right: 8px;
+    }
+
+    .home-feed .main .stories .carousel .story p {
+        font-size: 12px;
+    }
+
+    .profile .profile {
+        padding: 15px;
+    }
+
+    .home-feed .main .profiles .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .profiles .header p {
+        font-size: 10px;
+    }
+
+    .profile .profile h3 {
+        font-size: 15px;
+        margin-bottom: 5px;
+    }
+
+    .profile .profile p {
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+
+    .profile .profile h4 {
+        font-size: 8px;
+    }
+
+    .profile .profile .vote-img {
+        height: 20px
+    }
+
+    .home-feed .main button {
+        font-size: 10px;
+        padding: 10px;
+        margin-left: 10px;
+    }
+
+    /* stories  */
+    .story .create-story h3 {
+        font-size: 15px;
+    }
+
+    .story .create-story .img-container,
+    .story .story .img-container,
+    .story .story .comment .img-container,
+    .search .story .img-container {
+        height: 35px;
+        width: 35px;
+    }
+
+    .story .create-story input {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .story .create-story p {
+        font-size: 12px;
+    }
+
+    .story .story h3 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .story .story p {
+        font-size: 10px;
+        margin-right: 20px;
+    }
+
+    .story .story h4 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .story .story .widget img {
+        height: 22px
+    }
+
+    .story .story .widget i {
+        font-size: 18px;
+    }
+
+    .story .story .widget span {
+        font-size: 15px;
+    }
+
+    .story .story .body {
+        padding: 15px;
+    }
+
+    .story .story .comment {
+        padding: 10px;
+    }
+
+    .story .story .comment .input {
+        padding: 7px;
+    }
+
+    .story .story .comment button img,
+    .story .comments .comment .replies button img {
+        display: none;
+    }
+
+    .story .story .comment button {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 580px;
+        max-height: 90%;
+    }
+
+    .story-write-modal h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 14px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    /* single story page (comments)  */
+    .story .comments {
+        padding: 15px;
+    }
+
+    .story .comments .img-container,
+    .story .comments .comment .replies .img-container {
+        height: 35px;
+        width: 35px;
+    }
+
+    .story .comments .comment-body {
+        padding: 10px;
+    }
+
+    .story .comments .comment-body h3 {
+        font-size: 12px;
+    }
+
+    .story .comments .comment-body h4 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment-body p {
+        font-size: 12px;
+    }
+
+    .story .comments h5 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment .replies {
+        margin-left: 40px;
+    }
+
+    /* polls  */
+    .polls .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+        width: 250px;
+    }
+
+    .polls .searchbar input {
+        font-size: 12px;
+    }
+
+    .polls h1 {
+        margin-bottom: 20px;
+        font-size: 20px;
+    }
+
+    .polls .header {
+        padding: 10px;
+    }
+
+    .polls .header p {
+        font-size: 12px;
+    }
+
+    .polls .poll {
+        padding: 10px;
+    }
+
+    .polls .poll h3 {
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 10px;
+    }
+
+    .polls .options {
+        right: 12px;
+        top: 14px;
+        width: 60px;
+        padding: 5px;
+    }
+
+    .polls .options p {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    /* single polls page  */
+    .single-poll header h1 {
+        font-size: 14px;
+    }
+
+    .single-poll header h1 i {
+        margin-right: 10px;
+    }
+
+    .single-poll header .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    .single-poll header .searchbar input {
+        font-size: 12px;
+    }
+
+    /* aspirants page  */
+    .profile .header .searchbar {
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
+
+    .profile .header .searchbar input {
+        font-size: 13px;
+    }
+
+    .profile .header button {
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    .profile .header button i {
+        display: none
+    }
+
+    /* single aspirant page  */
+    .single-profile .aside .poll-active,
+    .single-profile .aside .history {
+        padding: 12px;
+        margin-bottom: 20px;
+    }
+
+    .single-profile .aside .poll-active h3 {
+        font-size: 12px;
+        margin-bottom: 9px;
+    }
+
+    .single-profile .aside .poll-active p {
+        font-size: 10px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .aside .poll-active img {
+        height: 25px;
+        margin-right: 13px;
+    }
+
+    .single-profile .aside .poll-active i {
+        margin-right: 15px;
+        font-size: 23px;
+    }
+
+    .single-profile .aside .poll-active h6 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .single-profile .aside .history h2 {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .main h2 {
+        font-size: 20px;
+    }
+
+    .single-profile .main .fa-share-nodes {
+        font-size: 20px;
+    }
+
+    .single-profile .main button#manage-profile>i {
+        margin-right: 5px;
+    }
+
+    .single-profile .main button#manage-profile {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .single-profile .main .info h3 {
+        font-size: 16px;
+    }
+
+    .single-profile .main .info p {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    /* login  */
+    .home .main #secured {
+        max-height: 170px;
+    }
+
+    .home .main h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+
+    .home .main h4 {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+
+    .home .login {
+        padding: 20px;
+    }
+
+    .home .login input {
+        padding: 12px 18px;
+    }
+
+    .home .login button#login-btn {
+        padding: 12px !important;
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+
+    /* login  */
+    #signup {
+        top: 5% !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 520px;
+    }
+
+    #signup .form {
+        width: 100%;
+    }
+
+    #signup .form input {
+        padding: 12px 20px;
+    }
+
+    #signup .form button#create {
+        padding: 12px 90px !important;
+    }
+
+    /* nav  */
+    nav .nav2 {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    nav .profile-img {
+        margin-left: 0;
+    }
+
+    /* home feed  */
+    .home-feed .main .header h1 {
+        font-size: 23px;
+    }
+
+    .home-feed .main .searchbar {
+        padding: 10px 20px;
+    }
+
+    .home-feed .main .header input {
+        font-size: 15px;
+    }
+
+    .home-feed .main .poll .main,
+    .single-poll .poll .body {
+        padding: 20px;
+    }
+
+    .home-feed .main .poll .main .header,
+    .single-poll .poll .header {
+        margin-bottom: 25px;
+    }
+
+    .home-feed .main .poll .main .header h3,
+    .single-poll .poll .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .poll .main .header p,
+    .single-poll .poll .header p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h4,
+    .single-poll .poll .candidate h3 {
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .home-feed .main .poll .main .candidate p,
+    .single-poll .poll .candidate p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    .home-feed .main .poll .main .candidate h3,
+    .single-poll .poll .candidate h2 {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h6,
+    .single-poll .poll .candidate h5 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll .main .candidate img.vote-img,
+    .single-poll .poll .candidate img.vote-img {
+        height: 40px;
+        width: auto;
+        min-width: unset;
+    }
+
+    .home-feed .main .poll footer,
+    .single-poll .poll footer {
+        padding: 14px 20px;
+    }
+
+    .home-feed .main .poll footer p,
+    .single-poll .poll footer p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll footer p i,
+    .single-poll .poll footer p i {
+        margin-right: 10px;
+    }
+
+    .home-feed .main .poll footer button {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll footer button i {
+        margin-left: 10px;
+    }
+
+    .home-feed .main .stories .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .stories .header h4 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .stories .carousel .story {
+        min-width: 220px;
+    }
+
+    .home-feed .main .stories .carousel .story .img-container {
+        height: 150px;
+    }
+
+    .home-feed .main .stories .carousel .story .like-btn {
+        top: 8px;
+        right: 8px;
+    }
+
+    .home-feed .main .stories .carousel .story p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .profiles .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .profiles .header p {
+        font-size: 12px;
+    }
+
+    .profile .profile {
+        padding: 10px;
+    }
+
+    .profile .profile h3 {
+        font-size: 15px;
+    }
+
+    .profile .profile p {
+        font-size: 11px;
+    }
+
+    .profile .profile .vote-img {
+        height: 25px;
+    }
+
+    .profile .profile h4 {
+        font-size: 10px;
+    }
+
+    .home-feed .main button {
+        font-size: 10px;
+        padding: 8px 10px;
+        margin-left: 10px;
+    }
+
+    /* stories  */
+    .story .create-story h3 {
+        font-size: 15px;
+    }
+
+    .story .create-story .img-container,
+    .story .story .img-container,
+    .story .story .comment .img-container,
+    .search .story .img-container {
+        height: 35px;
+        width: 35px;
+    }
+
+    .story .create-story input {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .story .create-story p {
+        font-size: 12px;
+        margin-left: 20px
+    }
+
+    .story .story h3 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .story .story p {
+        font-size: 10px;
+        margin-right: 20px;
+    }
+
+    .story .story h4 {
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .story .story .widget img {
+        height: 22px
+    }
+
+    .story .story .widget i {
+        font-size: 18px;
+    }
+
+    .story .story .widget span {
+        font-size: 15px;
+    }
+
+    .story .story .body {
+        padding: 15px;
+    }
+
+    .story .story .comment {
+        padding: 10px;
+    }
+
+    .story .story .comment .input {
+        padding: 7px;
+    }
+
+    .story .story .comment button img,
+    .story .comments .comment .replies button img {
+        display: none;
+    }
+
+    .story .story .comment button {
+        font-size: 12px;
+        padding: 10px;
+    }
+
+    /* single story page (comments)  */
+    .story .comments {
+        padding: 15px;
+    }
+
+    .story .comments .img-container,
+    .story .comments .comment .replies .img-container {
+        height: 35px;
+        width: 35px;
+    }
+
+    .story .comments .comment-body {
+        padding: 10px;
+    }
+
+    .story .comments .comment-body h3 {
+        font-size: 12px;
+    }
+
+    .story .comments .comment-body h4 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment-body p {
+        font-size: 12px;
+    }
+
+    .story .comments h5 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment .replies {
+        margin-left: 25px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 485px;
+        max-height: 90%;
+    }
+
+    .story-write-modal h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 14px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    /* polls  */
+    .polls .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+        width: 250px;
+    }
+
+    .polls .searchbar input {
+        font-size: 12px;
+    }
+
+    .polls h1 {
+        margin-bottom: 20px;
+        font-size: 18px;
+    }
+
+    .polls .header {
+        padding: 10px;
+    }
+
+    .polls .header p {
+        font-size: 12px;
+    }
+
+    .polls .poll {
+        padding: 10px;
+    }
+
+    .polls .poll h3 {
+        font-size: 12px;
+        margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 10px;
+    }
+
+    .polls .options {
+        right: 12px;
+        top: 14px;
+        width: 60px;
+        padding: 5px;
+    }
+
+    .polls .options p {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    /* single polls page  */
+    .single-poll header h1 {
+        font-size: 14px;
+    }
+
+    .single-poll header h1 i {
+        margin-right: 10px;
+    }
+
+    .single-poll header .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    .single-poll header .searchbar input {
+        font-size: 12px;
+    }
+
+    /* aspirants page  */
+    .profile .header .searchbar {
+        padding: 10px 15px;
+        border-radius: 15px;
+    }
+
+    .profile .header .searchbar input {
+        font-size: 13px;
+    }
+
+    .profile .header button {
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    .profile .header button i {
+        display: none
+    }
+
+    /* single aspirant page  */
+    .single-profile .aside .poll-active,
+    .single-profile .aside .history {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .single-profile .aside .poll-active h3 {
+        font-size: 15px;
+        margin-bottom: 9px;
+    }
+
+    .single-profile .aside .poll-active p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .single-profile .aside .poll-active img {
+        height: 30px;
+        margin-right: 23px;
+    }
+
+    .single-profile .aside .poll-active h6 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .single-profile .aside .history h2 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .main h2 {
+        font-size: 20px;
+    }
+
+    .single-profile .main .fa-share-nodes {
+        font-size: 20px;
+    }
+
+    .single-profile .main button#manage-profile>i {
+        margin-right: 5px;
+    }
+
+    .single-profile .main button#manage-profile {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .single-profile .main .info h3 {
+        font-size: 16px;
+    }
+
+    .single-profile .main .info p {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
+    /* login  */
+    .home .main #secured {
+        max-height: 170px;
+    }
+
+    .home .main h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+
+    .home .main h4 {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+
+    .home .login {
+        padding: 20px;
+    }
+
+    .home .login input {
+        padding: 12px 18px;
+    }
+
+    .home .login button#login-btn {
+        padding: 12px !important;
+    }
+}
+
+@media (min-width: 386px) and (max-width: 575px) {
+
+    /* login  */
+    #signup {
+        top: 5% !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 360px;
+    }
+
+    #signup .form {
+        width: 100%;
+    }
+
+    #signup .form input {
+        padding: 12px 20px;
+    }
+
+    #signup .form button#create {
+        padding: 12px 90px !important;
+    }
+
+    /* nav  */
+    .navbar-brand img {
+        max-width: 100px;
+    }
+
+    nav .nav2 {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    nav .profile-img {
+        max-width: 35px;
+        max-height: 35px;
+        margin-left: 0;
+    }
+
+    /* home feed  */
+    .home-feed .main .header h1 {
+        font-size: 21px;
+    }
+
+    .home-feed .main .searchbar {
+        padding: 10px 20px;
+        border-radius: 20px;
+    }
+
+    .home-feed .main .header input {
+        font-size: 14px;
+    }
+
+    .home-feed .main .poll .main,
+    .single-poll .poll .body {
+        padding: 20px;
+    }
+
+    .home-feed .main .poll .main .header,
+    .single-poll .poll .header {
+        margin-bottom: 25px;
+    }
+
+    .home-feed .main .poll .main .header h3,
+    .single-poll .poll .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .poll .main .header p,
+    .single-poll .poll .header p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h4,
+    .single-poll .poll .candidate h3 {
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .home-feed .main .poll .main .candidate p,
+    .single-poll .poll .candidate p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    .home-feed .main .poll .main .candidate h3,
+    .single-poll .poll .candidate h2 {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h6,
+    .single-poll .poll .candidate h5 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll .main .candidate img.vote-img,
+    .single-poll .poll .candidate img.vote-img {
+        height: 40px;
+        width: auto;
+        min-width: unset;
+    }
+
+    .home-feed .main .poll footer,
+    .single-poll .poll footer {
+        padding: 14px 20px;
+    }
+
+    .home-feed .main .poll footer p,
+    .single-poll .poll footer p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll footer p i,
+    .single-poll .poll footer p i {
+        margin-right: 10px;
+    }
+
+    .home-feed .main .poll footer button {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll footer button i {
+        margin-left: 10px;
+    }
+
+    .home-feed .main .stories .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .stories .header h4 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .stories .carousel .story {
+        min-width: 220px;
+    }
+
+    .home-feed .main .stories .carousel .story .img-container {
+        height: 150px;
+    }
+
+    .home-feed .main .stories .carousel .story .like-btn {
+        top: 8px;
+        right: 8px;
+    }
+
+    .home-feed .main .stories .carousel .story p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .profiles .header h3 {
+        font-size: 14px;
+    }
+
+    .home-feed .main .profiles .header p {
+        font-size: 12px;
+    }
+
+    .profile .profile {
+        padding: 10px;
+    }
+
+    .profile .profile h3 {
+        font-size: 15px;
+    }
+
+    .profile .profile p {
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+
+    .profile .profile .vote-img {
+        height: 25px;
+    }
+
+    .profile .profile h4 {
+        font-size: 10px;
+    }
+
+    .home-feed .main button {
+        font-size: 10px;
+        padding: 8px 10px;
+        margin-left: 10px;
+    }
+
+    footer#footer .top img#logo {
+        width: 60px;
+    }
+
+    /* stories  */
+    .story .create-story {
+        padding: 10px;
+    }
+
+    .story .create-story h3 {
+        font-size: 15px;
+    }
+
+    .story .create-story .img-container,
+    .story .story .img-container,
+    .story .story .comment .img-container,
+    .search .story .img-container {
+        height: 30px;
+        width: 30px;
+    }
+
+    .story .create-story input {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .story .create-story p {
+        font-size: 12px;
+        margin-left: 20px
+    }
+
+    .story .story h3 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .story .story p {
+        font-size: 10px;
+        margin-right: 20px;
+    }
+
+    .story .story h4 {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .story .story .widget img {
+        height: 22px
+    }
+
+    .story .story .widget i {
+        font-size: 18px;
+    }
+
+    .story .story .widget span {
+        font-size: 15px;
+    }
+
+    .story .story .body {
+        padding: 15px;
+    }
+
+    .story .story .comment {
+        padding: 10px;
+    }
+
+    .story .story .comment .input {
+        padding: 5px;
+    }
+
+    .story .story .comment button img,
+    .story .comments .comment .replies button img {
+        display: none;
+    }
+
+    .story .story .comment button,
+    .story .comments .comment .replies button {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    /* single story page (comments)  */
+    .story .comments {
+        padding: 10px;
+    }
+
+    .story .comments .img-container,
+    .story .comments .comment .replies .img-container {
+        height: 27px;
+        width: 27px;
+    }
+
+    .story .comments .comment-body {
+        padding: 10px;
+    }
+
+    .story .comments .comment-body h3 {
+        font-size: 12px;
+    }
+
+    .story .comments .comment-body h4 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment-body p {
+        font-size: 12px;
+    }
+
+    .story .comments h5 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment .replies {
+        margin-left: 25px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 355px;
+        max-height: 90%;
+    }
+
+    .story-write-modal h2 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 14px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    /* polls  */
+    .polls .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+        width: 100%;
+    }
+
+    .polls .searchbar input {
+        font-size: 12px;
+    }
+
+    .polls h1 {
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .polls .header {
+        padding: 5px;
+    }
+
+    .polls .header p {
+        font-size: 10px;
+    }
+
+    .polls .poll {
+        padding: 5px;
+    }
+
+    .polls .poll h3 {
+        font-size: 10px;
+        margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 8px;
+    }
+
+    .polls .poll h6#status-text {
+        display: none;
+    }
+
+    .polls .options {
+        right: 12px;
+        top: 14px;
+        width: 60px;
+        padding: 5px;
+    }
+
+    .polls .options p {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    /* single polls page  */
+    .single-poll header h1 {
+        font-size: 14px;
+        margin-bottom: 12px !important;
+    }
+
+    .single-poll header h1 i {
+        margin-right: 10px;
+    }
+
+    .single-poll header .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    .single-poll header .searchbar input {
+        font-size: 12px;
+    }
+
+    /* aspirants page  */
+    .profile .header .searchbar {
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .profile .header .searchbar input {
+        font-size: 13px;
+    }
+
+    .profile .header button {
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    /* single aspirant page  */
+    .single-profile .aside .poll-active,
+    .single-profile .aside .history {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .single-profile .aside .poll-active h3 {
+        font-size: 15px;
+        margin-bottom: 9px;
+    }
+
+    .single-profile .aside .poll-active p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .single-profile .aside .poll-active img {
+        height: 30px;
+        margin-right: 23px;
+    }
+
+    .single-profile .aside .poll-active h6 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .single-profile .aside .history h2 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .main h2 {
+        font-size: 20px;
+    }
+
+    .single-profile .main .fa-share-nodes {
+        font-size: 20px;
+    }
+
+    .single-profile .main button#manage-profile>i {
+        margin-right: 5px;
+    }
+
+    .single-profile .main button#manage-profile {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .single-profile .main .info {
+        padding: 15px;
+        margin-bottom: 35px;
+    }
+
+    .single-profile .main .info h3 {
+        font-size: 14px;
+    }
+
+    .single-profile .main .info p {
+        font-size: 12px;
+        margin-bottom: 25px;
+        line-height: 22px;
+    }
+
+    .single-profile .main .others h2 {
+        font-size: 16px;
+    }
+
+    .single-profile .main .profile {
+        padding: 10px;
+    }
+
+    /* login  */
+    .home .main #secured {
+        max-height: 170px;
+    }
+
+    .home .main h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+
+    .home .main h4 {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+
+    .home .login {
+        padding: 20px;
+    }
+
+    .home .login input {
+        padding: 12px 18px;
+    }
+
+    .home .login button#login-btn {
+        padding: 12px !important;
+    }
+}
+
+@media (max-width: 385px) {
+
+    /* login  */
+    #signup {
+        top: 5% !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        width: 320px;
+    }
+
+    #signup .form {
+        width: 100%;
+    }
+
+    #signup .form input {
+        padding: 12px 20px;
+    }
+
+    #signup .form button#create {
+        padding: 12px 90px !important;
+    }
+
+    /* nav  */
+    .navbar-brand img {
+        max-width: 100px;
+    }
+
+    nav .nav2 {
+        padding-left: 0;
+        border-left: none;
+    }
+
+    nav .profile-img {
+        max-width: 35px;
+        max-height: 35px;
+        margin-left: 0;
+    }
+
+    /* aside  */
+    .home-feed .avatar {
+        height: 40px;
+        width: 40px;
+    }
+
+    /* home feed  */
+    .home-feed .main .header h1 {
+        font-size: 20px;
+    }
+
+    .home-feed .main .searchbar {
+        padding: 10px 20px;
+        border-radius: 15px;
+    }
+
+    .home-feed .main .header input {
+        font-size: 13px;
+    }
+
+    .home-feed .main .poll .main,
+    .single-poll .poll .body {
+        padding: 10px;
+    }
+
+    .home-feed .main .poll .main .header,
+    .single-poll .poll .header {
+        margin-bottom: 25px;
+    }
+
+    .home-feed .main .poll .main .header h3,
+    .single-poll .poll .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .poll .main .header p,
+    .single-poll .poll .header p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h4,
+    .single-poll .poll .candidate h3 {
+        font-size: 13px;
+        margin-bottom: 0;
+    }
+
+    .home-feed .main .poll .main .candidate p,
+    .single-poll .poll .candidate p {
+        font-size: 10px;
+        margin-bottom: 5px;
+    }
+
+    .home-feed .main .poll .main .candidate h3,
+    .single-poll .poll .candidate h2 {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll .main .candidate h6,
+    .single-poll .poll .candidate h5 {
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll .main .candidate img.vote-img,
+    .single-poll .poll .candidate img.vote-img {
+        height: 40px;
+        width: auto;
+        min-width: unset;
+    }
+
+    .home-feed .main .poll footer,
+    .single-poll .poll footer {
+        padding: 14px 20px;
+    }
+
+    .home-feed .main .poll footer p,
+    .single-poll .poll footer p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .poll footer p i,
+    .single-poll .poll footer p i {
+        margin-right: 10px;
+    }
+
+    .home-feed .main .poll footer button {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .home-feed .main .poll footer button i {
+        margin-left: 10px;
+    }
+
+    .home-feed .main .stories .header h3 {
+        font-size: 15px;
+    }
+
+    .home-feed .main .stories .header h4 {
+        font-size: 10px;
+        padding: 0 8px;
+    }
+
+    .home-feed .main .stories .carousel .story {
+        min-width: 220px;
+    }
+
+    .home-feed .main .stories .carousel .story .img-container {
+        height: 150px;
+    }
+
+    .home-feed .main .stories .carousel .story .like-btn {
+        top: 8px;
+        right: 8px;
+    }
+
+    .home-feed .main .stories .carousel .story p {
+        font-size: 12px;
+    }
+
+    .home-feed .main .stories .header h4 i {
+        margin-right: 5px;
+    }
+
+    .home-feed .main .profiles .header h3 {
+        font-size: 14px;
+    }
+
+    .home-feed .main .profiles .header p {
+        font-size: 12px;
+    }
+
+    .profile .profile {
+        padding: 10px;
+    }
+
+    .profile .profile h3 {
+        font-size: 15px;
+    }
+
+    .profile .profile p {
+        font-size: 11px;
+        margin-bottom: 20px;
+    }
+
+    .profile .profile .vote-img {
+        height: 25px;
+    }
+
+    .profile .profile h4 {
+        font-size: 10px;
+    }
+
+    .home-feed .main button {
+        font-size: 10px;
+        padding: 8px 10px;
+        margin-left: 10px;
+    }
+
+    footer#footer .top img#logo {
+        width: 40px;
+    }
+
+    /* stories  */
+    .story .create-story {
+        padding: 5px;
+    }
+
+    .story .create-story h3 {
+        font-size: 15px;
+    }
+
+    .story .create-story .img-container,
+    .story .story .img-container,
+    .story .story .comment .img-container,
+    .search .story .img-container {
+        height: 27px;
+        width: 27px;
+    }
+
+    .story .create-story input {
+        font-size: 10px;
+        padding: 8px;
+        border-radius: 10px;
+    }
+
+    .story .create-story p {
+        font-size: 10px;
+        margin-left: 20px
+    }
+
+    .story .create-story p img {
+        margin-right: 8px;
+    }
+
+    .story .story h3 {
+        font-size: 12px;
+        margin-bottom: 2px;
+    }
+
+    .story .story p {
+        font-size: 10px;
+        margin-right: 20px;
+    }
+
+    .story .story h4 {
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .story .story .widget img {
+        height: 20px
+    }
+
+    .story .story .widget i {
+        font-size: 16px;
+    }
+
+    .story .story .widget span {
+        font-size: 13px;
+    }
+
+    .story .story .body {
+        padding: 15px;
+    }
+
+    .story .story .comment {
+        padding: 10px;
+    }
+
+    .story .story .comment .input {
+        padding: 5px;
+    }
+
+    .story .story .comment button img,
+    .story .comments .comment .replies button img {
+        display: none;
+    }
+
+    .story .story .comment button,
+    .story .comments .comment .replies button {
+        font-size: 12px;
+        padding: 5px;
+    }
+
+    /* single story page (comments)  */
+    .story .comments {
+        padding: 10px;
+    }
+
+    .story .comments .img-container,
+    .story .comments .comment .replies .img-container {
+        height: 27px;
+        width: 27px;
+    }
+
+    .story .comments .comment-body {
+        padding: 10px;
+    }
+
+    .story .comments .comment-body h3 {
+        font-size: 12px;
+    }
+
+    .story .comments .comment-body h4 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment-body p {
+        font-size: 12px;
+    }
+
+    .story .comments h5 {
+        font-size: 10px;
+    }
+
+    .story .comments .comment .replies {
+        margin-left: 25px;
+    }
+
+    .story .comments .comment .replies input {
+        padding: 8px;
+        font-size: 10px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 330px;
+        max-height: 90%;
+    }
+
+    .story-write-modal h2 {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 35px;
+        width: 35px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 12px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 12px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 12px;
+    }
+
+    .story-write-modal span {
+        font-size: 12px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 12px;
+        padding: 10px 12px;
+    }
+
+    /* polls  */
+    .polls .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+        width: 100%;
+    }
+
+    .polls .searchbar input {
+        font-size: 12px;
+    }
+
+    .polls h1 {
+        margin-bottom: 15px;
+        font-size: 16px;
+    }
+
+    .polls .header {
+        padding: 5px;
+    }
+
+    .polls .header p {
+        font-size: 10px;
+    }
+
+    .polls .poll {
+        padding: 5px;
+    }
+
+    .polls .poll h3 {
+        font-size: 10px;
+        margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 8px;
+    }
+
+    .polls .poll h6#status-text {
+        display: none;
+    }
+
+    .polls .options {
+        right: 12px;
+        top: 14px;
+        width: 60px;
+        padding: 5px;
+    }
+
+    .polls .options p {
+        font-size: 10px;
+        line-height: 15px;
+    }
+
+    /* single polls page  */
+    .single-poll header h1 {
+        font-size: 14px;
+        margin-bottom: 12px !important;
+    }
+
+    .single-poll header h1 i {
+        margin-right: 10px;
+    }
+
+    .single-poll header .searchbar {
+        padding: 10px 14px;
+        border-radius: 15px;
+    }
+
+    .single-poll header .searchbar input {
+        font-size: 12px;
+    }
+
+    /* aspirants page  */
+    .profile .header .searchbar {
+        padding: 10px 15px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .profile .header .searchbar input {
+        font-size: 13px;
+    }
+
+    .profile .header button {
+        padding: 10px;
+        font-size: 13px;
+        border-radius: 10px;
+    }
+
+    /* single aspirant page  */
+    .single-profile .aside .poll-active,
+    .single-profile .aside .history {
+        padding: 15px;
+        margin-bottom: 25px;
+    }
+
+    .single-profile .aside .poll-active h3 {
+        font-size: 15px;
+        margin-bottom: 9px;
+    }
+
+    .single-profile .aside .poll-active p {
+        font-size: 12px;
+        margin-bottom: 20px;
+    }
+
+    .single-profile .aside .poll-active img {
+        height: 30px;
+        margin-right: 23px;
+    }
+
+    .single-profile .aside .poll-active h6 {
+        font-size: 10px;
+        line-height: 16px;
+    }
+
+    .single-profile .aside .history h2 {
+        font-size: 15px;
+        margin-bottom: 15px;
+    }
+
+    .single-profile .main h2 {
+        font-size: 20px;
+    }
+
+    .single-profile .main .fa-share-nodes {
+        font-size: 20px;
+    }
+
+    .single-profile .main button#manage-profile>i {
+        margin-right: 5px;
+    }
+
+    .single-profile .main button#manage-profile {
+        font-size: 12px;
+        padding: 10px;
+        border-radius: 10px;
+    }
+
+    .single-profile .main .info {
+        padding: 10px;
+        margin-bottom: 35px;
+    }
+
+    .single-profile .main .info h3 {
+        font-size: 14px;
+    }
+
+    .single-profile .main .info p {
+        font-size: 12px;
+        margin-bottom: 25px;
+        line-height: 22px;
+    }
+
+    .single-profile .main .others h2 {
+        font-size: 16px;
+    }
+
+    .single-profile .main .profile {
+        padding: 10px;
+    }
+
+    /* login  */
+    .home .main #secured {
+        max-height: 170px;
+    }
+
+    .home .main h1 {
+        font-size: 25px;
+        line-height: 35px;
+    }
+
+    .home .main h4 {
+        font-size: 14px;
+        margin-bottom: 40px;
+    }
+
+    .home .login {
+        padding: 20px;
+    }
+
+    .home .login input {
+        padding: 12px 18px;
+    }
+
+    .home .login button#login-btn {
+        padding: 12px !important;
+    }
 }

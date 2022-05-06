@@ -52,7 +52,7 @@ function HomeStoryCard({ story }) {
                 }} />
                 {/* <i className="far fa-heart" /> */}
             </div>
-            <p className="mb-1">{story.story.length > 40 ? `${story.story.substring(0, 40)}...` : story.story}</p>
+            <p className="mb-1">{story.story.length > 90 ? `${story.story.substring(0, 90)}...` : story.story}</p>
         </div>
     )
 }

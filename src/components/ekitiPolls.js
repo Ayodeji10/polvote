@@ -1,12 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { API } from "../components/apiRoot";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Modal from 'react-modal'
 import HomePollCardAspirant from './homePollCardAspirant';
 Modal.setAppElement('#root')
 
-function HomePollCard() {
+function EkitiPolls() {
     // history 
     const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ function HomePollCard() {
     const [fetchLoading, setFetchLoading] = useState(true)
     // fetch current poll and parties
     const fetchcurrentPollAndParties = () => {
-        const pollAPI = `${API.API_ROOT}/polls/getsinglepoll/626d7109c44fc4e4698417c8`
+        const pollAPI = `${API.API_ROOT}/polls/getsinglepoll/626dd7317f225bf461a81abb`
         const partiesAPI = `${API.API_ROOT}/parties/parties`
 
         const getPoll = axios.get(pollAPI)
@@ -54,7 +54,7 @@ function HomePollCard() {
     // use ref 
     const inputRef = useRef()
 
-    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/626d7109c44fc4e4698417c8`)
+    const [shareLink] = useState(`https://polvote.com/polls/626dd7317f225bf461a81abb`)
 
     const copy = () => {
         navigator.clipboard.writeText(shareLink)
@@ -110,4 +110,4 @@ function HomePollCard() {
     )
 }
 
-export default HomePollCard 
+export default EkitiPolls

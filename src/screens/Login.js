@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../dataContext";
 import { API } from "../components/apiRoot";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { setUserSession } from "../utils/common";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
@@ -323,7 +323,7 @@ const Login = () => {
                                             <p>Advertise with us</p>
                                         </div> */}
                                         <div className="col-lg-2">
-                                            <p onClick={() => setTermsModal(true)}>Terms and Condition</p>
+                                            <p onClick={() => setTermsModal(true)}>Terms and Conditions</p>
                                             {/* terms and conditions modal  */}
                                             <Modal isOpen={termsModal} onRequestClose={() => setTermsModal(false)} id="terms">
                                                 {/* <i className="fa-solid fa-circle-xmark" onClick={() => setVerificationModal(false)} /> */}
@@ -549,11 +549,12 @@ const Login = () => {
                                     </div>
                                 </div>
                                 <div className="col-lg-2 d-flex justify-content-end">
-                                    <img src="/img/linkedin.png" alt="linkedIn" />
-                                    <img src="/img/fb.png" alt="facebook" />
-                                    <img src="/img/insta.png" alt="instagram" />
-                                    <img src="/img/twitter.png" alt="twitter" />
-                                    <img src="/img/tiktok.png" alt="tiktok" />
+                                    {/* <img src="/img/linkedin.png" alt="linkedIn" /> */}
+                                    <a href="https://youtube.com/channel/UCkcn0Kv_w_Qe0MfZ7Hhe6lg" target="_blank"><img src="/img/youtube.png" alt="youtube" /></a>
+                                    <a href="https://www.facebook.com/Polvoteofficial-115809974445682/" target="_blank"><img src="/img/fb.png" alt="facebook" /></a>
+                                    <a href="https://www.instagram.com/polvoteofficial/" target="_blank"><img src="/img/insta.png" alt="instagram" /></a>
+                                    <a href="https://twitter.com/pol_vote?t=iVqZBrU9MA793b4K1-YLwQ" target="_blank"><img src="/img/twitter.png" alt="twitter" /></a>
+                                    {/* <img src="/img/tiktok.png" alt="tiktok" /> */}
                                 </div>
                             </div>
                         </div>

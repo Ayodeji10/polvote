@@ -1,20 +1,17 @@
-import React, { useState, useEffect, useRef, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
 import axios from "axios";
 import { API } from "../components/apiRoot";
-import { DataContext } from "../dataContext";
 import Loader from '../components/loader';
+import SharePollModal from '../components/sharePollModal';
 import Modal from 'react-modal'
 import SinglePollCard from '../components/singlePollCard';
 Modal.setAppElement('#root')
 
 function SinglePoll() {
-    // context 
-    const { context } = useContext(DataContext)
-
     // history 
     const navigate = useNavigate()
 
@@ -27,19 +24,6 @@ function SinglePoll() {
 
     // params 
     const { id } = useParams()
-
-    // modals 
-    const [shareModal, setShareModal] = useState(false)
-
-    // use ref 
-    const inputRef = useRef()
-
-    const [shareLink, setShareLink] = useState(`https://polvote.com/polls/${id}`)
-
-    const copy = () => {
-        navigator.clipboard.writeText(shareLink)
-        inputRef.current.select()
-    }
 
     // current poll and parties
     const [currentPoll, setCurrentPoll] = useState({ aspirant: [] })
@@ -78,26 +62,39 @@ function SinglePoll() {
         setPollTotal(pollVotes)
     }, [currentPoll])
 
+    // modals 
+    const [sharePollModal, setSharePollModal] = useState(false)
+
+    const [shareLink] = useState(`https://polvote.com/polls/${id}`)
+
+    const handleSharePollModal = (param) => {
+        setSharePollModal(param)
+    }
+
     return (
         <div className="container-fluid">
             <Nav />
             <div class="home-feed container">
-                <div class="row">
+                <div class="row justify-content-lg-between">
                     {/* aside  */}
-                    <div class="col-lg-3 aside">
+                    <div class="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 single-poll">
+                    <div className="col-lg-8 col-md-9 single-poll">
                         {pageLoading ? <Loader pageLoading={pageLoading} /> :
                             <div>
-                                <header className="d-flex justify-content-between align-items-center">
-                                    <h1 className="mb-0"><Link to={"/polls"}><i className="fas fa-arrow-left" /></Link>{currentPoll.polltitle}</h1>
-                                    <div className="searchbar d-flex align-items-center">
-                                        <input type="text" placeholder="Search Poll" />
-                                        <img src="/img/search-normal.png" alt="search" />
+                                <header className="row align-items-center">
+                                    <div className="col-lg-7 col-md-7 col-sm-6">
+                                        <h1 className="mb-0"><Link to={"/polls"}><i className="fas fa-arrow-left" /></Link>{currentPoll.polltitle}</h1>
+                                    </div>
+                                    <div className="col-lg-5 col-md-5 col-sm-6">
+                                        <div className="searchbar d-flex align-items-center">
+                                            <input type="text" placeholder="Search Poll" />
+                                            <img src="/img/search-normal.png" alt="search" />
+                                        </div>
                                     </div>
                                 </header>
                                 <div className="poll">
@@ -119,8 +116,8 @@ function SinglePoll() {
                                         })}
                                     </div>
                                     <footer className="d-flex justify-content-between align-items-center">
-                                        <p>See More<i className=" fas fa-angle-down" /></p>
-                                        <p onClick={() => setShareModal(true)}><i className="fas fa-share-alt" />Share Poll</p>
+                                        {/* <p>See More<i className=" fas fa-angle-down" /></p> */}
+                                        <p onClick={() => setSharePollModal(true)}><i className="fas fa-share-alt" />Share Poll</p>
                                     </footer>
                                 </div>
                             </div>
@@ -132,23 +129,7 @@ function SinglePoll() {
             </div>
 
             {/* share modal  */}
-            <Modal isOpen={shareModal} onRequestClose={() => setShareModal(false)} id="poll-share-modal">
-                <i className="fas fa-times" onClick={() => setShareModal(false)} />
-                <h1>See who’s Leading the Poll</h1>
-                <p>You can explore Politics, Learn and Share Insights Online on Polvote</p>
-                <h3>Share on:</h3>
-                <div className="d-flex justify-content-between sm">
-                    <img src="/img/facebook.png" alt="facebook" />
-                    <img src="/img/Whatsapp.png" alt="whatsapp" />
-                    <img src="/img/twit.png" alt="twitter" />
-                    <img src="/img/Instagram.png" alt="instagram" />
-                </div>
-                <h3>Copy Link</h3>
-                <div className="link d-flex justify-content-between align-items-center">
-                    <input type="text" ref={inputRef} placeholder="https://www.polvote.com/share-poll/presidential/share_92029" value={shareLink} />
-                    <img src="/img/Group 111.png" alt="copy" onClick={copy} />
-                </div>
-            </Modal>
+            {sharePollModal && <SharePollModal isOpen={sharePollModal} handleShareStoryModal={handleSharePollModal} shareLink={shareLink} />}
         </div>
     )
 }

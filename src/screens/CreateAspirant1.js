@@ -63,15 +63,15 @@ function CreateAspirant1() {
         <div className="container-fluid">
             <Nav />
             <div className="home-feed container">
-                <div className="row">
+                <div className="row justify-content-md-between">
                     {/* aside  */}
-                    <div className="col-lg-3 aside">
+                    <div className="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 main">
+                    <div className="col-lg-8 col-md-9 main">
                         <div className="form">
                             <h1>Create an Aspirant Profile</h1>
                             <p>Please fill all input fields</p>

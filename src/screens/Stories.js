@@ -58,29 +58,28 @@ function Stories() {
         <div className="container-fluid">
             <Nav />
             <div className="home-feed container">
-                <div className="row">
+                <div className="row justify-content-lg-between">
                     {/* aside  */}
-                    <div className="col-lg-3 aside">
+                    <div className="col-lg-3 col-md-3  aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 story">
+                    <div className="col-lg-8 col-md-9 story">
                         {/* new story  */}
                         <div className="create-story">
                             <h3>Create New Story</h3>
                             <div className="row align-items-center mb-4">
-                                <div className="col-1">
+                                <div className="col-lg-1 col-md-1 col-sm-1 col-1">
                                     <div className="img-container">
                                         {context.user.image !== null && context.user.image !== undefined ?
                                             <img src={context.user.image} alt="profile-img" id='profile-img' /> :
                                             <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
                                         }
-                                        {/* <img src="img/Candidate.png" className="profile-img" alt="profile-img" /> */}
                                     </div>
                                 </div>
-                                <div className="col-11">
+                                <div className="col-lg-11 col-md-11 col-sm-11 col-11">
                                     <input type="text" placeholder="Share your thought" onClick={() => setWriteStoryModal(true)} value="" />
                                 </div>
                                 {/* write modal  */}
