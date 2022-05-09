@@ -109,7 +109,7 @@ const Home = () => {
                 }
                 if (error.response.status === 422) {
                     setPassword('')
-                    setError('kindly Check your mail to verify this account')
+                    setError('Kindly check your mail to verify this account')
                     console.error(error)
                 }
                 if (error.response.status !== 401 && error.response.status !== 422) {
