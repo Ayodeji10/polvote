@@ -130,16 +130,24 @@ function StoryCard({ story, index }) {
                 </div>
                 {/* images  */}
                 <div className="row mb-4">
-                    {story.image.length >= 1 &&
+                    {story.image.length !== 0 &&
                         <>
                             {
-                                story.image.map((each, index) => {
-                                    return (
-                                        <div className="col-6" key={index}>
-                                            <img src={each} alt="img" className="img-fluid" id="story-img" />
-                                        </div>
-                                    )
-                                })
+                                story.image.length === 1 ?
+                                    <div className="col-12" key={index}>
+                                        <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" />
+                                    </div> :
+                                    <>
+                                        {
+                                            story.image.map((each, index) => {
+                                                return (
+                                                    <div className="col-6" key={index}>
+                                                        <img src={each} alt="img" className="img-fluid" id="story-img" />
+                                                    </div>
+                                                )
+                                            })
+                                        }
+                                    </>
                             }
                         </>
                     }
