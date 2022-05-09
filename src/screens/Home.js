@@ -895,9 +895,9 @@ const Home = () => {
                             <div className="header d-flex justify-content-between align-items-center">
                                 <h3>More Stories</h3>
                                 <div className="d-flex align-items-center">
-                                    <h4 onClick={() => setWriteStoryModal(true)}><i className="fas fa-edit" />Write New Story</h4>
+                                    {/* <h4 onClick={() => setWriteStoryModal(true)}><i className="fas fa-edit" />Write New Story</h4> */}
                                     {/* write story modal  */}
-                                    {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
+                                    {/* {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />} */}
                                     <h4 onClick={() => navigate('/stories')}>See all Stories</h4>
                                 </div>
                             </div>
