@@ -76,25 +76,25 @@ function CreateAspirant1() {
                             <h1>Create an Aspirant Profile</h1>
                             <p>Please fill all input fields</p>
                             <div className="row">
-                                <div className="col-6">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div className="input">
                                         <label htmlFor="fname">First Name</label>
                                         <input type="text" id="fname" placeholder="Aspirant’s First Name" value={context.newAspirant.firstName} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, firstName: e.target.value } })} />
                                     </div>
                                 </div>
-                                <div className="col-6 d-flex justify-content-end">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end">
                                     <div className="input">
                                         <label htmlFor="lname">Last Name</label>
                                         <input type="text" id="lname" placeholder="Aspirant’s Last Name" value={context.newAspirant.lastName} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, lastName: e.target.value } })} />
                                     </div>
                                 </div>
-                                <div className="col-6">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div className="input">
                                         <label htmlFor="video">Attach a youtube link (optional)</label>
                                         <input type="text" id="video" placeholder="Profile / Manifesto Video" value={context.newAspirant.link} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, link: e.target.value } })} />
                                     </div>
                                 </div>
-                                <div className="col-6 d-flex justify-content-end">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end">
                                     <div className="input d-flex justify-content-between align-items-center">
                                         <div className="img-container d-flex align-items-center">
                                             {localStorage.getItem("profileImg") ?
@@ -105,7 +105,7 @@ function CreateAspirant1() {
                                         <input type="file" accept='image/*' onChange={(e) => handleImagePreview(e)} />
                                     </div>
                                 </div>
-                                <div className="col-6">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                                     <div className="input d-flex justify-content-between align-items-center">
                                         <div>
                                             <label htmlFor="date">Date of Birth</label>
@@ -124,7 +124,7 @@ function CreateAspirant1() {
                                         <i className="fas fa-calendar-alt" />
                                     </div>
                                 </div>
-                                <div className="col-6 d-flex justify-content-end">
+                                <div className="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end">
                                     <div className="input">
                                         <label htmlFor="paty">Political Party</label>
                                         <select name="category" id="category" onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, party: e.target.value } })}>
@@ -136,7 +136,7 @@ function CreateAspirant1() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="d-flex justify-content-between mt-5 align-items-center">
+                            <div className="d-flex justify-content-between mt-lg-5 mt-md-3 mt-sm-1 mt-1 align-items-center">
                                 <h6 className="mb-0">1 of 3</h6>
                                 <div>
                                     <p>{error}</p>

@@ -101,16 +101,20 @@ const Home = () => {
                     navigate('/')
                 }
             }).catch(error => {
-                // console.log(error)
+                console.log(error.response.status)
                 setLoading(false)
                 if (error.response.status === 401) {
                     setError("Invalid email or password")
                     setPassword('')
                 }
-                else {
+                if (error.response.status === 422) {
                     setPassword('')
-                    setError('Something went wrong, please try again')
+                    setError('kindly Check your mail to verify this account')
                     console.error(error)
+                }
+                if (error.response.status !== 401 && error.response.status !== 422) {
+                    setError("Something went wrong, please try again later")
+                    setPassword('')
                 }
             })
     }
@@ -691,7 +695,7 @@ const Home = () => {
                     <img src="img/verify.png" alt="email" />
                     <h1>One More Step!</h1>
                     <p>A Verification link has been sent to <span>{email}</span>. Please click on the link to verify
-                        your account
+                        your account. <span id="spam-text">Also check your SPAM folder in case it didn't drop in your Inbox</span>
                     </p>
                 </Modal>
 
@@ -713,8 +717,9 @@ const Home = () => {
                         {/* otp */}
                         {verificationView === 'otp' &&
                             <>
+                                <i className="fa-solid fa-arrow-left-long otp-back" onClick={() => setVerificationView("email")} />
                                 <h2>Enter (OTP) One Time Password</h2>
-                                <p>Kindly check your email {verifyEmailInput}. Enter the OTP sent from Polvote</p>
+                                <p>Kindly check your email {verifyEmailInput}. Enter the OTP sent from Polvote, <span>Also check your SPAM folder in case it didn't drop in your Inbox</span></p>
                                 <div className="otp-input d-flex justify-content-between">
                                     {otp.map((data, index) => {
                                         return (

@@ -67,15 +67,15 @@ function CreateAspirant2() {
         <div className="container-fluid">
             <Nav />
             <div class="home-feed container">
-                <div class="row">
+                <div class="row justify-content-lg-between">
                     {/* aside  */}
-                    <div class="col-lg-3 aside">
+                    <div class="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 main">
+                    <div className="col-lg-8 col-md-9 main">
                         <div className="form2">
                             <div className="d-flex">
                                 <Link to={"/create-aspirant"}><i className="fas fa-arrow-left" /></Link>
@@ -169,9 +169,9 @@ function CreateAspirant2() {
                                         </div>
                                     )
                                 })}
-                                <button className="mb-5" id="add-history" onClick={handleAddHstory}><i className="fas fa-plus-circle" />Add More Election
+                                <button className="mb-2 mb-md-3" id="add-history" onClick={handleAddHstory}><i className="fas fa-plus-circle" />Add More Election
                                     History</button>
-                                <div className="d-flex justify-content-between">
+                                <div className="d-flex justify-content-between align-items-center">
                                     <h6 className="mb-0">2 of 3</h6>
                                     <div>
                                         <p>{error}</p>
