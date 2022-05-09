@@ -71,7 +71,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
             headers: { "Content-Type": "application/x-www-form-urlencoded", 'Authorization': `Bearer ${context.user.token}` },
             data: fd
         }).then((response) => {
-            setStoryLoading(false)
+            // setStoryLoading(false)
             // console.log(response)
             window.location.reload()
         }, (error) => {
@@ -125,7 +125,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
                 <div>
                     <p>{storyError}</p>
                     {/* <button id="draft">Save as Draft</button> */}
-                    <button id="post" onClick={writeStory}>{storyLoading ? "loading..." : "Post Story"}</button>
+                    {storyLoading ? <button id="post" disabled >Loading...</button> : <button id="post" onClick={writeStory}>Post Story</button>}
                 </div>
             </div>
         </Modal>
