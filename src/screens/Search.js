@@ -106,7 +106,7 @@ function Search() {
                 </div>
               </div>
               <div className="col-2">
-                <button id="filter"><i className="fas fa-filter" />Filter</button>
+                {/* <button id="filter"><i className="fas fa-filter" />Filter</button> */}
               </div>
             </div>
             {pageLoading ?
