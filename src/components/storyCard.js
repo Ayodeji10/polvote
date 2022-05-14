@@ -46,12 +46,13 @@ function StoryCard({ story, index }) {
             headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
             data: fd
         }).then((response) => {
-            console.log(response)
+            // console.log(response)
             setLoading(false)
             setText("")
             setCommentLenght(prev => prev + 1)
+            window.location.reload()
         }, (error) => {
-            console.log(error)
+            // console.log(error)
             setLoading(false)
             // setError('Something went wrong, please try again')
         })
@@ -196,7 +197,7 @@ function StoryCard({ story, index }) {
             <div className="widget">
                 <div className="row justify-content-md-center">
                     <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => navigate(`/stories/${story._id}`)}>
-                        <img src="/img/comment.png" alt="comment" />
+                        <img src={context.darkMode ? "/img/comments-lm.png" : "/img/comment.png"} alt="comment" />
                         <span>{story.comments.length + commentLenght}</span>
                     </div>
                     <div className="col-2 d-flex align-items-center justify-content-center">
@@ -204,7 +205,7 @@ function StoryCard({ story, index }) {
                         <span>{story.likes.length + storyLike}</span>
                     </div>
                     <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => setShareStoryModal(true)}>
-                        <img src="/img/share.png" alt="share" />
+                        <img src={context.darkMode ? "/img/share-lm.png" : "/img/share.png"} alt="share" />
                         <span>{story.shares.length}</span>
                     </div>
                 </div>

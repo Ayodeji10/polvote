@@ -4,14 +4,23 @@ import { DataContext } from "../dataContext";
 
 const Nav = () => {
 
-    const { context } = useContext(DataContext)
+    const { context, setContext } = useContext(DataContext)
+
+    // toggle nav height 
+    window.addEventListener('scroll', () => {
+        let navContainer = document.querySelector(".navigation-container");
+        let windowPosition = window.scrollY > 0;
+        navContainer.classList.toggle('scroll-active', windowPosition)
+    })
 
     return (
-        <div className="navigation-container fixed-top">
+        <div className="navigation-container d-flex align-items-center fixed-top">
             <div className="container">
                 <nav className="navbar navbar-expand-lg navbar-light">
                     <div className="container-fluid">
-                        <Link to={"/"} className="navbar-brand logo"><img src="/img/Logo.png" alt="logo" /></Link>
+                        <Link to={"/"} className="navbar-brand logo">
+                            {context.darkMode ? <img src="/img/logo-dm.png" alt="logo" /> : <img src="/img/logo.png" alt="logo" />}
+                        </Link>
                         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                             <span />
                             <span />
@@ -64,7 +73,10 @@ const Nav = () => {
                                 {/* <li className="nav-item br"><a className="nav-link" id="course" href="#">Take Course</a></li> */}
                             </ul>
                             <ul className="navbar-nav nav2 align-items-center">
-                                {/* <li className="nav-item d-flex align-items-center"><img src="/img/theme.png" alt="theme" /></li> */}
+                                <li className="nav-item d-flex align-items-center">
+                                    {context.darkMode ? <img src="/img/night.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: false })} /> : <img src="/img/theme.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: true })} />}
+                                    {/* <img src="/img/theme.png" alt="theme" onClick={() => setContext({ ...context, darkMode: !context.darkMode })} /> */}
+                                </li>
                                 {/* <li className="nav-item"><a className="nav-link" href="#"><img src="/img/Group 42.png" alt="country" /></a></li> */}
                                 {/* <li className="nav-item"><a href className="nav-link"><img src="/img/Notification 1.png" alt="" /></a></li> */}
                                 <li className="nav-item profile-img d-flex align-items-center">

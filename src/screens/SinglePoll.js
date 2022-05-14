@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom";
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
+import { DataContext } from "../dataContext";
 import axios from "axios";
 import { API } from "../components/apiRoot";
 import Loader from '../components/loader';
@@ -12,6 +13,9 @@ import SinglePollCard from '../components/singlePollCard';
 Modal.setAppElement('#root')
 
 function SinglePoll() {
+    // context 
+    const { context } = useContext(DataContext)
+
     // history 
     const navigate = useNavigate()
 
@@ -72,7 +76,7 @@ function SinglePoll() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div class="home-feed container">
                 <div class="row justify-content-lg-between">

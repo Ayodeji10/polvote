@@ -1,8 +1,12 @@
-import React, { useRef } from 'react'
+import React, { useRef, useContext } from 'react'
+import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
 function ShareProfileModal({ shareLink, shareProfileModal, handleShareProfileModal }) {
+    // context 
+    const { context } = useContext(DataContext)
+
     // use ficus 
     const inputRef = useRef()
 
@@ -11,16 +15,24 @@ function ShareProfileModal({ shareLink, shareProfileModal, handleShareProfileMod
         inputRef.current.select()
     }
     return (
-        <Modal isOpen={shareProfileModal} onRequestClose={() => handleShareProfileModal(false)} id="poll-share-modal">
+        <Modal isOpen={shareProfileModal} onRequestClose={() => handleShareProfileModal(false)} id="poll-share-modal" className={`${context.darkMode ? 'dm' : ""}`}>
             <i className="fas fa-times" onClick={() => handleShareProfileModal(false)} />
             <h1>Share Profile of Aspirant on Polvote</h1>
             <p>You can explore Politics, Learn and Share Insights Online on Plvote</p>
             <h3>Share on:</h3>
-            <div className="d-flex justify-content-between sm">
-                <img src="/img/facebook.png" alt="facebook" />
-                <img src="/img/Whatsapp.png" alt="whatsapp" />
-                <img src="/img/twit.png" alt="twitter" />
-                <img src="/img/Instagram.png" alt="instagram" />
+            <div className="row mb-5">
+                <div className="col-3">
+                    <img src="/img/facebook.png" alt="facebook" className='img-fluid' />
+                </div>
+                <div className="col-3">
+                    <img src="/img/Whatsapp.png" alt="whatsapp" className='img-fluid' />
+                </div>
+                <div className="col-3">
+                    <img src="/img/twit.png" alt="twitter" className='img-fluid' />
+                </div>
+                <div className="col-3">
+                    <img src="/img/Instagram.png" alt="instagram" className='img-fluid' />
+                </div>
             </div>
             <h3>Copy Link</h3>
             <div className="link d-flex justify-content-between align-items-center">

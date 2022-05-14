@@ -75,18 +75,18 @@ function CreateAspirant3() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div class="home-feed container">
-                <div class="row">
+                <div class="row justify-content-lg-between">
                     {/* aside  */}
-                    <div class="col-lg-3 aside">
+                    <div class="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 main">
+                    <div className="col-lg-8 col-md-9 main">
                         <div className="submit-profile">
                             <div className="d-flex">
                                 <Link to={"/create-aspirant/setup-aspirant"}><i className="fas fa-arrow-left" /></Link>
@@ -96,7 +96,7 @@ function CreateAspirant3() {
                             </div>
                             <div className="poll">
                                 <div className="row">
-                                    <div className="col-7">
+                                    <div className="col-lg-7 col-md-7 col-sm-7 col-12">
                                         <div className="d-flex align-items-center mb-3">
                                             <input type="radio" id="add" checked={addToPoll} />
                                             <label htmlFor="add" onClick={() => setAddToPoll(true)}>Add profile to an ongoing poll</label>
@@ -107,7 +107,7 @@ function CreateAspirant3() {
                                         </div>
                                     </div>
                                     {addToPoll &&
-                                        <div className="col-5">
+                                        <div className="col-lg-5 col-md-5 col-sm-5 col-12">
                                             {/* country  */}
                                             <div className="input">
                                                 <label htmlFor="category">Choose Country</label>
@@ -152,12 +152,12 @@ function CreateAspirant3() {
                             </div>
                             <div className="owner">
                                 <div className="row">
-                                    <div className="col-7">
+                                    <div className="col-lg-7 col-md-7 col-sm-7 col-12">
                                         <p>Profile Ownership</p>
                                         <h6 className="mb-0">Are you the owner of this profile or you are a profile writer or an
                                             Account Manager of the named Political Aspirant?</h6>
                                     </div>
-                                    <div className="col-5">
+                                    <div className="col-lg-5 col-md-5 col-sm-5 col-12">
                                         <div className="input">
                                             <label htmlFor="poll">Profile Ownership</label>
                                             <select name="category" id="category" onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, ownership: e.target.value } })}>

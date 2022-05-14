@@ -95,12 +95,12 @@ function PreviewAspirant() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
-            <div className="single-profile container">
-                <div className="row">
+            <div className="single-profile container home-feed">
+                <div className="row justify-content-lg-between">
                     {/* aside  */}
-                    <div className="col-lg-3 aside">
+                    <div className="col-lg-3 col-md-3 aside">
                         {/* return btn  */}
                         <div className="return mb-3">
                             <Link to={"/create-aspirant/submit-profile"}><i className="fas fa-arrow-left" /><span>Back</span></Link>
@@ -131,9 +131,9 @@ function PreviewAspirant() {
                         </div>
                     </div>
                     {/* gutter  */}
-                    <div className="col-lg-1" />
+                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 main">
+                    <div className="col-lg-8 col-md-9 main">
                         <iframe width="100%" height={435} src={context.newAspirant.link.includes("watch") ? `https://www.youtube.com/embed/${context.newAspirant.link.substring(32, 43)}` : `https://www.youtube.com/embed/${context.newAspirant.link.substring(17, 28)}`} className="mb-4" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
                         </iframe>
                         <h2 className="mb-5">{context.newAspirant.firstName} {context.newAspirant.lastName}</h2>

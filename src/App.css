@@ -1,4 +1,8 @@
 /* resets  */
+* {
+    transition: all 1s ease-in;
+}
+
 body #root>.container-fluid {
     padding: 0;
     background-image: url('../src/bg-img/Rectangle\ 32.png');
@@ -41,7 +45,7 @@ input {
     border: none;
 }
 
-.login-form input {
+/* .login-form input {
     background-color: #36425E;
     color: #FFF !important;
     border: 0;
@@ -56,7 +60,7 @@ input {
     opacity: 0.25;
     font-family: 'Questrial', sans-serif;
     opacity: 40%;
-}
+} */
 
 /* presets  */
 .ReactModal__Overlay {
@@ -84,6 +88,12 @@ input {
 .navigation-container {
     box-shadow: 0px 4px 4px 0px #FFFFFF0D;
     background-color: rgba(1, 10, 32, 1);
+    /* transition: all 1s ease-in; */
+}
+
+.scroll-active {
+    height: 65px;
+    /* transition: all 1s ease-in; */
 }
 
 .navigation-container .container-fluid {
@@ -95,6 +105,10 @@ input {
     margin-right: 135px;
 }
 
+.navbar-brand img {
+    height: 30px
+}
+
 .navbar {
     padding: 20px 0;
     /* margin-bottom: 47px; */
@@ -103,6 +117,10 @@ input {
 nav li svg {
     display: block;
     margin: 0 auto 4px;
+}
+
+nav li img.theme {
+    cursor: pointer !important
 }
 
 nav li a {
@@ -197,10 +215,15 @@ nav .profile-img a {
 
 
 
+
 /* home  */
 .home {
     background-color: rgba(4, 19, 54, 1);
     min-height: 100vh
+}
+
+.home #logo {
+    height: 30px
 }
 
 .home header {
@@ -400,7 +423,6 @@ nav .profile-img a {
 #signup h1 {
     color: #FFF;
     text-align: center;
-    ;
     margin: 16px 0 8px 0;
     font-size: 22px;
     font-weight: 600;
@@ -411,7 +433,6 @@ nav .profile-img a {
 #signup h4 {
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
-    ;
     font-size: 14px;
     font-weight: 400;
     max-width: 344px;
@@ -504,8 +525,6 @@ nav .profile-img a {
     border: 0 !important
 }
 
-
-
 /* verification  */
 #verification {
     top: 30% !important;
@@ -553,8 +572,6 @@ nav .profile-img a {
 #verification p span {
     color: #007AF3
 }
-
-
 
 /* forgot password modal */
 #forgot-password {
@@ -731,12 +748,6 @@ nav .profile-img a {
 
 /* aside settings  */
 .home-feed .aside .settings {
-    background-color: rgba(255, 255, 255, 1);
-    border-radius: 10px;
-    padding: 9px 18px
-}
-
-.home-feed .aside .settings {
     position: absolute;
     right: 10px;
     top: 50px;
@@ -804,8 +815,6 @@ nav .profile-img a {
     background-color: #FFF
 }
 
-
-
 /* aside course  */
 .home-feed .aside .course {
     margin-bottom: 25px;
@@ -871,8 +880,13 @@ nav .profile-img a {
     padding: 26px 17px;
 }
 
-.home-feed .aside .content img {
+.home-feed .aside .content svg {
     margin-right: 17px;
+}
+
+.home-feed .aside .content svg path {
+    fill: #FFF;
+    stroke: #FFF;
 }
 
 .home-feed .aside .content span {
@@ -1100,7 +1114,8 @@ nav .profile-img a {
 
 .home-feed .main .poll footer {
     background-color: rgba(6, 25, 71, 1);
-    padding: 14px 38px
+    padding: 14px 38px;
+    border-radius: 0 0 5px 5px;
 }
 
 .home-feed .main .poll footer p {
@@ -1703,7 +1718,6 @@ footer#footer img.social {
 
 .single-poll .poll .candidate .indicator {
     height: 100%;
-    /* width: 50%; */
     background-color: #FFF;
     border-radius: 60px;
 }
@@ -1861,6 +1875,7 @@ footer#footer img.social {
 
 
 
+
 /* story  */
 .story .create-story {
     background-color: rgba(10, 24, 61, 1);
@@ -1978,7 +1993,6 @@ footer#footer img.social {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px
-        /* margin-bottom: 24px */
 }
 
 .story .story img#story-img {
@@ -2394,8 +2408,6 @@ img#return-btn {
 
 
 
-
-
 /* profile */
 .profile .header .searchbar {
     padding: 18px 27px;
@@ -2429,11 +2441,6 @@ img#return-btn {
     justify-content: center;
     padding-top: 50px;
 }
-
-/* .loaderContainer span span {
-    color: #FFF !important;
-    background-color: #FFF !important;
-} */
 
 .profile .profile {
     background-color: rgba(10, 24, 61, 1);
@@ -2662,7 +2669,6 @@ img#return-btn {
 }
 
 /* end add to poll modal  */
-
 .single-profile .aside .poll-active button {
     font-size: 14px;
     font-weight: 400;
@@ -2725,6 +2731,10 @@ img#return-btn {
 
 .single-profile .main .searchbar input {
     width: 100%
+}
+
+.single-profile .main .searchbar img {
+    cursor: pointer;
 }
 
 .single-profile .main h2 {
@@ -2790,66 +2800,6 @@ img#return-btn {
     font-size: 22px;
     font-weight: 600;
     margin-bottom: 24px;
-}
-
-.single-profile .main .profile {
-    background-color: rgba(10, 24, 61, 1);
-    border-radius: 10px;
-    padding: 32px;
-    margin-bottom: 16px;
-    cursor: pointer;
-}
-
-.single-profile .main .profile img#profile-img {
-    border-radius: 8px;
-}
-
-.single-profile .main .profile h3 {
-    color: rgba(135, 195, 254, 1);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 12px;
-}
-
-.single-profile .main .profile p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.single-profile .main .profile h4 {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.form button,
-.form2 button,
-.preview button,
-.submit-profile button,
-.single-profile .main button {
-    font-size: 14px;
-    font-weight: 700;
-    padding: 10px 24px;
-    border-radius: 5px;
-}
-
-.form button#draft,
-.form2 button#draft,
-.preview button#back,
-.submit-profile button#draft,
-.single-profile .main button#back {
-    color: rgba(0, 122, 243, 1);
-    background-color: #FFF;
-    margin-right: 22px
-}
-
-.form button#proceed,
-.form2 button#proceed,
-.preview button#proceed,
-.submit-profile button#proceed,
-.single-profile .main button#proceed {
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF;
 }
 
 
@@ -2961,6 +2911,36 @@ img#return-btn {
     color: #FFF;
 }
 
+.form button,
+.form2 button,
+.preview button,
+.submit-profile button,
+.single-profile .main button {
+    font-size: 14px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 5px;
+}
+
+.form button#draft,
+.form2 button#draft,
+.preview button#back,
+.submit-profile button#draft,
+.single-profile .main button#back {
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+    margin-right: 22px
+}
+
+.form button#proceed,
+.form2 button#proceed,
+.preview button#proceed,
+.submit-profile button#proceed,
+.single-profile .main button#proceed {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+}
+
 
 
 
@@ -2977,11 +2957,6 @@ img#return-btn {
 
 
 /* create aspirant 2 */
-/* .form2 {
-    max-width: 650px;
-    margin: 0 auto
-} */
-
 .form2 .fa-arrow-left,
 .submit-profile .fa-arrow-left {
     margin-right: 45px;
@@ -3224,8 +3199,12 @@ img#return-btn {
     margin-right: 0;
 }
 
-.search .toggle img {
+.search .toggle svg {
     margin-right: 10px;
+}
+
+.search .toggle button.active svg path {
+    fill: rgba(0, 122, 243, 1)
 }
 
 .search .toggle button.active {
@@ -3237,187 +3216,6 @@ img#return-btn {
     font-size: 16px;
     font-weight: 400;
 }
-
-.search .profile {
-    background-color: rgba(10, 24, 61, 1);
-    border-radius: 10px;
-    padding: 30px;
-    margin-bottom: 20px;
-}
-
-.search .profile img#profile-img {
-    border-radius: 8px;
-}
-
-.search .profile h3 {
-    color: rgba(135, 195, 254, 1);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.search .profile p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 34px;
-}
-
-.search .profile h4 {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.search .profile .fa-eye {
-    color: #FFF;
-    margin-right: 10px;
-}
-
-.search .profile .fa-share-alt {
-    color: rgba(0, 122, 243, 1);
-}
-
-
-
-
-
-/* polls search */
-.search .polls-page>p {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.6);
-    margin-bottom: 25px;
-}
-
-.search .polls .header {
-    padding: 11px 27px;
-    margin-bottom: 19px;
-    background-color: rgba(0, 122, 243, 1);
-    border-radius: 5px;
-}
-
-.search .polls .header p {
-    margin-bottom: 0;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.search .polls .poll {
-    background-color: rgba(10, 24, 61, 1);
-    padding: 30px 27px;
-    border-radius: 10px;
-    margin-bottom: 14px;
-}
-
-.search .polls .poll h3 {
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 7px;
-}
-
-.search .polls .poll h6 {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 0;
-}
-
-.search .polls .poll .fa-circle {
-    margin-right: 10px;
-    font-size: 10px;
-}
-
-.search .polls .poll a {
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(0, 122, 243, 1)
-}
-
-.search .polls .poll a i {
-    margin-left: 10px
-}
-
-
-
-
-
-
-/* stories search */
-/* .search .story {
-    border-radius: 10px;
-    background-color: rgba(10, 24, 61, 1);
-    margin-bottom: 24px;
-}
-
-.search .story .body {
-    padding: 24px
-}
-
-.search .story h3 {
-    font-size: 16px;
-    font-weight: 700;
-    margin-bottom: 5px;
-}
-
-.search .story p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-weight: 400;
-    margin-right: 40px
-}
-
-.search .story button#open {
-    font-size: 16px;
-    font-weight: 700;
-    background-color: rgba(0, 122, 243, 1);
-    padding: 9px 12px;
-    border-radius: 10px;
-}
-
-.search .story h4 {
-    font-size: 16px;
-    font-weight: 400;
-    margin-bottom: 24px
-}
-
-.search .story .widget {
-    border-top: solid 1px rgba(255, 255, 255, 0.1) !important;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
-    padding: 20px 0
-}
-
-.search .story .widget img {
-    margin-right: 12px
-}
-
-.search .story .widget span {
-    font-size: 16px;
-    font-weight: 400;
-}
-
-.search .story .comment {
-    padding: 22px 24px;
-}
-
-.search .story .comment input {
-    font-size: 14px;
-    font-weight: 400;
-    padding: 14px 19px;
-    width: 100%;
-    border-radius: 5px;
-}
-
-.search .story .comment button {
-    font-size: 16px;
-    font-weight: 700;
-    padding: 13px;
-    border-radius: 5px;
-    background-color: rgba(0, 122, 243, 1);
-}
-
-.search .story .comment button img {
-    margin-right: 10px;
-} */
 
 
 
@@ -3616,6 +3414,10 @@ img#return-btn {
     font-weight: 700;
     padding: 12px 42px;
 }
+
+
+
+
 
 
 
@@ -5438,6 +5240,63 @@ textarea::placeholder {
         font-size: 16px;
         margin-bottom: 15px;
     }
+
+    /* create aspirant 3 */
+    .submit-profile h1 {
+        font-size: 25px;
+        margin-bottom: 40px;
+    }
+
+    /* search  */
+    .search .searchbar {
+        padding: 10px 15px;
+    }
+
+    .search .toggle button {
+        margin-right: 40px;
+        padding-bottom: 15px;
+    }
+
+    /* user profile  */
+    .user-widget .img-container {
+        height: 100px;
+        width: 100px;
+    }
+
+    .user-widget h1 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+
+    .user-widget h4 {
+        font-size: 20px;
+    }
+
+    .user-widget button {
+        font-size: 14px;
+    }
+
+    .user-widget .img-container img#change-img {
+        right: 44px;
+    }
+
+    .user-aside section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .user-aside button {
+        font-size: 12px;
+    }
+
+    .user-aside button.active {
+        border-left: solid 3px rgba(0, 122, 243, 1) !important;
+    }
+
+    .user-aside button svg {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1119px) {
@@ -5800,6 +5659,89 @@ textarea::placeholder {
     .form2 .history h2 {
         font-size: 16px;
         margin-bottom: 15px;
+    }
+
+    /* create aspirant 3 */
+    .submit-profile h1 {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+
+    /* search  */
+    .search .searchbar {
+        padding: 10px;
+        border-radius: 40px;
+    }
+
+    .search .searchbar input {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .search .toggle button {
+        margin-right: 40px;
+        padding-bottom: 15px;
+    }
+
+    /* user profile  */
+    .user-widget .img-container {
+        height: 100px;
+        width: 100px;
+    }
+
+    .user-widget h1 {
+        font-size: 25px;
+        line-height: 30px;
+    }
+
+    .user-widget h4 {
+        font-size: 20px;
+    }
+
+    .user-widget button {
+        font-size: 14px;
+    }
+
+    .user-widget .img-container img#change-img {
+        right: 44px;
+    }
+
+    .user-aside section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .user-aside button {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .user-aside button.active {
+        border-left: solid 3px rgba(0, 122, 243, 1) !important;
+    }
+
+    .user-aside button svg {
+        margin-left: 15px;
+        margin-right: 15px;
+    }
+
+    .settings header {
+        padding: 18px 25px;
+    }
+
+    .settings header h1 {
+        font-size: 18px;
+    }
+
+    .settings .body input {
+        font-size: 12px;
+        padding: 12px;
+        margin-bottom: 25px;
+    }
+
+    .settings .body button {
+        font-size: 14px;
+        padding: 12px 30px;
     }
 }
 
@@ -6257,6 +6199,12 @@ textarea::placeholder {
         line-height: 15px;
     }
 
+    /* share poll modal  */
+    #poll-share-modal {
+        height: 400px;
+        padding: 30px !important;
+    }
+
     /* single polls page  */
     .single-poll header h1 {
         font-size: 14px;
@@ -6401,6 +6349,128 @@ textarea::placeholder {
 
     .form2 .input {
         padding: 10px 12px;
+    }
+
+    /* create aspirant 3 */
+    .submit-profile h1 {
+        font-size: 20px;
+        margin-bottom: 40px;
+    }
+
+    .submit-profile .poll label,
+    .submit-profile .owner label {
+        font-size: 12px;
+    }
+
+    .submit-profile .input select {
+        font-size: 12px;
+    }
+
+    /* search  */
+    .search .searchbar {
+        padding: 10px;
+        border-radius: 40px;
+    }
+
+    .search .searchbar input {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .search .toggle button {
+        margin-right: 30px;
+        padding-bottom: 15px;
+        font-size: 14px;
+    }
+
+    .search .toggle p {
+        font-size: 12px;
+    }
+
+    /* user profile  */
+    .user-widget {
+        padding: 13px;
+    }
+
+    .user-widget .img-container {
+        height: 100px;
+        width: 100px;
+    }
+
+    .user-widget h1 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .user-widget h4 {
+        font-size: 16px;
+    }
+
+    .user-widget button {
+        font-size: 12px;
+        padding: 12px 14px
+    }
+
+    .user-widget .img-container img#change-img {
+        right: 4px;
+    }
+
+    .user-aside section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .user-aside button {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .user-aside button.active {
+        border-left: solid 3px rgba(0, 122, 243, 1) !important;
+    }
+
+    .user-aside button svg {
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+    .story-header,
+    .aspirant-header {
+        padding: 10px;
+    }
+
+    .story-header h1,
+    .aspirant-header h1 {
+        font-size: 15px;
+    }
+
+    .story-header button,
+    .aspirant-header button {
+        font-size: 12px;
+        /* padding: 5px; */
+    }
+
+    .settings header {
+        padding: 18px 25px;
+    }
+
+    .settings header h1 {
+        font-size: 18px;
+    }
+
+    .settings .body {
+        padding: 20px;
+    }
+
+    .settings .body input {
+        font-size: 12px;
+        padding: 12px;
+        margin-bottom: 25px;
+    }
+
+    .settings .body button {
+        font-size: 14px;
+        padding: 12px 30px;
     }
 }
 
@@ -6847,6 +6917,22 @@ textarea::placeholder {
         line-height: 15px;
     }
 
+    /* share poll modal  */
+    #poll-share-modal {
+        width: 530px;
+        height: 400px;
+        padding: 30px !important;
+    }
+
+    #poll-share-modal h1 {
+        font-size: 24px;
+    }
+
+    #poll-share-modal p {
+        font-size: 12px;
+        margin-bottom: 35px;
+    }
+
     /* single polls page  */
     .single-poll header h1 {
         font-size: 14px;
@@ -6991,6 +7077,129 @@ textarea::placeholder {
 
     .form2 .history .input input {
         font-size: 12px;
+    }
+
+    /* create aspirant 3 */
+    .submit-profile h1 {
+        font-size: 20px;
+        margin-bottom: 30px;
+    }
+
+    .submit-profile .poll label,
+    .submit-profile .owner label {
+        font-size: 12px;
+    }
+
+    .submit-profile .input select {
+        font-size: 12px;
+    }
+
+    /* search  */
+    .search .searchbar {
+        padding: 10px;
+        border-radius: 40px;
+    }
+
+    .search .searchbar input {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .search .toggle button {
+        margin-right: 25px;
+        padding-bottom: 15px;
+        font-size: 12px;
+    }
+
+    .search .toggle p {
+        font-size: 12px;
+    }
+
+    /* user profile  */
+    .user-widget {
+        padding: 13px;
+    }
+
+    .user-widget .img-container {
+        height: 100px;
+        width: 100px;
+    }
+
+    .user-widget h1 {
+        font-size: 20px;
+        line-height: 30px;
+    }
+
+    .user-widget h4 {
+        font-size: 16px;
+    }
+
+    .user-widget button {
+        font-size: 10px;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+
+    .user-widget .img-container img#change-img {
+        right: 17px;
+    }
+
+    .user-aside section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .user-aside button {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .user-aside button.active {
+        border-left: solid 3px rgba(0, 122, 243, 1) !important;
+    }
+
+    .user-aside button svg {
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+    .story-header,
+    .aspirant-header {
+        padding: 10px;
+    }
+
+    .story-header h1,
+    .aspirant-header h1 {
+        font-size: 15px;
+    }
+
+    .story-header button,
+    .aspirant-header button {
+        font-size: 12px;
+        /* padding: 5px; */
+    }
+
+    .settings header {
+        padding: 18px 25px;
+    }
+
+    .settings header h1 {
+        font-size: 18px;
+    }
+
+    .settings .body {
+        padding: 20px;
+    }
+
+    .settings .body input {
+        font-size: 12px;
+        padding: 12px;
+        margin-bottom: 25px;
+    }
+
+    .settings .body button {
+        font-size: 14px;
+        padding: 12px 30px;
     }
 }
 
@@ -7440,6 +7649,47 @@ textarea::placeholder {
         line-height: 15px;
     }
 
+    /* share poll modal  */
+    #poll-share-modal {
+        width: 370px;
+        height: 297px;
+        padding: 20px !important;
+    }
+
+    #poll-share-modal h1 {
+        font-size: 16px;
+    }
+
+    #poll-share-modal p {
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+
+    #poll-share-modal .link {
+        padding: 10px;
+    }
+
+    #poll-share-modal .link input {
+        font-size: 10px;
+    }
+
+    /* vote modal  */
+    #vote-modal {
+        width: 400px;
+        height: 240px;
+        padding: 30px !important;
+    }
+
+    #vote-modal h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    #vote-modal p {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
     /* single polls page  */
     .single-poll header h1 {
         font-size: 14px;
@@ -7628,6 +7878,114 @@ textarea::placeholder {
 
     .form2 .history .input input {
         font-size: 12px;
+    }
+
+    /* search  */
+    .search .searchbar {
+        padding: 10px;
+        border-radius: 40px;
+    }
+
+    .search .searchbar input {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .search .toggle button {
+        margin-right: 35px;
+        padding-bottom: 15px;
+        font-size: 12px;
+    }
+
+    .search .toggle p {
+        font-size: 12px;
+    }
+
+    /* user profile  */
+    .user-widget {
+        padding: 13px;
+    }
+
+    .user-widget .img-container {
+        height: 80px;
+        width: 80px;
+    }
+
+    .user-widget h1 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .user-widget h4 {
+        font-size: 12px;
+    }
+
+    .user-widget button {
+        font-size: 10px;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+
+    .user-widget .img-container img#change-img {
+        right: 12px;
+    }
+
+    .user-aside section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .user-aside button {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .user-aside button.active {
+        border-left: solid 3px rgba(0, 122, 243, 1) !important;
+    }
+
+    .user-aside button svg {
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+    .story-header,
+    .aspirant-header {
+        padding: 10px;
+    }
+
+    .story-header h1,
+    .aspirant-header h1 {
+        font-size: 12px;
+    }
+
+    .story-header button,
+    .aspirant-header button {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .settings header {
+        padding: 18px 25px;
+    }
+
+    .settings header h1 {
+        font-size: 18px;
+    }
+
+    .settings .body {
+        padding: 20px;
+    }
+
+    .settings .body input {
+        font-size: 12px;
+        padding: 12px;
+        margin-bottom: 25px;
+    }
+
+    .settings .body button {
+        font-size: 14px;
+        padding: 12px 30px;
     }
 }
 
@@ -8122,6 +8480,55 @@ textarea::placeholder {
         line-height: 15px;
     }
 
+    /* share poll modal  */
+    #poll-share-modal {
+        width: 340px;
+        height: 310px;
+        padding: 20px !important;
+    }
+
+    #poll-share-modal h1 {
+        font-size: 16px;
+    }
+
+    #poll-share-modal p {
+        font-size: 10px;
+        margin-bottom: 20px;
+    }
+
+    #poll-share-modal .link {
+        padding: 5px;
+    }
+
+    #poll-share-modal .link input {
+        font-size: 9px;
+    }
+
+    /* vote modal  */
+    #vote-modal {
+        width: 340px;
+        height: 213px;
+        padding: 15px !important;
+    }
+
+    #vote-modal h3 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    #vote-modal p {
+        font-size: 14px;
+        margin-bottom: 30px;
+    }
+
+    #vote-modal button#proceed {
+        padding: 10px;
+    }
+
+    #vote-modal button {
+        font-size: 12px;
+    }
+
     /* single polls page  */
     .single-poll header h1 {
         font-size: 14px;
@@ -8292,4 +8699,731 @@ textarea::placeholder {
     .form2 button#add-history {
         font-size: 12px;
     }
+
+    /* search  */
+    .search .searchbar {
+        padding: 10px;
+        border-radius: 40px;
+    }
+
+    .search .searchbar input {
+        font-size: 14px;
+        line-height: 25px;
+    }
+
+    .search .toggle button {
+        margin-right: 10px;
+        padding-bottom: 10px;
+        font-size: 10px;
+    }
+
+    .search .toggle p {
+        font-size: 12px;
+    }
+
+    /* user profile  */
+    .user-widget {
+        padding: 13px;
+    }
+
+    .user-widget .img-container {
+        height: 80px;
+        width: 80px;
+    }
+
+    .user-widget h1 {
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .user-widget h4 {
+        font-size: 12px;
+    }
+
+    .user-widget button {
+        font-size: 10px;
+        padding: 5px 8px;
+        border-radius: 5px;
+    }
+
+    .user-widget .img-container img#change-img {
+        right: -8px;
+    }
+
+    .user-aside section {
+        padding: 15px 0;
+        margin-bottom: 20px;
+    }
+
+    .user-aside button {
+        font-size: 12px;
+        margin-bottom: 15px;
+    }
+
+    .user-aside button.active {
+        border-left: solid 3px rgba(0, 122, 243, 1) !important;
+    }
+
+    .user-aside button svg {
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+    .story-header,
+    .aspirant-header {
+        padding: 10px;
+    }
+
+    .story-header h1,
+    .aspirant-header h1 {
+        font-size: 12px;
+    }
+
+    .story-header button,
+    .aspirant-header button {
+        font-size: 10px;
+        padding: 5px;
+    }
+
+    .settings header {
+        padding: 18px 25px;
+    }
+
+    .settings header h1 {
+        font-size: 18px;
+    }
+
+    .settings .body {
+        padding: 20px;
+    }
+
+    .settings .body input {
+        font-size: 12px;
+        padding: 12px;
+        margin-bottom: 25px;
+    }
+
+    .settings .body button {
+        font-size: 14px;
+        padding: 12px 30px;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* dark mode colors  */
+/* presets  */
+body #root>.container-fluid.dm {
+    background-image: none;
+    background-color: rgba(249, 252, 255, 1);
+}
+
+.dm a,
+.dm h1,
+.dm h2,
+.dm h3,
+.dm h4,
+.dm h5,
+.dm h6,
+.dm div,
+.dm p,
+.dm span,
+.dm button,
+.dm select,
+.dm label {
+    color: rgba(4, 19, 54, 1)
+}
+
+/* navbar  */
+.dm .navigation-container {
+    box-shadow: 0px 4px 4px 0px rgba(10, 24, 61, 0.05);
+    background-color: rgba(249, 252, 255, 1);
+}
+
+.dm nav li a {
+    color: rgba(6, 25, 71, 1) !important;
+}
+
+.dm nav li.active a {
+    color: rgba(0, 122, 243, 1) !important;
+}
+
+.dm nav .nav2 {
+    padding-left: 38px;
+    border-left: solid 2px #010A20
+}
+
+/* home  */
+.home.dm {
+    background-color: rgba(249, 252, 255, 1);
+}
+
+.home.dm .main h4 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm.home .login {
+    border: solid 1px rgba(10, 24, 61, 0.1) !important
+}
+
+.dm.home .login h1 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm.home .login h2 {
+    color: rgba(10, 24, 61, 0.7)
+}
+
+.dm.home .login .or span {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm.home .login label {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm.home .login input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    color: rgba(10, 24, 61, 1)
+}
+
+/* aside  */
+.dm .home-feed .aside .settings {
+    background-color: rgba(6, 25, 71, 1);
+}
+
+.dm .home-feed .aside .settings p {
+    color: rgba(255, 255, 255, 1)
+}
+
+.dm .home-feed .aside .content {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .home-feed .aside .content svg path {
+    fill: rgba(10, 24, 61, 1);
+    stroke: rgba(10, 24, 61, 1);
+}
+
+.dm .home-feed .aside .polls {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+/* home feed  */
+.dm .home-feed .main .searchbar {
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.1);
+}
+
+.dm .home-feed .main .poll {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .home-feed .main .poll .main .header p {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .home-feed .main .poll .main .candidate p {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .home-feed .main .poll .main .candidate .bar {
+    background-color: rgba(10, 24, 61, 0.2);
+}
+
+.dm .home-feed .main .poll .main .candidate .indicator {
+    background-color: rgba(10, 24, 61, 1);
+}
+
+.dm .home-feed .main .poll .main .candidate h6 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .home-feed .main .poll footer {
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important
+}
+
+.dm .home-feed .main .poll footer button {
+    color: #FFF
+}
+
+.dm .home-feed .main .stories .header h4 {
+    color: rgba(0, 122, 243, 1)
+}
+
+.dm .home-feed .main .stories .carousel .story .like-btn {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.2)
+}
+
+.dm .home-feed .main .stories .carousel::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 122, 243, 1)
+}
+
+.dm .home-feed .main .profiles .header p {
+    color: rgba(0, 122, 243, 1)
+}
+
+/* footer  */
+footer#footer.dm p {
+    color: rgba(10, 24, 61, 1)
+}
+
+footer#footer.dm .bottom h4 {
+    color: rgba(10, 24, 61, 1)
+}
+
+footer#footer.dm .bottom {
+    border-top: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+/* polls  */
+.dm .polls .searchbar {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.06);
+}
+
+.dm .polls .header {
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    background-color: rgba(10, 24, 61, 0.08);
+}
+
+.dm .polls .poll {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .polls .poll h6 {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+/* single polls  */
+.dm .single-poll header .searchbar {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.06);
+}
+
+.dm .single-poll .poll .body {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .single-poll .poll .candidate p {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .single-poll .poll .candidate .bar {
+    background-color: rgba(10, 24, 61, 0.2)
+}
+
+.dm .single-poll .poll .candidate .indicator {
+    background-color: rgba(10, 24, 61, 1);
+}
+
+.dm .single-poll .poll .candidate h5 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .single-poll .poll footer {
+    background-color: #FFF;
+    border: 1px solid rgba(0, 0, 0, 0.1)
+}
+
+/* stories  */
+.dm .story .create-story {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+}
+
+.dm .story .create-story input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .create-story p {
+    color: rgba(10, 24, 61, 0.)
+}
+
+.dm .story .create-story .img-container,
+.dm .story .story .img-container,
+.dm .story .story .comment .img-container,
+.dm .search .story .img-container {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .story {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .story p {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+.dm .story .story .options {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .story h4 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .story .story .shareStory {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .story .widget {
+    border-top: 1px solid rgba(10, 24, 61, 0.1) !important;
+    border-bottom: 1px solid rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm .story .story .widget i.fa-solid {
+    color: rgba(0, 122, 243, 1)
+}
+
+.dm .story .story .comment .input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .story .comment button {
+    color: #FFF
+}
+
+/* single story page  */
+.dm .story .comments {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .comments .comment-body {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .comments .comment-body p,
+.dm .story .comments h5,
+.dm .story .comments h6,
+.dm .story .comments .comment-body h4 {
+    color: rgba(4, 19, 54, 1)
+}
+
+.dm .story .comments .comment .replies input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story .comments .comment .replies button {
+    color: #FFF
+}
+
+/* profiles  */
+.dm .profile .header .searchbar {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .profile .header button {
+    color: #FFF;
+}
+
+.dm .profile .profile {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .profile .profile h3,
+.dm .profile .profile p,
+.profile .profile .fa-eye {
+    color: rgba(10, 24, 61, 1)
+}
+
+/* single profile page  */
+.dm .single-profile .aside .return span,
+.dm .single-profile .aside .return i,
+.dm .single-profile .aside .poll-active h6,
+.dm .single-profile .aside .history p {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .single-profile .aside .poll-active,
+.dm .single-profile .aside .history {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    background-color: #FFF;
+}
+
+.dm .single-profile .main .searchbar {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.06);
+}
+
+.dm .single-profile .main button#edit,
+.dm .single-profile .main button#manage-profile {
+    color: #FFF
+}
+
+.dm .single-profile .main .info {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    background-color: #FFF;
+}
+
+.dm .single-profile .main .info p {
+    color: rgba(10, 24, 61, 0.8)
+}
+
+/* create aspirant 1  */
+.dm .form .input {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .form .input input,
+.dm .form .input select {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .form button#draft,
+.form2 button#draft,
+.preview button#back,
+.submit-profile button#draft {
+    border: 1px solid rgba(0, 122, 243, 1) !important;
+    color: rgba(0, 122, 243, 1)
+}
+
+/* create aspirant 2  */
+.dm .form2 .input {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .form2 .input textarea {
+    color: rgba(10, 24, 61, 1);
+}
+
+.dm .form2 .history .input input {
+    color: rgba(1, 10, 32, 1)
+}
+
+/* create aspirant 3  */
+.dm .home-feed .submit-profile .poll {
+    background-color: #FFF;
+    border: none !important
+}
+
+.dm .submit-profile .input {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .submit-profile .input select {
+    color: rgba(1, 10, 32, 1)
+}
+
+/* search  */
+.dm .search .toggle {
+    border-bottom: solid 1px rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm .search .toggle button {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+/* user profile  */
+.dm .user-widget h1,
+.dm .user-widget h4 {
+    color: #FFF
+}
+
+.dm .user-widget button {
+    background-color: #FFF;
+    color: rgba(0, 122, 243, 1)
+}
+
+.dm .user-aside section {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story-header,
+.dm .aspirant-header {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .story-header h1,
+.dm .aspirant-header h1 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .story-header button,
+.dm .aspirant-header button {
+    color: #FFF
+}
+
+.dm .settings header {
+    background-color: rgba(10, 24, 61, 0.1);
+}
+
+.dm .settings .body {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .settings .body input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    color: rgba(10, 24, 61, 1)
+}
+
+.dm .settings .body input::placeholder {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+.settings .body button {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+/* sign up modal  */
+#signup.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+#signup.dm i {
+    color: rgba(10, 24, 61, 0.5);
+}
+
+#signup.dm h1 {
+    color: rgba(10, 24, 61, 1)
+}
+
+#signup.dm h4 {
+    color: rgba(10, 24, 61, 0.7)
+}
+
+#signup.dm .or span {
+    border: solid 1px rgba(10, 24, 61, 0.1) !important
+}
+
+#signup.dm .form label {
+    color: rgba(10, 24, 61, 1)
+}
+
+#signup.dm .form input {
+    color: rgba(10, 24, 61, 1);
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+/* verfication modal  */
+#verification.dm {
+    position: absolute;
+    background: rgba(249, 252, 255, 1) !important;
+}
+
+#verification.dm i {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+#verification.dm h1 {
+    color: rgba(10, 24, 61, 1)
+}
+
+#verification.dm p {
+    color: #0A183D;
+}
+
+/* forgot password modal  */
+#forgot-password.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+#forgot-password.dm .content input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    color: rgba(10, 24, 61, 1);
+}
+
+#forgot-password.dm .content p {
+    color: rgba(10, 24, 61, 1)
+}
+
+#forgot-password.dm .content h3 {
+    color: rgba(10, 24, 61, 1)
+}
+
+/* share poll modal  */
+#poll-share-modal.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+#poll-share-modal.dm .fa-times {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+#poll-share-modal.dm .link {
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+}
+
+/* vote modal  */
+#vote-modal.dm {
+    background-color: rgba(255, 255, 255, 1) !important;
+    position: absolute;
+}
+
+#vote-modal button#cancel {
+    border: 1px solid rgba(0, 122, 243, 1) !important;
+}
+
+/* write story modal  */
+.story-write-modal.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+.story-write-modal.dm h2 {
+    color: rgba(10, 24, 61, 1);
+    border-bottom: solid 1px rgba(10, 24, 61, 0.1) !important;
+}
+
+.story-write-modal.dm h3 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.story-write-modal.dm h4 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.story-write-modal.dm textarea {
+    color: rgba(10, 24, 61, 1)
+}
+
+.story-write-modal.dm textarea::placeholder {
+    color: rgba(10, 24, 61, 0.3)
+}
+
+/* share story modal  */
+.story-write-modal.dm .story {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.story-write-modal.dm .story h3 {
+    color: rgba(10, 24, 61, 1)
+}
+
+.story-write-modal.dm .story h4 {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+.story-write-modal.dm .story p {
+    color: rgba(10, 24, 61, 1)
 }

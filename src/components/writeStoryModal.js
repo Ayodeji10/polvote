@@ -82,7 +82,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
     }
 
     return (
-        <Modal isOpen={openModal} onRequestClose={() => handleWriteStoryModal(false)} className="story-write-modal">
+        <Modal isOpen={openModal} onRequestClose={() => handleWriteStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`}>
             <i className="far fa-times-circle" onClick={() => handleWriteStoryModal(false)} />
             <h2>Write New Story</h2>
             <div className="d-flex justify-content-between align-items-center mb-1 mb-md-2 mb-lg-3 mb-sm-3">

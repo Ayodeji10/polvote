@@ -58,7 +58,10 @@ function Comments({ comment, id }) {
             <div className="row">
                 <div className="col-1">
                     <div className="img-container">
-                        <img src={comment.userimage === null || comment.userimage === undefined ? "img/Candidate.png" : `${comment.userimage}`} className="profile-img" alt="profile-img" />
+                        {comment.userimage === null || comment.userimage === undefined ?
+                            <img src="/img/place.jpg" alt="profile-img" id='profile-img' /> :
+                            <img src={comment.userimage} alt="profile-img" id='profile-img' />
+                        }
                     </div>
                 </div>
                 <div className="col-11">
@@ -101,8 +104,10 @@ function Comments({ comment, id }) {
                         <div className="row" key={index}>
                             <div className="col-1">
                                 <div className="img-container">
-                                    <img src={reply.userimage === null || reply.userimage === undefined ? "img/Candidate.png" : `${reply.userimage}`} className="profile-img" alt="profile-img" />
-                                    {/* <img src="/img/Candidate.png" className="profile-img" alt="profile-img" /> */}
+                                    {reply.userimage === null || reply.userimage === undefined ?
+                                        <img src="/img/place.jpg" alt="profile-img" id='profile-img' /> :
+                                        <img src={reply.userimage} alt="profile-img" id='profile-img' />
+                                    }
                                 </div>
                             </div>
                             <div className="col-11">

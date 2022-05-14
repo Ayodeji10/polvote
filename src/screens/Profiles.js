@@ -56,7 +56,7 @@ function Profiles() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div className="home-feed container">
                 <div className="row justify-content-lg-between">

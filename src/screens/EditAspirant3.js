@@ -85,7 +85,7 @@ function EditAspirant3() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div class="home-feed container">
                 <div class="row">

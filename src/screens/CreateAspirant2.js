@@ -64,7 +64,7 @@ function CreateAspirant2() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div class="home-feed container">
                 <div class="row justify-content-lg-between">
@@ -136,7 +136,7 @@ function CreateAspirant2() {
                                                             onChange={(e) => handleHistoryInput(index, e)}
                                                         />
                                                     </div>
-                                                    <i className="fas fa-calendar-alt" />
+                                                    {/* <i className="fas fa-calendar-alt" /> */}
                                                 </div>
                                             </div>
                                             <div className="col-6">

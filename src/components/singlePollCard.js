@@ -75,7 +75,7 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
             </div>
 
             {/* vote modal  */}
-            <Modal isOpen={voteModal} onRequestClose={() => setVoteModal(false)} id="vote-modal" className="">
+            <Modal isOpen={voteModal} onRequestClose={() => setVoteModal(false)} id="vote-modal" className={`${context.darkMode ? 'dm' : ""}`} >
                 <h3>You're about to Vote</h3>
                 <p>Note: you can only vote for one aspirant in this category</p>
                 <div className="d-flex justify-content-between">
@@ -85,7 +85,7 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
             </Modal>
 
             {/*multiple vote modal  */}
-            <Modal isOpen={multipleVotesModal} onRequestClose={() => setMultipleVotesModal(false)} id="vote-modal" className="">
+            <Modal isOpen={multipleVotesModal} onRequestClose={() => setMultipleVotesModal(false)} id="vote-modal" className={`${context.darkMode ? 'dm' : ""}`}>
                 <h3>Multiple Vote detected</h3>
                 <p>You can’t vote for multiple candidate in this category, Kindly revoke Vote for {multiple[0].firstname} {multiple[0].lastname}  to proceed with poll</p>
                 <div className="d-flex justify-content-between">

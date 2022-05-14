@@ -159,8 +159,10 @@ function SingleProfile() {
 
     const [shareLink] = useState(`https://polvote.com/profiles/single/${id}`)
 
+    const [searchParam, setSearchParam] = useState("")
+
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div className="home-feed">
                 {pageLoading ?
@@ -283,8 +285,12 @@ function SingleProfile() {
                             <div className="col-lg-8 col-md-9 main">
                                 <div className="d-flex justify-content-end">
                                     <div className="searchbar d-flex align-items-center">
-                                        <input type="text" placeholder="Search for Profile Name" />
-                                        <img src="/img/search-normal.png" alt="search" />
+                                        <input type="text" placeholder="Search for Profile Name" value={searchParam} onChange={(e) => setSearchParam(e.target.value)} />
+                                        <img src="/img/search-normal.png" alt="search" onClick={() => {
+                                            if (searchParam !== "") {
+                                                navigate(`/search=${searchParam}`)
+                                            }
+                                        }} />
                                     </div>
                                 </div>
                                 <iframe width="100%" height={435} src={aspirant.videourl.includes("watch") ? `https://www.youtube.com/embed/${aspirant.videourl.substring(32, 43)}` : `https://www.youtube.com/embed/${aspirant.videourl.substring(17, 28)}`} className="mb-4" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen>
@@ -322,8 +328,8 @@ function SingleProfile() {
                                     <NewAspirantLineText text={aspirant.activism} />
                                 </div>
                                 <div className="others">
-                                    <h2>See other profile</h2>
-                                    <div className="profiles">
+                                    <h2>See other profiles</h2>
+                                    <div className="profile">
                                         {randomAspirants.map((aspirant, index) => {
                                             return (
                                                 <SingleProfileCard aspirant={aspirant} key={index} handleSShareProfieMOdal={handleSShareProfieMOdal} />

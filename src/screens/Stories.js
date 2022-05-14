@@ -35,7 +35,7 @@ function Stories() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        console.log(response.data)
+        // console.log(response.data)
         setStories(response.data)
         setPageLoading(false)
     }
@@ -55,7 +55,7 @@ function Stories() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div className="home-feed container">
                 <div className="row justify-content-lg-between">

@@ -60,7 +60,7 @@ function CreateAspirant1() {
     }
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
             <div className="home-feed container">
                 <div className="row justify-content-md-between">
@@ -121,7 +121,7 @@ function CreateAspirant1() {
                                             /> */}
                                             <input type="date" name="date" id="date" onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, DOB: e.target.value } })} />
                                         </div>
-                                        <i className="fas fa-calendar-alt" />
+                                        {/* <i className="fas fa-calendar-alt" /> */}
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-6 d-flex justify-content-end">

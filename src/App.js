@@ -31,7 +31,8 @@ function App() {
     user: {},
     newAspirant: { firstName: "", lastName: "", link: "", DOB: "", party: "", overview: "", education: "", politics: "", business: "", activism: "", history: [{ pollTitle: "", pollYear: "", position: "", numberOfVotes: "" }], ownership: "Writer", transfer: "No", amount: "", pollid: null },
     homeSearchKey: "",
-    profileView: "aspirants"
+    profileView: "aspirants",
+    darkMode: true
   })
 
   // save context to local storage

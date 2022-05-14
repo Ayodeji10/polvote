@@ -252,12 +252,12 @@ const Login = () => {
 
     return (
         <>
-            <div className="home">
+            <div className={`home ${context.darkMode ? 'dm' : ""}`}>
                 <div className="container">
                     <header className="d-flex align-items-center justify-content-between">
-                        <img src="/img/Logo.png" alt="logo" />
+                        {context.darkMode ? <img src="/img/logo-dm.png" id="logo" alt="logo" /> : <img src="/img/logo.png" id="logo" alt="logo" />}
                         <div>
-                            {/* <img src="img/theme.png" alt="theme" /> */}
+                            {context.darkMode ? <img src="/img/night.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: false })} /> : <img src="/img/theme.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: true })} />}
                             {/* <img src="img/Group 42.png" alt="country" id="country" /> */}
                         </div>
                     </header>
@@ -567,7 +567,7 @@ const Login = () => {
             </div>
 
             {/* signup modal  */}
-            <Modal isOpen={signupModal} onRequestClose={() => setSignupModal(false)} id="signup">
+            <Modal isOpen={signupModal} onRequestClose={() => setSignupModal(false)} id="signup" className={`${context.darkMode ? 'dm' : ""}`}>
                 <i className="fa-solid fa-circle-xmark" onClick={() => setSignupModal(false)} />
                 <h1>Signup on Polvote</h1>
                 <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
@@ -635,7 +635,7 @@ const Login = () => {
             </Modal>
 
             {/* verification modal */}
-            <Modal isOpen={verificationModal} onRequestClose={() => setVerificationModal(false)} id="verification">
+            <Modal isOpen={verificationModal} onRequestClose={() => setVerificationModal(false)} id="verification" className={`${context.darkMode ? 'dm' : ""}`}>
                 <i className="fa-solid fa-circle-xmark" onClick={() => setVerificationModal(false)} />
                 <img src="/img/verify.png" alt="email" />
                 <h1>One More Step!</h1>
@@ -645,7 +645,7 @@ const Login = () => {
             </Modal>
 
             {/* forgot password modal */}
-            <Modal isOpen={forgotPasswordModal} onRequestClose={() => setForgotPasswordModal(false)} id="forgot-password">
+            <Modal isOpen={forgotPasswordModal} onRequestClose={() => setForgotPasswordModal(false)} id="forgot-password" className={`${context.darkMode ? 'dm' : ""}`}>
                 <i className="fa-solid fa-circle-xmark" onClick={() => setForgotPasswordModal(false)} />
                 <div className="content">
                     {/* enter email */}

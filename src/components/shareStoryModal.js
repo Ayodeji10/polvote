@@ -75,7 +75,7 @@ function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
     }
 
     return (
-        <Modal isOpen={openModal} onRequestClose={() => handleShareStoryModal(false)} className="story-write-modal" id='share-story-modal'>
+        <Modal isOpen={openModal} onRequestClose={() => handleShareStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
             <i className="far fa-times-circle" onClick={() => handleShareStoryModal(false)} />
             <h2>Write New Story</h2>
             <div className="d-flex justify-content-between align-items-center mb-3">
@@ -91,10 +91,10 @@ function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
                         <h4 className="mb-0">{context.user.username}</h4>
                     </div>
                 </div>
-                <select name="status" id="status" onChange={(e) => setShareAnonymous(e.target.value)}>
+                {/* <select name="status" id="status" onChange={(e) => setShareAnonymous(e.target.value)}>
                     <option value={false}>Public</option>
                     <option value={true}>Stay Anonymous</option>
-                </select>
+                </select> */}
             </div>
             <textarea name id cols={30} rows={2} placeholder="Share your thought" value={shareText} onChange={(e) => setShareText(e.target.value)} />
             <div className="row">
