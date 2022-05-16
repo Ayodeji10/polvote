@@ -91,7 +91,7 @@ function CreateAspirant3() {
                             <div className="d-flex">
                                 <Link to={"/create-aspirant/setup-aspirant"}><i className="fas fa-arrow-left" /></Link>
                                 <div>
-                                    <h1>Proceed to Submit Profile for Ahmed Bola Tinubu</h1>
+                                    <h1>Proceed to Submit Profile for {context.newAspirant.firstName} {context.newAspirant.lastName}</h1>
                                 </div>
                             </div>
                             <div className="poll">

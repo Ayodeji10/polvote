@@ -9,7 +9,6 @@ import axios from "axios";
 import { DataContext } from "../dataContext";
 import StoryCard from '../components/storyCard'
 import Loader from '../components/loader';
-import NewlineText from '../components/newLineText';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -84,7 +83,12 @@ function SingleStory() {
                     {/* <div className="col-lg-1" /> */}
                     {/* main  */}
                     <div className="col-lg-8 col-md-9 story">
-                        <Link to={"/stories"}><img src="/img/back.png" id="return-btn" alt="return to stories" /></Link>
+                        <Link to={"/stories"}>
+                            {context.darkMode ?
+                                <img src="/img/back-lm.png" id="return-btn" alt="return to stories" /> :
+                                <img src="/img/back.png" id="return-btn" alt="return to stories" />
+                            }
+                        </Link>
                         {pageLoading ?
                             <Loader pageLoading={pageLoading} /> :
                             <>

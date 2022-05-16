@@ -307,7 +307,7 @@ const Home = () => {
                 <div className={`home ${context.darkMode ? 'dm' : ""}`}>
                     <div className="container">
                         <header className="d-flex align-items-center justify-content-between">
-                            {context.darkMode ? <img src="/img/logo-dm.png" id="logo" alt="logo" /> : <img src="/img/Logo.png" id="logo" alt="logo" />}
+                            {context.darkMode ? <img src="/img/logo-dm.png" id="logo" alt="logo" /> : <img src="/img/logo.png" id="logo" alt="logo" />}
                             <div>
                                 {context.darkMode ? <img src="/img/night.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: false })} /> : <img src="/img/theme.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: true })} />}
                                 {/* <img src="img/Group 42.png" alt="country" id="country" /> */}

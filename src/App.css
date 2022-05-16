@@ -7279,6 +7279,7 @@ textarea::placeholder {
     /* nav  */
     .navbar-brand img {
         max-width: 100px;
+        height: unset
     }
 
     nav .nav2 {
@@ -8090,6 +8091,7 @@ textarea::placeholder {
     /* nav  */
     .navbar-brand img {
         max-width: 100px;
+        height: unset
     }
 
     nav .nav2 {
