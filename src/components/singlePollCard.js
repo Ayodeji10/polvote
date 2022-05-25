@@ -68,8 +68,8 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
                 </div>
                 <div className="col-lg-1 col-md-2 col-sm-2 col-2">
                     {aspirant.votes.filter(vote => vote === context.user._id).length > 0 ?
-                        <img src="/img/Group 515.png" alt="voted" onClick={checkVote} className="vote-img" /> :
-                        <img src="/img/Group 516.png" alt="vote" onClick={checkVote} className="vote-img" />
+                        <img src="/img/Group 515.svg" alt="voted" onClick={checkVote} className="vote-img" /> :
+                        <img src="/img/Group 516.svg" alt="vote" onClick={checkVote} className="vote-img" />
                     }
                 </div>
             </div>

@@ -83,11 +83,7 @@ function SingleStory() {
                     {/* <div className="col-lg-1" /> */}
                     {/* main  */}
                     <div className="col-lg-8 col-md-9 story">
-                        <Link to={"/stories"}>
-                            {context.darkMode ?
-                                <img src="/img/back-lm.png" id="return-btn" alt="return to stories" /> :
-                                <img src="/img/back.png" id="return-btn" alt="return to stories" />
-                            }
+                        <Link to={"/stories"}><i className="fa-solid fa-arrow-left-long mb-4"></i>
                         </Link>
                         {pageLoading ?
                             <Loader pageLoading={pageLoading} /> :

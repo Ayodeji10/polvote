@@ -29,6 +29,12 @@ label {
     border: none !important;
 }
 
+.error-msg {
+    font-size: 14px;
+    text-align: center;
+    color: red;
+}
+
 select option {
     background-color: #FFF;
     color: rgba(10, 24, 61, 1)
@@ -44,23 +50,6 @@ input {
     outline: none !important;
     border: none;
 }
-
-/* .login-form input {
-    background-color: #36425E;
-    color: #FFF !important;
-    border: 0;
-    text-decoration: none !important;
-    outline: none !important;
-}
-
-.login-form input::placeholder {
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
-    opacity: 0.25;
-    font-family: 'Questrial', sans-serif;
-    opacity: 40%;
-} */
 
 /* presets  */
 .ReactModal__Overlay {
@@ -93,7 +82,7 @@ input {
 
 .scroll-active {
     height: 65px;
-    /* transition: all 1s ease-in; */
+    /* opacity: 0.9 */
 }
 
 .navigation-container .container-fluid {
@@ -227,72 +216,59 @@ nav .profile-img a {
 }
 
 .home header {
-    padding-top: 43px;
-    margin-bottom: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 35px;
+    margin-bottom: 70px;
 }
 
-.home header #country {
-    margin-left: 46px
+.home header button {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 21px;
+    padding: 12px 20px !important;
+    border-radius: 50px;
+    width: unset;
+    margin-bottom: 0;
+    margin-left: 22px
 }
 
-.home .main #secured {
-    margin-bottom: 8px;
-    max-height: 216px;
-    max-width: 216px;
+.home header button#login-btn {
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+}
+
+.home header button#create-account-btn {
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
 }
 
 .home .main h1 {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 700;
     line-height: 58px;
-    margin-bottom: 6px;
+    margin-bottom: 72px;
 }
 
-.home .main h4 {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 16px;
-    font-weight: 400;
-    line-height: 24px
+.home .main h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 34px;
 }
 
-.home .login {
-    border: solid 1px rgba(255, 255, 255, 0.1) !important;
-    border-radius: 20px;
-    padding: 34px;
-    margin-bottom: 24px;
-    /* width: 456px */
+.home .main h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 34px;
 }
 
-.home .login h1 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 10px;
-    line-height: 24px;
-    color: #FFF;
-    text-align: center;
-}
-
-.home .login h2 {
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0 auto;
-    margin-bottom: 16px;
-    max-width: 345px;
-    line-height: 20px;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-}
-
-.home button {
-    width: 287px;
-    background-color: #FFF;
-    color: rgba(10, 24, 61, 1);
+.home .main #google-btn button {
+    width: 400px;
+    justify-content: center;
     border-radius: 100px !important;
-    font-size: 14px;
-    font-weight: 400;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    padding: 0 15px !important
+    margin-bottom: 12px;
+    padding: 5px !important
 }
 
 .home button.metro {
@@ -308,83 +284,53 @@ nav .profile-img a {
     color: rgba(10, 24, 61, 1)
 }
 
-.home .login .or {
-    margin-bottom: 30px;
+.home .main .or {
+    width: 320px;
+    margin: 40px 0;
 }
 
-.home .login .or span {
-    border: solid 1px rgba(255, 255, 255, 1) !important;
-    width: 100%
+.home .main .or span {
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    width: 156px
 }
 
-.home .login .or h6 {
+.home .main .or h6 {
     margin: 0 16px
 }
 
-.home .login label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 14px;
-}
-
-.home .login input {
-    width: 100%;
-    border-radius: 100px;
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #FFF;
-    padding: 18px 24px;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 30px;
-}
-
-.home .login input:last-child {
-    margin-bottom: 24px;
-}
-
-.home .login .remember label,
-.home .login .remember input {
-    display: inline;
-    margin: unset;
-    padding: 0;
-    width: unset;
-    color: rgba(82, 169, 255, 1)
-}
-
-.home .login .remember a {
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(1, 147, 222, 1)
-}
-
-.home .login button#login-btn {
-    width: 100%;
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF;
+.home .main button.home-btn {
+    width: 400px;
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 24px;
-    padding: 16px !important;
-    border-radius: 100px;
+    padding: 14px 0;
+    border-radius: 50px;
 }
 
-.home h6 {
+.home .main button.home-btn.one {
     color: #FFF;
-    font-size: 14px;
+    background-color: rgba(0, 122, 243, 1);
+    margin-bottom: 31px;
+}
+
+.home .main h3 {
+    font-size: 16px;
     font-weight: 400;
-    text-align: center;
-    margin-bottom: 71px;
+    margin-bottom: 78px;
+    max-width: 400px
 }
 
-.home h6 span {
-    color: #52A9FF;
-    cursor: pointer;
+.home .main h3 span {
+    color: rgba(0, 122, 243, 1)
 }
 
-.home footer {
-    padding: 22px 0;
-    border-top: solid 2px rgba(255, 255, 255, 0.2) !important;
+.home .main button.home-btn.two {
+    color: rgba(10, 24, 61, 1);
+    background-color: #FFF;
+    margin-bottom: 74px;
+}
+
+.home footer#footer {
+    margin-top: 0
 }
 
 .home footer p {
@@ -395,22 +341,20 @@ nav .profile-img a {
     cursor: pointer;
 }
 
-.home footer img {
-    margin-left: 12px;
-    height: 20px;
-    width: 20px
+.home footer #logo {
+    height: unset
 }
 
 /* signup modal  */
 #signup {
-    top: 5% !important;
+    top: 15% !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
     margin-left: auto !important;
     margin-right: auto !important;
     width: 803px;
-    height: 700px;
+    height: 580px;
     background-color: rgba(4, 19, 54, 1) !important;
     border-radius: 10px !important;
     padding: 16px 14px !important;
@@ -492,9 +436,9 @@ nav .profile-img a {
 
 #signup .form input {
     border-radius: 100px;
-    background-color: rgba(255, 255, 255, 0.2);
+    background-color: #FFF;
     width: 100%;
-    color: #FFF;
+    color: black !important;
     padding: 18px 20px;
     margin-bottom: 26px;
     font-size: 14px;
@@ -525,6 +469,145 @@ nav .profile-img a {
     border: 0 !important
 }
 
+/* login modal  */
+#loginModal {
+    top: 8% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 588px;
+    height: 630px;
+    background-color: rgba(4, 19, 54, 1) !important;
+    border-radius: 10px !important;
+    padding: 16px 14px !important;
+}
+
+#loginModal i {
+    float: right;
+}
+
+#loginModal.dm i {
+    color: rgba(1, 10, 32, 1)
+}
+
+#loginModal h1 {
+    color: #FFF;
+    text-align: center;
+    margin: 16px 0 8px 0;
+    font-size: 22px;
+    font-weight: 600;
+    max-width: none;
+    line-height: 24px;
+}
+
+#loginModal h4 {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 344px;
+    margin: 0 auto 20px;
+    line-height: 20px;
+}
+
+#loginModal .w-400 {
+    width: 400px;
+    margin: 0 auto
+}
+
+#loginModal #google-btn button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 100px !important;
+    margin-bottom: 12px;
+}
+
+#loginModal button.metro {
+    padding: 10px 15px !important;
+    text-transform: lowercase;
+}
+
+#loginModal button.metro i {
+    float: unset;
+}
+
+#loginModal button span {
+    color: rgba(10, 24, 61, 1)
+}
+
+#loginModal .or {
+    width: 100%;
+    margin: 25px 0;
+}
+
+#loginModal .or span {
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    width: 175px
+}
+
+#loginModal .or h6 {
+    margin: 0 16px
+}
+
+#loginModal label {
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px
+}
+
+#loginModal input {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 19px;
+    padding: 18px 24px;
+    border-radius: 100px;
+}
+
+#loginModal input#login-password {
+    margin-bottom: 8px;
+}
+
+#loginModal input::placeholder {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+#loginModal h5 {
+    text-align: right;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(82, 169, 255, 1);
+    cursor: pointer;
+    margin-bottom: 22px;
+}
+
+#loginModal button#proceed {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 16px 0;
+    border-radius: 100px;
+    margin-bottom: 17px;
+}
+
+#loginModal h6 {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    color: #FFF
+}
+
+#loginModal h6 span {
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer
+}
+
 /* verification  */
 #verification {
     top: 30% !important;
@@ -534,7 +617,7 @@ nav .profile-img a {
     margin-left: auto !important;
     margin-right: auto !important;
     width: 591px;
-    height: 375px;
+    height: 400px;
     background-color: rgba(4, 19, 54, 1) !important;
     border-radius: 10px !important;
     padding: 12px !important;
@@ -680,22 +763,6 @@ nav .profile-img a {
     text-align: center;
     margin: 0 8px;
     margin-bottom: 51px;
-}
-
-/* terms and conditions  */
-#terms {
-    top: 5% !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 591px;
-    height: 700px;
-    background-color: rgba(4, 19, 54, 1) !important;
-    border-radius: 10px !important;
-    padding: 25px 15px !important;
-    text-align: center;
 }
 
 
@@ -1104,13 +1171,17 @@ nav .profile-img a {
     color: rgba(255, 255, 255, 0.7);
 }
 
-.home-feed .main .poll .main .candidate .vote {
+.home-feed .main .poll .main .candidate svg {
+    cursor: pointer
+}
+
+/* .home-feed .main .poll .main .candidate .vote {
     background-color: rgba(0, 122, 243, 1);
     height: 40px;
     width: 40px;
     border-radius: 50%;
     padding: 10.4px
-}
+} */
 
 .home-feed .main .poll footer {
     background-color: rgba(6, 25, 71, 1);
@@ -1417,14 +1488,14 @@ footer#footer .bottom {
     border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
 }
 
-footer#footer .bottom h4 {
+footer#footer .bottom a {
     color: rgba(255, 255, 255, 1);
     font-size: 12px;
     font-weight: 400;
     margin-right: 60px;
 }
 
-footer#footer .bottom h4:last-child {
+footer#footer .bottom a:last-child {
     margin-right: 0;
 }
 
@@ -1433,6 +1504,83 @@ footer#footer img.social {
     width: 20px
 }
 
+#advertiseWithUs {
+    width: 516px;
+    height: 700px;
+    border-radius: 10px !important;
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(6, 25, 71, 1) !important;
+    top: 5% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding: 30px 40px !important;
+}
+
+#advertiseWithUs i {
+    float: right
+}
+
+#advertiseWithUs h2 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 43px;
+}
+
+#advertiseWithUs h3 {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+#advertiseWithUs .checkbox label {
+    font-size: 16px;
+    font-weight: 400;
+    margin-left: 10px
+}
+
+#advertiseWithUs .input label {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+#advertiseWithUs .input select {
+    border-radius: 40px;
+    width: 100%;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFF;
+    margin-bottom: 24px;
+}
+
+#advertiseWithUs .input input {
+    border-radius: 40px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    padding: 10px 16px;
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFF;
+    margin-bottom: 24px;
+}
+
+#advertiseWithUs button {
+    border-radius: 50px;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 0;
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    margin-top: 44px
+}
 
 
 
@@ -2677,7 +2825,7 @@ img#return-btn {
     padding: 0
 }
 
-.single-profile .aside .poll-active img {
+.single-profile .aside .poll-active svg {
     margin-right: 13px;
 }
 
@@ -2801,6 +2949,56 @@ img#return-btn {
     font-weight: 600;
     margin-bottom: 24px;
 }
+
+/* redirect to poll modal  */
+#redirectModal {
+    top: 30% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 286px;
+    height: 270px;
+    background-color: rgba(6, 25, 71, 1) !important;
+    border-radius: 10px !important;
+    padding: 17px 21px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#redirectModal i {
+    float: right;
+    cursor: pointer
+}
+
+#redirectModal p {
+    margin-top: 27px;
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 22px;
+}
+
+#redirectModal button {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 11px 0;
+    border-radius: 5px;
+}
+
+#redirectModal button#proceed-btn {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    margin-bottom: 15px;
+}
+
+#redirectModal button#cancel-btn {
+    color: rgba(0, 122, 243, 1);
+    background-color: #FFF;
+}
+
+
 
 
 
@@ -3628,6 +3826,93 @@ img#return-btn {
     color: #FFF;
     margin-bottom: 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* terms and conditions */
+.terms {
+    scroll-behavior: smooth;
+}
+
+.terms img#logo {
+    height: 30px;
+    margin-top: 43px;
+    margin-bottom: 59px;
+}
+
+.terms h2 {
+    font-size: 20px;
+    font-weight: 400;
+    padding-bottom: 22px;
+    margin-right: 37px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.terms h2.active {
+    border-bottom: 4px solid rgba(0, 122, 243, 1) !important
+}
+
+.terms h3 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.terms p {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 24px
+}
+
+.terms ul li,
+.terms ol li {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.terms .navigation {
+    position: sticky;
+    top: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.5) !important;
+    border-radius: 20px;
+    padding: 19px 22px
+}
+
+.terms .navigation a {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 10px;
+}
+
+.terms .navigation a i {
+    font-size: 10px;
+    margin-right: 10px;
+    color: rgba(0, 122, 243, 1)
+}
+
+.terms .navigation a.active {
+    color: #FFF
+}
+
 
 
 
@@ -5301,55 +5586,20 @@ textarea::placeholder {
 
 @media (min-width: 992px) and (max-width: 1119px) {
 
-    /* login  */
-    .home .main #secured {
-        max-height: 170px;
-    }
-
+    /* home  */
     .home .main h1 {
-        font-size: 25px;
-        line-height: 35px;
-    }
-
-    .home .main h4 {
-        font-size: 14px;
-    }
-
-    .home .login {
-        padding: 20px;
-    }
-
-    .home .login input {
-        padding: 12px 18px;
-    }
-
-    .home .login button#login-btn {
-        padding: 12px !important;
-    }
-
-    .home .main #secured {
-        max-height: 170px;
-    }
-
-    .home .main h1 {
-        font-size: 30px;
+        font-size: 35px;
         line-height: 45px;
+        margin-bottom: 35px;
     }
 
-    .home .main h4 {
-        font-size: 14px;
+    .home .main h2 {
+        font-size: 16px;
+        margin-bottom: 25px;
     }
 
-    .home .login {
-        padding: 20px;
-    }
-
-    .home .login input {
-        padding: 12px 18px;
-    }
-
-    .home .login button#login-btn {
-        padding: 12px !important;
+    .home .main h3 {
+        margin-bottom: 40px;
     }
 
     #signup .form input {
@@ -5747,31 +5997,29 @@ textarea::placeholder {
 
 @media (min-width: 768px) and (max-width: 991px) {
 
-    /* login  */
-    .home .main #secured {
-        max-height: 170px;
-    }
-
+    /* home  */
     .home .main h1 {
-        font-size: 25px;
-        line-height: 35px;
+        font-size: 30px;
+        line-height: 40px;
+        margin-bottom: 30px;
     }
 
-    .home .main h4 {
-        font-size: 14px;
+    .home .main h2 {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+
+    .home .main #google-btn button {
+        width: 80%;
+    }
+
+    .home .main h3 {
         margin-bottom: 40px;
+        max-width: 80%
     }
 
-    .home .login {
-        padding: 20px;
-    }
-
-    .home .login input {
-        padding: 12px 18px;
-    }
-
-    .home .login button#login-btn {
-        padding: 12px !important;
+    .home .main button.home-btn {
+        width: 80%;
     }
 
     #signup {
@@ -5796,6 +6044,15 @@ textarea::placeholder {
         padding: 12px 90px !important;
     }
 
+    /* loginModal  */
+    #loginModal {
+        width: 500px;
+    }
+
+    #loginModal input {
+        padding: 12px 18px;
+    }
+
     /* verification  */
     #verification {
         width: 496px;
@@ -5807,6 +6064,10 @@ textarea::placeholder {
     }
 
     /* nav  */
+    .scroll-active {
+        height: unset;
+    }
+
     nav .nav2 {
         padding-left: 0;
         border-left: none;
@@ -5814,6 +6075,20 @@ textarea::placeholder {
 
     nav .profile-img {
         margin-left: 0;
+    }
+
+    nav li svg {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    nav .nav2 {
+        padding-left: 0 !important;
+        border-left: unset !important;
+    }
+
+    nav li img.theme {
+        margin-bottom: 10px;
     }
 
     /* aside  */
@@ -6472,35 +6747,95 @@ textarea::placeholder {
         font-size: 14px;
         padding: 12px 30px;
     }
+
+    /* terms and conditions  */
+    .terms img#logo {
+        height: 25px;
+        margin-top: 43px;
+        margin-bottom: 45px;
+    }
+
+    .terms h2 {
+        font-size: 16px;
+        margin-right: 30px;
+        padding-bottom: 12px;
+    }
+
+    .terms h2.active {
+        border-bottom: 2px solid rgba(0, 122, 243, 1) !important;
+    }
+
+    .terms h3 {
+        font-size: 20px;
+        margin-bottom: 16px;
+    }
+
+    .terms p {
+        font-size: 14px;
+        margin-bottom: 18px;
+        line-height: 20px;
+    }
+
+    .terms ul li,
+    .terms ol li {
+        font-size: 14px;
+    }
+
+    .terms .navigation {
+        padding: 10px;
+    }
+
+    .terms .navigation a {
+        font-size: 12px;
+    }
+
+    .terms .navigation a i {
+        font-size: 6px;
+        margin-right: 8px;
+    }
 }
 
 @media (min-width: 576px) and (max-width: 767px) {
 
-    /* login  */
-    .home .main #secured {
-        max-height: 170px;
+    /* home  */
+    .home-feed {
+        padding-top: 110px;
+    }
+
+    .home #logo {
+        height: 25px;
+    }
+
+    .home header button {
+        font-size: 12px;
+        line-height: 12px;
+        padding: 10px 14px !important;
+        border-radius: 20px;
+        margin-left: 12px;
     }
 
     .home .main h1 {
-        font-size: 25px;
-        line-height: 35px;
+        font-size: 22px;
+        line-height: unset;
+        margin-bottom: 20px;
     }
 
-    .home .main h4 {
-        font-size: 14px;
+    .home .main h2 {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+
+    .home .main #google-btn button {
+        width: 80%;
+    }
+
+    .home .main h3 {
         margin-bottom: 40px;
+        max-width: 80%
     }
 
-    .home .login {
-        padding: 20px;
-    }
-
-    .home .login input {
-        padding: 12px 18px;
-    }
-
-    .home .login button#login-btn {
-        padding: 12px !important;
+    .home .main button.home-btn {
+        width: 80%;
     }
 
     #signup {
@@ -6523,6 +6858,24 @@ textarea::placeholder {
 
     #signup .form button#create {
         padding: 12px 90px !important;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 500px;
+        height: 595px
+    }
+
+    #loginModal input {
+        padding: 12px 18px;
+    }
+
+    #loginModal .w-400 {
+        width: 350px;
+    }
+
+    #loginModal h6 {
+        font-size: 14px;
     }
 
     /* verification  */
@@ -6566,6 +6919,10 @@ textarea::placeholder {
     }
 
     /* nav  */
+    .scroll-active {
+        height: unset;
+    }
+
     nav .nav2 {
         padding-left: 0;
         border-left: none;
@@ -6573,6 +6930,20 @@ textarea::placeholder {
 
     nav .profile-img {
         margin-left: 0;
+    }
+
+    nav li svg {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    nav .nav2 {
+        padding-left: 0 !important;
+        border-left: unset !important;
+    }
+
+    nav li img.theme {
+        margin-bottom: 10px;
     }
 
     /* home feed  */
@@ -7201,11 +7572,99 @@ textarea::placeholder {
         font-size: 14px;
         padding: 12px 30px;
     }
+
+    /* terms and conditions  */
+    .terms img#logo {
+        height: 20px;
+        margin-top: 43px;
+        margin-bottom: 35px;
+    }
+
+    .terms h2 {
+        font-size: 14px;
+        margin-right: 25px;
+        padding-bottom: 12px;
+    }
+
+    .terms h2.active {
+        border-bottom: 2px solid rgba(0, 122, 243, 1) !important;
+    }
+
+    .terms h3 {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .terms p {
+        font-size: 12px;
+        margin-bottom: 18px;
+        line-height: 20px;
+    }
+
+    .terms ul li,
+    .terms ol li {
+        font-size: 12px;
+    }
+
+    .terms .navigation {
+        border-radius: 10px;
+        padding: 5px;
+    }
+
+    .terms .navigation a {
+        font-size: 10px;
+        margin-bottom: 7px;
+    }
+
+    .terms .navigation a i {
+        font-size: 6px;
+        margin-right: 8px;
+    }
 }
 
 @media (min-width: 386px) and (max-width: 575px) {
 
-    /* login  */
+    /* home  */
+    .home-feed {
+        padding-top: 100px;
+    }
+
+    .home #logo {
+        height: 25px;
+    }
+
+    .home header button {
+        font-size: 12px;
+        line-height: 12px;
+        padding: 10px 14px !important;
+        border-radius: 20px;
+        margin-left: 12px;
+    }
+
+    .home .main h1 {
+        font-size: 18px;
+        line-height: unset;
+        margin-bottom: 20px;
+    }
+
+    .home .main h2 {
+        font-size: 16px;
+        margin-bottom: 25px;
+    }
+
+    .home .main #google-btn button {
+        width: 60%;
+    }
+
+    .home .main h3 {
+        margin-bottom: 40px;
+        max-width: 60%
+    }
+
+    .home .main button.home-btn {
+        width: 60%;
+    }
+
     #signup {
         top: 5% !important;
         bottom: 0 !important;
@@ -7226,6 +7685,42 @@ textarea::placeholder {
 
     #signup .form button#create {
         padding: 12px 90px !important;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 360px;
+        height: 545px
+    }
+
+    #loginModal h1 {
+        font-size: 16px;
+    }
+
+    #loginModal h4 {
+        font-size: 12px;
+    }
+
+    #loginModal label {
+        font-size: 12px;
+    }
+
+    #loginModal input {
+        padding: 12px 18px;
+        font-size: 12px;
+    }
+
+    #loginModal .w-400 {
+        width: 95%;
+    }
+
+    #loginModal button#proceed {
+        font-size: 12px;
+        padding: 10px 0;
+    }
+
+    #loginModal h6 {
+        font-size: 14px;
     }
 
     /* verification  */
@@ -7277,6 +7772,10 @@ textarea::placeholder {
     }
 
     /* nav  */
+    .scroll-active {
+        height: unset;
+    }
+
     .navbar-brand img {
         max-width: 100px;
         height: unset
@@ -7291,6 +7790,20 @@ textarea::placeholder {
         max-width: 35px;
         max-height: 35px;
         margin-left: 0;
+    }
+
+    nav li svg {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    nav .nav2 {
+        padding-left: 0 !important;
+        border-left: unset !important;
+    }
+
+    nav li img.theme {
+        margin-bottom: 10px;
     }
 
     /* home feed  */
@@ -7800,33 +8313,6 @@ textarea::placeholder {
         padding: 10px;
     }
 
-    /* login  */
-    .home .main #secured {
-        max-height: 170px;
-    }
-
-    .home .main h1 {
-        font-size: 25px;
-        line-height: 35px;
-    }
-
-    .home .main h4 {
-        font-size: 14px;
-        margin-bottom: 40px;
-    }
-
-    .home .login {
-        padding: 20px;
-    }
-
-    .home .login input {
-        padding: 12px 18px;
-    }
-
-    .home .login button#login-btn {
-        padding: 12px !important;
-    }
-
     /* create aspirant 1  */
     .form h1 {
         font-size: 20px;
@@ -7988,35 +8474,102 @@ textarea::placeholder {
         font-size: 14px;
         padding: 12px 30px;
     }
+
+    /* terms and conditions  */
+    .terms img#logo {
+        height: 20px;
+        margin-top: 43px;
+        margin-bottom: 35px;
+    }
+
+    .terms h2 {
+        font-size: 14px;
+        margin-right: 25px;
+        padding-bottom: 12px;
+    }
+
+    .terms h2.active {
+        border-bottom: 2px solid rgba(0, 122, 243, 1) !important;
+    }
+
+    .terms h3 {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .terms p {
+        font-size: 12px;
+        margin-bottom: 18px;
+        line-height: 20px;
+    }
+
+    .terms ul li,
+    .terms ol li {
+        font-size: 12px;
+    }
+
+    .terms .navigation {
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    .terms .navigation a {
+        font-size: 10px;
+        margin-bottom: 7px;
+    }
+
+    .terms .navigation a i {
+        font-size: 6px;
+        margin-right: 8px;
+    }
 }
 
 @media (max-width: 385px) {
 
-    /* login  */
-    .home .main #secured {
-        max-height: 170px;
+    /* home  */
+    .home-feed {
+        padding-top: 100px;
+    }
+
+    .home #logo {
+        height: 20px;
+    }
+
+    .home header button {
+        font-size: 10px;
+        line-height: 10px;
+        padding: 10px 14px !important;
+        border-radius: 10px;
+        margin-left: 10px;
     }
 
     .home .main h1 {
-        font-size: 25px;
-        line-height: 35px;
-    }
-
-    .home .main h4 {
         font-size: 14px;
+        line-height: unset;
+        margin-bottom: 20px;
+    }
+
+    .home .main h2 {
+        font-size: 10px;
+        margin-bottom: 25px;
+    }
+
+    .home .main #google-btn button {
+        width: 100%;
+        padding: 0px !important;
+    }
+
+    .home .main h3 {
         margin-bottom: 40px;
+        max-width: 100%;
+        font-size: 12px
     }
 
-    .home .login {
-        padding: 20px;
-    }
-
-    .home .login input {
-        padding: 12px 18px;
-    }
-
-    .home .login button#login-btn {
-        padding: 12px !important;
+    .home .main button.home-btn {
+        width: 100%;
+        font-size: 12px;
+        padding: 10px 0;
     }
 
     #signup {
@@ -8039,6 +8592,42 @@ textarea::placeholder {
 
     #signup .form button#create {
         padding: 12px 90px !important;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 90%;
+        height: 545px
+    }
+
+    #loginModal h1 {
+        font-size: 16px;
+    }
+
+    #loginModal h4 {
+        font-size: 12px;
+    }
+
+    #loginModal label {
+        font-size: 12px;
+    }
+
+    #loginModal input {
+        padding: 12px 18px;
+        font-size: 12px;
+    }
+
+    #loginModal .w-400 {
+        width: 95%;
+    }
+
+    #loginModal button#proceed {
+        font-size: 12px;
+        padding: 10px 0;
+    }
+
+    #loginModal h6 {
+        font-size: 14px;
     }
 
     #verification {
@@ -8089,6 +8678,10 @@ textarea::placeholder {
     }
 
     /* nav  */
+    .scroll-active {
+        height: unset;
+    }
+
     .navbar-brand img {
         max-width: 100px;
         height: unset
@@ -8103,6 +8696,20 @@ textarea::placeholder {
         max-width: 35px;
         max-height: 35px;
         margin-left: 0;
+    }
+
+    nav li svg {
+        display: inline-block;
+        margin: 0 10px 0 0;
+    }
+
+    nav .nav2 {
+        padding-left: 0 !important;
+        border-left: unset !important;
+    }
+
+    nav li img.theme {
+        margin-bottom: 10px;
     }
 
     /* aside  */
@@ -8809,6 +9416,55 @@ textarea::placeholder {
         font-size: 14px;
         padding: 12px 30px;
     }
+
+    /* terms and conditions  */
+    .terms img#logo {
+        height: 20px;
+        margin-top: 35px;
+        margin-bottom: 35px;
+    }
+
+    .terms h2 {
+        font-size: 12px;
+        margin-right: 25px;
+        padding-bottom: 12px;
+    }
+
+    .terms h2.active {
+        border-bottom: 2px solid rgba(0, 122, 243, 1) !important;
+    }
+
+    .terms h3 {
+        font-size: 14px;
+        margin-bottom: 16px;
+    }
+
+    .terms p {
+        font-size: 10px;
+        margin-bottom: 18px;
+        line-height: 20px;
+    }
+
+    .terms ul li,
+    .terms ol li {
+        font-size: 10px;
+    }
+
+    .terms .navigation {
+        border-radius: 10px;
+        padding: 5px;
+        margin-bottom: 20px;
+    }
+
+    .terms .navigation a {
+        font-size: 10px;
+        margin-bottom: 7px;
+    }
+
+    .terms .navigation a i {
+        font-size: 6px;
+        margin-right: 8px;
+    }
 }
 
 
@@ -8869,32 +9525,22 @@ body #root>.container-fluid.dm {
     background-color: rgba(249, 252, 255, 1);
 }
 
-.home.dm .main h4 {
-    color: rgba(10, 24, 61, 1)
-}
-
-.dm.home .login {
-    border: solid 1px rgba(10, 24, 61, 0.1) !important
-}
-
-.dm.home .login h1 {
-    color: rgba(10, 24, 61, 1)
-}
-
-.dm.home .login h2 {
-    color: rgba(10, 24, 61, 0.7)
-}
-
-.dm.home .login .or span {
-    border: 1px solid rgba(10, 24, 61, 0.1) !important
-}
-
-.dm.home .login label {
-    color: rgba(10, 24, 61, 1)
-}
-
-.dm.home .login input {
+.home.dm header button#login-btn {
     border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+}
+
+.home.dm .main .or span {
+    border: solid 1px rgba(10, 24, 61, 0.1) !important;
+    width: 156px
+}
+
+.home.dm .main button.home-btn.two {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+}
+
+.dm footer#footer .bottom a {
     color: rgba(10, 24, 61, 1)
 }
 
@@ -9294,6 +9940,28 @@ footer#footer.dm .bottom {
     background-color: rgba(0, 122, 243, 1);
 }
 
+/* terms and conditions  */
+.dm.terms h2 {
+    color: rgba(0, 0, 0, 0.5)
+}
+
+.dm.terms h2.active {
+    color: rgba(0, 0, 0, 1)
+}
+
+.dm.terms .navigation {
+    background-color: #FFF;
+    box-shadow: 0px 4px 12px 0px rgba(236, 245, 255, 1);
+}
+
+.terms .navigation a {
+    color: rgb(203, 200, 200)
+}
+
+.dm.terms .navigation a.active {
+    color: #000
+}
+
 /* sign up modal  */
 #signup.dm {
     position: absolute;
@@ -9323,6 +9991,41 @@ footer#footer.dm .bottom {
 #signup.dm .form input {
     color: rgba(10, 24, 61, 1);
     border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+/* login modal */
+#loginModal.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+#loginModal.dm h1 {
+    color: rgba(10, 24, 61, 1)
+}
+
+#loginModal.dm h4 {
+    color: rgba(10, 24, 61, 0.7);
+
+}
+
+#loginModal.dm .or span {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+#loginModal.dm .or h6 {
+    color: rgba(10, 24, 61, 1)
+}
+
+#loginModal.dm label {
+    color: rgba(10, 24, 61, 1)
+}
+
+#loginModal.dm input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+#loginModal.dm h6 {
+    color: rgba(10, 24, 61, 1)
 }
 
 /* verfication modal  */
@@ -9428,4 +10131,22 @@ footer#footer.dm .bottom {
 
 .story-write-modal.dm .story p {
     color: rgba(10, 24, 61, 1)
+}
+
+/* redirect to poll modal  */
+#redirectModal.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+#redirectModal.dm i {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+#redirectModal.dm p {
+    color: rgba(10, 24, 61, 1)
+}
+
+#redirectModal.dm button#cancel-btn {
+    border: 1px solid rgba(0, 122, 243, 1) !important
 }
