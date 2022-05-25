@@ -76,7 +76,7 @@ function EkitiPolls() {
                         <button id="leaderboerd-btn" className="active"><img src="img/Group 376.svg" alt="Leaderboard" />Leaderboard</button> */}
                             </div>
                         </div>
-                        {currentPoll.aspirant.map((aspirant, index) => {
+                        {currentPoll.aspirant.sort((a, b) => b.votes.length - a.votes.length).map((aspirant, index) => {
                             return (
                                 <HomePollCardAspirant aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} />
                             )
