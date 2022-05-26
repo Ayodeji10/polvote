@@ -37,9 +37,9 @@ function SingleStory() {
                 method: "patch",
                 headers: { 'Authorization': `Bearer ${context.user.token}` },
             }).then((response) => {
-                console.log(response)
+                // console.log(response)
             }, (error) => {
-                console.log(error)
+                // console.log(error)
             })
         }
     }, [id])

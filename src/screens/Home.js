@@ -122,15 +122,15 @@ const Home = () => {
 
     // google signup 
     const responseSuccessGoogle = (response) => {
-        console.log(response)
-        console.log(response.tokenId)
+        // console.log(response)
+        // console.log(response.tokenId)
         setLoading(true)
         axios({
             method: "post",
             url: `${API.API_ROOT}/users/googleLogin`,
             data: { tokenId: response.tokenId }
         }).then((response) => {
-            console.log(response)
+            // console.log(response)
             if (response.status === 200) {
                 setLoading(false)
                 setUserSession(response.data.token)
@@ -299,6 +299,35 @@ const Home = () => {
         fetchAspirants()
     }, [])
 
+    // google ad
+    // useEffect(() => {
+    //     (window.adsbygoogle = window.adsbygoogle || []).push({});
+    // }, [])
+    // useEffect(() => {
+    //     const pushAd = () => {
+    //         try {
+    //             const adsbygoogle = window.adsbygoogle
+    //             console.log({ adsbygoogle })
+    //             adsbygoogle.push({})
+    //         } catch (e) {
+    //             console.error(e)
+    //         }
+    //     }
+
+    //     let interval = setInterval(() => {
+    //         // Check if Adsense script is loaded every 300ms
+    //         if (window.adsbygoogle) {
+    //             pushAd()
+    //             // clear the interval once the ad is pushed so that function isn't called indefinitely
+    //             clearInterval(interval)
+    //         }
+    //     }, 300)
+
+    //     return () => {
+    //         clearInterval(interval)
+    //     }
+    // }, [])
+
     if (localStorage.getItem('ballotbox_token') == null) {
         return (
             <>
@@ -306,7 +335,6 @@ const Home = () => {
                     <div className="container">
                         <header>
                             {context.darkMode ? <img src="/img/logo-dm.png" id="logo" alt="logo" /> : <img src="/img/logo.png" id="logo" alt="logo" />}
-                            {/* <img src="/img/p.png" id="logo" alt="" /> */}
                             <div>
                                 {context.darkMode ? <img src="/img/night.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: false })} /> : <img src="/img/theme.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: true })} />}
                                 <button id="login-btn" onClick={() => setLoginModal(true)}>Login</button>
@@ -570,14 +598,22 @@ const Home = () => {
                         </div>
                         {/* advert  */}
                         {/* <img src="img/newBanner.png" alt="advert" className="banner-add" /> */}
-                        <div>
+                        {/* <div>
                             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
-                                crossorigin="anonymous"></script>
+                                crossOrigin="anonymous"></script>
+                            <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={2804702051} data-ad-format="auto" data-full-width-responsive="true" />
+                            <script>
+                                (adsbygoogle = window.adsbygoogle || []).push({ });
+                            </script>
+                        </div> */}
+                        {/* <div>
+                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
+                                crossOrigin="anonymous"></script>
                             <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={4741582797} data-ad-format="auto" data-full-width-responsive="true" />
                             <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({ });
                             </script>
-                        </div>
+                        </div> */}
                         {/* poll  */}
                         <HomePollCard />
                         {/* stories  */}
@@ -604,11 +640,9 @@ const Home = () => {
                             </div>
                         </div>
                         {/* adds  */}
-                        <div className="adds">
+                        {/* <div className="adds">
                             <div className="row">
                                 <div className="col-lg-4">
-                                    {/* <p>Close Ad <i className="fas fa-times-circle" /></p>
-                                    <img src="img/bill-300-x-250 1.png" alt="adds" className="img-fluid" /> */}
                                     <div>
                                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                             crossorigin="anonymous"></script>
@@ -619,8 +653,6 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
-                                    {/* <p>Close Ad <i className="fas fa-times-circle" /></p>
-                                    <img src="img/bill-300-x-250 1.png" alt="adds" className="img-fluid" /> */}
                                     <div>
                                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                             crossorigin="anonymous"></script>
@@ -631,8 +663,6 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
-                                    {/* <p>Close Ad <i className="fas fa-times-circle" /></p>
-                                    <img src="img/bill-300-x-250 1.png" alt="adds" className="img-fluid" /> */}
                                     <div>
                                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                             crossorigin="anonymous"></script>
@@ -643,7 +673,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         {/* profiles  */}
                         <div className="profiles">
                             <div className="header d-flex justify-content-between align-items-center mb-3">
@@ -712,11 +742,9 @@ const Home = () => {
                         {/* osun polls  */}
                         <OsunPolls />
                         {/* adds  */}
-                        <div className="adds mt-5">
+                        {/* <div className="adds mt-5">
                             <div className="row">
                                 <div className="col-lg-4">
-                                    {/* <p>Close Ad <i className="fas fa-times-circle" /></p>
-                                    <img src="img/bill-300-x-250 1.png" alt="adds" className="img-fluid" /> */}
                                     <div>
                                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                             crossorigin="anonymous"></script>
@@ -727,8 +755,6 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
-                                    {/* <p>Close Ad <i className="fas fa-times-circle" /></p>
-                                    <img src="img/bill-300-x-250 1.png" alt="adds" className="img-fluid" /> */}
                                     <div>
                                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                             crossorigin="anonymous"></script>
@@ -739,8 +765,6 @@ const Home = () => {
                                     </div>
                                 </div>
                                 <div className="col-lg-4">
-                                    {/* <p>Close Ad <i className="fas fa-times-circle" /></p>
-                                    <img src="img/bill-300-x-250 1.png" alt="adds" className="img-fluid" /> */}
                                     <div>
                                         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                             crossorigin="anonymous"></script>
@@ -751,7 +775,7 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         {/* courses  */}
                         {/* <div className="courses">
                             <div className="header d-flex justify-content-between align-items-center mb-2">
@@ -833,14 +857,14 @@ const Home = () => {
                         </div> */}
                         {/* add  */}
                         {/* <img src="img/newBanner.png" alt="advert" /> */}
-                        <div>
+                        {/* <div>
                             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
                                 crossorigin="anonymous"></script>
                             <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={4741582797} data-ad-format="auto" data-full-width-responsive="true" />
                             <script>
                                 (adsbygoogle = window.adsbygoogle || []).push({ });
                             </script>
-                        </div>
+                        </div> */}
                         {/* footer  */}
                         <Footer />
                     </div>

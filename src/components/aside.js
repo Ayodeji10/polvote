@@ -39,6 +39,35 @@ function Aside() {
         setWriteStoryModal(variable)
     }
 
+    // google ads
+    // useEffect(() => {
+    //     (window.adsbygoogle = window.adsbygoogle || []).push({});
+    // }, [])
+    // useEffect(() => {
+    //     const pushAd = () => {
+    //         try {
+    //             const adsbygoogle = window.adsbygoogle
+    //             console.log({ adsbygoogle })
+    //             adsbygoogle.push({})
+    //         } catch (e) {
+    //             console.error(e)
+    //         }
+    //     }
+
+    //     let interval = setInterval(() => {
+    //         // Check if Adsense script is loaded every 300ms
+    //         if (window.adsbygoogle) {
+    //             pushAd()
+    //             // clear the interval once the ad is pushed so that function isn't called indefinitely
+    //             clearInterval(interval)
+    //         }
+    //     }, 300)
+
+    //     return () => {
+    //         clearInterval(interval)
+    //     }
+    // }, [])
+
     // logout modal 
     const [logoutModal, setLogoutModal] = useState(false)
 
@@ -124,14 +153,14 @@ function Aside() {
                 <span className='mb-2'>Close Ad <i className="fas fa-times-circle" /></span>
                 <img src="/img/EZ-Cash-loan 2.png" alt="" />
             </div> */}
-            <div>
+            {/* <div>
                 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
-                    crossorigin="anonymous"></script>
-                <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={4741582797} data-ad-format="auto" data-full-width-responsive="true" />
+                    crossOrigin="anonymous"></script>
+                <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={2804702051} data-ad-format="auto" data-full-width-responsive="true" />
                 <script>
                     (adsbygoogle = window.adsbygoogle || []).push({ });
                 </script>
-            </div>
+            </div> */}
 
             {/* Stories  */}
             <div className="content">

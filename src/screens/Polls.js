@@ -55,10 +55,10 @@ function Polls() {
     return (
         <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
-            <div class="home-feed container">
-                <div class="row justify-content-lg-between">
+            <div className="home-feed container">
+                <div className="row justify-content-lg-between">
                     {/* aside  */}
-                    <div class="col-lg-3 col-md-3 aside">
+                    <div className="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
                     {/* gutter  */}
