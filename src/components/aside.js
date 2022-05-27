@@ -5,7 +5,7 @@ import axios from "axios";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
 import WriteStoryModal from './writeStoryModal';
-import Ad1 from './ad1';
+// import Ad1 from './ad1';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -162,7 +162,7 @@ function Aside() {
                     (adsbygoogle = window.adsbygoogle || []).push({ });
                 </script>
             </div> */}
-            <Ad1 />
+            {/* <Ad1 /> */}
 
             {/* Stories  */}
             <div className="content">

@@ -5,7 +5,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import { setUserSession } from "../utils/common";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-import FacebookLogin from "react-facebook-login"
+// import FacebookLogin from "react-facebook-login"
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -142,28 +142,28 @@ const Login = () => {
     }
 
     // facebook login 
-    const responseFacebook = (response) => {
-        // console.log(response)
-        setLoading(true)
-        if (response) {
-            axios({
-                method: "post",
-                url: `${API.API_ROOT}/users/facebookLogin`,
-                data: { accessToken: response.accessToken, userID: response.userID }
-            }).then((response) => {
-                // console.log(response)
-                if (response.status === 200) {
-                    setLoading(false)
-                    setUserSession(response.data.token)
-                    setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
-                    window.location.reload()
-                } else {
-                    setError('SOmething went wrong, pls try again later')
-                }
-            }
-            )
-        }
-    }
+    // const responseFacebook = (response) => {
+    //     // console.log(response)
+    //     setLoading(true)
+    //     if (response) {
+    //         axios({
+    //             method: "post",
+    //             url: `${API.API_ROOT}/users/facebookLogin`,
+    //             data: { accessToken: response.accessToken, userID: response.userID }
+    //         }).then((response) => {
+    //             // console.log(response)
+    //             if (response.status === 200) {
+    //                 setLoading(false)
+    //                 setUserSession(response.data.token)
+    //                 setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
+    //                 window.location.reload()
+    //             } else {
+    //                 setError('SOmething went wrong, pls try again later')
+    //             }
+    //         }
+    //         )
+    //     }
+    // }
 
     // forgot password 
     // verify email 
@@ -278,7 +278,7 @@ const Login = () => {
                                         cookiePolicy={'single_host_origin'}
                                     />
                                 </div>
-                                <div id="google-btn">
+                                {/* <div id="google-btn">
                                     <FacebookLogin
                                         appId="1162929354518536"
                                         autoLoad={false}
@@ -288,7 +288,7 @@ const Login = () => {
                                         icon="fa-facebook"
                                         textButton="Login with Facebook Account"
                                     />
-                                </div>
+                                </div> */}
                                 <div className="or d-flex justify-content-between align-items-center">
                                     <span></span>
                                     <h6>or</h6>
