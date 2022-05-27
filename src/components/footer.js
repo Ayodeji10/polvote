@@ -17,7 +17,7 @@ function Footer() {
         <footer id="footer" className={`${context.darkMode ? 'dm' : ""}`}>
             <div className="row justify-content-lg-between top">
                 <div className="col-lg-8 d-flex align-items-start">
-                    {context.darkMode ? <img src="/img/pl.png" alt="logo" id="logo" /> : <img src="/img/p.png" alt="logo" id="logo" />}
+                    {context.darkMode ? <img src="/img/pl.png" alt="logo" className="logo" /> : <img src="/img/p.png" alt="logo" className="logo" />}
 
                     <div>
                         <h1>Pol<span>vote</span></h1>

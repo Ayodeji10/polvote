@@ -12,7 +12,7 @@ function PrivacyPolicy() {
         <div className={`container-fluid terms ${context.darkMode ? 'dm' : ""}`}>
             <div className="container">
                 <Link to={'/'}>
-                    {context.darkMode ? <img src="/img/logo-dm.png" id="logo" alt="logo" /> : <img src="/img/logo.png" id="logo" alt="logo" />}
+                    {context.darkMode ? <img src="/img/logo-dm.png" className="logo" alt="logo" /> : <img src="/img/logo.png" className="logo" alt="logo" />}
                 </Link>
                 <div className="row pb-5">
                     <div className="col-lg-9 col-md-9 col-sm-8 order-lg-1 order-md-1 order-sm-1 order-2">

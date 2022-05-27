@@ -5,7 +5,7 @@ import { setUserSession } from "../utils/common";
 import axios from "axios";
 import { API } from "../components/apiRoot";
 import GoogleLogin from "react-google-login";
-// import FacebookLogin from "react-facebook-login"
+import FacebookLogin from "react-facebook-login"
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
@@ -16,6 +16,8 @@ import HomePollCard from "../components/homePollCard";
 import WriteStoryModal from "../components/writeStoryModal";
 import EkitiPolls from "../components/ekitiPolls";
 import OsunPolls from "../components/osunPolls"
+// import Ad1 from "../components/ad1"
+import { Adsense } from '@ctrl/react-adsense';
 Modal.setAppElement('#root')
 
 
@@ -151,22 +153,24 @@ const Home = () => {
     const responseFacebook = (response) => {
         // console.log(response)
         setLoading(true)
-        axios({
-            method: "post",
-            url: `${API.API_ROOT}/users/facebookLogin`,
-            data: { accessToken: response.accessToken, userID: response.userID }
-        }).then((response) => {
-            // console.log(response)
-            if (response.status === 200) {
-                setLoading(false)
-                setUserSession(response.data.token)
-                setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
-                window.location.reload()
-            } else {
-                setError('SOmething went wrong, pls try again later')
+        if (response) {
+            axios({
+                method: "post",
+                url: `${API.API_ROOT}/users/facebookLogin`,
+                data: { accessToken: response.accessToken, userID: response.userID }
+            }).then((response) => {
+                console.log(response)
+                if (response.status === 200) {
+                    setLoading(false)
+                    setUserSession(response.data.token)
+                    setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
+                    window.location.reload()
+                } else {
+                    setError('SOmething went wrong, pls try again later')
+                }
             }
+            )
         }
-        )
     }
 
     // forgot password 
@@ -334,7 +338,7 @@ const Home = () => {
                 <div className={`home ${context.darkMode ? 'dm' : ""}`}>
                     <div className="container">
                         <header>
-                            {context.darkMode ? <img src="/img/logo-dm.png" id="logo" alt="logo" /> : <img src="/img/logo.png" id="logo" alt="logo" />}
+                            {context.darkMode ? <img src="/img/logo-dm.png" className="logo" alt="logo" /> : <img src="/img/logo.png" className="logo" alt="logo" />}
                             <div>
                                 {context.darkMode ? <img src="/img/night.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: false })} /> : <img src="/img/theme.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: true })} />}
                                 <button id="login-btn" onClick={() => setLoginModal(true)}>Login</button>
@@ -356,7 +360,7 @@ const Home = () => {
                                             cookiePolicy={'single_host_origin'}
                                         />
                                     </div>
-                                    {/* <div id="google-btn">
+                                    <div id="google-btn">
                                         <FacebookLogin
                                             appId="1162929354518536"
                                             autoLoad={false}
@@ -366,7 +370,7 @@ const Home = () => {
                                             icon="fa-facebook"
                                             textButton="Login with Facebook Account"
                                         />
-                                    </div> */}
+                                    </div>
                                     <div className="or d-flex justify-content-between align-items-center">
                                         <span></span>
                                         <h6>or</h6>
@@ -385,7 +389,7 @@ const Home = () => {
                         <footer id="footer" className={`${context.darkMode ? 'dm' : ""}`}>
                             <div className="row justify-content-lg-between justify-content-md-between top">
                                 <div className="col-lg-8 col-md-8 d-flex align-items-start">
-                                    {context.darkMode ? <img src="/img/pl.png" alt="logo" id="logo" /> : <img src="/img/p.png" alt="logo" id="logo" />}
+                                    {context.darkMode ? <img src="/img/pl.png" alt="logo" className="logo" /> : <img src="/img/p.png" alt="logo" className="logo" />}
                                     <div>
                                         <h1>Pol<span>vote</span></h1>
                                         <p className="mb-0">Polvote provides you with the ability to see profiles of Political Aspirants contesting for leadership, governance and economic positions near your locality. It also offers you a news feed which takes contributions from Political enthusiasts discussing simple to complex topics on social media including you. It also gives you the ability to vote for these aspiring leaders in contests created for the internet via Polvote.</p>
@@ -598,22 +602,13 @@ const Home = () => {
                         </div>
                         {/* advert  */}
                         {/* <img src="img/newBanner.png" alt="advert" className="banner-add" /> */}
-                        {/* <div>
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
-                                crossOrigin="anonymous"></script>
-                            <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={2804702051} data-ad-format="auto" data-full-width-responsive="true" />
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({ });
-                            </script>
-                        </div> */}
-                        {/* <div>
-                            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
-                                crossOrigin="anonymous"></script>
-                            <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={4741582797} data-ad-format="auto" data-full-width-responsive="true" />
-                            <script>
-                                (adsbygoogle = window.adsbygoogle || []).push({ });
-                            </script>
-                        </div> */}
+                        {/* <Ad1 /> */}
+                        <Adsense
+                            client="ca-pub-7640562161899788"
+                            slot="7259870550"
+                            style={{ width: 500, height: 300 }}
+                            format=""
+                        />
                         {/* poll  */}
                         <HomePollCard />
                         {/* stories  */}

@@ -211,7 +211,7 @@ nav .profile-img a {
     min-height: 100vh
 }
 
-.home #logo {
+.home .logo {
     height: 30px
 }
 
@@ -269,6 +269,14 @@ nav .profile-img a {
     border-radius: 100px !important;
     margin-bottom: 12px;
     padding: 5px !important
+}
+
+.home .main #google-btn>span>button {
+    width: 400px;
+    justify-content: center;
+    border-radius: 100px !important;
+    margin-bottom: 12px;
+    padding: 11px !important
 }
 
 .home button.metro {
@@ -341,7 +349,7 @@ nav .profile-img a {
     cursor: pointer;
 }
 
-.home footer #logo {
+.home footer .logo {
     height: unset
 }
 
@@ -1464,7 +1472,7 @@ footer#footer .top {
     margin-bottom: 28px;
 }
 
-footer#footer .top img#logo {
+footer#footer .top img.logo {
     margin-right: 25px
 }
 
@@ -3850,7 +3858,7 @@ img#return-btn {
     scroll-behavior: smooth;
 }
 
-.terms img#logo {
+.terms img.logo {
     height: 30px;
     margin-top: 43px;
     margin-bottom: 59px;
@@ -6009,7 +6017,8 @@ textarea::placeholder {
         margin-bottom: 25px;
     }
 
-    .home .main #google-btn button {
+    .home .main #google-btn button,
+    .home .main #google-btn>span>button {
         width: 80%;
     }
 
@@ -6749,7 +6758,7 @@ textarea::placeholder {
     }
 
     /* terms and conditions  */
-    .terms img#logo {
+    .terms img.logo {
         height: 25px;
         margin-top: 43px;
         margin-bottom: 45px;
@@ -6802,7 +6811,7 @@ textarea::placeholder {
         padding-top: 110px;
     }
 
-    .home #logo {
+    .home .logo {
         height: 25px;
     }
 
@@ -6825,7 +6834,8 @@ textarea::placeholder {
         margin-bottom: 25px;
     }
 
-    .home .main #google-btn button {
+    .home .main #google-btn button,
+    .home .main #google-btn>span>button {
         width: 80%;
     }
 
@@ -7574,7 +7584,7 @@ textarea::placeholder {
     }
 
     /* terms and conditions  */
-    .terms img#logo {
+    .terms img.logo {
         height: 20px;
         margin-top: 43px;
         margin-bottom: 35px;
@@ -7629,7 +7639,7 @@ textarea::placeholder {
         padding-top: 100px;
     }
 
-    .home #logo {
+    .home .logo {
         height: 25px;
     }
 
@@ -7652,8 +7662,9 @@ textarea::placeholder {
         margin-bottom: 25px;
     }
 
-    .home .main #google-btn button {
-        width: 60%;
+    .home .main #google-btn button,
+    .home .main #google-btn>span>button {
+        width: 80%;
     }
 
     .home .main h3 {
@@ -7953,7 +7964,7 @@ textarea::placeholder {
         margin-left: 10px;
     }
 
-    footer#footer .top img#logo {
+    footer#footer .top img.logo {
         width: 60px;
     }
 
@@ -8476,7 +8487,7 @@ textarea::placeholder {
     }
 
     /* terms and conditions  */
-    .terms img#logo {
+    .terms img.logo {
         height: 20px;
         margin-top: 43px;
         margin-bottom: 35px;
@@ -8532,7 +8543,7 @@ textarea::placeholder {
         padding-top: 100px;
     }
 
-    .home #logo {
+    .home .logo {
         height: 20px;
     }
 
@@ -8558,6 +8569,11 @@ textarea::placeholder {
     .home .main #google-btn button {
         width: 100%;
         padding: 0px !important;
+    }
+
+    .home .main #google-btn>span>button {
+        width: 100%;
+        padding: 11px !important
     }
 
     .home .main h3 {
@@ -8870,7 +8886,7 @@ textarea::placeholder {
         margin-left: 10px;
     }
 
-    footer#footer .top img#logo {
+    footer#footer .top img.logo {
         width: 40px;
     }
 
@@ -9418,7 +9434,7 @@ textarea::placeholder {
     }
 
     /* terms and conditions  */
-    .terms img#logo {
+    .terms img.logo {
         height: 20px;
         margin-top: 35px;
         margin-bottom: 35px;
