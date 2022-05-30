@@ -119,13 +119,13 @@ function EditAspirant1() {
                             <Loader pageLoading={loading} />
                             :
                             <div className="form">
-                                <div className="row">
+                                <div className="row mb-lg-4 mb-md-3 mb-2">
                                     <div className="col-1">
                                         <Link to={"/user-profile"}><i class="fa-solid fa-arrow-left-long"></i></Link>
                                     </div>
                                     <div className="col-11">
                                         <h1>Edit Aspirant Profile</h1>
-                                        <p>Lorem ipsum dolor sit amet, consec</p>
+                                        {/* <p>Lorem ipsum dolor sit amet, consec</p> */}
                                     </div>
                                 </div>
                                 <div className="row">
@@ -156,10 +156,9 @@ function EditAspirant1() {
                                         </div>
                                     </div>
                                     <div className="col-6">
-                                        <div className="input d-flex justify-content-between align-items-center">
-                                            <div>
-                                                <label htmlFor="bday">Date of Birth</label>
-                                                <DatePicker
+                                        <div className="input">
+                                            <label htmlFor="bday">Date of Birth</label>
+                                            {/* <DatePicker
                                                     selected={new Date(aspirant.dob)}
                                                     onChange={(date) => setAspirant({ ...aspirant, dob: date })}
                                                     // onChange={(date) => setContext({ ...context, editAspirant: { ...context.editAspirant, dob: date } })}
@@ -169,9 +168,8 @@ function EditAspirant1() {
                                                     showYearDropdown
                                                     // scrollableYearDropdown
                                                     scrollableMonthYearDropdown
-                                                />
-                                            </div>
-                                            <i className="fas fa-calendar-alt" />
+                                                /> */}
+                                            <input type="date" name="date" id="date" onChange={(e) => setAspirant({ ...aspirant, dob: e.target.value })} />
                                         </div>
                                     </div>
                                     <div className="col-6 d-flex justify-content-end">

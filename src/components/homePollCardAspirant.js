@@ -31,12 +31,12 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll }) {
     }
 
     // vote 
-    const vote = () => {
+    const vote = (aspirantId) => {
         axios({
-            url: `${API.API_ROOT}/polls/voters/626d7109c44fc4e4698417c8`,
+            url: `${API.API_ROOT}/polls/voters/${currentPoll._id}`,
             method: "patch",
             headers: { 'Authorization': `Bearer ${context.user.token}` },
-            data: { aspiid: aspirant.id }
+            data: { aspiid: aspirantId }
         }).then((response) => {
             window.location.reload()
             // console.log(response)
@@ -105,7 +105,7 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll }) {
                 <p>'Note: you can only vote for one aspirant in this category</p>
                 <div className="d-flex justify-content-between">
                     <button id="cancel" onClick={() => setVoteModal(false)}>Cancel</button>
-                    <button id="proceed" onClick={vote}>Proceed to Vote</button>
+                    <button id="proceed" onClick={() => vote(aspirant.id)}>Proceed to Vote</button>
                 </div>
             </Modal>
             {/* vote modal  */}
@@ -114,7 +114,7 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll }) {
                 <p>You can’t vote for multiple candidate in this category, Kindly revoke Vote for {multiple[0].firstname} {multiple[0].lastname} to proceed with poll</p>
                 <div className="d-flex justify-content-between">
                     <button id="cancel" onClick={() => setMultipleVotesModal(false)}>Cancel</button>
-                    <button id="proceed" onClick={vote}>Revoke Previous Vote</button>
+                    <button id="proceed" onClick={() => vote(aspirant.id)}>Revoke Previous Vote</button>
                 </div>
             </Modal>
         </div>

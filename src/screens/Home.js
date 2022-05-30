@@ -15,7 +15,8 @@ import SingleProfileCard from "../components/singleProfileCard";
 import HomePollCard from "../components/homePollCard";
 import WriteStoryModal from "../components/writeStoryModal";
 import EkitiPolls from "../components/ekitiPolls";
-import OsunPolls from "../components/osunPolls"
+import OsunPolls from "../components/osunPolls";
+import Helmet from "react-helmet";
 // import Ad1 from "../components/ad1"
 // import { Adsense } from '@ctrl/react-adsense';
 Modal.setAppElement('#root')
@@ -377,7 +378,7 @@ const Home = () => {
                                         <span></span>
                                     </div>
                                     <button className="home-btn one" onClick={() => setSignupModal(true)}>Signup with email</button>
-                                    <h3>By signing up, you agree to the <span>Terms and condition</span> and <span>Privacy Policy.</span></h3>
+                                    <h3>By signing up, you agree to the <Link to={'/terms-and-conditions'}>Terms and condition</Link> and <Link to={'/privacy-policy'}>Privacy Policy.</Link></h3>
                                     <button className="home-btn two" onClick={() => setLoginModal(true)}>Login</button>
                                 </div>
                             </div>
@@ -580,6 +581,7 @@ const Home = () => {
 
     return (
         <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`} >
+            {/* nav  */}
             <Nav />
             {/* feed  */}
             <div className="home-feed container">

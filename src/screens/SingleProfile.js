@@ -329,10 +329,10 @@ function SingleProfile() {
                                         <>
                                             {aspirant.pollsdetails.length > 0 &&
                                                 <div className='d-flex align-items-center'>
-                                                    <i onClick={() => setShareModal(true)} clasNames="fa-solid fa-share-nodes"></i>
+                                                    <i onClick={() => setShareModal(true)} className="fa-solid fa-share-nodes"></i>
                                                     {/* share modal  */}
                                                     {shareModal && <ShareProfileModal shareProfileModal={shareModal} shareLink={shareLink} handleShareProfileModal={handleSShareProfieMOdal} />}
-                                                    <button id="manage-profile" onClick={() => navigate(`/polls/${aspirant.pollsdetails[0].pollid}`)}><i className="fa-solid fa-thumbs-up"></i>Vote</button>
+                                                    <button id="manage-profile" onClick={() => setRedirectToPollModal(true)}><i className="fa-solid fa-thumbs-up"></i>Vote</button>
                                                 </div>
                                             }
                                         </>

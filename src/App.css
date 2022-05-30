@@ -327,8 +327,8 @@ nav .profile-img a {
     max-width: 400px
 }
 
-.home .main h3 span {
-    color: rgba(0, 122, 243, 1)
+.home .main h3 a {
+    color: rgba(0, 122, 243, 1);
 }
 
 .home .main button.home-btn.two {
@@ -3237,6 +3237,8 @@ img#return-btn {
     background-color: transparent;
     font-size: 14px;
     font-weight: 400;
+    margin: 0;
+    padding: 0
 }
 
 .form2 button#add-history i {
@@ -7677,21 +7679,42 @@ textarea::placeholder {
     }
 
     #signup {
-        top: 5% !important;
+        top: 2% !important;
         bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
         margin-left: auto !important;
         margin-right: auto !important;
-        width: 360px;
+        width: 320px;
+        height: 600px
     }
 
     #signup .form {
         width: 100%;
     }
 
+    #signup h1 {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+    }
+
+    #signup h4 {
+        font-size: 12px;
+        margin: 0 auto 8px;
+    }
+
+    #signup .form label {
+        font-size: 10px;
+    }
+
     #signup .form input {
-        padding: 12px 20px;
+        padding: 8px 12px;
+        margin-bottom: 15px;
+        font-size: 12px;
+    }
+
+    #signup .form p {
+        margin-bottom: 8px;
     }
 
     #signup .form button#create {
@@ -8589,21 +8612,42 @@ textarea::placeholder {
     }
 
     #signup {
-        top: 5% !important;
+        top: 2% !important;
         bottom: 0 !important;
         left: 0 !important;
         right: 0 !important;
         margin-left: auto !important;
         margin-right: auto !important;
         width: 320px;
+        height: 600px
     }
 
     #signup .form {
         width: 100%;
     }
 
+    #signup h1 {
+        margin: 0 0 8px 0;
+        font-size: 16px;
+    }
+
+    #signup h4 {
+        font-size: 12px;
+        margin: 0 auto 8px;
+    }
+
+    #signup .form label {
+        font-size: 10px;
+    }
+
     #signup .form input {
-        padding: 12px 20px;
+        padding: 8px 12px;
+        margin-bottom: 15px;
+        font-size: 12px;
+    }
+
+    #signup .form p {
+        margin-bottom: 8px;
     }
 
     #signup .form button#create {
@@ -9731,6 +9775,10 @@ footer#footer.dm .bottom {
     border: 1px solid rgba(10, 24, 61, 0.1) !important
 }
 
+.dm.story-write-modal .fa-times-circle {
+    color: black
+}
+
 .dm .story .story p {
     color: rgba(10, 24, 61, 0.5)
 }
@@ -9875,6 +9923,10 @@ footer#footer.dm .bottom {
 
 .dm .form2 .history .input input {
     color: rgba(1, 10, 32, 1)
+}
+
+.dm .form2 .history .fa-trash-alt {
+    color: rgba(0, 122, 243, 1)
 }
 
 /* create aspirant 3  */

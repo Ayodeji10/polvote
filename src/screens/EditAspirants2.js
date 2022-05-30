@@ -130,11 +130,11 @@ function EditAspirant2() {
                             <Loader pageLoading={loading} />
                             :
                             <div className="form2">
-                                <div className="d-flex">
+                                <div className="d-flex mb-lg-4 mb-md-3 mb-2">
                                     <Link to={`/edit-aspirant/${aspirant._id}`}><i className="fas fa-arrow-left" /></Link>
                                     <div>
                                         <h1>Set up Aspirant Profile</h1>
-                                        <p>Lorem ipsum dolor sit amet, consec</p>
+                                        {/* <p>Lorem ipsum dolor sit amet, consec</p> */}
                                     </div>
                                 </div>
                                 <div className="input">

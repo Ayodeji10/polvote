@@ -106,7 +106,7 @@ function CreateAspirant1() {
                                     </div>
                                 </div>
                                 <div className="col-lg-6 col-md-6 col-sm-6 col-6">
-                                    <div className="input d-flex justify-content-between align-items-center">
+                                    <div className="input">
                                         <div>
                                             <label htmlFor="date">Date of Birth</label>
                                             {/* <DatePicker
