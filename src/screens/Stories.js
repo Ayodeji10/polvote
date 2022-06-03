@@ -95,7 +95,7 @@ function Stories() {
                         {pageLoading ?
                             <Loader pageLoading={pageLoading} /> :
                             <>
-                                {stories.map((story, index) => {
+                                {stories.filter(story => story.status !== "1").map((story, index) => {
                                     return (
                                         <StoryCard story={story} index={index} key={index} />
                                     )
