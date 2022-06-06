@@ -174,6 +174,9 @@ const Home = () => {
     //     }
     // }
 
+    // const responseCancel = () => {
+    // }
+
     // forgot password 
     // verify email 
     const [verifyEmailLoading, setVerifyEmailLoading] = useState(false)
@@ -363,10 +366,11 @@ const Home = () => {
                                     </div>
                                     {/* <div id="google-btn">
                                         <FacebookLogin
-                                            appId="1162929354518536"
+                                            appId="1164223311085368"
                                             autoLoad={false}
+                                            isMobile={false}
                                             fields="name,email,picture"
-                                            // onClick={componentClicked}
+                                            onFailure={responseCancel}
                                             callback={responseFacebook}
                                             icon="fa-facebook"
                                             textButton="Login with Facebook Account"

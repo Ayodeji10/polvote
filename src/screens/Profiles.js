@@ -155,7 +155,7 @@ function Profiles() {
                             <Loader pageLoading={pageLoading} />
                             :
                             <>
-                                {aspirants.filter((aspirant) => aspirant.status == 1).map((aspirant, index) => {
+                                {aspirants.sort((a, b) => a.aspirantviews.length - b.aspirantviews.length).filter((aspirant) => aspirant.status == 1).map((aspirant, index) => {
                                     return (
                                         <SingleProfileCard aspirant={aspirant} key={index} />
                                     )

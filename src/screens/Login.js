@@ -276,6 +276,7 @@ const Login = () => {
                                         onSuccess={responseSuccessGoogle}
                                         onFailure={responseErrorGoogle}
                                         cookiePolicy={'single_host_origin'}
+                                    // redirectUri=""
                                     />
                                 </div>
                                 {/* <div id="google-btn">
