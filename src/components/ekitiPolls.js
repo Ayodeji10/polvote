@@ -89,8 +89,8 @@ function EkitiPolls() {
                                 <p className="mb-0">{live ? livePollTotalVotes : pollToTal} Total Votes</p>
                             </div>
                             <div className="d-flex">
-                                <button id="chart-btn" className={!live && "active"} onClick={() => setLive(false)}>Polvote Results</button>
-                                <button id="leaderboerd-btn" className={live && 'active'} onClick={() => setLive(true)}>Live Results</button>
+                                <button id="chart-btn" className={!live && "active"} onClick={() => setLive(false)}>Polvote Result</button>
+                                <button id="leaderboerd-btn" className={live && 'active'} onClick={() => setLive(true)}>Live Result</button>
                             </div>
                         </div>
                         {live ?
