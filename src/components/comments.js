@@ -59,8 +59,8 @@ function Comments({ comment, id }) {
                 <div className="col-1">
                     <div className="img-container">
                         {comment.userimage === null || comment.userimage === undefined ?
-                            <img src="/img/place.jpg" alt="profile-img" id='profile-img' /> :
-                            <img src={comment.userimage} alt="profile-img" id='profile-img' />
+                            <img src="/img/place.jpg" alt="profile-img" className='profile-img' /> :
+                            <img src={comment.userimage} alt="profile-img" className='profile-img' />
                         }
                     </div>
                 </div>

@@ -66,6 +66,21 @@ function SinglePoll() {
         setPollTotal(pollVotes)
     }, [currentPoll])
 
+    // get Live poll total 
+    const [livePollTotal, setLivePollTotal] = useState()
+    let livePollTotalVotes = currentPoll.aspirant.reduce((total, aspirant) => {
+        let increament = parseInt(aspirant.livevote)
+        total += (increament)
+        return total
+    }, 0)
+    useEffect(() => {
+        if (livePollTotalVotes === 0) {
+            setLivePollTotal(0.000000000000001)
+        } else {
+            setLivePollTotal(livePollTotalVotes)
+        }
+    }, [currentPoll])
+
     // modals 
     const [sharePollModal, setSharePollModal] = useState(false)
 
@@ -74,6 +89,8 @@ function SinglePoll() {
     const handleSharePollModal = (param) => {
         setSharePollModal(param)
     }
+
+    const [live, setLive] = useState(false)
 
     return (
         <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
@@ -84,9 +101,6 @@ function SinglePoll() {
                     <div className="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
-                    {/* gutter  */}
-                    {/* <div className="col-lg-1" /> */}
-                    {/* main  */}
                     <div className="col-lg-8 col-md-9 single-poll">
                         {pageLoading ? <Loader pageLoading={pageLoading} /> :
                             <div>
@@ -106,18 +120,49 @@ function SinglePoll() {
                                         <div className="header d-flex justify-content-between align-items-center">
                                             <div>
                                                 <h3>{currentPoll.polltitle}</h3>
-                                                <p className="mb-0">{pollToTal} Total Votes</p>
+                                                <p className="mb-0">{live ? livePollTotalVotes : pollToTal} Total Votes</p>
                                             </div>
                                             <div className="d-flex">
-                                                {/* <button id="chart-btn"><img src="/img/_3295429435616.svg" alt="Chart" />Chart</button> */}
-                                                {/* <button id="leaderboerd-btn" className="active"><img src="/img/Group 376.svg" alt="Leaderboard" />Leaderboard</button> */}
+                                                <button id="chart-btn" className={!live && "active"} onClick={() => setLive(false)}>Polvote Results</button>
+                                                <button id="leaderboerd-btn" className={live && 'active'} onClick={() => setLive(true)}>Live Results</button>
                                             </div>
                                         </div>
-                                        {currentPoll.aspirant.sort((a, b) => b.votes.length - a.votes.length).map((aspirant, index) => {
-                                            return (
-                                                <SinglePollCard aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} id={id} />
-                                            )
-                                        })}
+                                        {live ?
+                                            <>
+                                                <h6 id='startdate'>Poll starts on {`${currentPoll.livevotedate.substring(8, 10)}-${currentPoll.livevotedate.substring(5, 7)}-${currentPoll.livevotedate.substring(0, 4)}`}</h6>
+                                                {
+                                                    currentPoll.aspirant.sort((a, b) => b.livevote - a.livevote).map((aspirant, index) => {
+                                                        return (
+                                                            <div className="candidate mb-3" key={index}>
+                                                                <div className="row align-items-center">
+                                                                    <div className="col-lg-2 col-md-2 col-sm-2 col-2">
+                                                                        <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
+                                                                    </div>
+                                                                    <div className="col-lg-8 col-md-7 col-sm-7 col-7">
+                                                                        <h4 onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h4>
+                                                                        <p>{aspirant.politparty}</p>
+                                                                        <div className="bar">
+                                                                            <div className="indicator" style={{ width: `${(aspirant.livevote / livePollTotal) * 100}%` }} />
+                                                                        </div>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-2 col-sm-2 col-2 d-flex flex-column justify-content-between align-items-end">
+                                                                        <h3>{(parseFloat(aspirant.livevote / livePollTotal) * 100).toFixed(1) === undefined ? `0%` : `${((aspirant.livevote / livePollTotal) * 100).toFixed(1)}%`}</h3>
+                                                                        <h6 className=" mb-0">{aspirant.livevote} Vote{aspirant.livevote > 1 && "s"}</h6>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        )
+                                                    })
+                                                }
+                                            </> :
+                                            <>
+                                                {currentPoll.aspirant.sort((a, b) => b.votes.length - a.votes.length).map((aspirant, index) => {
+                                                    return (
+                                                        <SinglePollCard aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} id={id} fetchcurrentPollAndParties={fetchcurrentPollAndParties} />
+                                                    )
+                                                })}
+                                            </>
+                                        }
                                     </div>
                                     <footer className="d-flex justify-content-between align-items-center">
                                         {/* <p>See More<i className=" fas fa-angle-down" /></p> */}

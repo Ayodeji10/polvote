@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
-function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
+function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id, fetchcurrentPollAndParties }) {
     // context 
     const { context } = useContext(DataContext)
 
@@ -16,6 +16,8 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
     // modals 
     const [voteModal, setVoteModal] = useState(false)
     const [multipleVotesModal, setMultipleVotesModal] = useState(false)
+    const [voteSuccessModal, setVoteSuccessModal] = useState(false)
+    const [voteRevokeModal, setVoteRevokeModal] = useState(false)
 
     // chech for duplicate vote 
     const [multiple, setMultiple] = useState([{ firstname: "", lastname: "" }])
@@ -31,7 +33,29 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
     }
 
     // vote 
+    const [votedAspirant, setVotedAspirant] = useState({})
     const vote = (aspirantId) => {
+        // console.log(aspirantId)
+        const aspirant = currentPoll.aspirant.filter(aspirant => aspirant.id === aspirantId)
+        setVotedAspirant(aspirant[0])
+        axios({
+            url: `${API.API_ROOT}/polls/voters/${id}`,
+            method: "patch",
+            headers: { 'Authorization': `Bearer ${context.user.token}` },
+            data: { aspiid: aspirantId }
+        }).then((response) => {
+            // window.location.reload()
+            console.log(response)
+            setVoteModal(false)
+            setVoteSuccessModal(true)
+            fetchcurrentPollAndParties()
+        }, (error) => {
+            // console.log(error)
+        })
+    }
+
+    // remove vote 
+    const devote = (aspirantId) => {
         // console.log(aspirantId)
         axios({
             url: `${API.API_ROOT}/polls/voters/${id}`,
@@ -39,7 +63,10 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
             headers: { 'Authorization': `Bearer ${context.user.token}` },
             data: { aspiid: aspirantId }
         }).then((response) => {
-            window.location.reload()
+            fetchcurrentPollAndParties()
+            setMultipleVotesModal(false)
+            setVoteRevokeModal(true)
+            // window.location.reload()
             // console.log(response)
         }, (error) => {
             // console.log(error)
@@ -90,8 +117,24 @@ function SinglePollCard({ aspirant, pollToTal, parties, currentPoll, id }) {
                 <p>You can’t vote for multiple candidate in this category, Kindly revoke Vote for {multiple[0].firstname} {multiple[0].lastname}  to proceed with poll</p>
                 <div className="d-flex justify-content-between">
                     <button id="cancel" onClick={() => setMultipleVotesModal(false)}>Cancel</button>
-                    <button id="proceed" onClick={() => vote(aspirant.id)}>Revoke Previous Vote</button>
+                    <button id="proceed" onClick={() => devote(aspirant.id)}>Revoke Previous Vote</button>
                 </div>
+            </Modal>
+
+            {/* vote success modal */}
+            <Modal isOpen={voteSuccessModal} onRequestClose={() => setVoteSuccessModal(false)} id="voteConfirmation" className={`${context.darkMode ? 'dm' : ""}`}>
+                <i className="fa-solid fa-circle-xmark" onClick={() => setVoteSuccessModal(false)} />
+                <img src="/img/done.png" alt="done" />
+                <h3>Successful!</h3>
+                <p>You have successfully voted for {votedAspirant.firstname} {votedAspirant.lastname}</p>
+            </Modal>
+
+            {/* vote revoke success modal */}
+            <Modal isOpen={voteRevokeModal} onRequestClose={() => setVoteRevokeModal(false)} id="voteConfirmation" className={`${context.darkMode ? 'dm' : ""}`}>
+                <i className="fa-solid fa-circle-xmark" onClick={() => setVoteRevokeModal(false)} />
+                <img src="/img/revoke.png" alt="done" />
+                <h3>Vote Revoked Successfully!!</h3>
+                <p>You have successfully revoked your vote for {multiple[0].firstname} {multiple[0].lastname}</p>
             </Modal>
         </div>
     )
