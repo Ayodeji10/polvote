@@ -2545,7 +2545,8 @@ footer#footer img.social {
 }
 
 .delete-write-modal i {
-    float: right
+    float: right;
+    cursor: pointer;
 }
 
 .delete-write-modal h1 {
@@ -2579,8 +2580,6 @@ footer#footer img.social {
     background-color: rgba(0, 122, 243, 1);
     color: #FFF
 }
-
-
 
 
 
@@ -11139,4 +11138,18 @@ footer#footer.dm .bottom {
 
 #withdrawalModal.dm .response p {
     color: rgba(10, 24, 61, 0.8);
+}
+
+/* delete story modal  */
+.delete-write-modal.dm {
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+.delete-write-modal.dm h1,
+.delete-write-modal.dm i {
+    color: rgba(10, 24, 61, 1)
+}
+
+.delete-write-modal.dm button#cancel {
+    border: 1px solid rgba(0, 122, 243, 1) !important
 }
