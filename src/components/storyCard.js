@@ -3,10 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
-import Modal from 'react-modal';
 import NewLineText from "../components/newLineText";
 import ShareStoryModal from './shareStoryModal';
-Modal.setAppElement('#root')
+import EditStoryModal from './editStoryModal';
+import DeleteStoryModal from './deleteStoryModal';
 
 function StoryCard({ story, index }) {
     // context 
@@ -91,6 +91,20 @@ function StoryCard({ story, index }) {
         setShareStoryModal(variable)
     }
 
+    // edit story 
+    const [editStoryModal, setEditStoryModal] = useState(false)
+
+    const handleEditStoryModal = (variable) => [
+        setEditStoryModal(variable)
+    ]
+
+    // delete story modal 
+    const [deleteStoryModal, setDeleteStoryModal] = useState(false)
+
+    const handleDeleteStoryModal = (variable) => [
+        setDeleteStoryModal(variable)
+    ]
+
     return (
         <div className="story">
             <div className="body">
@@ -104,7 +118,10 @@ function StoryCard({ story, index }) {
                         </div>
                     </div>
                     <div className="col-9 col-sm-10 col-md-10 col-lg-10 d-flex flex-column justify-content-center">
-                        <h3>{story.fullname}</h3>
+                        <h3 onClick={(e) => {
+                            e.preventDefault()
+                            navigate(`/user/${story.userid}`)
+                        }}>{story.fullname}</h3>
                         <div className="d-flex">
                             <p className="mb-0">{story.username}</p>
                             <p className="mb-0">{story.createdAt.substring(8, 10)}-{story.createdAt.substring(5, 7)}-{story.createdAt.substring(0, 4)} {parseInt(story.createdAt.substring(11, 13)) + 1}{story.createdAt.substring(13, 16)} {story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}</p>
@@ -114,17 +131,22 @@ function StoryCard({ story, index }) {
                         <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                {/* <div className="d-flex">
-                                    <i className="fa-regular fa-bookmark" />
-                                    <div>
-                                        <h4>Save Story</h4>
-                                        <p>Add story to your saved items</p>
-                                    </div>
-                                </div> */}
-                                <div className="d-flex" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
                                     <i className="fa-solid fa-link"></i>
-                                    <h4>Copy Link</h4>
+                                    <h4 className='mb-0'>Copy Link</h4>
                                 </div>
+                                {story.userid === context.user._id &&
+                                    <>
+                                        <div className="d-flex align-items-center mb-1" onClick={() => setEditStoryModal(true)}>
+                                            <i className="fa-solid fa-pen-to-square"></i>
+                                            <h4 className='mb-0'>Edit Story</h4>
+                                        </div>
+                                        <div className="d-flex align-items-center mb-1" onClick={() => setDeleteStoryModal(true)} >
+                                            <i className="fa-solid fa-trash-can"></i>
+                                            <h4 className='mb-0'>Delete Story</h4>
+                                        </div>
+                                    </>
+                                }
                             </div>
                         }
                     </div>
@@ -168,7 +190,10 @@ function StoryCard({ story, index }) {
                                 </div>
                             </div>
                             <div className="col-10 col-sm-11 col-md-11 col-lg-11 d-flex flex-column justify-content-center">
-                                <h3>{story.storyinfo[0].fullname}</h3>
+                                <h3 onClick={(e) => {
+                                    e.preventDefault()
+                                    navigate(`/user/${story.storyinfo[0].userid}`)
+                                }}>{story.storyinfo[0].fullname}</h3>
                                 <div className="d-flex">
                                     <p className="mb-0">{story.storyinfo[0].username}</p>
                                     {/* <p className="mb-0">23 Hours Ago</p> */}
@@ -212,6 +237,10 @@ function StoryCard({ story, index }) {
             </div>
             {/* share modal  */}
             {shareStoryModal && <ShareStoryModal story={story} index={index} openModal={shareStoryModal} handleShareStoryModal={handleShareStoryModal} />}
+            {/* edit story modal */}
+            {editStoryModal && <EditStoryModal story={story} index={index} openModal={editStoryModal} handleEditStoryModal={handleEditStoryModal} />}
+            {/* deleteStoryModal  */}
+            {deleteStoryModal && <DeleteStoryModal story={story} openModal={deleteStoryModal} handleDeleteStoryModal={handleDeleteStoryModal} />}
             <div className="comment">
                 <div className="row align-items-center">
                     <div className="col-1">

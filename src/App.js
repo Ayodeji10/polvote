@@ -19,6 +19,8 @@ import EditAspirant2 from './screens/EditAspirants2';
 import EditAspirant3 from './screens/EditAspirant3';
 import Search from './screens/Search';
 import UserProfile from './screens/UserProfile';
+import User from "./screens/User";
+import Withdrawal from "./screens/Withdrawal";
 import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
 import Courses from './screens/Courses';
@@ -70,6 +72,8 @@ function App() {
           <Route exact path="/edit-aspirant/submit-profile/:id" element={<EditAspirant3 />} />
           <Route exact path="/search=:param" element={<Search />} />
           <Route exact path="/user-profile" element={<UserProfile />} />
+          <Route exact path="/withdrawal/:id" element={<Withdrawal />} />
+          <Route exact path="/user/:id" element={<User />} />
           <Route exact path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route exact path="/courses" element={<Courses />} />

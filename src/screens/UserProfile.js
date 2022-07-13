@@ -26,7 +26,7 @@ function UserProfile() {
         }
     }, [])
 
-    // const [walletView, setWalletView] = useState('stories')
+    const [walletView, setWalletView] = useState('stories')
 
     // profile setting 
     const [profileUpdateLoading, setProfileUpdateLoading] = useState(false)
@@ -80,7 +80,7 @@ function UserProfile() {
         }
     }
 
-    // fetch aspirants, stories
+    // fetch aspirants, storie, countries and transactions
     const [aspirants, setAspirants] = useState([])
     const fetchAspirants = async () => {
         const response = await axios
@@ -88,8 +88,6 @@ function UserProfile() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        // const persons = response.data.filter((aspirant) => aspirant.creatorid === context.user._id)
-        // setAspirants(persons)
         setAspirants(response.data)
     }
 
@@ -100,14 +98,45 @@ function UserProfile() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        // const stories = response.data.filter(story => story.userid === context.user._id)
-        // setStories(stories)
         setStories(response.data)
+    }
+
+    // get story wallet total
+    const [storyTotal, setStoryTotal] = useState(0)
+    let storyWallet = stories.filter(story => story.userid === context.user._id).reduce((total, story) => {
+        let increament = story.storyviews.filter(view => view.status === "0" || view.status === "3").length * 2// multiplied by conversion rate
+        total += (increament)
+        return total
+    }, 0)
+    useEffect(() => {
+        setStoryTotal(storyWallet)
+    }, [stories])
+
+    const [countries, setCountries] = useState([])
+    const fetchCountries = async () => {
+        const response = await axios
+            .get(`${API.API_ROOT}/countries/countries`)
+            .catch((error) => [
+                console.log('Err', error)
+            ]);
+        setCountries(response.data)
+    }
+
+    const [history, setHistory] = useState([])
+    const fetchHistory = async () => {
+        const response = await axios
+            .get(`${API.API_ROOT}/wallet`)
+            .catch((error) => [
+                console.log('Err', error)
+            ]);
+        setHistory(response.data)
     }
 
     useEffect(() => {
         fetchAspirants()
         fetchStories()
+        fetchCountries()
+        fetchHistory()
     }, [])
 
     // cover picture 
@@ -190,6 +219,77 @@ function UserProfile() {
         setWriteStoryModal(variable)
     }
 
+    // update payout settings 
+    const [paySettingLoader, setPaySettingLoader] = useState(false)
+    const [paySettingError, setPaySettingError] = useState("")
+    const [paySettingSuccess, setPaySettingSuccess] = useState(false)
+
+    const updatePaySettings = () => {
+        setPaySettingLoader(true)
+        setPaySettingError("")
+        if (context.user.bankname === "" || context.user.bankcountry === "" || context.user.accountname === "" || context.user.accountnumber === "" || context.user.sortcode === "") {
+            setPasswordUpdateError("Please fill all account details")
+            setPasswordUpdateLoading(false)
+        } else {
+            axios({
+                url: `${API.API_ROOT}/users/paymentsettings`,
+                method: "post",
+                headers: { "Content-Type": "application/json", 'Authorization': `Bearer ${context.user.token}` },
+                data: {
+                    bankname: context.user.bankname,
+                    bankcountry: context.user.bankcountry,
+                    accountname: context.user.accountname,
+                    accountnumber: context.user.accountnumber,
+                    sortcode: context.user.sortcode
+                }
+            }).then((response) => {
+                setContext({ ...context, user: response.data.users })
+                setPaySettingSuccess(true)
+                setPaySettingLoader(false)
+                setPaySettingError("")
+                setTimeout(() => {
+                    setPaySettingSuccess(false)
+                }, 800000);
+            }, (error) => {
+                console.log(error)
+                setPaySettingLoader(false)
+            })
+        }
+    }
+
+    // withdrawal modal 
+    const [withdrawalModal, setWithdrawalModal] = useState(false)
+    const [withdrawalModalState, setWithdrawalModalState] = useState('proceed')
+
+    const [withdrawalLoading, setWithdrawalLoading] = useState(false)
+
+    const withdraw = () => {
+        if (storyTotal < 10000) {
+            setWithdrawalModalState(false)
+        } else {
+            setWithdrawalLoading(true)
+            console.log(storyTotal, context.user.bankname, context.user.bankcountry, context.user.accountname, context.user.accountnumber, context.user.sortcode)
+            axios.post(`${API.API_ROOT}/wallet/withdrawl`,
+                {
+                    amount: storyTotal,
+                    bankname: context.user.bankname,
+                    bankcountry: context.user.bankcountry,
+                    accountname: context.user.accountname,
+                    accountnumber: context.user.accountnumber,
+                    sortcode: context.user.sortcode
+                },
+                { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${context.user.token}` } })
+                .then(response => {
+                    console.log(response)
+                    setWithdrawalLoading(false)
+                    setWithdrawalModalState(true)
+                }).catch(error => {
+                    console.error(error)
+                    setWithdrawalLoading(false)
+                })
+        }
+    }
+
     return (
         <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             {/* navigation */}
@@ -253,11 +353,15 @@ function UserProfile() {
                                 }
                                 Stories
                             </button>
-                            {/* <button className={currentView === "wallet" && "active"} onClick={() => setCurrentView('wallet')}><img src="img/wallet.png" alt="wallet" />My Wallet</button> */}
+                            <button className={context.profileView === "wallet" && "active"} onClick={() => setContext({ ...context, profileView: "wallet" })}>
+                                <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M19.96 7.3331H18.6667V3.99977C18.6667 3.82295 18.5964 3.65339 18.4714 3.52836C18.3464 3.40334 18.1768 3.3331 18 3.3331H2C1.82319 3.3331 1.65362 3.26286 1.5286 3.13784C1.40357 3.01281 1.33333 2.84324 1.33333 2.66643C1.33333 2.48962 1.40357 2.32005 1.5286 2.19503C1.65362 2.07 1.82319 1.99977 2 1.99977H17.7333C17.9101 1.99977 18.0797 1.92953 18.2047 1.8045C18.3298 1.67948 18.4 1.50991 18.4 1.3331C18.4 1.15629 18.3298 0.986719 18.2047 0.861694C18.0797 0.73667 17.9101 0.666432 17.7333 0.666432H2C1.7426 0.661125 1.48667 0.706584 1.24683 0.80021C1.007 0.893837 0.787966 1.0338 0.602238 1.2121C0.41651 1.3904 0.267729 1.60354 0.164396 1.83935C0.0610619 2.07516 0.00519958 2.32903 0 2.58643V16.5864C0.000872594 16.9486 0.073176 17.307 0.212769 17.6411C0.352362 17.9753 0.556503 18.2786 0.8135 18.5337C1.0705 18.7889 1.3753 18.9908 1.71046 19.128C2.04561 19.2652 2.40453 19.3349 2.76667 19.3331H18C18.1768 19.3331 18.3464 19.2629 18.4714 19.1378C18.5964 19.0128 18.6667 18.8432 18.6667 18.6664V15.3331H19.96C20.0441 15.3395 20.1287 15.3286 20.2085 15.3011C20.2883 15.2737 20.3616 15.2302 20.4241 15.1734C20.4865 15.1166 20.5366 15.0477 20.5715 14.9708C20.6063 14.894 20.6251 14.8108 20.6267 14.7264V8.05977C20.6289 7.87655 20.5611 7.6994 20.4373 7.56438C20.3134 7.42937 20.1427 7.34666 19.96 7.3331ZM19.3333 13.9998H13.6133C12.9301 13.9754 12.2845 13.6809 11.8182 13.1809C11.352 12.6809 11.1033 12.0163 11.1267 11.3331C11.1033 10.6499 11.352 9.98525 11.8182 9.48526C12.2845 8.98526 12.9301 8.69076 13.6133 8.66643H19.3333V13.9998Z" fill="#0A183D" fill-opacity="0.6" />
+                                </svg>
+                                My Wallet
+                            </button>
                             {/* <button><img src="img/courses.png" alt="courses" />My Courses</button> */}
                         </section>
                         <section>
-                            {/* <button><img src="img/notification 2.png" alt="notification" />Notifications</button> */}
                             <button className={context.profileView === "edit" && "active"} onClick={() => setContext({ ...context, profileView: 'edit' })}>
                                 {context.darkMode ?
                                     <svg width={24} height={26} viewBox="0 0 24 26" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -270,6 +374,25 @@ function UserProfile() {
                                     </svg>
                                 }
                                 Edit Profile
+                            </button>
+                            <button className={context.profileView === "pay" && "active"} onClick={() => setContext({ ...context, profileView: 'pay' })}>
+                                {context.darkMode ?
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g opacity="0.5">
+                                            <path d="M23.625 3.5H0.875V21H23.625V3.5ZM21.875 19.25H2.625V5.25H21.875V19.25Z" fill="#0A183D" />
+                                            <path d="M25.375 7.875V22.75H5.25V24.5H27.125V7.875H25.375Z" fill="#0A183D" />
+                                            <path d="M12.25 16.5408C14.4211 16.5408 16.1875 14.6192 16.1875 12.2573C16.1875 9.89543 14.4211 7.97387 12.25 7.97387C10.0789 7.97387 8.3125 9.89538 8.3125 12.2573C8.3125 14.6193 10.0789 16.5408 12.25 16.5408ZM12.25 9.72388C13.4562 9.72388 14.4375 10.8604 14.4375 12.2573C14.4375 13.6543 13.4562 14.7908 12.25 14.7908C11.0438 14.7908 10.0625 13.6543 10.0625 12.2573C10.0625 10.8604 11.0438 9.72388 12.25 9.72388ZM4.375 7.4375H6.125V17.0625H4.375V7.4375ZM18.375 7.4375H20.125V17.0625H18.375V7.4375Z" fill="#0A183D" />
+                                        </g>
+                                    </svg> :
+                                    <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <g opacity="0.5">
+                                            <path d="M23.625 3.5H0.875V21H23.625V3.5ZM21.875 19.25H2.625V5.25H21.875V19.25Z" fill="white" />
+                                            <path d="M25.375 7.875V22.75H5.25V24.5H27.125V7.875H25.375Z" fill="white" />
+                                            <path d="M12.25 16.5408C14.4211 16.5408 16.1875 14.6192 16.1875 12.2573C16.1875 9.89543 14.4211 7.97387 12.25 7.97387C10.0789 7.97387 8.3125 9.89538 8.3125 12.2573C8.3125 14.6193 10.0789 16.5408 12.25 16.5408ZM12.25 9.72388C13.4562 9.72388 14.4375 10.8604 14.4375 12.2573C14.4375 13.6543 13.4562 14.7908 12.25 14.7908C11.0438 14.7908 10.0625 13.6543 10.0625 12.2573C10.0625 10.8604 11.0438 9.72388 12.25 9.72388ZM4.375 7.4375H6.125V17.0625H4.375V7.4375ZM18.375 7.4375H20.125V17.0625H18.375V7.4375Z" fill="white" />
+                                        </g>
+                                    </svg>
+                                }
+                                Payout Settings
                             </button>
                         </section>
                         <section>
@@ -308,78 +431,170 @@ function UserProfile() {
                         {/* profiles */}
                         {context.profileView === 'aspirants' &&
                             <>
-                                <div className="aspirant-header d-flex justify-content-between align-items-center">
-                                    <h1 className="mb-0">Aspirant Profiles</h1>
-                                    <button onClick={() => navigate("/create-aspirant")}><img src="img/edit.png" alt="create" />Create Aspirant Profile</button>
-                                </div>
-                                <div className="profile">
-                                    {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").map((aspirant, index) => {
-                                        return (
-                                            <SingleProfileCard aspirant={aspirant} key={index} />
-                                        )
-                                    }).reverse()}
-                                </div>
+                                {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").length < 1 ?
+                                    <div className="empty">
+                                        {context.darkMode ?
+                                            <img src="/img/empty-profile-lt.png" className="img-fluid" alt="no stories" /> :
+                                            <img src="/img/empty-profile.png" className="img-fluid" alt="no stories" />
+                                        }
+                                        <p>No Profiles Created Yet</p>
+                                    </div> :
+                                    <>
+                                        <div className="aspirant-header d-flex justify-content-between align-items-center">
+                                            <h1 className="mb-0">Aspirant Profiles</h1>
+                                            <button onClick={() => navigate("/create-aspirant")}><img src="img/edit.png" alt="create" />Create Aspirant Profile</button>
+                                        </div>
+                                        <div className="profile">
+                                            {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").map((aspirant, index) => {
+                                                return (
+                                                    <SingleProfileCard aspirant={aspirant} key={index} />
+                                                )
+                                            }).reverse()}
+                                        </div>
+                                    </>
+                                }
                             </>
                         }
 
                         {/* stories */}
                         {context.profileView === "stories" &&
                             <>
-                                <div className="story-header">
-                                    <div className="d-flex align-items-center justify-content-between">
-                                        <h1 className="mb-0">My Stories</h1>
-                                        <button onClick={() => setWriteStoryModal(true)}><img src="img/edit.png" alt="edit" />Write New Story</button>
-                                    </div>
-                                </div>
-                                {/* write modal  */}
-                                {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
-                                <div className="story">
-                                    {stories.filter(story => story.userid === context.user._id).map((story, index) => {
-                                        return (
-                                            <StoryCard story={story} key={index} />
-                                        )
-                                    }).reverse()}
-                                </div>
+                                {stories.filter(story => story.userid === context.user._id).length < 1 ?
+                                    <div className="empty">
+                                        {context.darkMode ?
+                                            <img src="/img/empty-stories-lt.png" alt="no stories" /> :
+                                            <img src="/img/empty-stories.png" className="img-fluid" alt="no stories" />
+                                        }
+                                        <p>No Stories Yet</p>
+                                    </div> :
+                                    <>
+                                        <div className="story-header">
+                                            <div className="d-flex align-items-center justify-content-between">
+                                                <h1 className="mb-0">My Stories</h1>
+                                                <button onClick={() => setWriteStoryModal(true)}><img src="img/edit.png" alt="edit" />Write New Story</button>
+                                            </div>
+                                        </div>
+                                        {/* write modal  */}
+                                        {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
+                                        <div className="story">
+                                            {stories.filter(story => story.userid === context.user._id).map((story, index) => {
+                                                return (
+                                                    <StoryCard story={story} key={index} />
+                                                )
+                                            }).reverse()}
+                                        </div>
+                                    </>
+                                }
                             </>
                         }
 
                         {/* wallet */}
-                        {/* {currentView === "wallet" &&
+                        {context.profileView === "wallet" &&
                             <div className="wallet">
                                 <div className="header mb-3">
-                                    <div className="row">
-                                        <div className="col-lg-7">
+                                    <div className="row mt-3 mt-md-0 mt-lg-0">
+                                        <div className="col-lg-6 col-md-5 col-sm-5 col-10">
                                             <section className="category">
                                                 <div className="row">
-                                                    <div className="col-lg-4">
-                                                        <button className={walletView === 'stories' && 'active'} onClick={() => setWalletView('stories')} ><img src="img/stories.png" alt="stories" />Stories</button>
+                                                    <div className="col-6">
+                                                        <button className={walletView === 'stories' && 'active'} onClick={() => setWalletView('stories')} >
+                                                            {context.darkMode ?
+                                                                <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M17.5833 0.25H2.41667C1.225 0.25 0.25 1.225 0.25 2.41667V17.5833C0.25 18.775 1.225 19.75 2.41667 19.75H17.5833C18.775 19.75 19.75 18.775 19.75 17.5833V2.41667C19.75 1.225 18.775 0.25 17.5833 0.25ZM8.91667 15.4167H4.58333C3.9875 15.4167 3.5 14.9292 3.5 14.3333C3.5 13.7375 3.9875 13.25 4.58333 13.25H8.91667C9.5125 13.25 10 13.7375 10 14.3333C10 14.9292 9.5125 15.4167 8.91667 15.4167ZM12.1667 11.0833H7.83333C7.2375 11.0833 6.75 10.5958 6.75 10C6.75 9.40417 7.2375 8.91667 7.83333 8.91667H12.1667C12.7625 8.91667 13.25 9.40417 13.25 10C13.25 10.5958 12.7625 11.0833 12.1667 11.0833ZM15.4167 6.75H11.0833C10.4875 6.75 10 6.2625 10 5.66667C10 5.07083 10.4875 4.58333 11.0833 4.58333H15.4167C16.0125 4.58333 16.5 5.07083 16.5 5.66667C16.5 6.2625 16.0125 6.75 15.4167 6.75Z" fill="#0A183D" fillOpacity="0.5" />
+                                                                </svg> :
+                                                                <svg width={20} height={20} viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <path d="M17.5833 0.25H2.41667C1.225 0.25 0.25 1.225 0.25 2.41667V17.5833C0.25 18.775 1.225 19.75 2.41667 19.75H17.5833C18.775 19.75 19.75 18.775 19.75 17.5833V2.41667C19.75 1.225 18.775 0.25 17.5833 0.25ZM8.91667 15.4167H4.58333C3.9875 15.4167 3.5 14.9292 3.5 14.3333C3.5 13.7375 3.9875 13.25 4.58333 13.25H8.91667C9.5125 13.25 10 13.7375 10 14.3333C10 14.9292 9.5125 15.4167 8.91667 15.4167ZM12.1667 11.0833H7.83333C7.2375 11.0833 6.75 10.5958 6.75 10C6.75 9.40417 7.2375 8.91667 7.83333 8.91667H12.1667C12.7625 8.91667 13.25 9.40417 13.25 10C13.25 10.5958 12.7625 11.0833 12.1667 11.0833ZM15.4167 6.75H11.0833C10.4875 6.75 10 6.2625 10 5.66667C10 5.07083 10.4875 4.58333 11.0833 4.58333H15.4167C16.0125 4.58333 16.5 5.07083 16.5 5.66667C16.5 6.2625 16.0125 6.75 15.4167 6.75Z" fill="white" fillOpacity="0.6" />
+                                                                </svg>
+                                                            }
+                                                            Stories</button>
                                                     </div>
-                                                    <div className="col-lg-4">
-                                                        <button className={walletView === 'profiles' && 'active'} onClick={() => setWalletView('profiles')}><img src="img/aspirant.png" alt="aspirant" />Aspirant
-                                                            Profiles</button>
-                                                    </div>
-                                                    <div className="col-lg-4">
-                                                        <button className={walletView === 'courses' && 'active'} onClick={() => setWalletView('courses')}><img src="img/courses.png" alt="courses" />Courses</button>
+                                                    <div className="col-6">
+                                                        <button className={walletView === 'courses' && 'active'} onClick={() => setWalletView('courses')}>
+                                                            {context.darkMode ?
+                                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <g clip-path="url(#clip0_4845_911)">
+                                                                        <path d="M15.8395 19.8554C12.5143 17.4008 6.98846 13.2166 0.115356 12.3037L3.05329 9.43035C11.4864 12.6869 15.8395 19.8554 15.8395 19.8554ZM0.466253 15.2582L2.75867 13.4234C9.44887 15.0687 15.1228 19.8621 15.1228 19.8621C12.7336 18.5131 5.95563 15.1945 0.466253 15.2582ZM2.5708 8.60276L10.226 1.79172L11.8745 2.74593L8.1628 6.96C12.16 10.2563 16.5959 13.7628 16.1987 19.4789C12.2627 13.9026 7.62239 9.91448 2.57163 8.60276H2.5708ZM9.11453 6.83917L14.9945 0C18.1319 2.56552 19.8856 6.54869 19.8856 8.70041C19.6298 11.4497 16.941 18.0935 16.6927 18.8268C16.5065 17.1658 17.8795 14.2254 9.11453 6.83917Z" fill="#0A183D" fill-opacity="0.5" />
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="clip0_4845_911">
+                                                                            <rect width="19.8621" height="19.8621" fill="white" transform="translate(0.0689697)" />
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg> :
+                                                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                    <g clip-path="url(#clip0_4839_50821)">
+                                                                        <path d="M15.8394 19.8554C12.5142 17.4008 6.9884 13.2166 0.115295 12.3037L3.05323 9.43035C11.4863 12.6869 15.8394 19.8554 15.8394 19.8554ZM0.466192 15.2582L2.75861 13.4234C9.44881 15.0687 15.1227 19.8621 15.1227 19.8621C12.7335 18.5131 5.95557 15.1945 0.466192 15.2582ZM2.57074 8.60276L10.2259 1.79172L11.8745 2.74593L8.16274 6.96C12.16 10.2563 16.5958 13.7628 16.1986 19.4789C12.2626 13.9026 7.62233 9.91448 2.57157 8.60276H2.57074ZM9.11447 6.83917L14.9945 0C18.1318 2.56552 19.8855 6.54869 19.8855 8.70041C19.6298 11.4497 16.941 18.0935 16.6927 18.8268C16.5065 17.1658 17.8794 14.2254 9.11447 6.83917Z" fill="white" />
+                                                                    </g>
+                                                                    <defs>
+                                                                        <clipPath id="clip0_4839_50821">
+                                                                            <rect width="19.8621" height="19.8621" fill="white" transform="translate(0.0689697)" />
+                                                                        </clipPath>
+                                                                    </defs>
+                                                                </svg>
+                                                            }
+                                                            Courses</button>
                                                     </div>
                                                 </div>
                                             </section>
                                         </div>
-                                        <div className="col-lg-1">
+                                        <div className="col-lg-1 col-md-2 col-sm-2 col-2">
                                             <section className="history d-flex align-items-center justify-content-center">
                                                 <button className={walletView === 'history' && 'active'} onClick={() => setWalletView('history')}>
                                                     <i className="fas fa-history"></i>
                                                 </button>
                                             </section>
                                         </div>
-                                        <div className="col-lg-4">
-                                            <section className="withdrawl">
+                                        <div className="col-lg-5 col-md-5 col-sm-5 col-12">
+                                            <section className="withdrawl mt-3 mt-sm-0">
                                                 <div className="row align-items-center">
-                                                    <div className="col-6">
+                                                    <div className="col-6 col-sm-7">
                                                         <p>Total Wallet Balance</p>
-                                                        <h2 className="mb-0">$27,826</h2>
+                                                        <h2 className="mb-0">${storyTotal.toFixed(2)}</h2>
                                                     </div>
-                                                    <div className="col-6">
-                                                        <button><img src="img/withdrawl.png" alt="withdrawl" />Withdraw</button>
+                                                    <div className="col-6 col-sm-5">
+                                                        <button onClick={() => setWithdrawalModal(true)}><img src="img/withdrawl.png" alt="withdrawl" />{withdrawalLoading ? "Loading..." : "Withdraw"}</button>
+
+                                                        {/* withdrawal modal  */}
+                                                        <Modal isOpen={withdrawalModal} onRequestClose={() => {
+                                                            setWithdrawalModalState('proceed')
+                                                            setWithdrawalModal(false)
+                                                        }} id="withdrawalModal" className={`${context.darkMode ? 'dm' : ""}`}>
+                                                            <i className="fas fa-times" onClick={() => {
+                                                                setWithdrawalModalState('proceed')
+                                                                setWithdrawalModal(false)
+                                                            }} />
+                                                            {withdrawalModalState === "proceed" &&
+                                                                <div className="proceed">
+                                                                    <h1>Withrawal Request</h1>
+                                                                    <p>PS: You must have a minimum amount of N10,000 in your wallet before you can withdraw.</p>
+                                                                    <div className="row">
+                                                                        <div className="col-6">
+                                                                            <h4>Available Balance</h4>
+                                                                            <h2>N{storyTotal}</h2>
+                                                                        </div>
+                                                                        <div className="col-6">
+                                                                            <h4>MInimum Payout</h4>
+                                                                            <h2>N10,000</h2>
+                                                                        </div>
+                                                                    </div>
+                                                                    <button onClick={withdraw}>{withdrawalLoading ? "Loading..." : "Withdraw Funds"}</button>
+                                                                </div>
+                                                            }
+                                                            {withdrawalModalState === false &&
+                                                                <div className="response">
+                                                                    <img src="/img/false.png" className='img-fluid' alt="declined" />
+                                                                    <h2>Withdrawal Failed!</h2>
+                                                                    <p>You need to have a minimum amount of N10,000 before you can withdraw</p>
+                                                                </div>
+                                                            }
+                                                            {withdrawalModalState === true &&
+                                                                <div className="response">
+                                                                    <img src="/img/verify.png" className='img-fluid' alt="confirm" />
+                                                                    <h2>One More Step!</h2>
+                                                                    <p>A Verification link  has been sent to <span>{context.user.email}</span>. Please click on the link to verify your withdrawal request.</p>
+                                                                </div>
+                                                            }
+                                                        </Modal>
                                                     </div>
                                                 </div>
                                             </section>
@@ -388,199 +603,67 @@ function UserProfile() {
                                 </div>
 
                                 {walletView === 'stories' &&
-                                    <div className="stories">
-                                        <div className="story">
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-10">
-                                                    <p className="mb-0">Osun PDP internal rift unabated as governorship primary draws closer
-                                                    </p>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <span><img src="img/view.png" alt="views" />6,202 Views</span>
-                                                    <span><img src="img/cash.png" alt="cash" />$450</span>
-                                                </div>
+                                    <>
+                                        {stories.filter(story => story.userid === context.user._id).length < 1 ?
+                                            <div className="empty">
+                                                {context.darkMode ?
+                                                    <img src="/img/empty-stories-lt.png" alt="no stories" /> :
+                                                    <img src="/img/empty-stories.png" className="img-fluid" alt="no stories" />
+                                                }
+                                                <p>No Stories Yet</p>
+                                            </div> :
+                                            <div className="stories">
+                                                {stories.filter(story => story.userid === context.user._id).map((story, index) => {
+                                                    return (
+                                                        <div className="story" key={index}>
+                                                            <div className="row align-items-center">
+                                                                <div className="col-lg-10 col-sm-9 col-12 mb-2">
+                                                                    <p className="mb-0">{story.story.substring(0, 200)}</p>
+                                                                </div>
+                                                                <div className="col-lg-2 col-sm-3 col-12">
+                                                                    <span>
+                                                                        {context.darkMode ?
+                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M20.257 6.962C20.731 7.582 20.731 8.419 20.257 9.038C18.764 10.987 15.182 15 11 15C6.818 15 3.236 10.987 1.743 9.038C1.51238 8.74113 1.3872 8.37592 1.3872 8C1.3872 7.62408 1.51238 7.25887 1.743 6.962C3.236 5.013 6.818 1 11 1C15.182 1 18.764 5.013 20.257 6.962V6.962Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                            </svg> :
+                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M20.257 6.962C20.731 7.582 20.731 8.419 20.257 9.038C18.764 10.987 15.182 15 11 15C6.81801 15 3.23601 10.987 1.74301 9.038C1.51239 8.74113 1.38721 8.37592 1.38721 8C1.38721 7.62408 1.51239 7.25887 1.74301 6.962C3.23601 5.013 6.81801 1 11 1C15.182 1 18.764 5.013 20.257 6.962V6.962Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                            </svg>
+                                                                        }
+                                                                        {story.storyviews.length} View{story.storyviews.length > 1 && "s"}
+                                                                    </span>
+                                                                    <span>
+                                                                        {context.darkMode ?
+                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H19C19.5304 1 20.0391 1.21071 20.4142 1.58579C20.7893 1.96086 21 2.46957 21 3V13C21 13.5304 20.7893 14.0391 20.4142 14.4142C20.0391 14.7893 19.5304 15 19 15H3C2.46957 15 1.96086 14.7893 1.58579 14.4142C1.21071 14.0391 1 13.5304 1 13V3Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M1 5C2.06087 5 3.07828 4.57857 3.82843 3.82843C4.57857 3.07828 5 2.06087 5 1" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                            </svg> :
+                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                <path d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H19C19.5304 1 20.0391 1.21071 20.4142 1.58579C20.7893 1.96086 21 2.46957 21 3V13C21 13.5304 20.7893 14.0391 20.4142 14.4142C20.0391 14.7893 19.5304 15 19 15H3C2.46957 15 1.96086 14.7893 1.58579 14.4142C1.21071 14.0391 1 13.5304 1 13V3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M1 5C2.06087 5 3.07828 4.57857 3.82843 3.82843C4.57857 3.07828 5 2.06087 5 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                            </svg>
+                                                                        }
+                                                                        ${story.storyviews.filter(storyview => storyview.status === "0" || storyview.status === "0").length * 0.002}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
                                             </div>
-                                        </div>
-                                        <div className="story">
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-10">
-                                                    <p className="mb-0">Osun PDP internal rift unabated as governorship primary draws closer
-                                                    </p>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <span><img src="img/view.png" alt="views" />6,202 Views</span>
-                                                    <span><img src="img/cash.png" alt="cash" />$450</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="story">
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-10">
-                                                    <p className="mb-0">Osun PDP internal rift unabated as governorship primary draws closer
-                                                    </p>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <span><img src="img/view.png" alt="views" />6,202 Views</span>
-                                                    <span><img src="img/cash.png" alt="cash" />$450</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="story">
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-10">
-                                                    <p className="mb-0">Osun PDP internal rift unabated as governorship primary draws closer
-                                                    </p>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <span><img src="img/view.png" alt="views" />6,202 Views</span>
-                                                    <span><img src="img/cash.png" alt="cash" />$450</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                        }
+                                    </>
                                 }
 
-                                {walletView === 'profiles' &&
-                                    <div className="profiles">
-                                        <div className="head mb-2">
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-4">
-                                                    <h4>Aspirant’s Name</h4>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h4>Profile Worth</h4>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <h4>Views</h4>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <h4>Amount Earned</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="body">
-                                            <div className="profile">
-                                                <div className="row">
-                                                    <div className="col-lg-4">
-                                                        <h4>Ahmed Bola Tinubu</h4>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p>$40</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/view.png" alt="views" />6,202 Views</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/cash.png" alt="amount" />$450</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="profile">
-                                                <div className="row">
-                                                    <div className="col-lg-4">
-                                                        <h4>Ahmed Bola Tinubu</h4>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p>$40</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/view.png" alt="views" />6,202 Views</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/cash.png" alt="amount" />$450</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="profile">
-                                                <div className="row">
-                                                    <div className="col-lg-4">
-                                                        <h4>Ahmed Bola Tinubu</h4>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p>$40</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/view.png" alt="views" />6,202 Views</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/cash.png" alt="amount" />$450</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-
-                                {walletView === "courses" &&
-                                    <div className="profiles">
-                                        <div className="head mb-2">
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-5">
-                                                    <h4>Course Title</h4>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h4>Course Fee</h4>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h4>Quantity sold</h4>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <h4>Amount Earned</h4>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div className="body">
-                                            <div className="profile">
-                                                <div className="row">
-                                                    <div className="col-lg-5">
-                                                        <h4>American Government and Politics</h4>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p>$40</p>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p><img src="img/view.png" alt="views" />3</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/cash.png" alt="amount" />$450</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="profile">
-                                                <div className="row">
-                                                    <div className="col-lg-5">
-                                                        <h4>American Government and Politics</h4>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p>$40</p>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p><img src="img/view.png" alt="views" />3</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/cash.png" alt="amount" />$450</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="profile">
-                                                <div className="row">
-                                                    <div className="col-lg-5">
-                                                        <h4>American Government and Politics</h4>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p>$40</p>
-                                                    </div>
-                                                    <div className="col-lg-2">
-                                                        <p><img src="img/view.png" alt="views" />3</p>
-                                                    </div>
-                                                    <div className="col-lg-3">
-                                                        <p><img src="img/cash.png" alt="amount" />$450</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                {walletView == "courses" &&
+                                    <div className="courses">
+                                        <h1>Coming Soon!!!</h1>
                                     </div>
                                 }
 
@@ -588,103 +671,69 @@ function UserProfile() {
                                     <div className="history">
                                         <h1>Transaction History</h1>
                                         <div className="row header">
-                                            <div className="col-lg-1">
+                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
                                                 <p>Status</p>
                                             </div>
-                                            <div className="col-lg-2">
+                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4">
                                                 <p>Account Name</p>
                                             </div>
-                                            <div className="col-lg-1">
+                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
                                                 <p>Amount</p>
                                             </div>
-                                            <div className="col-lg-2">
+                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
                                                 <p>Bank Name</p>
                                             </div>
-                                            <div className="col-lg-2">
+                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4">
                                                 <p>Acct Number</p>
                                             </div>
-                                            <div className="col-lg-1">
-                                                <p>Currency</p>
+                                            <div className="col-lg-3 col-md-3 col-sm-3 col-4">
+                                                <p>Reason of Rejection</p>
                                             </div>
-                                            <div className="col-lg-3">
+                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4">
                                                 <p>Date &amp; Time</p>
                                             </div>
                                         </div>
-                                        <div className="transactions">
-                                            <div className="row align-items-center">
-                                                <div className=" col-lg-1">
-                                                    <img src="img/trans-done.png" alt="done" />
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>Adesina Flake Akintola</h3>
-                                                </div>
-                                                <div className="col-lg-1">
-                                                    <h4>150000</h4>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>Zenith Bank</h3>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>0012382910</h3>
-                                                </div>
-                                                <div className="col-lg-1">
-                                                    <h3>Naira</h3>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <h4>Mon Feb 14, 2022, 3:29 PM</h4>
-                                                </div>
+                                        {history.filter((history => history.userid === context.user._id)).length < 1 ?
+                                            <div className="history-empty">
+
+                                            </div> :
+                                            <div className="transactions">
+                                                {history.filter((history => history.userid === context.user._id)).map((history, index) => {
+                                                    return (
+                                                        <div className="row align-items-center" key={index}>
+                                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
+                                                                {history.status === "0" || history.status === "1" && <i class="fa-solid fa-triangle-exclamation"></i>}
+                                                                {/* <i class="fa-solid fa-triangle-exclamation"></i> */}
+                                                                {history.status === "2" && <i class="fa-solid fa-square-check"></i>}
+                                                                {history.status === "3" && <i class="fa-solid fa-rectangle-xmark"></i>}
+                                                            </div>
+                                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4">
+                                                                <h3>{history.accountname}</h3>
+                                                            </div>
+                                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
+                                                                <h4>{history.amount}</h4>
+                                                            </div>
+                                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
+                                                                <h3>{history.bankname}</h3>
+                                                            </div>
+                                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+                                                                <h3>{history.accountnumber}</h3>
+                                                            </div>
+                                                            <div className="col-lg-3 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+                                                                <h4>{history.reason === null || history.reason === undefined ? "Nil" : history.reason}</h4>
+                                                            </div>
+                                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+                                                                <h4>{history.createdAt.substring(0, 19)}</h4>
+                                                            </div>
+                                                        </div>
+                                                    )
+                                                })}
                                             </div>
-                                            <div className="row align-items-center">
-                                                <div className="col-lg-1">
-                                                    <img src="/img/trans1.png" alt="cancelled" />
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>Adesina Flake</h3>
-                                                </div>
-                                                <div className="col-lg-1">
-                                                    <h4>150000</h4>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>Zenith Bank</h3>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>0012382910</h3>
-                                                </div>
-                                                <div className="col-lg-1">
-                                                    <h3>Naira</h3>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <h4>Mon Feb 14, 2022, 3:29 PM</h4>
-                                                </div>
-                                            </div>
-                                            <div className="row align-items-center">
-                                                <div className=" col-lg-1">
-                                                    <img src="img/trans-done.png" alt="done" />
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>Adesina Flake Akintola</h3>
-                                                </div>
-                                                <div className="col-lg-1">
-                                                    <h4>150000</h4>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>Zenith Bank</h3>
-                                                </div>
-                                                <div className="col-lg-2">
-                                                    <h3>0012382910</h3>
-                                                </div>
-                                                <div className="col-lg-1">
-                                                    <h3>Naira</h3>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <h4>Mon Feb 14, 2022, 3:29 PM</h4>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        }
                                     </div>
                                 }
                             </div>
-                        } */}
+                        }
 
                         {/* edit */}
                         {context.profileView === "edit" &&
@@ -748,6 +797,45 @@ function UserProfile() {
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        }
+
+                        {/* pay out  */}
+                        {context.profileView === "pay" &&
+                            <div className="payout-setting mt-sm-3 mt-md-0 mt-3">
+                                <h1>Manage your Payout Settings</h1>
+                                {/* <h2>Below are payout options for your account</h2> */}
+                                <div className="bank">
+                                    <h1>Bank Account</h1>
+                                    <h3>If you want to receive your payouts in your bank account, you have to enter your bank details here. <span>Please ensure your account name is the same with your profile name.</span></h3>
+                                    {paySettingSuccess &&
+                                        <div className="row success-msg align-items-center">
+                                            <div className="col-11">
+                                                <h4 className='mb-0'>You have successfully updated your bank account details</h4>
+                                            </div>
+                                            <div className="col-1">
+                                                <i className="fa-solid fa-xmark" />
+                                            </div>
+                                        </div>
+                                    }
+                                    <label htmlFor="bankname">Bank Name</label>
+                                    <input type="text" id='bankname' placeholder='FCMB' value={context.user.bankname} onChange={(e) => setContext({ ...context, user: { ...context.user, bankname: e.target.value } })} />
+                                    <label htmlFor="bankcountry">Bank Country</label>
+                                    <select name="category" id="category" onChange={(e) => setContext({ ...context, user: { ...context.user, bankcountry: e.target.value } })}>
+                                        <option value="">-- Select country --</option>
+                                        {countries.map((country) => {
+                                            return <option value={country.country} key={country._id}>{country.country}</option>
+                                        })}
+                                    </select>
+                                    <label htmlFor="accountname">Account Name</label>
+                                    <input type="text" id='accountname' placeholder='James Jackson' value={context.user.accountname} onChange={(e) => setContext({ ...context, user: { ...context.user, accountname: e.target.value } })} />
+                                    <label htmlFor="acctnumber">Account Number</label>
+                                    <input type="number" id='acctnumber' placeholder='1234567890' value={context.user.accountnumber} onChange={(e) => setContext({ ...context, user: { ...context.user, accountnumber: e.target.value } })} />
+                                    <label htmlFor="sortcode">Sort Code</label>
+                                    <input type="number" id='sortcode' placeholder='032943479' value={context.user.sortcode} onChange={(e) => setContext({ ...context, user: { ...context.user, sortcode: e.target.value } })} />
+                                    <h3><span>{paySettingError}</span></h3>
+                                    <button onClick={updatePaySettings}>{paySettingLoader ? "Loading..." : "Save"}</button>
                                 </div>
                             </div>
                         }

@@ -2149,6 +2149,7 @@ footer#footer img.social {
     font-size: 16px;
     font-weight: 700;
     margin-bottom: 5px;
+    cursor: pointer
 }
 
 .story .story p {
@@ -2515,6 +2516,68 @@ footer#footer img.social {
 
 .story-write-modal .story img {
     border-radius: 10px;
+}
+
+/* edit story modal  */
+.edit-story-modal textarea {
+    height: 300px;
+}
+
+.edit-story-modal i.fa-trash-can {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+/* delete story modal  */
+.delete-write-modal {
+    position: absolute;
+    top: 20% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 442px;
+    max-height: 276px;
+    background-color: #0A183D !important;
+    border-radius: 10px !important;
+    padding: 19px 35px !important;
+}
+
+.delete-write-modal i {
+    float: right
+}
+
+.delete-write-modal h1 {
+    margin: 5px 0 47px 0;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+}
+
+.delete-write-modal p {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 42px;
+}
+
+.delete-write-modal button {
+    padding: 11px 45px;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.delete-write-modal button#cancel {
+    background-color: #FFF;
+    color: rgba(0, 122, 243, 1);
+}
+
+.delete-write-modal button#delete {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
 }
 
 
@@ -3568,7 +3631,13 @@ img#return-btn {
 
 .user-aside button svg {
     margin-left: 25px;
-    margin-right: 29px
+    margin-right: 29px;
+}
+
+.user-aside button svg path {
+    margin-left: 25px;
+    margin-right: 29px;
+    fill: rgba(255, 255, 255, 0.5);
 }
 
 .user-aside button.active svg path {
@@ -3593,6 +3662,17 @@ img#return-btn {
 .story-header a {
     font-size: 12px;
     font-weight: 400;
+}
+
+.empty {
+    text-align: center;
+    padding-top: 50px;
+}
+
+.empty p {
+    text-align: center;
+    font-size: 34px;
+    font-weight: 700
 }
 
 .story-header img,
@@ -3711,12 +3791,16 @@ img#return-btn {
 }
 
 .wallet .header section.category button.active {
-    color: #FFF;
+    color: rgba(0, 122, 243, 1);
     border-bottom: solid 2px rgba(0, 122, 243, 1) !important;
 }
 
-.wallet .header section.category button img {
+.wallet .header section.category button svg {
     margin-right: 11px
+}
+
+.wallet .header section.category button.active svg path {
+    fill: rgba(0, 122, 243, 1);
 }
 
 .wallet .header section.history {
@@ -3738,11 +3822,11 @@ img#return-btn {
 
 .wallet .header section.history button i {
     font-size: 20px;
-    color: rgba(0, 122, 243, 1)
+    color: rgba(255, 255, 255, 0.5)
 }
 
 .wallet .header section.history button.active i {
-    color: #FFF
+    color: rgba(0, 122, 243, 1)
 }
 
 .wallet .header section.withdrawl p {
@@ -3799,41 +3883,16 @@ img#return-btn {
     margin-bottom: 0;
 }
 
-.wallet .stories .story span img {
+.wallet .stories .story span svg {
     margin-right: 11px;
 }
 
-/* profile  */
-.wallet .profiles .head {
-    border-radius: 10px 10px 0 0;
-    padding: 15px 46px;
-    background-color: rgba(10, 24, 61, 1);
-}
-
-.wallet .profiles .body {
-    border-radius: 0 0 10px 10px;
-    padding: 0 46px;
-    background-color: rgba(10, 24, 61, 1);
-}
-
-.wallet .profiles h4 {
-    font-size: 16px;
+/* courses  */
+.wallet .courses h1 {
+    text-align: center;
+    font-size: 34px;
     font-weight: 400;
-    margin-bottom: 0;
-}
-
-.wallet .profiles p {
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 0;
-}
-
-.wallet .profiles p img {
-    margin-right: 10px;
-}
-
-.wallet .profile {
-    padding: 30px 0
+    margin-top: 78px
 }
 
 /* history */
@@ -3871,20 +3930,225 @@ img#return-btn {
 }
 
 .wallet .history .transactions h3 {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.5);
     margin-bottom: 0;
 }
 
 .wallet .history .transactions h4 {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
     color: #FFF;
     margin-bottom: 0;
 }
 
+.wallet .history .transactions i {
+    font-size: 20px;
+}
 
+.wallet .history .transactions i.fa-square-check {
+    color: rgba(88, 159, 88, 1);
+}
+
+.wallet .history .transactions i.fa-rectangle-xmark {
+    color: rgba(255, 0, 0, 1)
+}
+
+.wallet .history .transactions i.fa-circle-exclamation {
+    color: rgba(254, 192, 6, 1)
+}
+
+/* withdrawal modal  */
+#withdrawalModal {
+    top: 15% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 571px;
+    height: 487px;
+    background-color: rgba(6, 25, 71, 1) !important;
+    border-radius: 10px !important;
+    padding: 32px 56px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#withdrawalModal i {
+    float: right;
+    cursor: pointer
+}
+
+#withdrawalModal .proceed h1 {
+    font-size: 30px;
+    font-weight: 400;
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+#withdrawalModal .proceed p {
+    color: rgba(255, 50, 50, 1);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 52px;
+}
+
+#withdrawalModal .proceed h4 {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 5px;
+}
+
+#withdrawalModal .proceed h2 {
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 0px;
+}
+
+#withdrawalModal .proceed button {
+    width: 100%;
+    background-color: #007AF3;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 40px;
+    margin-top: 80px;
+}
+
+#withdrawalModal .response {
+    text-align: center;
+}
+
+#withdrawalModal .response img {
+    margin: 57px 0 19px 0
+}
+
+#withdrawalModal .response h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+#withdrawalModal .response p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 0px;
+}
+
+#withdrawalModal .response p span {
+    color: rgba(0, 122, 243, 1)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* pay setting  */
+.payout-setting {
+    background-color: rgba(6, 25, 71, 1);
+    padding: 25px;
+    border-radius: 10px;
+}
+
+.payout-setting h1 {
+    font-size: 30px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.payout-setting h2 {
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+.payout-setting .bank {
+    padding: 20px 43px;
+    background-color: rgba(4, 21, 63, 1);
+}
+
+.payout-setting .bank h1 {
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.payout-setting .bank h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 13px;
+    line-height: 20px;
+}
+
+.payout-setting .bank h3 span {
+    color: rgba(255, 50, 50, 1)
+}
+
+.payout-setting .bank .success-msg {
+    background-color: rgba(88, 159, 88, 1);
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin-bottom: 26px;
+    width: 80%
+}
+
+.payout-setting .bank .success-msg h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(0, 29, 0, 1)
+}
+
+.payout-setting .bank .success-msg i {
+    color: rgba(0, 29, 0, 1);
+    cursor: pointer;
+}
+
+.payout-setting .bank label {
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.payout-setting .bank input,
+.payout-setting .bank select {
+    width: 80%;
+    font-size: 18px;
+    font-weight: 400;
+    margin-bottom: 31px;
+    padding: 14px 26px;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.payout-setting .bank select {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #FFF
+}
+
+.payout-setting .bank button {
+    width: 80%;
+    border-radius: 40px;
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: rgba(0, 122, 243, 1);
+}
 
 
 
@@ -6050,6 +6314,70 @@ textarea::placeholder {
         font-size: 14px;
         padding: 12px 30px;
     }
+
+    /* wallet  */
+    .wallet .header section.history button i {
+        font-size: 15px;
+    }
+
+    .wallet .header section.withdrawl h2 {
+        font-size: 18px;
+    }
+
+    /* payout setting  */
+    .payout-setting {
+        padding: 20px;
+    }
+
+    .payout-setting h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .payout-setting h2 {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .payout-setting .bank {
+        padding: 20px;
+    }
+
+    .payout-setting .bank h1 {
+        font-size: 20px;
+    }
+
+    .payout-setting .bank h3 {
+        font-size: 12px;
+    }
+
+    .payout-setting .bank .success-msg {
+        padding: 8px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .payout-setting .bank .success-msg h4 {
+        font-size: 14px;
+    }
+
+    .payout-setting .bank label {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .payout-setting .bank input,
+    .payout-setting .bank select {
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 15px;
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    .payout-setting .bank button {
+        width: 100%;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
@@ -6783,6 +7111,10 @@ textarea::placeholder {
         /* padding: 5px; */
     }
 
+    .empty p {
+        font-size: 21px;
+    }
+
     .settings header {
         padding: 18px 25px;
     }
@@ -6850,6 +7182,74 @@ textarea::placeholder {
     .terms .navigation a i {
         font-size: 6px;
         margin-right: 8px;
+    }
+
+    /* wallet  */
+    .wallet .header section.history button i {
+        font-size: 15px;
+    }
+
+    .wallet .header section.withdrawl h2 {
+        font-size: 18px;
+    }
+
+    .wallet .header section.category button {
+        padding: 0;
+    }
+
+    /* payout setting  */
+    .payout-setting {
+        padding: 20px;
+    }
+
+    .payout-setting h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .payout-setting h2 {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .payout-setting .bank {
+        padding: 20px;
+    }
+
+    .payout-setting .bank h1 {
+        font-size: 20px;
+    }
+
+    .payout-setting .bank h3 {
+        font-size: 12px;
+    }
+
+    .payout-setting .bank .success-msg {
+        padding: 8px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .payout-setting .bank .success-msg h4 {
+        font-size: 14px;
+    }
+
+    .payout-setting .bank label {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .payout-setting .bank input,
+    .payout-setting .bank select {
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 15px;
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    .payout-setting .bank button {
+        width: 100%;
     }
 }
 
@@ -7614,6 +8014,10 @@ textarea::placeholder {
         /* padding: 5px; */
     }
 
+    .empty p {
+        font-size: 21px;
+    }
+
     .settings header {
         padding: 18px 25px;
     }
@@ -7683,6 +8087,94 @@ textarea::placeholder {
     .terms .navigation a i {
         font-size: 6px;
         margin-right: 8px;
+    }
+
+    /* wallet  */
+    .wallet .header section.withdrawl p {
+        font-size: 10px;
+    }
+
+    .wallet .header section.history button i {
+        font-size: 15px;
+    }
+
+    .wallet .header section.withdrawl h2 {
+        font-size: 16px;
+    }
+
+    .wallet .header section.withdrawl button {
+        font-size: 12px;
+    }
+
+    .wallet .header section.withdrawl button img {
+        margin-right: 0;
+        margin-bottom: 5px;
+    }
+
+    .wallet .header section.category button {
+        padding: 0;
+    }
+
+    /* payout setting  */
+    .payout-setting {
+        padding: 15px;
+    }
+
+    .payout-setting h1 {
+        font-size: 24px;
+        margin-bottom: 8px;
+    }
+
+    .payout-setting h2 {
+        font-size: 15px;
+        margin-bottom: 30px;
+    }
+
+    .payout-setting .bank {
+        padding: 20px;
+    }
+
+    .payout-setting .bank h1 {
+        font-size: 20px;
+    }
+
+    .payout-setting .bank h3 {
+        font-size: 12px;
+    }
+
+    .payout-setting .bank .success-msg {
+        padding: 8px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+
+    .payout-setting .bank .success-msg h4 {
+        font-size: 14px;
+    }
+
+    .payout-setting .bank label {
+        font-size: 15px;
+        margin-bottom: 12px;
+    }
+
+    .payout-setting .bank input,
+    .payout-setting .bank select {
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 15px;
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    .payout-setting .bank button {
+        width: 100%;
+    }
+
+    /* withdrawal modal  */
+    #withdrawalModal {
+        width: 480px;
+        height: 487px;
+        padding: 32px 56px !important;
     }
 }
 
@@ -8543,6 +9035,10 @@ textarea::placeholder {
         padding: 5px;
     }
 
+    .empty p {
+        font-size: 18px;
+    }
+
     .settings header {
         padding: 18px 25px;
     }
@@ -8613,6 +9109,106 @@ textarea::placeholder {
     .terms .navigation a i {
         font-size: 6px;
         margin-right: 8px;
+    }
+
+    /* wallet  */
+    .wallet .header section.withdrawl p {
+        font-size: 10px;
+    }
+
+    .wallet .header section.history button i {
+        font-size: 15px;
+    }
+
+    .wallet .header section.withdrawl h2 {
+        font-size: 16px;
+    }
+
+    .wallet .header section.withdrawl button {
+        font-size: 12px;
+    }
+
+    .wallet .header section.category button {
+        padding: 0;
+    }
+
+    .wallet .stories .story span {
+        margin-bottom: 0;
+        margin-right: 15px
+    }
+
+    /* payout setting  */
+    .payout-setting {
+        padding: 15px;
+    }
+
+    .payout-setting h1 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .payout-setting h2 {
+        font-size: 12px;
+        margin-bottom: 25px;
+    }
+
+    .payout-setting .bank {
+        padding: 15px;
+    }
+
+    .payout-setting .bank h1 {
+        font-size: 16px;
+    }
+
+    .payout-setting .bank h3 {
+        font-size: 10px;
+    }
+
+    .payout-setting .bank .success-msg {
+        padding: 5px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .payout-setting .bank .success-msg h4 {
+        font-size: 10px;
+    }
+
+    .payout-setting .bank label {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .payout-setting .bank input,
+    .payout-setting .bank select {
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 15px;
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    .payout-setting .bank button {
+        width: 100%;
+    }
+
+    /* withdrawal modal  */
+    #withdrawalModal {
+        width: 340px;
+        height: 400px;
+        padding: 15px 20px !important;
+    }
+
+    #withdrawalModal .proceed h1 {
+        font-size: 20px;
+    }
+
+    #withdrawalModal .proceed h4 {
+        font-size: 14px;
+    }
+
+    #withdrawalModal .proceed h2 {
+        font-size: 24px;
     }
 }
 
@@ -9516,6 +10112,10 @@ textarea::placeholder {
         padding: 5px;
     }
 
+    .empty p {
+        font-size: 16px;
+    }
+
     .settings header {
         padding: 18px 25px;
     }
@@ -9586,6 +10186,106 @@ textarea::placeholder {
     .terms .navigation a i {
         font-size: 6px;
         margin-right: 8px;
+    }
+
+    /* wallet  */
+    .wallet .header section.withdrawl p {
+        font-size: 10px;
+    }
+
+    .wallet .header section.history button i {
+        font-size: 15px;
+    }
+
+    .wallet .header section.withdrawl h2 {
+        font-size: 16px;
+    }
+
+    .wallet .header section.withdrawl button {
+        font-size: 12px;
+    }
+
+    .wallet .header section.category button {
+        padding: 0;
+    }
+
+    .wallet .stories .story span {
+        margin-bottom: 0;
+        margin-right: 15px
+    }
+
+    /* payout setting  */
+    .payout-setting {
+        padding: 10px;
+    }
+
+    .payout-setting h1 {
+        font-size: 20px;
+        margin-bottom: 8px;
+    }
+
+    .payout-setting h2 {
+        font-size: 12px;
+        margin-bottom: 25px;
+    }
+
+    .payout-setting .bank {
+        padding: 10px;
+    }
+
+    .payout-setting .bank h1 {
+        font-size: 16px;
+    }
+
+    .payout-setting .bank h3 {
+        font-size: 10px;
+    }
+
+    .payout-setting .bank .success-msg {
+        padding: 5px;
+        margin-bottom: 15px;
+        width: 100%;
+    }
+
+    .payout-setting .bank .success-msg h4 {
+        font-size: 10px;
+    }
+
+    .payout-setting .bank label {
+        font-size: 12px;
+        margin-bottom: 10px;
+    }
+
+    .payout-setting .bank input,
+    .payout-setting .bank select {
+        width: 100%;
+        font-size: 15px;
+        margin-bottom: 15px;
+        padding: 10px 12px;
+        border-radius: 15px;
+    }
+
+    .payout-setting .bank button {
+        width: 100%;
+    }
+
+    /* withdrawal modal  */
+    #withdrawalModal {
+        width: 340px;
+        height: 400px;
+        padding: 15px 20px !important;
+    }
+
+    #withdrawalModal .proceed h1 {
+        font-size: 20px;
+    }
+
+    #withdrawalModal .proceed h4 {
+        font-size: 14px;
+    }
+
+    #withdrawalModal .proceed h2 {
+        font-size: 24px;
     }
 }
 
@@ -10048,6 +10748,14 @@ footer#footer.dm .bottom {
     color: rgba(0, 122, 243, 1)
 }
 
+.dm .user-aside button svg path {
+    fill: rgba(10, 24, 61, 0.6);
+}
+
+.dm .user-aside button.active svg path {
+    fill: rgba(0, 122, 243, 1)
+}
+
 .dm .user-aside section {
     background-color: #FFF;
     border: 1px solid rgba(10, 24, 61, 0.1) !important
@@ -10090,6 +10798,85 @@ footer#footer.dm .bottom {
 .settings .body button {
     color: #FFF;
     background-color: rgba(0, 122, 243, 1);
+}
+
+/* payout settings  */
+.dm .payout-setting {
+    background-color: unset
+}
+
+.dm .payout-setting .bank {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+.dm .payout-setting .bank input,
+.dm .payout-setting .bank select {
+    background-color: unset;
+    border: solid 1px rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .payout-setting .bank select {
+    color: #000
+}
+
+/* wallet  */
+.dm .wallet .header section {
+    border: 1px solid rgba(10, 24, 61, 0.1);
+    background-color: #FFF;
+}
+
+.dm .wallet .header section.category button {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+.dm .wallet .header section.category button.active {
+    color: rgba(0, 122, 243, 1);
+    border-bottom: solid 2px rgba(0, 122, 243, 1) !important;
+}
+
+.dm .wallet .header section.category button.active svg path {
+    fill: rgba(0, 122, 243, 1);
+    /* stroke: rgba(0, 122, 243, 1); */
+}
+
+.dm .wallet .header section.history {
+    background-color: #FFF
+}
+
+.dm .wallet .header section.history button i {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+.dm .wallet .header section.history button.active i {
+    color: rgba(0, 122, 243, 1)
+}
+
+.dm .wallet .header section.withdrawl p {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+.dm .wallet .stories {
+    background-color: #FFF;
+}
+
+.dm .wallet .stories .story {
+    border-bottom: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .wallet .history h1 {
+    color: rgba(10, 24, 61, 1);
+    border-bottom: 1px solid rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm .wallet .history .transactions {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .wallet .history p,
+.dm .wallet .history .transactions h3,
+.dm .wallet .history .transactions h4 {
+    color: rgba(10, 24, 61, 0.7)
 }
 
 /* terms and conditions  */
@@ -10303,10 +11090,6 @@ footer#footer.dm .bottom {
     border: 1px solid rgba(0, 122, 243, 1) !important
 }
 
-
-
-
-
 /* vote confirmation modal */
 #voteConfirmation.dm {
     position: absolute;
@@ -10326,4 +11109,34 @@ footer#footer.dm .bottom {
     font-weight: 400;
     color: rgba(10, 24, 61, 0.7);
     margin-bottom: 0;
+}
+
+/* withdrawal modal */
+#withdrawalModal.dm {
+    position: absolute;
+    background-color: #E5E5E5 !important;
+    border: solid 1px rgba(10, 24, 61, 0.1) !important
+}
+
+#withdrawalModal.dm i {
+    float: right;
+    color: rgba(10, 24, 61, 1)
+}
+
+#withdrawalModal.dm .proceed h1,
+#withdrawalModal.dm .proceed h2,
+#withdrawalModal.dm .response h2 {
+    color: rgba(10, 24, 61, 1)
+}
+
+#withdrawalModal.dm .proceed h4 {
+    color: rgba(10, 24, 61, 0.7)
+}
+
+#withdrawalModal.dm .proceed button {
+    color: #FFF
+}
+
+#withdrawalModal.dm .response p {
+    color: rgba(10, 24, 61, 0.8);
 }
