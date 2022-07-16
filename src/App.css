@@ -3914,6 +3914,19 @@ img#return-btn {
     color: rgba(255, 255, 255, 0.5);
 }
 
+.wallet .history-empty h1 {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 400;
+    color: #FFF;
+    border: none !important;
+    margin-top: 50px
+}
+
+.wallet .history-empty h1 i {
+    margin-right: 10px
+}
+
 .wallet .history .transactions {
     background-color: rgba(10, 24, 61, 1);
     border-radius: 20px;
@@ -10865,6 +10878,10 @@ footer#footer.dm .bottom {
 .dm .wallet .history h1 {
     color: rgba(10, 24, 61, 1);
     border-bottom: 1px solid rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm .wallet .history-empty h1 {
+    border: none !important;
 }
 
 .dm .wallet .history .transactions {

@@ -9,6 +9,7 @@ import axios from "axios";
 import StoryCard from '../components/storyCard';
 import SingleProfileCard from '../components/singleProfileCard';
 import WriteStoryModal from '../components/writeStoryModal';
+import Loader from '../components/loader';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -81,6 +82,7 @@ function UserProfile() {
     }
 
     // fetch aspirants, storie, countries and transactions
+    const [aspirantLoading, setAspirantLoading] = useState(true)
     const [aspirants, setAspirants] = useState([])
     const fetchAspirants = async () => {
         const response = await axios
@@ -89,8 +91,10 @@ function UserProfile() {
                 console.log('Err', error)
             ]);
         setAspirants(response.data)
+        setAspirantLoading(false)
     }
 
+    const [storiesLoading, setStoriesLoading] = useState(true)
     const [stories, setStories] = useState([])
     const fetchStories = async () => {
         const response = await axios
@@ -99,6 +103,7 @@ function UserProfile() {
                 console.log('Err', error)
             ]);
         setStories(response.data)
+        setStoriesLoading(false)
     }
 
     // get story wallet total
@@ -123,6 +128,7 @@ function UserProfile() {
     }
 
     const [history, setHistory] = useState([])
+    const [historyLoading, setHistoryLoading] = useState(true)
     const fetchHistory = async () => {
         const response = await axios
             .get(`${API.API_ROOT}/wallet`)
@@ -130,13 +136,14 @@ function UserProfile() {
                 console.log('Err', error)
             ]);
         setHistory(response.data)
+        setHistoryLoading(false)
     }
 
     useEffect(() => {
-        fetchAspirants()
-        fetchStories()
-        fetchCountries()
-        fetchHistory()
+        fetchAspirants();
+        fetchStories();
+        fetchCountries();
+        fetchHistory();
     }, [])
 
     // cover picture 
@@ -428,29 +435,35 @@ function UserProfile() {
                     {/* <div className="col-lg-1" /> */}
                     {/* main  */}
                     <div className="col-lg-8 col-md-9">
+
                         {/* profiles */}
                         {context.profileView === 'aspirants' &&
                             <>
-                                {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").length < 1 ?
-                                    <div className="empty">
-                                        {context.darkMode ?
-                                            <img src="/img/empty-profile-lt.png" className="img-fluid" alt="no stories" /> :
-                                            <img src="/img/empty-profile.png" className="img-fluid" alt="no stories" />
-                                        }
-                                        <p>No Profiles Created Yet</p>
-                                    </div> :
+                                {aspirantLoading ?
+                                    <Loader pageLoading={aspirantLoading} /> :
                                     <>
-                                        <div className="aspirant-header d-flex justify-content-between align-items-center">
-                                            <h1 className="mb-0">Aspirant Profiles</h1>
-                                            <button onClick={() => navigate("/create-aspirant")}><img src="img/edit.png" alt="create" />Create Aspirant Profile</button>
-                                        </div>
-                                        <div className="profile">
-                                            {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").map((aspirant, index) => {
-                                                return (
-                                                    <SingleProfileCard aspirant={aspirant} key={index} />
-                                                )
-                                            }).reverse()}
-                                        </div>
+                                        {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").length < 1 ?
+                                            <div className="empty">
+                                                {context.darkMode ?
+                                                    <img src="/img/empty-profile-lt.png" className="img-fluid" alt="no stories" /> :
+                                                    <img src="/img/empty-profile.png" className="img-fluid" alt="no stories" />
+                                                }
+                                                <p>No Profiles Created Yet</p>
+                                            </div> :
+                                            <>
+                                                <div className="aspirant-header d-flex justify-content-between align-items-center">
+                                                    <h1 className="mb-0">Aspirant Profiles</h1>
+                                                    <button onClick={() => navigate("/create-aspirant")}><img src="img/edit.png" alt="create" />Create Aspirant Profile</button>
+                                                </div>
+                                                <div className="profile">
+                                                    {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").map((aspirant, index) => {
+                                                        return (
+                                                            <SingleProfileCard aspirant={aspirant} key={index} />
+                                                        )
+                                                    }).reverse()}
+                                                </div>
+                                            </>
+                                        }
                                     </>
                                 }
                             </>
@@ -459,30 +472,35 @@ function UserProfile() {
                         {/* stories */}
                         {context.profileView === "stories" &&
                             <>
-                                {stories.filter(story => story.userid === context.user._id).length < 1 ?
-                                    <div className="empty">
-                                        {context.darkMode ?
-                                            <img src="/img/empty-stories-lt.png" alt="no stories" /> :
-                                            <img src="/img/empty-stories.png" className="img-fluid" alt="no stories" />
-                                        }
-                                        <p>No Stories Yet</p>
-                                    </div> :
+                                {storiesLoading ?
+                                    <Loader pageLoading={storiesLoading} /> :
                                     <>
-                                        <div className="story-header">
-                                            <div className="d-flex align-items-center justify-content-between">
-                                                <h1 className="mb-0">My Stories</h1>
-                                                <button onClick={() => setWriteStoryModal(true)}><img src="img/edit.png" alt="edit" />Write New Story</button>
-                                            </div>
-                                        </div>
-                                        {/* write modal  */}
-                                        {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
-                                        <div className="story">
-                                            {stories.filter(story => story.userid === context.user._id).map((story, index) => {
-                                                return (
-                                                    <StoryCard story={story} key={index} />
-                                                )
-                                            }).reverse()}
-                                        </div>
+                                        {stories.filter(story => story.userid === context.user._id).length < 1 ?
+                                            <div className="empty">
+                                                {context.darkMode ?
+                                                    <img src="/img/empty-stories-lt.png" alt="no stories" /> :
+                                                    <img src="/img/empty-stories.png" className="img-fluid" alt="no stories" />
+                                                }
+                                                <p>No Stories Yet</p>
+                                            </div> :
+                                            <>
+                                                <div className="story-header">
+                                                    <div className="d-flex align-items-center justify-content-between">
+                                                        <h1 className="mb-0">My Stories</h1>
+                                                        <button onClick={() => setWriteStoryModal(true)}><img src="img/edit.png" alt="edit" />Write New Story</button>
+                                                    </div>
+                                                </div>
+                                                {/* write modal  */}
+                                                {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
+                                                <div className="story">
+                                                    {stories.filter(story => story.userid === context.user._id).map((story, index) => {
+                                                        return (
+                                                            <StoryCard story={story} key={index} />
+                                                        )
+                                                    }).reverse()}
+                                                </div>
+                                            </>
+                                        }
                                     </>
                                 }
                             </>
@@ -549,7 +567,7 @@ function UserProfile() {
                                                 <div className="row align-items-center">
                                                     <div className="col-6 col-sm-7">
                                                         <p>Total Wallet Balance</p>
-                                                        <h2 className="mb-0">${storyTotal.toFixed(2)}</h2>
+                                                        <h2 className="mb-0">N{storyTotal.toFixed(2)}</h2>
                                                     </div>
                                                     <div className="col-6 col-sm-5">
                                                         <button onClick={() => setWithdrawalModal(true)}><img src="img/withdrawl.png" alt="withdrawl" />{withdrawalLoading ? "Loading..." : "Withdraw"}</button>
@@ -604,59 +622,64 @@ function UserProfile() {
 
                                 {walletView === 'stories' &&
                                     <>
-                                        {stories.filter(story => story.userid === context.user._id).length < 1 ?
-                                            <div className="empty">
-                                                {context.darkMode ?
-                                                    <img src="/img/empty-stories-lt.png" alt="no stories" /> :
-                                                    <img src="/img/empty-stories.png" className="img-fluid" alt="no stories" />
+                                        {storiesLoading ?
+                                            <Loader pageLoading={storiesLoading} /> :
+                                            <>
+                                                {stories.filter(story => story.userid === context.user._id).length < 1 ?
+                                                    <div className="empty">
+                                                        {context.darkMode ?
+                                                            <img src="/img/empty-stories-lt.png" alt="no stories" /> :
+                                                            <img src="/img/empty-stories.png" className="img-fluid" alt="no stories" />
+                                                        }
+                                                        <p>No Stories Yet</p>
+                                                    </div> :
+                                                    <div className="stories">
+                                                        {stories.filter(story => story.userid === context.user._id).map((story, index) => {
+                                                            return (
+                                                                <div className="story" key={index}>
+                                                                    <div className="row align-items-center">
+                                                                        <div className="col-lg-10 col-sm-9 col-12 mb-2">
+                                                                            <p className="mb-0">{story.story.substring(0, 200)}</p>
+                                                                        </div>
+                                                                        <div className="col-lg-2 col-sm-3 col-12">
+                                                                            <span>
+                                                                                {context.darkMode ?
+                                                                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path d="M20.257 6.962C20.731 7.582 20.731 8.419 20.257 9.038C18.764 10.987 15.182 15 11 15C6.818 15 3.236 10.987 1.743 9.038C1.51238 8.74113 1.3872 8.37592 1.3872 8C1.3872 7.62408 1.51238 7.25887 1.743 6.962C3.236 5.013 6.818 1 11 1C15.182 1 18.764 5.013 20.257 6.962V6.962Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    </svg> :
+                                                                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path d="M20.257 6.962C20.731 7.582 20.731 8.419 20.257 9.038C18.764 10.987 15.182 15 11 15C6.81801 15 3.23601 10.987 1.74301 9.038C1.51239 8.74113 1.38721 8.37592 1.38721 8C1.38721 7.62408 1.51239 7.25887 1.74301 6.962C3.23601 5.013 6.81801 1 11 1C15.182 1 18.764 5.013 20.257 6.962V6.962Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    </svg>
+                                                                                }
+                                                                                {story.storyviews.length} View{story.storyviews.length > 1 && "s"}
+                                                                            </span>
+                                                                            <span>
+                                                                                {context.darkMode ?
+                                                                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H19C19.5304 1 20.0391 1.21071 20.4142 1.58579C20.7893 1.96086 21 2.46957 21 3V13C21 13.5304 20.7893 14.0391 20.4142 14.4142C20.0391 14.7893 19.5304 15 19 15H3C2.46957 15 1.96086 14.7893 1.58579 14.4142C1.21071 14.0391 1 13.5304 1 13V3Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M1 5C2.06087 5 3.07828 4.57857 3.82843 3.82843C4.57857 3.07828 5 2.06087 5 1" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    </svg> :
+                                                                                    <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                                                        <path d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H19C19.5304 1 20.0391 1.21071 20.4142 1.58579C20.7893 1.96086 21 2.46957 21 3V13C21 13.5304 20.7893 14.0391 20.4142 14.4142C20.0391 14.7893 19.5304 15 19 15H3C2.46957 15 1.96086 14.7893 1.58579 14.4142C1.21071 14.0391 1 13.5304 1 13V3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M1 5C2.06087 5 3.07828 4.57857 3.82843 3.82843C4.57857 3.07828 5 2.06087 5 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                        <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                                                                    </svg>
+                                                                                }
+                                                                                N{story.storyviews.filter(storyview => storyview.status === "0" || storyview.status === "0").length * 2}
+                                                                            </span>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
                                                 }
-                                                <p>No Stories Yet</p>
-                                            </div> :
-                                            <div className="stories">
-                                                {stories.filter(story => story.userid === context.user._id).map((story, index) => {
-                                                    return (
-                                                        <div className="story" key={index}>
-                                                            <div className="row align-items-center">
-                                                                <div className="col-lg-10 col-sm-9 col-12 mb-2">
-                                                                    <p className="mb-0">{story.story.substring(0, 200)}</p>
-                                                                </div>
-                                                                <div className="col-lg-2 col-sm-3 col-12">
-                                                                    <span>
-                                                                        {context.darkMode ?
-                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M20.257 6.962C20.731 7.582 20.731 8.419 20.257 9.038C18.764 10.987 15.182 15 11 15C6.818 15 3.236 10.987 1.743 9.038C1.51238 8.74113 1.3872 8.37592 1.3872 8C1.3872 7.62408 1.51238 7.25887 1.743 6.962C3.236 5.013 6.818 1 11 1C15.182 1 18.764 5.013 20.257 6.962V6.962Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                            </svg> :
-                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M20.257 6.962C20.731 7.582 20.731 8.419 20.257 9.038C18.764 10.987 15.182 15 11 15C6.81801 15 3.23601 10.987 1.74301 9.038C1.51239 8.74113 1.38721 8.37592 1.38721 8C1.38721 7.62408 1.51239 7.25887 1.74301 6.962C3.23601 5.013 6.81801 1 11 1C15.182 1 18.764 5.013 20.257 6.962V6.962Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                            </svg>
-                                                                        }
-                                                                        {story.storyviews.length} View{story.storyviews.length > 1 && "s"}
-                                                                    </span>
-                                                                    <span>
-                                                                        {context.darkMode ?
-                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H19C19.5304 1 20.0391 1.21071 20.4142 1.58579C20.7893 1.96086 21 2.46957 21 3V13C21 13.5304 20.7893 14.0391 20.4142 14.4142C20.0391 14.7893 19.5304 15 19 15H3C2.46957 15 1.96086 14.7893 1.58579 14.4142C1.21071 14.0391 1 13.5304 1 13V3Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M1 5C2.06087 5 3.07828 4.57857 3.82843 3.82843C4.57857 3.07828 5 2.06087 5 1" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="#0A183D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                            </svg> :
-                                                                            <svg width="22" height="16" viewBox="0 0 22 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                                <path d="M1 3C1 2.46957 1.21071 1.96086 1.58579 1.58579C1.96086 1.21071 2.46957 1 3 1H19C19.5304 1 20.0391 1.21071 20.4142 1.58579C20.7893 1.96086 21 2.46957 21 3V13C21 13.5304 20.7893 14.0391 20.4142 14.4142C20.0391 14.7893 19.5304 15 19 15H3C2.46957 15 1.96086 14.7893 1.58579 14.4142C1.21071 14.0391 1 13.5304 1 13V3Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M1 5C2.06087 5 3.07828 4.57857 3.82843 3.82843C4.57857 3.07828 5 2.06087 5 1" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                                <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-                                                                            </svg>
-                                                                        }
-                                                                        ${story.storyviews.filter(storyview => storyview.status === "0" || storyview.status === "0").length * 0.002}
-                                                                    </span>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
+                                            </>
                                         }
                                     </>
                                 }
@@ -693,42 +716,47 @@ function UserProfile() {
                                                 <p>Date &amp; Time</p>
                                             </div>
                                         </div>
-                                        {history.filter((history => history.userid === context.user._id)).length < 1 ?
-                                            <div className="history-empty">
-
-                                            </div> :
-                                            <div className="transactions">
-                                                {history.filter((history => history.userid === context.user._id)).map((history, index) => {
-                                                    return (
-                                                        <div className="row align-items-center" key={index}>
-                                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
-                                                                {history.status === "0" || history.status === "1" && <i class="fa-solid fa-triangle-exclamation"></i>}
-                                                                {/* <i class="fa-solid fa-triangle-exclamation"></i> */}
-                                                                {history.status === "2" && <i class="fa-solid fa-square-check"></i>}
-                                                                {history.status === "3" && <i class="fa-solid fa-rectangle-xmark"></i>}
-                                                            </div>
-                                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4">
-                                                                <h3>{history.accountname}</h3>
-                                                            </div>
-                                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
-                                                                <h4>{history.amount}</h4>
-                                                            </div>
-                                                            <div className="col-lg-1 col-md-3 col-sm-3 col-4">
-                                                                <h3>{history.bankname}</h3>
-                                                            </div>
-                                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
-                                                                <h3>{history.accountnumber}</h3>
-                                                            </div>
-                                                            <div className="col-lg-3 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
-                                                                <h4>{history.reason === null || history.reason === undefined ? "Nil" : history.reason}</h4>
-                                                            </div>
-                                                            <div className="col-lg-2 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
-                                                                <h4>{history.createdAt.substring(0, 19)}</h4>
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                })}
-                                            </div>
+                                        {historyLoading ?
+                                            <Loader pageLoading={storiesLoading} /> :
+                                            <>
+                                                {history.filter((history => history.userid === context.user._id)).length < 1 ?
+                                                    <div className="history-empty">
+                                                        <h1><i className="fas fa-history"></i>No Transaction </h1>
+                                                    </div> :
+                                                    <div className="transactions">
+                                                        {history.filter((history => history.userid === context.user._id)).map((history, index) => {
+                                                            return (
+                                                                <div className="row align-items-center" key={index}>
+                                                                    <div className="col-lg-1 col-md-3 col-sm-3 col-4">
+                                                                        {history.status === "0" || history.status === "1" && <i class="fa-solid fa-triangle-exclamation"></i>}
+                                                                        {/* <i class="fa-solid fa-triangle-exclamation"></i> */}
+                                                                        {history.status === "2" && <i class="fa-solid fa-square-check"></i>}
+                                                                        {history.status === "3" && <i class="fa-solid fa-rectangle-xmark"></i>}
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-3 col-sm-3 col-4">
+                                                                        <h3>{history.accountname}</h3>
+                                                                    </div>
+                                                                    <div className="col-lg-1 col-md-3 col-sm-3 col-4">
+                                                                        <h4>{history.amount}</h4>
+                                                                    </div>
+                                                                    <div className="col-lg-1 col-md-3 col-sm-3 col-4">
+                                                                        <h3>{history.bankname}</h3>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+                                                                        <h3>{history.accountnumber}</h3>
+                                                                    </div>
+                                                                    <div className="col-lg-3 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+                                                                        <h4>{history.reason === null || history.reason === undefined ? "Nil" : history.reason}</h4>
+                                                                    </div>
+                                                                    <div className="col-lg-2 col-md-3 col-sm-3 col-4 mt-lg-0 mt-md-2 mt-sm-2 mt-2">
+                                                                        <h4>{history.createdAt.substring(0, 19)}</h4>
+                                                                    </div>
+                                                                </div>
+                                                            )
+                                                        })}
+                                                    </div>
+                                                }
+                                            </>
                                         }
                                     </div>
                                 }
