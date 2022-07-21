@@ -29,10 +29,15 @@ label {
     border: none !important;
 }
 
+button i.fa-spinner {
+    margin-left: 10px;
+    color: inherit !important
+}
+
 .error-msg {
-    font-size: 14px;
-    text-align: center;
-    color: red;
+    font-size: 14px !important;
+    text-align: center !important;
+    color: red !important;
 }
 
 select option {
@@ -492,7 +497,7 @@ nav .profile-img a {
     padding: 16px 14px !important;
 }
 
-#loginModal i {
+#loginModal i.fa-circle-xmark {
     float: right;
 }
 
@@ -602,6 +607,11 @@ nav .profile-img a {
     padding: 16px 0;
     border-radius: 100px;
     margin-bottom: 17px;
+}
+
+#loginModal button#proceed i {
+    margin-left: 10px;
+    color: #FFF;
 }
 
 #loginModal h6 {
@@ -6751,8 +6761,8 @@ textarea::placeholder {
     /* stories modal  */
     .story-write-modal {
         top: 5% !important;
-        width: 580px;
-        max-height: 90%;
+        width: 580px !important;
+        max-height: 90% !important;
     }
 
     .story-write-modal h2 {
@@ -7635,6 +7645,52 @@ textarea::placeholder {
         padding: 10px;
     }
 
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 560px !important;
+        max-height: 90% !important;
+    }
+
+    .story-write-modal h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 14px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    /* delete modal  */
+    .delete-write-modal {
+        width: 400px;
+        max-height: 276px;
+    }
+
     /* single story page (comments)  */
     .story .comments {
         padding: 15px;
@@ -7668,6 +7724,10 @@ textarea::placeholder {
 
     .story .comments .comment .replies {
         margin-left: 25px;
+    }
+
+    .edit-story-modal textarea {
+        height: 120px;
     }
 
     /* stories modal  */
@@ -8625,6 +8685,76 @@ textarea::placeholder {
         padding: 5px;
     }
 
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 370px !important;
+        height: 90% !important;
+        padding: 15px !important
+    }
+
+    .story-write-modal h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 14px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .story-write-modal .story .img-container {
+        height: 30px;
+        width: 30px;
+    }
+
+    .story-write-modal .story h3 {
+        font-size: 14px;
+    }
+
+    .story-write-modal .story p {
+        font-size: 12px;
+    }
+
+    /* delete modal  */
+    .delete-write-modal {
+        width: 370px;
+        max-height: 220px;
+        padding: 15px !important
+    }
+
+    .delete-write-modal h1 {
+        font-size: 20px;
+    }
+
+    .delete-write-modal button {
+        padding: 11px 45px;
+    }
+
     /* single story page (comments)  */
     .story .comments {
         padding: 10px;
@@ -8698,6 +8828,10 @@ textarea::placeholder {
     .story-write-modal button#post {
         font-size: 14px;
         padding: 10px 12px;
+    }
+
+    .edit-story-modal textarea {
+        height: 90px;
     }
 
     /* polls  */
@@ -9679,6 +9813,80 @@ textarea::placeholder {
     .story .comments .comment .replies button {
         font-size: 12px;
         padding: 5px;
+    }
+
+    /* stories modal  */
+    .story-write-modal {
+        top: 5% !important;
+        width: 350px !important;
+        height: 90% !important;
+        padding: 15px !important
+    }
+
+    .story-write-modal h2 {
+        font-size: 18px;
+        margin-bottom: 10px;
+        padding-bottom: 10px;
+    }
+
+    .story-write-modal .img-container {
+        height: 40px;
+        width: 40px;
+        margin-right: 10px;
+    }
+
+    .story-write-modal h3 {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    .story-write-modal h4 {
+        font-size: 14px;
+    }
+
+    .story-write-modal textarea {
+        font-size: 14px;
+    }
+
+    .story-write-modal span {
+        font-size: 14px;
+    }
+
+    .story-write-modal button#post {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+
+    .story-write-modal .story .img-container {
+        height: 30px;
+        width: 30px;
+    }
+
+    .story-write-modal .story h3 {
+        font-size: 14px;
+    }
+
+    .story-write-modal .story p {
+        font-size: 12px;
+    }
+
+    .edit-story-modal textarea {
+        height: 90px;
+    }
+
+    /* delete modal  */
+    .delete-write-modal {
+        width: 350px;
+        max-height: 220px;
+        padding: 15px !important
+    }
+
+    .delete-write-modal h1 {
+        font-size: 20px;
+    }
+
+    .delete-write-modal button {
+        padding: 11px 45px;
     }
 
     /* single story page (comments)  */

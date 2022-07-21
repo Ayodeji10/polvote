@@ -54,24 +54,32 @@ const Login = () => {
     const handleSignUp = () => {
         setError(null)
         setLoading(true)
-        axios.post(`${API.API_ROOT}/users/register`, { firstname: firstName, lastname: lastName, username: username, phonenumber: number, email: email, password: password }, { headers: { 'content-type': 'application/json' } })
-            .then(response => {
-                console.log(response)
-                setLoading(false);
-                setSignupModal(false)
-                setVerificationModal(true)
-            }).catch(error => {
-                setLoading(false)
-                if (error.response.status === 422) {
-                    setError('this Email is already registered')
-                } else if (error.response.status === 401 || error.response.status === 400) {
-                    setError(error.response.data.message)
-                }
-                else {
-                    setError('Something went wrong, please try again')
-                }
-                console.error(error)
-            })
+        if (firstName === "" || lastName === "" || username === "" || email === "" || number === "" || password === "") {
+            setError("Please fill all Input Spaces")
+            setLoading(false)
+        } else if (email.charAt(0) !== "@") {
+            setError("Username must start with '@'")
+            setLoading(false)
+        } else {
+            axios.post(`${API.API_ROOT}/users/register`, { firstname: firstName, lastname: lastName, username: username, phonenumber: number, email: email.toLowerCase(), password: password }, { headers: { 'content-type': 'application/json' } })
+                .then(response => {
+                    console.log(response)
+                    setLoading(false);
+                    setSignupModal(false)
+                    setVerificationModal(true)
+                }).catch(error => {
+                    setLoading(false)
+                    if (error.response.status === 422) {
+                        setError('this Email is already registered')
+                    } else if (error.response.status === 401 || error.response.status === 400) {
+                        setError(error.response.data.message)
+                    }
+                    else {
+                        setError('Something went wrong, please try again')
+                    }
+                    console.error(error)
+                })
+        }
     }
 
     // login 
@@ -82,7 +90,7 @@ const Login = () => {
         e.preventDefault()
         setError(null)
         setLoading(true)
-        axios.post(`${API.API_ROOT}/users/signin`, { email: loginEmail, password: loginPassword })
+        axios.post(`${API.API_ROOT}/users/signin`, { email: loginEmail.toLowerCase(), password: loginPassword })
             .then(response => {
                 // console.log(response)
                 setLoading(false);
@@ -365,8 +373,8 @@ const Login = () => {
                             <input id="pass" type="password" placeholder="***************" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>
                     </div>
-                    <p>{error}</p>
-                    <button id="create" className="mb-3" onClick={handleSignUp}>{loading ? "loading..." : "Create Account"}</button>
+                    <p className="error-msg">{error}</p>
+                    <button id="create" className="mb-3" onClick={handleSignUp}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Create Account"}</button>
                 </div>
             </Modal>
 
@@ -411,7 +419,7 @@ const Login = () => {
                         setForgotPasswordModal(true)
                     }}>Forgot Password?</h5>
                     <p className="error-msg">{error}</p>
-                    <button id="proceed" onClick={(e) => handleLogin(e)}>{loading ? "loading..." : "Login"}</button>
+                    <button id="proceed" onClick={(e) => handleLogin(e)}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Login"}</button>
                     <h6>Don’t have an account? <span onClick={() => setLoginModal(false)}>Signup</span></h6>
                 </div>
             </Modal>
