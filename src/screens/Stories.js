@@ -6,6 +6,7 @@ import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
 import StoryCard from '../components/storyCard';
+import LoginPrompt from '../components/loginPrompt';
 import { useNavigate } from "react-router-dom";
 import Loader from '../components/loader';
 import WriteStoryModal from '../components/writeStoryModal';
@@ -19,13 +20,6 @@ function Stories() {
     // history
     const navigate = useNavigate()
 
-    // redirect if user is not logged in 
-    useEffect(() => {
-        if (localStorage.getItem('ballotbox_token') === null) {
-            navigate('/')
-        }
-    }, [])
-
     // fetch stories
     const [stories, setStories] = useState([])
     const [pageLoading, setPageLoading] = useState(true)
@@ -35,7 +29,6 @@ function Stories() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        // console.log(response.data)
         setStories(response.data)
         setPageLoading(false)
     }
@@ -66,29 +59,20 @@ function Stories() {
                     {/* gutter  */}
                     {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 col-md-9 story">
+                    <div className="story col-lg-6 col-md-9">
                         {/* new story  */}
-                        <div className="create-story">
-                            <h3>Create New Story</h3>
-                            <div className="row align-items-center mb-4">
-                                <div className="col-lg-1 col-md-1 col-sm-1 col-1">
-                                    <div className="img-container">
-                                        {context.user.image !== null && context.user.image !== undefined ?
-                                            <img src={context.user.image} alt="profile-img" id='profile-img' /> :
-                                            <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
-                                        }
+                        <div className="stories-header">
+                            <div className="row">
+                                <div className="col-lg-7 col-md-6 col-sm-6">
+                                    <div className="searchbar d-flex justify-content-between align-items-center">
+                                        <input type="text" placeholder='Search for Stories' />
+                                        <img src="/img/search-normal.png" alt="" />
                                     </div>
                                 </div>
-                                <div className="col-lg-11 col-md-11 col-sm-11 col-11">
-                                    <input type="text" placeholder="Share your thought" onClick={() => setWriteStoryModal(true)} value="" />
+                                <div className="col-lg-5 col-md-6 col-sm-6">
+                                    <button className='d-flex align-items-center justify-content-center' onClick={() => setWriteStoryModal(true)}><img src="/img/edit.png" alt="write" />Write New Story</button>
+                                    {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
                                 </div>
-                                {/* write modal  */}
-                                {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
-                            </div>
-                            <div className="d-flex justify-content-end">
-                                <p onClick={() => setWriteStoryModal(true)} className="mb-0 d-flex align-items-center"><img src="img/clarity_camera-solid.png" alt="image" /><span>Photo</span></p>
-                                <p onClick={() => setWriteStoryModal(true)} className="mb-0 d-flex align-items-center"><img src="img/link.png" alt="link" /><span>Attach
-                                    link</span></p>
                             </div>
                         </div>
                         {/* stories  */}
@@ -106,8 +90,38 @@ function Stories() {
                         {/* footer  */}
                         <Footer />
                     </div>
+                    <div className="col-lg-3">
+                        <div className="aside-sticky">
+                            <div className="story-recomentdations">
+                                <h2>Recommended Stories</h2>
+                                {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
+                                    return (
+                                        <div className="story row" key={index}>
+                                            <div className="col-2">
+                                                <div className="img-container">
+                                                    {each.userimage === null || each.userimage === undefined ?
+                                                        <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
+                                                        <img src={each.userimage} alt="avatar" id='profile-img' />
+                                                    }
+                                                </div>
+                                            </div>
+                                            <div className="col-10 details">
+                                                <h3>{each.fullname}</h3>
+                                                <h4>{each.username}</h4>
+                                                {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
+                                                    return <p key={index}>{text}</p>
+                                                })}
+                                                <button>Read more</button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
         </div>
     )
 }

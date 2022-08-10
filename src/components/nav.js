@@ -1,10 +1,13 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../dataContext";
 
 const Nav = () => {
 
     const { context, setContext } = useContext(DataContext)
+
+    // history 
+    const navigate = useNavigate()
 
     // toggle nav height 
     window.addEventListener('scroll', () => {
@@ -79,14 +82,24 @@ const Nav = () => {
                                 </li>
                                 {/* <li className="nav-item"><a className="nav-link" href="#"><img src="/img/Group 42.png" alt="country" /></a></li> */}
                                 {/* <li className="nav-item"><a href className="nav-link"><img src="/img/Notification 1.png" alt="" /></a></li> */}
-                                <li className="nav-item profile-img d-flex align-items-center">
-                                    <Link to={"/user-profile"} className="nav-link">
-                                        {context.user.image !== null && context.user.image !== undefined ?
-                                            <img src={context.user.image} alt="profile-img" id='profile-img' /> :
-                                            <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
-                                        }
-                                    </Link>
-                                </li>
+                                {localStorage.getItem('ballotbox_token') === null ?
+                                    <>
+                                        <li className={`nav-item ${window.location.pathname.includes("/stories") && 'active'}`}>
+                                            <button onClick={() => navigate("/login")}>Login</button>
+                                        </li>
+                                        <li className={`nav-item ${window.location.pathname.includes("/stories") && 'active'}`}>
+                                            <button id="signup-nav-btn" onClick={() => navigate("/login")}>Sign Up</button>
+                                        </li>
+                                    </> :
+                                    <li className="nav-item profile-img d-flex align-items-center">
+                                        <Link to={"/user-profile"} className="nav-link">
+                                            {context.user.image !== null && context.user.image !== undefined ?
+                                                <img src={context.user.image} alt="profile-img" id='profile-img' /> :
+                                                <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
+                                            }
+                                        </Link>
+                                    </li>
+                                }
                             </ul>
                         </div>
                     </div>

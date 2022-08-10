@@ -4,10 +4,10 @@ import Aside from "../components/aside";
 import Footer from "../components/footer";
 import axios from "axios";
 import { API } from "../components/apiRoot";
-import { useNavigate } from "react-router-dom";
 import { DataContext } from "../dataContext";
 import PollCard from '../components/pollCard';
 import Loader from '../components/loader';
+import LoginPrompt from '../components/loginPrompt';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -15,17 +15,8 @@ function Polls() {
     // context 
     const { context } = useContext(DataContext)
 
-    // history
-    const navigate = useNavigate()
-
-    // redirect if user is not logged in 
-    useEffect(() => {
-        if (localStorage.getItem('ballotbox_token') === null) {
-            navigate('/')
-        }
-    }, [])
-
-    const [filterModal, setFilterModal] = useState(false)
+    // const [filterModal, setFilterModal] = useState(false)
+    const [activePolls, setActivePolls] = useState(true)
     const [pageLoading, setPageLoading] = useState(true)
 
     // fetch polls 
@@ -61,25 +52,26 @@ function Polls() {
                     <div className="col-lg-3 col-md-3 aside">
                         <Aside />
                     </div>
-                    {/* gutter  */}
-                    {/* <div className="col-lg-1" /> */}
                     {/* main  */}
                     <div className="col-lg-8 col-md-9 polls">
-                        <div className="d-flex justify-content-end align-items-center mb-5">
+                        <div className="d-flex justify-content-end align-items-center mb-lg-5 mb-md-2 mb-sm-4 mb-4">
                             <div className="searchbar d-flex align-items-center">
                                 <input type="text" placeholder="Search Poll" onChange={(e) => searchPolls(e)} />
                                 <img src="img/search-normal.png" alt="search" />
                             </div>
                             {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
                         </div>
-                        <h1>All Polls</h1>
+                        <h1>{activePolls ? "Active Polls" : "Concluded Polls"}<i className="fa-solid fa-angle-down" /></h1>
                         {pageLoading ?
                             <Loader pageLoading={pageLoading} /> :
                             <>
                                 <div className="header">
-                                    <div className="row">
-                                        <div className="col-6">
+                                    <div className="row align-items-center">
+                                        <div className="col-4">
                                             <p>Polls</p>
+                                        </div>
+                                        <div className="col-2">
+                                            <p>No of Votes</p>
                                         </div>
                                         <div className="col-2">
                                             <p>Open Date</p>
@@ -87,20 +79,30 @@ function Polls() {
                                         <div className="col-2">
                                             <p>End Date</p>
                                         </div>
-                                        <div className="col-2">
-                                            <p>Status</p>
-                                        </div>
                                     </div>
                                 </div>
-                                {polls.map((poll, index) => {
+                                {polls.filter(poll => poll.status === `${activePolls ? "0" : "1"}`).map((poll, index) => {
                                     // get total votes 
                                     let pollVotes = poll.aspirant.reduce((total, aspirant) => {
                                         let increament = aspirant.votes.length
                                         total += (increament)
-                                        return total
+                                        if (total !== 0) {
+                                            return total
+                                        } else {
+                                            return 0.000000001
+                                        }
+                                    }, 0);
+                                    let liveVotes = poll.aspirant.reduce((total, aspirant) => {
+                                        let increament = parseInt(aspirant.livevote)
+                                        total += (increament)
+                                        if (total !== 0) {
+                                            return total
+                                        } else {
+                                            return 0.000000001
+                                        }
                                     }, 0)
                                     return (
-                                        <PollCard poll={poll} pollVotes={pollVotes} key={index} />
+                                        <PollCard poll={poll} pollVotes={pollVotes} liveVotes={liveVotes} key={index} fetchPolls={fetchPolls} />
                                     )
                                 })}
                             </>
@@ -112,7 +114,7 @@ function Polls() {
             </div>
 
             {/* filter modal */}
-            <Modal isOpen={filterModal} onRequestClose={() => setFilterModal(false)} id="polls-modal">
+            {/* <Modal isOpen={filterModal} onRequestClose={() => setFilterModal(false)} id="polls-modal">
                 <div className="header d-flex justify-content-between align-items-center">
                     <i className="fas fa-filter" />
                     <h3 className="mb-0">Filter Polls</h3>
@@ -151,7 +153,8 @@ function Polls() {
                     </div>
                 </div>
                 <button>Show Result</button>
-            </Modal>
+            </Modal> */}
+            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
         </div>
     )
 }

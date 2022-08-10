@@ -142,73 +142,86 @@ function SingleCourse() {
                                     arcu gravida nam. Convallis
                                     volutpat turpis eget neque in consectetur in. Elit dapibus tellus sapien nec nunc.
                                 </p>
-                                {/* similar courses */}
-                                <section>
-                                    <h2>Similar Courses</h2>
-                                    <div className="carousel">
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                            </div>
+                                <h4 id='instructor'>About the Instructor</h4>
+                                <div className="row">
+                                    <div className="col-lg-2">
+                                        <div className="img-container">
+                                            <img src="/img/candidate.png" alt="" />
                                         </div>
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
+                                    </div>
+                                    <div className="col-lg-10">
+                                        <h4 id='name'>Adewale Taofeek</h4>
+                                        <h6>Loobyist</h6>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est iaculis tristique felis suspendisse. Neque eu nunc suspendisse laoreet non accumsan. Ut amet accumsan, massa, ac eget. At urna lectus enim, sed est ut.In scelerisque nec cursus eget. Viverra viverra ultrices pulvinar mauris diam. Sit egestas tellus quisque donec. Faucibus et sed tempus interdum ut dictum urna suspendisse. Dolor at lectus pharetra tellus aliquet consectetur praesent. Eu justo et cras gravida tortor urna convallis felis. Faucibus lacinia pulvinar praesent vestibulum, ut.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Est iaculis tristique felis suspendisse. Neque eu nunc </p>
+                                    </div>
+                                </div>
+                            </div>
+                            {/* similar courses */}
+                            <section>
+                                <h2>Similar Courses</h2>
+                                <div className="carousel">
+                                    <div className="card">
+                                        <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                        <div className="body px-3">
+                                            <h3>Moral Foundations of Politics</h3>
+                                            <div className="rating mb-4">
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star" />
+                                                <i className="fas fa-star" />
+                                                <span>4.9</span>
+                                                <span className="ratings">4,709 Ratings</span>
                                             </div>
                                         </div>
                                     </div>
-                                </section>
-                            </div>
+                                    <div className="card">
+                                        <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                        <div className="body px-3">
+                                            <h3>Moral Foundations of Politics</h3>
+                                            <div className="rating mb-4">
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star" />
+                                                <i className="fas fa-star" />
+                                                <span>4.9</span>
+                                                <span className="ratings">4,709 Ratings</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card">
+                                        <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                        <div className="body px-3">
+                                            <h3>Moral Foundations of Politics</h3>
+                                            <div className="rating mb-4">
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star" />
+                                                <i className="fas fa-star" />
+                                                <span>4.9</span>
+                                                <span className="ratings">4,709 Ratings</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="card">
+                                        <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                        <div className="body px-3">
+                                            <h3>Moral Foundations of Politics</h3>
+                                            <div className="rating mb-4">
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star active" />
+                                                <i className="fas fa-star" />
+                                                <i className="fas fa-star" />
+                                                <span>4.9</span>
+                                                <span className="ratings">4,709 Ratings</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
                         </div>
                         {/* footer  */}
                         <Footer />

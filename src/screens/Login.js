@@ -1,21 +1,16 @@
-import React, { useContext, useState, useEffect } from "react";
-import { DataContext } from "../dataContext";
+import React, { useState, useContext } from "react";
 import { API } from "../components/apiRoot";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import { DataContext } from "../dataContext";
 import { setUserSession } from "../utils/common";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
-// import FacebookLogin from "react-facebook-login"
+import FacebookLogin from "react-facebook-login"
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
-
 const Login = () => {
-    // context 
     const { context, setContext } = useContext(DataContext)
-
-    // params 
-    const { Id } = useParams()
 
     // history 
     const navigate = useNavigate()
@@ -24,8 +19,7 @@ const Login = () => {
     const [loading, setLoading] = useState(false)
 
     // modals 
-    const [signupModal, setSignupModal] = useState(false)
-    const [loginModal, setLoginModal] = useState(false)
+    const [view, setView] = useState("main")
     const [verificationModal, setVerificationModal] = useState(false)
     const [forgotPasswordModal, setForgotPasswordModal] = useState(false)
     const [verificationView, setVerificationView] = useState('email')
@@ -57,15 +51,13 @@ const Login = () => {
         if (firstName === "" || lastName === "" || username === "" || email === "" || number === "" || password === "") {
             setError("Please fill all Input Spaces")
             setLoading(false)
-        } else if (email.charAt(0) !== "@") {
+        } else if (username.charAt(0) !== "@") {
             setError("Username must start with '@'")
             setLoading(false)
         } else {
             axios.post(`${API.API_ROOT}/users/register`, { firstname: firstName, lastname: lastName, username: username, phonenumber: number, email: email.toLowerCase(), password: password }, { headers: { 'content-type': 'application/json' } })
                 .then(response => {
-                    console.log(response)
                     setLoading(false);
-                    setSignupModal(false)
                     setVerificationModal(true)
                 }).catch(error => {
                     setLoading(false)
@@ -124,15 +116,15 @@ const Login = () => {
 
     // google signup 
     const responseSuccessGoogle = (response) => {
-        console.log(response)
-        console.log(response.tokenId)
+        // console.log(response)
+        // console.log(response.tokenId)
         setLoading(true)
         axios({
             method: "post",
             url: `${API.API_ROOT}/users/googleLogin`,
             data: { tokenId: response.tokenId }
         }).then((response) => {
-            console.log(response)
+            // console.log(response)
             if (response.status === 200) {
                 setLoading(false)
                 setUserSession(response.data.token)
@@ -150,28 +142,31 @@ const Login = () => {
     }
 
     // facebook login 
-    // const responseFacebook = (response) => {
-    //     // console.log(response)
-    //     setLoading(true)
-    //     if (response) {
-    //         axios({
-    //             method: "post",
-    //             url: `${API.API_ROOT}/users/facebookLogin`,
-    //             data: { accessToken: response.accessToken, userID: response.userID }
-    //         }).then((response) => {
-    //             // console.log(response)
-    //             if (response.status === 200) {
-    //                 setLoading(false)
-    //                 setUserSession(response.data.token)
-    //                 setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
-    //                 window.location.reload()
-    //             } else {
-    //                 setError('SOmething went wrong, pls try again later')
-    //             }
-    //         }
-    //         )
-    //     }
-    // }
+    const responseFacebook = (response) => {
+        // console.log(response)
+        setLoading(true)
+        if (response) {
+            axios({
+                method: "post",
+                url: `${API.API_ROOT}/users/facebookLogin`,
+                data: { accessToken: response.accessToken, userID: response.userID }
+            }).then((response) => {
+                console.log(response)
+                if (response.status === 200) {
+                    setLoading(false)
+                    setUserSession(response.data.token)
+                    setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
+                    window.location.reload()
+                } else {
+                    setError('SOmething went wrong, pls try again later')
+                }
+            }
+            )
+        }
+    }
+
+    const responseCancel = () => {
+    }
 
     // forgot password 
     // verify email 
@@ -249,180 +244,200 @@ const Login = () => {
         }
     }
 
-    // activate user 
-    const activateUser = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/users/activate/${Id}`)
-    }
-    useEffect(() => {
-        if (Id && Id !== '') activateUser()
-    }, [Id])
-
     return (
         <>
             <div className={`home ${context.darkMode ? 'dm' : ""}`}>
                 <div className="container">
                     <header>
-                        {context.darkMode ? <img src="/img/logo-dm.png" className="logo" alt="logo" /> : <img src="/img/logo.png" className="logo" alt="logo" />}
-                        {/* <img src="/img/p.png" id="logo" alt="" /> */}
+                        {context.darkMode ? <img src="/img/logo-dm.png" className="logo" alt="logo" onClick={() => navigate("/")} /> : <img src="/img/logo.png" className="logo" alt="logo" onClick={() => navigate("/")} />}
                         <div>
                             {context.darkMode ? <img src="/img/night.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: false })} /> : <img src="/img/theme.png" alt="theme" className="theme" onClick={() => setContext({ ...context, darkMode: true })} />}
-                            <button id="login-btn" onClick={() => setLoginModal(true)}>Login</button>
-                            <button id="create-account-btn" onClick={() => setSignupModal(true)}>Create an account</button>
+                            <button id="login-btn" onClick={() => {
+                                if (view === 'main' || view === "signup") {
+                                    setView('login')
+                                } else {
+                                    setView('signup')
+                                }
+                            }}>{view === 'signup' || view === 'main' ? "Login" : "Signup"}</button>
                         </div>
                     </header>
-                    <div className="row">
-                        <div className="col-lg-6 col-md-7">
-                            <div className="main">
-                                <h1>Explore Politics, Learn and Share Insights Online</h1>
-                                <h2>Login with any of your social Accounts</h2>
-                                <div id="google-btn">
-                                    <GoogleLogin
-                                        clientId="819346895976-gcbt1b49ig3svd6rosf4mu4a42misfcg.apps.googleusercontent.com"
-                                        // clientId="854389897420-1big4hbsc4b05kop2femba3df4msdjh2.apps.googleusercontent.com"
-                                        buttonText="Signup with Google"
-                                        onSuccess={responseSuccessGoogle}
-                                        onFailure={responseErrorGoogle}
-                                        cookiePolicy={'single_host_origin'}
-                                    // redirectUri=""
-                                    />
-                                </div>
-                                {/* <div id="google-btn">
-                                    <FacebookLogin
-                                        appId="1162929354518536"
-                                        autoLoad={false}
-                                        fields="name,email,picture"
-                                        // onClick={componentClicked}
-                                        callback={responseFacebook}
-                                        icon="fa-facebook"
-                                        textButton="Login with Facebook Account"
-                                    />
-                                </div> */}
-                                <div className="or d-flex justify-content-between align-items-center">
-                                    <span></span>
-                                    <h6>or</h6>
-                                    <span></span>
-                                </div>
-                                <button className="home-btn one" onClick={() => setSignupModal(true)}>Signup with email</button>
-                                <h3>By signing up, you agree to the <Link to={'/terms-and-conditions'}>Terms and condition</Link> and <Link to={'/privacy-policy'}>Privacy Policy.</Link></h3>
-                                <button className="home-btn two" onClick={() => setLoginModal(true)}>Login</button>
-                            </div>
+                    <div className="row body justify-content-lg-between align-items-center">
+                        <div className="text col-lg-5 col-md-6 order-lg-1 order-md-1 order-sm-2 order-2 d-flex flex-column align-items-lg-end align-items-md-end align-items-sm-center align-items-center">
+                            <img src="/img/secured.png" alt="secured" />
+                            <h1>Explore Politics, Learn and Share Insights Online</h1>
+                            <p>Polvote provides you with the ability to see profiles of Political Aspirants contesting for leadership, governance and economic positions near your locality. It also offers you a news feed which takes contributions from Political enthusiasts discussing simple to complex topics on social media including you. It also gives you the ability to vote for these aspiring leaders in contests created for the internet via Polvote.</p>
                         </div>
-                        <div className="col-lg-6 col-md-5 d-flex align-items-center justify-content-end justify-content-sm-center">
-                            <img src="/img/secured.png" alt="secured" className="img-fluid mb-sm-5 mb-3" />
+                        <div className={`order-lg-2 order-md-2 order-sm-1 order-1 ${view === 'signup' ? "col-lg-6 col-md-6" : "col-lg-4 col-md-6"} `} >
+                            {/* main  */}
+                            {view === "main" &&
+                                <div className="main">
+                                    <h3>By signing up, you agree to the <Link to={'/terms-and-conditions'}>Terms and condition</Link> and <Link to={'/privacy-policy'}>Privacy Policy.</Link></h3>
+                                    <div id="google-btn">
+                                        <GoogleLogin
+                                            clientId="819346895976-gcbt1b49ig3svd6rosf4mu4a42misfcg.apps.googleusercontent.com"
+                                            // clientId="854389897420-1big4hbsc4b05kop2femba3df4msdjh2.apps.googleusercontent.com"
+                                            buttonText="Signup with Google"
+                                            onSuccess={responseSuccessGoogle}
+                                            onFailure={responseErrorGoogle}
+                                            cookiePolicy={'single_host_origin'}
+                                        />
+                                    </div>
+                                    {/* <div id="google-btn">
+                                        <FacebookLogin
+                                            appId="1164223311085368"
+                                            autoLoad={false}
+                                            isMobile={false}
+                                            fields="name,email,picture"
+                                            onFailure={responseCancel}
+                                            callback={responseFacebook}
+                                            icon="fa-facebook"
+                                            textButton="Sign up with Facebook "
+                                        />
+                                    </div> */}
+                                    <div className="or d-flex justify-content-between align-items-center">
+                                        <span></span>
+                                        <h6>or</h6>
+                                        <span></span>
+                                    </div>
+                                    <button className="home-btn" onClick={() => setView('signup')}>Signup with email</button>
+                                    <h5 className="mb-0" onClick={() => setView("login")}>Already have an account? <span>Login</span></h5>
+                                </div>
+                            }
+                            {/* login  */}
+                            {view === "login" &&
+                                <div className="login">
+                                    <h1>Login to Vote on Ballot Box</h1>
+                                    <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
+                                    <div id="google-btn">
+                                        <GoogleLogin
+                                            clientId="819346895976-gcbt1b49ig3svd6rosf4mu4a42misfcg.apps.googleusercontent.com"
+                                            // clientId="854389897420-1big4hbsc4b05kop2femba3df4msdjh2.apps.googleusercontent.com"
+                                            buttonText="Login with Google"
+                                            onSuccess={responseSuccessGoogle}
+                                            onFailure={responseErrorGoogle}
+                                            cookiePolicy={'single_host_origin'}
+                                        />
+                                    </div>
+                                    {/* <div id="google-btn">
+                                        <FacebookLogin
+                                            appId="1162929354518536"
+                                            autoLoad={false}
+                                            fields="name,email,picture"
+                                            // onClick={componentClicked}
+                                            callback={responseFacebook}
+                                            icon="fa-facebook"
+                                            textButton="Login with Facebook "
+                                        />
+                                    </div> */}
+                                    <div className="or d-flex justify-content-between align-items-center">
+                                        <span></span>
+                                        <h6>or</h6>
+                                        <span></span>
+                                    </div>
+                                    <label htmlFor="login-email">Email Address</label>
+                                    <input type="text" id="login-email" placeholder="Email Address" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
+                                    <label htmlFor="login-password">Password</label>
+                                    <input type="password" id="login-password" placeholder="***************" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
+                                    <div className="d-flex align-items-center justify-content-between">
+                                        <div className="d-flex align-items-center">
+                                            <input type="checkbox" id="remember" />
+                                            <label htmlFor="remember" id="remember-label">Remember me</label>
+                                        </div>
+                                        <h5 onClick={() => { setForgotPasswordModal(true) }}>Forgot Password?</h5>
+                                    </div>
+                                    <p className="error-msg">{error}</p>
+                                    <button id="proceed" onClick={(e) => handleLogin(e)}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Login"}</button>
+                                    <h6>Don’t have an account? <span onClick={() => setView("signup")}>Signup</span></h6>
+                                </div>
+                            }
+                            {/* signup  */}
+                            {view === "signup" &&
+                                <div className="signup">
+                                    <h1>Signup on Polvote</h1>
+                                    <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
+                                    <div className="row justify-content-center mb-4">
+                                        <div className="col-lg-7 col-12">
+                                            <div id="google-btn">
+                                                <GoogleLogin
+                                                    clientId="819346895976-gcbt1b49ig3svd6rosf4mu4a42misfcg.apps.googleusercontent.com"
+                                                    // clientId="854389897420-1big4hbsc4b05kop2femba3df4msdjh2.apps.googleusercontent.com"
+                                                    buttonText="Login with Google"
+                                                    onSuccess={responseSuccessGoogle}
+                                                    onFailure={responseErrorGoogle}
+                                                    cookiePolicy={'single_host_origin'}
+                                                />
+                                            </div>
+                                        </div>
+                                        {/* <div className="col-lg-6">
+                                            <div id="google-btn">
+                                                <FacebookLogin
+                                                    appId="1162929354518536"
+                                                    autoLoad={false}
+                                                    fields="name,email,picture"
+                                                    // onClick={componentClicked}
+                                                    callback={responseFacebook}
+                                                    icon="fa-facebook"
+                                                    textButton="Login with Facebook "
+                                                />
+                                            </div>
+                                        </div> */}
+                                    </div>
+                                    <div className="or d-flex justify-content-between align-items-center">
+                                        <span></span>
+                                        <h6>or</h6>
+                                        <span></span>
+                                    </div>
+                                    <div className="row">
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <label htmlFor="fname">First Name</label>
+                                            <input id="fname" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <label htmlFor="lname">Last Name</label>
+                                            <input id="lname" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <label htmlFor="Username">Username</label>
+                                            <input id="Username" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <label htmlFor="Email">Email</label>
+                                            <input id="Email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <label htmlFor="number">Phone Number</label>
+                                            <input id="number" type="tel" placeholder="+234  |   700234567891" value={number} onChange={(e) => setNumber(e.target.value)} />
+                                        </div>
+                                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                            <label htmlFor="pass">Create Password</label>
+                                            <input id="pass" type="password" placeholder="***************" value={password} onChange={(e) => setPassword(e.target.value)} />
+                                        </div>
+                                    </div>
+                                    <p className="error-msg">{error}</p>
+                                    <button id="create" className="mb-3" onClick={handleSignUp}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Create Account"}</button>
+                                    <h6 onClick={() => setView("login")}>Already have an account? <span>Login</span></h6>
+                                </div>
+                            }
                         </div>
                     </div>
                     {/* footer  */}
                     <footer id="footer" className={`${context.darkMode ? 'dm' : ""}`}>
-                        <div className="row justify-content-lg-between justify-content-md-between top">
-                            <div className="col-lg-8 col-md-8 d-flex align-items-start">
-                                {context.darkMode ? <img src="/img/pl.png" alt="logo" className="logo" /> : <img src="/img/p.png" alt="logo" className="logo" />}
-                                <div>
-                                    <h1>Pol<span>vote</span></h1>
-                                    <p className="mb-0">Polvote provides you with the ability to see profiles of Political Aspirants contesting for leadership, governance and economic positions near your locality. It also offers you a news feed which takes contributions from Political enthusiasts discussing simple to complex topics on social media including you. It also gives you the ability to vote for these aspiring leaders in contests created for the internet via Polvote.</p>
-                                </div>
+                        <div className="row">
+                            <div className="col-lg-8 col-md-7 col-sm-6 col-7 d-flex text">
+                                {/* <Link>Advertise with us</Link> */}
+                                <Link to={'/terms-and-conditions'}>Terms and Condition</Link>
+                                <Link to={'/privacy-policy'}>Privacy Policy</Link>
                             </div>
-                            <div className="col-lg-2 col-md-3 d-flex flex-column justify-content-end mt-md-3 mt-sm-3 mt-4">
-                                <h5>FOLLOW US</h5>
-                                <div className="d-flex justify-content-between">
-                                    <a href="https://youtube.com/channel/UCkcn0Kv_w_Qe0MfZ7Hhe6lg" target="_blank"><img src="/img/youtube.png" alt="youtube" className='social' /></a>
-                                    <a href="https://www.facebook.com/Polvoteofficial-115809974445682/" target="_blank"><img src="/img/fb.png" alt="facebook" className='social' /></a>
-                                    <a href="https://www.instagram.com/polvoteofficial/" target="_blank"><img src="/img/insta.png" alt="instagram" className='social' /></a>
-                                    <a href="https://twitter.com/pol_vote?t=iVqZBrU9MA793b4K1-YLwQ" target="_blank"><img src="/img/twitter.png" alt="twitter" className='social' /></a>
-                                </div>
+                            <div className="col-lg-4 col-md-5 col-sm-6 col-5 d-flex justify-content-lg-end justify-content-md-end justify-content-sm-end justify-content-between">
+                                <a href="https://youtube.com/channel/UCkcn0Kv_w_Qe0MfZ7Hhe6lg" target="_blank"><img src="/img/youtube.png" alt="youtube" className='social' /></a>
+                                <a href="https://www.facebook.com/Polvoteofficial-115809974445682/" target="_blank"><img src="/img/fb.png" alt="facebook" className='social' /></a>
+                                <a href="https://www.instagram.com/polvoteofficial/" target="_blank"><img src="/img/insta.png" alt="instagram" className='social' /></a>
+                                <a href="https://twitter.com/pol_vote?t=iVqZBrU9MA793b4K1-YLwQ" target="_blank"><img src="/img/twitter.png" alt="twitter" className='social' /></a>
                             </div>
-                        </div>
-                        <div className="bottom d-flex">
-                            {/* <Link>Advertise with us</Link> */}
-                            <Link to={'/terms-and-conditions'}>Terms and Condition</Link>
-                            <Link to={'/privacy-policy'}>Privacy Policy</Link>
                         </div>
                     </footer>
                 </div>
             </div>
-
-            {/* signup modal  */}
-            <Modal isOpen={signupModal} onRequestClose={() => setSignupModal(false)} id="signup" className={`${context.darkMode ? 'dm' : ""}`}>
-                <i className="fa-solid fa-circle-xmark" onClick={() => setSignupModal(false)} />
-                <h1>Signup on Polvote</h1>
-                <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
-                <div className="form">
-                    <div className="row">
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label htmlFor="fname">First Name</label>
-                            <input id="fname" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
-                        </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label htmlFor="lname">Last Name</label>
-                            <input id="lname" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
-                        </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label htmlFor="Username">Username</label>
-                            <input id="Username" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-                        </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label htmlFor="Email">Email</label>
-                            <input id="Email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label htmlFor="number">Phone Number</label>
-                            <input id="number" type="tel" placeholder="+234  |   700234567891" value={number} onChange={(e) => setNumber(e.target.value)} />
-                        </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
-                            <label htmlFor="pass">Create Password</label>
-                            <input id="pass" type="password" placeholder="***************" value={password} onChange={(e) => setPassword(e.target.value)} />
-                        </div>
-                    </div>
-                    <p className="error-msg">{error}</p>
-                    <button id="create" className="mb-3" onClick={handleSignUp}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Create Account"}</button>
-                </div>
-            </Modal>
-
-            {/* login modal  */}
-            <Modal isOpen={loginModal} onRequestClose={() => setLoginModal(false)} id="loginModal" className={`${context.darkMode ? 'dm' : ""}`}>
-                <i className="fa-solid fa-circle-xmark" onClick={() => setLoginModal(false)} />
-                <h1>Login to Vote on Ballot Box</h1>
-                <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
-                <div className="w-400">
-                    <div id="google-btn">
-                        <GoogleLogin
-                            clientId="819346895976-gcbt1b49ig3svd6rosf4mu4a42misfcg.apps.googleusercontent.com"
-                            // clientId="854389897420-1big4hbsc4b05kop2femba3df4msdjh2.apps.googleusercontent.com"
-                            buttonText="Login with Google"
-                            onSuccess={responseSuccessGoogle}
-                            onFailure={responseErrorGoogle}
-                            cookiePolicy={'single_host_origin'}
-                        />
-                    </div>
-                    {/* <div id="google-btn">
-                            <FacebookLogin
-                                appId="1162929354518536"
-                                autoLoad={false}
-                                fields="name,email,picture"
-                                // onClick={componentClicked}
-                                callback={responseFacebook}
-                                icon="fa-facebook"
-                                textButton="Login with Facebook Account"
-                            />
-                        </div> */}
-                    <div className="or d-flex justify-content-between align-items-center">
-                        <span></span>
-                        <h6>or</h6>
-                        <span></span>
-                    </div>
-                    <label htmlFor="login-email">Email Address</label>
-                    <input type="text" id="login-email" placeholder="Email Address" value={loginEmail} onChange={(e) => setLoginEmail(e.target.value)} />
-                    <label htmlFor="login-password">Password</label>
-                    <input type="password" id="login-password" placeholder="***************" value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)} />
-                    <h5 onClick={() => {
-                        setLoginModal(false)
-                        setForgotPasswordModal(true)
-                    }}>Forgot Password?</h5>
-                    <p className="error-msg">{error}</p>
-                    <button id="proceed" onClick={(e) => handleLogin(e)}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Login"}</button>
-                    <h6>Don’t have an account? <span onClick={() => setLoginModal(false)}>Signup</span></h6>
-                </div>
-            </Modal>
 
             {/* verification modal */}
             <Modal isOpen={verificationModal} onRequestClose={() => setVerificationModal(false)} id="verification" className={`${context.darkMode ? 'dm' : ""}`}>

@@ -73,23 +73,25 @@ function Aside() {
     const [logoutModal, setLogoutModal] = useState(false)
 
     return (
-        <>
+        <div className='aside-sticky'>
             {/* user  */}
-            <div className="user d-flex justify-content-between align-items-center mb-lg-5 mb-3" >
-                <div className="d-flex" style={{ cursor: "pointer" }} onClick={() => navigate("/user-profile")}>
-                    <div className="avatar">
-                        {context.user.image !== null && context.user.image !== undefined ?
-                            <img src={context.user.image} alt="avatar" id='profile-img' /> :
-                            <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
-                        }
+            {window.location.pathname !== "/" && localStorage.getItem('ballotbox_token') !== null &&
+                <div className="user d-flex justify-content-between align-items-center mb-lg-5 mb-3" >
+                    <div className="d-flex" style={{ cursor: "pointer" }} onClick={() => navigate("/user-profile")}>
+                        <div className="avatar">
+                            {context.user.image !== null && context.user.image !== undefined ?
+                                <img src={context.user.image} alt="avatar" id='profile-img' /> :
+                                <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
+                            }
+                        </div>
+                        <div className="d-flex flex-column justify-content-center">
+                            <p>Welcome</p>
+                            <h3 className="mb-0">{context.user.email}</h3>
+                        </div>
                     </div>
-                    <div className="d-flex flex-column justify-content-center">
-                        <p>Welcome</p>
-                        <h3 className="mb-0">{context.user.email}</h3>
-                    </div>
-                </div>
-                <i style={{ cursor: "pointer" }} className="fas fa-ellipsis-v" onMouseOver={() => setUserOptions(true)} />
-            </div >
+                    <i style={{ cursor: "pointer" }} className="fas fa-ellipsis-v" onMouseOver={() => setUserOptions(true)} />
+                </div >
+            }
 
             {/* settings  */}
             {userOPtions &&
@@ -207,7 +209,7 @@ function Aside() {
             <div className="polls">
                 <h3>Active Polls</h3>
                 <div className="active-polls">
-                    {polls.map(poll => {
+                    {polls.filter(poll => poll.status !== "1").map(poll => {
                         return (
                             <Link to={`/polls/${poll._id}`} className="d-flex justify-content-between align-items-center" key={poll._id}>
                                 <h4 className="mb-0">{poll.polltitle}</h4><i className="fas fa-angle-right" />
@@ -219,7 +221,7 @@ function Aside() {
                     </a> */}
                 </div>
             </div>
-        </>
+        </div>
     )
 }
 

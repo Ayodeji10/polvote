@@ -2,9 +2,12 @@ import React, { useState } from 'react'
 import Nav from '../components/nav'
 import Footer from '../components/footer'
 import CourseInProgressWidget from '../components/courseInProgressWidget'
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function CourseInProgress() {
+    // history
+    const navigate = useNavigate()
+
     const [currentView, setCurrentView] = useState("notes")
 
     return (
@@ -19,7 +22,6 @@ function CourseInProgress() {
                     </div>
                     <div className="col-lg-1" />
                     <div className="col-lg-8 main">
-                        <Link to={'/courses/dashboard'}><h6><i className="fa-solid fa-arrow-left-long" />RETURN TO MY COURSES</h6></Link>
                         <div className="header d-flex justify-content-between">
                             <div>
                                 <p>The Morals of Natural Politics</p>
@@ -34,7 +36,7 @@ function CourseInProgress() {
                                 </span>
                             </div>
                         </div>
-                        {currentView === "quiz" ? "" : <iframe width="100%" height={475} src="https://www.youtube.com/embed/dcbs4MMCsFc" className="mb-4" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>}
+                        <iframe width="100%" height={475} src="https://www.youtube.com/embed/dcbs4MMCsFc" className="mb-4" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
                         <div className="d-flex page justify-content-between align-items-center mb-4">
                             <div>
                                 <button className={currentView === "notes" && "active"} onClick={() => setCurrentView('notes')}>
@@ -45,17 +47,12 @@ function CourseInProgress() {
                                     <span>Resources</span>
                                     {currentView === "resources" && <i className="fa-solid fa-circle" />}
                                 </button>
-                                <button className={currentView === "quiz" && "active"} onClick={() => setCurrentView('quiz')}>
+                                <button className={currentView === "quiz" && "active"} onClick={() => navigate("/courses/dashboard/single/quiz")}>
                                     <span>Quiz (3)</span>
                                     {currentView === "quiz" && <i className="fa-solid fa-circle" />}
                                 </button>
                             </div>
-                            <select name="cars" id="cars">
-                                <option value="volvo">About Instructor</option>
-                                <option value="saab">Saab</option>
-                                <option value="mercedes">Mercedes</option>
-                                <option value="audi">Audi</option>
-                            </select>
+                            <button className='active'><span>About Instructor</span></button>
                         </div>
 
                         {/* notes  */}
@@ -93,9 +90,8 @@ function CourseInProgress() {
                                 {/* books */}
                                 <div className="ebooks">
                                     <h2>eBooks</h2>
-                                    <div className="row">
-                                        {/* start of each book  */}
-                                        <div className="col-lg-3">
+                                    <div className="ebooks-carousel">
+                                        <div className="ebook">
                                             <img src="/img/book1.png" alt="book-img" />
                                             <h4>City on the Edge</h4>
                                             <p>Mark Goldman</p>
@@ -106,9 +102,7 @@ function CourseInProgress() {
                                                 <span>48%</span>
                                             </div>
                                         </div>
-                                        <div className="col-lg-1" />
-                                        {/* end of each book  */}
-                                        <div className="col-lg-3">
+                                        <div className="ebook">
                                             <img src="/img/book2.png" alt="book-img" />
                                             <h4>City on the Edge</h4>
                                             <p>Mark Goldman</p>
@@ -119,8 +113,7 @@ function CourseInProgress() {
                                                 <span>48%</span>
                                             </div>
                                         </div>
-                                        <div className="col-lg-1" />
-                                        <div className="col-lg-3">
+                                        <div className="ebook">
                                             <img src="/img/book3.png" alt="book-img" />
                                             <h4>City on the Edge</h4>
                                             <p>Mark Goldman</p>
@@ -131,7 +124,17 @@ function CourseInProgress() {
                                                 <span>48%</span>
                                             </div>
                                         </div>
-                                        <div className="col-lg-1" />
+                                        <div className="ebook">
+                                            <img src="/img/book1.png" alt="book-img" />
+                                            <h4>City on the Edge</h4>
+                                            <p>Mark Goldman</p>
+                                            <div className="d-flex align-items-center justify-content-between">
+                                                <div className="bar">
+                                                    <div className="indicator" />
+                                                </div>
+                                                <span>48%</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* videos  */}

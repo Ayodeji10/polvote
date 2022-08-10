@@ -39,7 +39,7 @@ function Withdrawal() {
     }, [id])
 
     return (
-        <p>...</p>
+        <h6>...</h6>
     )
 }
 

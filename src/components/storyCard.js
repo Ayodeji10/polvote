@@ -7,6 +7,7 @@ import NewLineText from "../components/newLineText";
 import ShareStoryModal from './shareStoryModal';
 import EditStoryModal from './editStoryModal';
 import DeleteStoryModal from './deleteStoryModal';
+import Comment from '../components/comments'
 
 function StoryCard({ story, index }) {
     // context 
@@ -58,6 +59,9 @@ function StoryCard({ story, index }) {
         })
     }
 
+    // lenght of comment showed 
+    const [commentLength, setCommentLength] = useState(2)
+
     // like 
     const like = () => {
         axios({
@@ -108,7 +112,7 @@ function StoryCard({ story, index }) {
     return (
         <div className="story">
             <div className="body">
-                <div className="row mb-lg-5 mb-md-4 mb-sm-4 mb-4 align-items-center">
+                <div className="row mb-3 align-items-center">
                     <div className="col-2 col-sm-1 col-md-1 col-lg-1">
                         <div className="img-container">
                             {story.userimage === null || story.userimage === undefined ?
@@ -124,7 +128,8 @@ function StoryCard({ story, index }) {
                         }}>{story.fullname}</h3>
                         <div className="d-flex">
                             <p className="mb-0">{story.username}</p>
-                            <p className="mb-0">{story.createdAt.substring(8, 10)}-{story.createdAt.substring(5, 7)}-{story.createdAt.substring(0, 4)} {parseInt(story.createdAt.substring(11, 13)) + 1}{story.createdAt.substring(13, 16)} {story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}</p>
+                            <p className="mb-0">{story.createdAt.substring(8, 10)}-{story.createdAt.substring(5, 7)}-{story.createdAt.substring(0, 4)}</p>
+                            <p className='mb-0'>{parseInt(story.createdAt.substring(11, 13)) + 1}{story.createdAt.substring(13, 16)} {story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}</p>
                         </div>
                     </div>
                     <div className="col-1" onClick={() => setOptions(!options)}>
@@ -151,6 +156,8 @@ function StoryCard({ story, index }) {
                         }
                     </div>
                 </div>
+                {/* <h4>{story.story}</h4> */}
+                <NewLineText text={story.story} />
                 {/* images  */}
                 <div className="row mb-4">
                     {story.image.length !== 0 &&
@@ -175,8 +182,6 @@ function StoryCard({ story, index }) {
                         </>
                     }
                 </div>
-                {/* <h4>{story.story}</h4> */}
-                <NewLineText text={story.story} />
                 {/* share  */}
                 {story.storyinfo.length !== 0 &&
                     <div className="shareStory mt-4">
@@ -241,31 +246,45 @@ function StoryCard({ story, index }) {
             {editStoryModal && <EditStoryModal story={story} index={index} openModal={editStoryModal} handleEditStoryModal={handleEditStoryModal} />}
             {/* deleteStoryModal  */}
             {deleteStoryModal && <DeleteStoryModal story={story} openModal={deleteStoryModal} handleDeleteStoryModal={handleDeleteStoryModal} />}
-            <div className="comment">
-                <div className="row align-items-center">
-                    <div className="col-1">
-                        <div className="img-container">
-                            {context.user.image !== null && context.user.image !== undefined ?
-                                <img src={context.user.image} alt="profile-img" id='profile-img' /> :
-                                <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
-                            }
+            {window.location.pathname !== "/user-profile" && localStorage.getItem('ballotbox_token') !== null &&
+                <>
+                    <div className="comment">
+                        <div className="row align-items-center">
+                            <div className="col-1">
+                                <div className="img-container">
+                                    {context.user.image !== null && context.user.image !== undefined ?
+                                        <img src={context.user.image} alt="profile-img" id='profile-img' /> :
+                                        <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
+                                    }
+                                </div>
+                            </div>
+                            <div className="col-8">
+                                {/* <input type="text" placeholder="Leave a comment..." value={text} onChange={(e) => setText(e.target.value)} /> */}
+                                <div className="input d-flex justify-content-between align-items-center">
+                                    <input type="text" placeholder="Leave a comment..." value={text} onChange={(e) => setText(e.target.value)} />
+                                    <input type="file" id='add-image' accept='image/*' hidden onChange={(e) => setCommentImg(e.target.files[0])} />
+                                    <i className="fa-regular fa-image" onClick={addImage} />
+                                    {/* <i class="fa-solid fa-image" ></i> */}
+                                </div>
+                            </div>
+                            <div className="col-3">
+                                <button onClick={comment}><img src="/img/send.png" alt="send" />{loading ? "loading" : "Send"}</button>
+                            </div>
                         </div>
                     </div>
-                    <div className="col-9">
-                        {/* <input type="text" placeholder="Leave a comment..." value={text} onChange={(e) => setText(e.target.value)} /> */}
-                        <div className="input d-flex justify-content-between align-items-center">
-                            <input type="text" placeholder="Leave a comment..." value={text} onChange={(e) => setText(e.target.value)} />
-                            <input type="file" id='add-image' accept='image/*' hidden onChange={(e) => setCommentImg(e.target.files[0])} />
-                            <i className="fa-regular fa-image" onClick={addImage} />
-                            {/* <i class="fa-solid fa-image" ></i> */}
+                    {story.comments.length > 0 &&
+                        <div className="comments">
+                            <h2>Comments</h2>
+                            {story.comments.slice(0, commentLength).map((comment, index) => {
+                                return <Comment comment={comment} id={story._id} key={index} />
+                            })}
+                            {commentLength <= 2 && <h5 id='loadMore' onClick={() => setCommentLength(story.comments.length)}>Load more comments</h5>}
                         </div>
-                    </div>
-                    <div className="col-2">
-                        <button onClick={comment}><img src="/img/send.png" alt="send" />{loading ? "loading" : "Send"}</button>
-                    </div>
-                </div>
-            </div>
+                    }
+                </>
+            }
         </div>
+        // }
     )
 }
 

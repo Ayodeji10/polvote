@@ -7,6 +7,7 @@ import axios from "axios";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
+import LoginPrompt from '../components/loginPrompt';
 import Loader from '../components/loader';
 import SingleProfileCard from '../components/singleProfileCard';
 Modal.setAppElement('#root')
@@ -18,13 +19,6 @@ function Profiles() {
 
     // navigate 
     const navigate = useNavigate()
-
-    // redirect if user is not logged in 
-    useEffect(() => {
-        if (localStorage.getItem('ballotbox_token') === null) {
-            navigate('/')
-        }
-    }, [])
 
     const [filterModal, setFilterModal] = useState(false)
     const [pageLoading, setPageLoading] = useState(true)
@@ -67,17 +61,17 @@ function Profiles() {
                     {/* gutter  */}
                     {/* <div className="col-lg-1" /> */}
                     {/* main  */}
-                    <div className="col-lg-8 col-md-9 profile">
+                    <div className="col-lg-6 col-md-9 profile">
                         {/* header */}
-                        <div className="header mb-5">
+                        <div className="header mb-lg-5 mb-md-4 mb-sm-3 mb-3">
                             <div className="row">
-                                <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div className="col-lg-7 col-md-7 col-sm-7 col-12">
                                     <div className="searchbar d-flex align-items-center">
                                         <input type="text" placeholder="Search for Aspirant Profile" onChange={(e) => searchProfile(e)} />
                                         <img src="img/search-normal.png" alt="search" />
                                     </div>
                                 </div>
-                                <div className="col-lg-4 col-md-4 col-sm-4 col-7">
+                                <div className="col-lg-5 col-md-5 col-sm-5 col-12">
                                     <Link to={"/create-aspirant"}><button><i className="far fa-edit" />Create Aspirant Profile</button></Link>
                                 </div>
                                 <div className="col-lg-2 col-md-2 col-sm-2 col-5">
@@ -165,8 +159,31 @@ function Profiles() {
                         {/* footer  */}
                         <Footer />
                     </div>
+                    <div className="col-lg-3">
+                        <div className="aside-sticky">
+                            <div className="profile-recomentdations">
+                                <h2>Other Aspirant Profiles</h2>
+                                {aspirantList.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
+                                    return (
+                                        <div className="profile row" key={index}>
+                                            <div className="col-lg-2 col-md-1">
+                                                <div className="img-container">
+                                                    <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
+                                                </div>
+                                            </div>
+                                            <div className="col-lg-10 col-md-11 details">
+                                                <h3>{each.overview}</h3>
+                                                <button>Read more</button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
         </div>
     )
 }

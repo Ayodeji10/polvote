@@ -34,13 +34,15 @@ function CoursesDashboardUser() {
                                 </div>
                             </div>
                             <div className="d-flex align-items-center">
-                                {admin !== true ? <i className="fa-solid fa-toggle-off" onClick={() => setAdmin(true)} /> : <i class="fa-solid fa-toggle-on" onClick={() => setAdmin(false)}></i>}
-
+                                <label className="switch">
+                                    <input type="checkbox" onClick={() => setAdmin(!admin)} />
+                                    <span className="slider" />
+                                </label>
                                 <p className="mb-0">{admin ? "Switch to Student Mode" : "Switch to Course Administrator"}</p>
                             </div>
                         </div>
 
-                        {/* board */}
+                        {/* user board */}
                         {admin !== true &&
                             <>
                                 <div className="board">
@@ -190,98 +192,17 @@ function CoursesDashboardUser() {
                                         </>
                                     }
                                 </div>
-                                <section>
-                                    <h1>Because you’ve completed these courses</h1>
-                                    <p>These are similar courses you can enrol for</p>
-                                    <div className="carousel">
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                                <p className="mb-0">When do governments deserve our allegiance, and when should they be
-                                                    denied it? The participants will be encouraged to dive into the complex theories
-                                                    and phenomena and get familiar with the concepts
-                                                    that are still very relevant in the co</p>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                                <p className="mb-0">When do governments deserve our allegiance, and when should they be
-                                                    denied it? The participants will be encouraged to dive into the complex theories
-                                                    and phenomena and get familiar with the concepts
-                                                    that are still very relevant in the co</p>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                                <p className="mb-0">When do governments deserve our allegiance, and when should they be
-                                                    denied it? The participants will be encouraged to dive into the complex theories
-                                                    and phenomena and get familiar with the concepts
-                                                    that are still very relevant in the co</p>
-                                            </div>
-                                        </div>
-                                        <div className="card">
-                                            <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
-                                            <div className="body px-3">
-                                                <h3>Moral Foundations of Politics</h3>
-                                                <div className="rating mb-4">
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star active" />
-                                                    <i className="fas fa-star" />
-                                                    <i className="fas fa-star" />
-                                                    <span>4.9</span>
-                                                    <span className="ratings">4,709 Ratings</span>
-                                                </div>
-                                                <p className="mb-0">When do governments deserve our allegiance, and when should they be
-                                                    denied it? The participants will be encouraged to dive into the complex theories
-                                                    and phenomena and get familiar with the concepts
-                                                    that are still very relevant in the co</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </section>
                             </>
                         }
 
-                        {/* admin  */}
+                        {/* admin board */}
                         {admin === true &&
                             <div className="admin">
                                 <div className="button-container d-flex justify-content-between">
                                     <button className={adminView === 'courses' && "active"} onClick={() => setAdminView('courses')}><img src="/img/courses.png" alt="courses" />My Courses</button>
-                                    <button className={adminView === 'new-course' && "active"} onClick={() => setAdminView('new-course')}><img src="/img/create.png" alt="add-course" />Add New Course</button>
-                                    <button className={adminView === 'resources' && "active"} onClick={() => setAdminView('resources')}><img src="/img/resource.png" alt="resourced" />Resources</button>
+                                    <button className={adminView === 'new-course' && "active"} onClick={() => setAdminView('new-course')}><img src="/img/create.png" alt="add-course" />Create Course</button>
+                                    <button className={adminView === 'resources' && "active"} onClick={() => setAdminView('resources')}><img src="/img/resource.png" alt="resourced" />Modules</button>
+                                    <button className={adminView === 'instructor' && "active"} onClick={() => setAdminView('instructor')}><img src="/img/person.png" alt="Instructor" />Resources</button>
                                     <button className={adminView === 'instructor' && "active"} onClick={() => setAdminView('instructor')}><img src="/img/person.png" alt="Instructor" />Instructor</button>
                                 </div>
 
@@ -301,18 +222,15 @@ function CoursesDashboardUser() {
                                                 <div className="col-lg-2">
                                                     <img src="/img/sample-course.png" alt="course-img" />
                                                 </div>
-                                                <div className="col-lg-7">
+                                                <div className="col-lg-7 d-flex flex-column justify-content-between">
                                                     <h2>Public Administration and Bureaucracy</h2>
-                                                    <div className="bar">
-                                                        <div className="indicator" />
-                                                    </div>
                                                     <p className="mb-0">DRAFT</p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <div className="d-flex flex-column justify-content-between align-items-end" id="edit">
                                                         <button>Complete Course</button>
                                                         <div className="d-flex justify-content-between align-items-end">
-                                                            <p className="mb-0">Last Edited</p>
+                                                            <h4 className="mb-0">Last Edited</h4>
                                                             <h4 className="mb-0">24 Dec, 2021</h4>
                                                         </div>
                                                     </div>
@@ -324,41 +242,18 @@ function CoursesDashboardUser() {
                                                 <div className="col-lg-2">
                                                     <img src="/img/sample-course.png" alt="course-img" />
                                                 </div>
-                                                <div className="col-lg-7">
+                                                <div className="col-lg-7 d-flex flex-column justify-content-between">
                                                     <h2>Public Administration and Bureaucracy</h2>
-                                                    <div className="bar">
-                                                        <div className="indicator" />
+                                                    <div>
+                                                        <p className="mb-0">PUBLISHED</p>
+                                                        <h4>Published on 22 January 2021</h4>
                                                     </div>
-                                                    <p className="mb-0">DRAFT</p>
-                                                </div>
-                                                <div className="col-lg-3">
-                                                    <div className="d-flex flex-column justify-content-between align-items-end" id="edit">
-                                                        <button>Complete Course</button>
-                                                        <div className="d-flex justify-content-between align-items-end">
-                                                            <p className="mb-0">Last Edited</p>
-                                                            <h4 className="mb-0">24 Dec, 2021</h4>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="course">
-                                            <div className="row">
-                                                <div className="col-lg-2">
-                                                    <img src="/img/sample-course.png" alt="course-img" />
-                                                </div>
-                                                <div className="col-lg-7">
-                                                    <h2>Public Administration and Bureaucracy</h2>
-                                                    <div className="bar">
-                                                        <div className="indicator" />
-                                                    </div>
-                                                    <p className="mb-0">PUBLISHED</p>
                                                 </div>
                                                 <div className="col-lg-3">
                                                     <div className="d-flex flex-column justify-content-between align-items-end" id="edit">
                                                         <button>Edit Course</button>
                                                         <div className="d-flex justify-content-between align-items-end">
-                                                            <p className="mb-0">Last Edited</p>
+                                                            <h4 className="mb-0">Last Edited</h4>
                                                             <h4 className="mb-0">24 Dec, 2021</h4>
                                                         </div>
                                                     </div>
@@ -518,6 +413,89 @@ function CoursesDashboardUser() {
                                 }
                             </div>
                         }
+                        {/* similar courses  */}
+                        <section>
+                            <h1>Because you’ve completed these courses</h1>
+                            <p>These are similar courses you can enrol for</p>
+                            <div className="carousel">
+                                <div className="card">
+                                    <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                    <div className="body px-3">
+                                        <h3>Moral Foundations of Politics</h3>
+                                        <div className="rating mb-4">
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star" />
+                                            <i className="fas fa-star" />
+                                            <span>4.9</span>
+                                            <span className="ratings">4,709 Ratings</span>
+                                        </div>
+                                        <p className="mb-0">When do governments deserve our allegiance, and when should they be
+                                            denied it? The participants will be encouraged to dive into the complex theories
+                                            and phenomena and get familiar with the concepts
+                                            that are still very relevant in the co</p>
+                                    </div>
+                                </div>
+                                <div className="card">
+                                    <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                    <div className="body px-3">
+                                        <h3>Moral Foundations of Politics</h3>
+                                        <div className="rating mb-4">
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star" />
+                                            <i className="fas fa-star" />
+                                            <span>4.9</span>
+                                            <span className="ratings">4,709 Ratings</span>
+                                        </div>
+                                        <p className="mb-0">When do governments deserve our allegiance, and when should they be
+                                            denied it? The participants will be encouraged to dive into the complex theories
+                                            and phenomena and get familiar with the concepts
+                                            that are still very relevant in the co</p>
+                                    </div>
+                                </div>
+                                <div className="card">
+                                    <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                    <div className="body px-3">
+                                        <h3>Moral Foundations of Politics</h3>
+                                        <div className="rating mb-4">
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star" />
+                                            <i className="fas fa-star" />
+                                            <span>4.9</span>
+                                            <span className="ratings">4,709 Ratings</span>
+                                        </div>
+                                        <p className="mb-0">When do governments deserve our allegiance, and when should they be
+                                            denied it? The participants will be encouraged to dive into the complex theories
+                                            and phenomena and get familiar with the concepts
+                                            that are still very relevant in the co</p>
+                                    </div>
+                                </div>
+                                <div className="card">
+                                    <img src="/img/pexels-george-ikwegbu-2379429 1.png" className="top-img" alt="course-img" />
+                                    <div className="body px-3">
+                                        <h3>Moral Foundations of Politics</h3>
+                                        <div className="rating mb-4">
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star active" />
+                                            <i className="fas fa-star" />
+                                            <i className="fas fa-star" />
+                                            <span>4.9</span>
+                                            <span className="ratings">4,709 Ratings</span>
+                                        </div>
+                                        <p className="mb-0">When do governments deserve our allegiance, and when should they be
+                                            denied it? The participants will be encouraged to dive into the complex theories
+                                            and phenomena and get familiar with the concepts
+                                            that are still very relevant in the co</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
                         {/* footer  */}
                         <Footer />
                     </div>

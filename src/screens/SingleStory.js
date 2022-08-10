@@ -89,14 +89,6 @@ function SingleStory() {
                             <Loader pageLoading={pageLoading} /> :
                             <>
                                 <StoryCard story={story} />
-                                {/* comments  */}
-                                {story.comments.length > 0 &&
-                                    <div className="comments">
-                                        {story.comments.map((comment, index) => {
-                                            return <Comment comment={comment} id={id} key={index} />
-                                        })}
-                                    </div>
-                                }
                             </>
                         }
                         {/* footer  */}

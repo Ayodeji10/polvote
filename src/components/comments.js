@@ -54,7 +54,7 @@ function Comments({ comment, id }) {
     }
 
     return (
-        <div className="comment mb-3">
+        <div className="comment">
             <div className="row">
                 <div className="col-1">
                     <div className="img-container">
@@ -118,11 +118,11 @@ function Comments({ comment, id }) {
                                     </div>
                                     <p className="mb-0">{reply.comment}</p>
                                 </div>
-                                <div className="d-flex align-items-center mb-3">
-                                    {/* <h5 className="mb-0">Like</h5> */}
-                                    {/* <h5 className="mb-0">Reply</h5> */}
-                                    {/* <h6 className="mb-0">2 Mins</h6> */}
-                                </div>
+                                {/* <div className="d-flex align-items-center mb-3">
+                                    <h5 className="mb-0">Like</h5>
+                                    <h5 className="mb-0">Reply</h5>
+                                    <h6 className="mb-0">2 Mins</h6>
+                                </div> */}
                             </div>
                         </div>
                     )

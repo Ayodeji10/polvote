@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { DataContext } from './dataContext';
 import Home from './screens/Home';
 import Login from './screens/Login';
+import Verify from "./screens/Verify";
 import Polls from './screens/Polls';
 import SinglePoll from './screens/SinglePoll';
 import Stories from './screens/Stories';
@@ -25,8 +26,11 @@ import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
 import Courses from './screens/Courses';
 import SingleCourse from './screens/SingleCourse';
-import CoursesDashboardUser from './screens/CoursesDashboardUser';
+import CoursesDashboardUser from './screens/CoursesDashboard';
 import CourseInProgress from './screens/CourseInProgress';
+import CourseQuiz from "./screens/CourseQuiz";
+import QuizReview from "./screens/QuizReview";
+import CourseCertificates from "./screens/CourseCertificates";
 import './App.css';
 
 function App() {
@@ -35,7 +39,7 @@ function App() {
     user: {},
     newAspirant: { firstName: "", lastName: "", link: "", DOB: "", party: "", overview: "", education: "", politics: "", business: "", activism: "", history: [{ pollTitle: "", pollYear: "", position: "", numberOfVotes: "" }], ownership: "Writer", transfer: "No", amount: "", pollid: null },
     homeSearchKey: "",
-    profileView: "aspirants",
+    profileView: "articles",
     darkMode: true
   })
 
@@ -56,7 +60,8 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/login/:Id" element={<Login />} />
+          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/verify/:Id" element={<Verify />} />
           <Route exact path="/polls" element={<Polls />} />
           <Route exact path="/polls/:id" element={<SinglePoll />} />
           <Route exact path="/stories" element={<Stories />} />
@@ -80,6 +85,9 @@ function App() {
           <Route exact path="/courses/single" element={<SingleCourse />} />
           <Route exact path="/courses/dashboard" element={<CoursesDashboardUser />} />
           <Route exact path="/courses/dashboard/single" element={<CourseInProgress />} />
+          <Route exact path="/courses/dashboard/single/quiz" element={<CourseQuiz />} />
+          <Route exact path="/courses/dashboard/single/quiz/review" element={<QuizReview />} />
+          <Route exact path="/courses/certificates" element={<CourseCertificates />} />
         </Routes>
       </DataContext.Provider>
     </Router>

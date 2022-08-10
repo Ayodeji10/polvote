@@ -58,8 +58,18 @@ input {
 
 /* presets  */
 .ReactModal__Overlay {
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    background-color: rgba(0, 0, 0, 0.4) !important;
     z-index: 1031 !important;
+    opacity: 0;
+    transition: opacity 500ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+    opacity: 0;
 }
 
 
@@ -122,9 +132,25 @@ nav li a {
     font-weight: 400;
     line-height: 24px;
     color: #80848F !important;
-    font-family: 'Questrial', sans-serif;
+    font-family: 'Nunito', sans-serif;
     padding-left: 20px !important;
     padding-right: 20px !important;
+}
+
+nav li button {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #FFF !important;
+    font-family: 'Questrial', sans-serif;
+    padding: 9px 16px !important;
+    border-radius: 30px;
+    background-color: transparent;
+    margin-left: 25px;
+}
+
+nav li button#signup-nav-btn {
+    background-color: rgba(0, 122, 243, 1)
 }
 
 nav li a#course {
@@ -225,7 +251,7 @@ nav .profile-img a {
     justify-content: space-between;
     align-items: center;
     padding-top: 35px;
-    margin-bottom: 70px;
+    margin-bottom: 92px;
 }
 
 .home header button {
@@ -236,51 +262,57 @@ nav .profile-img a {
     border-radius: 50px;
     width: unset;
     margin-bottom: 0;
-    margin-left: 22px
-}
-
-.home header button#login-btn {
-    color: rgba(0, 122, 243, 1);
-    background-color: #FFF;
-}
-
-.home header button#create-account-btn {
+    margin-left: 22px;
     color: #FFF;
-    background-color: rgba(0, 122, 243, 1);
+    background-color: transparent;
 }
 
-.home .main h1 {
-    font-size: 42px;
-    font-weight: 700;
-    line-height: 58px;
-    margin-bottom: 72px;
+.home .body {
+    margin-bottom: 231px;
 }
 
-.home .main h2 {
-    font-size: 20px;
-    font-weight: 700;
-    margin-bottom: 34px;
+.home .text img {
+    width: 216px;
+    margin-bottom: 16px;
 }
 
-.home .main h2 {
-    font-size: 20px;
+.home .text h1 {
+    font-size: 38px;
     font-weight: 700;
-    margin-bottom: 34px;
+    line-height: 42px;
+    margin-bottom: 21px;
+}
+
+.home .text p {
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 0;
+}
+
+.home .main h3 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 16px;
+}
+
+.home .main h3 a {
+    color: rgba(0, 122, 243, 1);
 }
 
 .home .main #google-btn button {
-    width: 400px;
+    width: 100%;
     justify-content: center;
     border-radius: 100px !important;
-    margin-bottom: 12px;
+    margin-bottom: 34px;
     padding: 5px !important
 }
 
 .home .main #google-btn>span>button {
-    width: 400px;
+    width: 100%;
     justify-content: center;
     border-radius: 100px !important;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
     padding: 11px !important
 }
 
@@ -298,8 +330,8 @@ nav .profile-img a {
 }
 
 .home .main .or {
-    width: 320px;
-    margin: 40px 0;
+    width: 100%;
+    margin-bottom: 16px;
 }
 
 .home .main .or span {
@@ -312,293 +344,151 @@ nav .profile-img a {
 }
 
 .home .main button.home-btn {
-    width: 400px;
+    width: 100%;
     font-size: 16px;
     font-weight: 700;
     padding: 14px 0;
     border-radius: 50px;
-}
-
-.home .main button.home-btn.one {
     color: #FFF;
     background-color: rgba(0, 122, 243, 1);
-    margin-bottom: 31px;
+    margin-bottom: 16px;
 }
 
-.home .main h3 {
+.home .main h5 {
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 78px;
-    max-width: 400px
+    text-align: center;
 }
 
-.home .main h3 a {
-    color: rgba(0, 122, 243, 1);
-}
-
-.home .main button.home-btn.two {
-    color: rgba(10, 24, 61, 1);
-    background-color: #FFF;
-    margin-bottom: 74px;
+.home .main h5 span {
+    cursor: pointer;
+    color: rgba(0, 122, 243, 1)
 }
 
 .home footer#footer {
-    margin-top: 0
+    margin-top: 0;
+    border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
+    padding: 27px 0 24px
 }
 
-.home footer p {
-    margin-bottom: 0;
+.home footer#footer .text a {
     font-size: 14px;
     font-weight: 400;
-    color: #FFF;
-    cursor: pointer;
+    margin: 0 83px 0 0
 }
 
-.home footer .logo {
-    height: unset
+.home footer#footer a {
+    margin: 0 0 0 16px
 }
 
-/* signup modal  */
-#signup {
-    top: 15% !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 803px;
-    height: 580px;
-    background-color: rgba(4, 19, 54, 1) !important;
-    border-radius: 10px !important;
-    padding: 16px 14px !important;
+.home .login {
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 33px 41px 15px;
+    border-radius: 20px;
 }
 
-#signup i {
-    float: right;
-}
-
-#signup h1 {
+.home .login h1 {
     color: #FFF;
     text-align: center;
-    margin: 16px 0 8px 0;
+    margin: 0 0 10px 0;
     font-size: 22px;
-    font-weight: 600;
-    max-width: none;
-    line-height: 24px;
-}
-
-#signup h4 {
-    color: rgba(255, 255, 255, 0.7);
-    text-align: center;
-    font-size: 14px;
-    font-weight: 400;
-    max-width: 344px;
-    margin: 0 auto 20px;
-    line-height: 20px;
-}
-
-#signup .form {
-    width: 627px;
-    margin: 0 auto
-}
-
-#signup .form button {
-    width: 100%;
-    background-color: #FFF !important;
-    padding: 0 15px !important;
-    border-radius: 100px !important;
-    color: rgba(10, 24, 61, 1) !important;
-    text-transform: lowercase;
-}
-
-#signup .form button.kep-login-facebook {
-    padding: 12px !important;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-#signup .form button.kep-login-facebook i {
-    float: unset
-}
-
-#signup .form button span {
-    color: rgba(10, 24, 61, 1) !important;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-#signup .form span {
-    width: 100%;
-    border: solid 1px rgba(255, 255, 255, 0.2) !important;
-}
-
-#signup .form h5 {
-    line-height: 20px;
-    margin: 0 16px;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-#signup .form label {
-    display: block;
-    color: #FFF;
-    margin-bottom: 3px;
-    font-size: 14px;
-    font-weight: 600;
-}
-
-#signup .form input {
-    border-radius: 100px;
-    background-color: #FFF;
-    width: 100%;
-    color: black !important;
-    padding: 18px 20px;
-    margin-bottom: 26px;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-#signup .form button#create {
-    width: unset;
-    display: block;
-    margin: 0px auto;
-    color: #FFF !important;
-    background-color: rgba(0, 122, 243, 1) !important;
-    font-size: 16px;
     font-weight: 700;
-    padding: 16px 135px !important
 }
 
-#signup .form h6 {
-    /* margin-bottom: 31px; */
-    text-align: center;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-#signup .form h6 span {
-    color: rgba(0, 122, 243, 1);
-    cursor: pointer;
-    border: 0 !important
-}
-
-/* login modal  */
-#loginModal {
-    top: 8% !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    width: 588px;
-    height: 630px;
-    background-color: rgba(4, 19, 54, 1) !important;
-    border-radius: 10px !important;
-    padding: 16px 14px !important;
-}
-
-#loginModal i.fa-circle-xmark {
-    float: right;
-}
-
-#loginModal.dm i {
-    color: rgba(1, 10, 32, 1)
-}
-
-#loginModal h1 {
-    color: #FFF;
-    text-align: center;
-    margin: 16px 0 8px 0;
-    font-size: 22px;
-    font-weight: 600;
-    max-width: none;
-    line-height: 24px;
-}
-
-#loginModal h4 {
+.home .login h4 {
     color: rgba(255, 255, 255, 0.7);
     text-align: center;
     font-size: 14px;
     font-weight: 400;
-    max-width: 344px;
+    max-width: 375px;
     margin: 0 auto 20px;
     line-height: 20px;
 }
 
-#loginModal .w-400 {
-    width: 400px;
-    margin: 0 auto
-}
-
-#loginModal #google-btn button {
+.home .login #google-btn button {
     width: 100%;
     justify-content: center;
     border-radius: 100px !important;
-    margin-bottom: 12px;
+    /* margin-bottom: 12px; */
 }
 
-#loginModal button.metro {
+.home .login #google-btn button.metro {
     padding: 10px 15px !important;
     text-transform: lowercase;
 }
 
-#loginModal button.metro i {
+.home .login #google-btn button.metro i {
     float: unset;
 }
 
-#loginModal button span {
+.home .login #google-btn button span {
     color: rgba(10, 24, 61, 1)
 }
 
-#loginModal .or {
+.home .login .or {
     width: 100%;
-    margin: 25px 0;
+    margin: 20px 0;
 }
 
-#loginModal .or span {
+.home .login .or span {
     border: solid 1px rgba(255, 255, 255, 0.1) !important;
     width: 175px
 }
 
-#loginModal .or h6 {
+.home .login .or h6 {
     margin: 0 16px
 }
 
-#loginModal label {
+.home .login label {
     display: block;
     font-size: 16px;
     font-weight: 600;
     margin-bottom: 8px
 }
 
-#loginModal input {
+.home .login input {
     display: block;
     width: 100%;
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 19px;
-    padding: 18px 24px;
+    margin-bottom: 18px;
+    padding: 15px 25px;
     border-radius: 100px;
 }
 
-#loginModal input#login-password {
-    margin-bottom: 8px;
-}
-
-#loginModal input::placeholder {
+.home .login input::placeholder {
     color: rgba(10, 24, 61, 0.5)
 }
 
-#loginModal h5 {
-    text-align: right;
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(82, 169, 255, 1);
-    cursor: pointer;
-    margin-bottom: 22px;
+.home .login input#login-password {
+    margin-bottom: 14px;
 }
 
-#loginModal button#proceed {
+.home .login input#remember {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 0;
+}
+
+.home .login label#remember-label {
+    display: inline-block;
+    width: unset;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 122, 243, 1);
+    margin-bottom: 0;
+}
+
+.home .login h5 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+    /* margin-bottom: 22px; */
+}
+
+.home .login button#proceed {
     width: 100%;
     font-size: 16px;
     font-weight: 700;
@@ -609,21 +499,124 @@ nav .profile-img a {
     margin-bottom: 17px;
 }
 
-#loginModal button#proceed i {
+.home .login button#proceed i {
     margin-left: 10px;
     color: #FFF;
 }
 
-#loginModal h6 {
+.home .login h6 {
     font-size: 16px;
     font-weight: 400;
     text-align: center;
     color: #FFF
 }
 
-#loginModal h6 span {
+.home .login h6 span {
     color: rgba(0, 122, 243, 1);
     cursor: pointer
+}
+
+/* signup */
+.home .signup {
+    padding: 33px 23px 20px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important
+}
+
+.home .signup h1 {
+    color: #FFF;
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.home .signup h4 {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 422px;
+    margin: 0 auto 20px;
+    line-height: 20px;
+}
+
+.home .signup #google-btn button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 100px !important;
+    /* margin-bottom: 12px; */
+}
+
+.home .signup #google-btn button.metro {
+    padding: 10px 15px !important;
+    text-transform: lowercase;
+}
+
+.home .signup #google-btn button.metro i {
+    float: unset;
+}
+
+.home .signup #google-btn button span {
+    color: rgba(10, 24, 61, 1)
+}
+
+.home .signup .or {
+    width: 100%;
+    margin: 20px 0;
+}
+
+.home .signup .or span {
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    width: 70%
+}
+
+.home .signup .or h6 {
+    margin: 0 16px
+}
+
+.home .signup label {
+    display: block;
+    color: #FFF;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.home .signup input {
+    border-radius: 100px;
+    background-color: #FFF;
+    width: 100%;
+    color: black !important;
+    padding: 18px 20px;
+    margin-bottom: 26px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.home .signup button#create {
+    width: unset;
+    display: block;
+    margin: 0px auto;
+    color: #FFF !important;
+    background-color: rgba(0, 122, 243, 1) !important;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 135px !important;
+    border-radius: 50px;
+}
+
+.home .signup h6 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.home .signup h6 span {
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+    border: 0 !important
 }
 
 /* verification  */
@@ -901,6 +894,17 @@ nav .profile-img a {
 }
 
 /* aside course  */
+.aside-sticky {
+    position: sticky !important;
+    top: 80px !important;
+    overflow-y: scroll;
+    height: 87vh;
+}
+
+.aside-sticky::-webkit-scrollbar {
+    display: none;
+}
+
 .home-feed .aside .course {
     margin-bottom: 25px;
 }
@@ -976,7 +980,7 @@ nav .profile-img a {
 
 .home-feed .aside .content span {
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 600;
 }
 
 .home-feed .aside .content>span {
@@ -1047,9 +1051,9 @@ nav .profile-img a {
 }
 
 .home-feed .aside .polls h3 {
-    font-size: 20px;
-    font-weight: 800;
-    margin-bottom: 27px;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 18px;
 }
 
 .home-feed .aside .polls h4 {
@@ -1060,14 +1064,14 @@ nav .profile-img a {
 /* main  */
 /* header  */
 .home-feed .main .header h1 {
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
     margin-bottom: 13px;
     text-align: center;
 }
 
 .home-feed .main .searchbar {
-    padding: 11px 34px;
+    padding: 19px 26px;
     background-color: #FFF;
     border-radius: 80px;
     box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
@@ -1077,7 +1081,7 @@ nav .profile-img a {
 .home-feed .main .header input {
     width: 100%;
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 400;
     background-color: transparent;
 }
 
@@ -1106,7 +1110,7 @@ nav .profile-img a {
 .home-feed .main .poll .main .header h3 {
     font-size: 20px;
     font-weight: 700;
-    margin-bottom: 4px;
+    margin-bottom: 6px;
 }
 
 .home-feed .main .poll .main .header p {
@@ -1157,14 +1161,14 @@ nav .profile-img a {
 }
 
 .home-feed .main .poll .main .candidate h4 {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
-    margin-bottom: 5px;
+    margin-bottom: 2px;
     cursor: pointer;
 }
 
 .home-feed .main .poll .main .candidate p {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     margin-bottom: 8px;
     color: rgba(255, 255, 255, 0.7)
@@ -1261,64 +1265,6 @@ nav .profile-img a {
 
 .home-feed .main .stories .header h4 i {
     margin-right: 10px
-}
-
-.home-feed .main .stories .carousel {
-    display: flex;
-    overflow-x: scroll;
-}
-
-.home-feed .main .stories .carousel .story {
-    position: relative;
-    margin-right: 20px;
-    min-width: 284px;
-    max-width: 284px;
-    cursor: pointer;
-}
-
-.home-feed .main .stories .carousel .story .img-container {
-    width: 100%;
-    height: 220px
-}
-
-.home-feed .main .stories .carousel .story img {
-    border-radius: 20px;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: top;
-}
-
-.home-feed .main .stories .carousel .story .like-btn {
-    height: 30px;
-    width: 30px;
-    border-radius: 50%;
-    background-color: #FFF;
-    position: absolute;
-    top: 12px;
-    right: 12px;
-}
-
-.home-feed .main .stories .carousel .story .like-btn i {
-    color: rgba(255, 0, 0, 1)
-}
-
-.home-feed .main .stories .carousel .story p {
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.home-feed .main .stories .carousel::-webkit-scrollbar {
-    height: 5px
-}
-
-.home-feed .main .stories .carousel::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-.home-feed .main .stories .carousel::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
 }
 
 /* profiles  */
@@ -1605,6 +1551,181 @@ footer#footer img.social {
     margin-top: 44px
 }
 
+/* .profile-widget  */
+.profile-widget .profile {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.profile-widget .profile .top {
+    height: 74px;
+    background-color: rgba(0, 122, 243, 1);
+}
+
+.profile-widget .profile .top .img-container {
+    height: 78px;
+    width: 78px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: solid 2px #FFF !important;
+    position: absolute;
+    top: 36px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+}
+
+.profile-widget .profile .top .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
+}
+
+.profile-widget .profile .name {
+    text-align: center;
+    padding: 42px 0 27px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+.profile-widget .profile .name h2 {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 24px;
+    margin-bottom: 2px;
+}
+
+.profile-widget .profile .name h3 {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.profile-widget .profile .stats {
+    padding: 17px 15px 22px;
+    border-bottom: solid 1px rgba(255, 255, 255, 0.15) !important;
+}
+
+.profile-widget .profile h4 {
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.75)
+}
+
+.profile-widget .profile .stats h5 {
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(0, 122, 243, 1)
+}
+
+.profile-widget .profile .info {
+    padding: 12px 15px 17px;
+}
+
+.profile-widget .profile .info h4 {
+    line-height: 20px;
+    margin-bottom: 2px;
+}
+
+.profile-widget .profile .info a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* login prompt  */
+.login-prompt {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 40px 80px;
+    background-color: rgba(30, 44, 81, 0.7);
+}
+
+.login-prompt i {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+}
+
+.login-prompt p {
+    font-size: 18px;
+    font-weight: 600
+}
+
+.login-prompt button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 9px 29px;
+    border-radius: 30px;
+}
+
+.login-prompt button#login-btn {
+    border: 1px solid rgba(255, 255, 255, 1) !important;
+    background-color: transparent;
+    margin-right: 10px
+}
+
+.login-prompt button#signup-btn {
+    background-color: rgba(0, 122, 243, 1);
+}
+
+/* loginModal  */
+#loginModal {
+    top: 20% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 552px;
+    height: 367px;
+    background-color: rgba(10, 24, 61, 1) !important;
+    border-radius: 10px !important;
+    padding: 32px 43px !important;
+    text-align: center;
+}
+
+#loginModal i {
+    float: right
+}
+
+#loginModal img {
+    margin: 20px 0 40px 0;
+    height: 51px
+}
+
+#loginModal p {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+#loginModal button {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 9px 31px;
+    border-radius: 30px;
+    color: #FFF
+}
+
+#loginModal button#bt-1 {
+    border: 1px solid rgba(255, 255, 255, 1) !important;
+    background-color: transparent;
+}
+
+#loginModal button#bt-2 {
+    background-color: rgba(0, 122, 243, 1);
+}
+
+
+#loginModal.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
 
 
 
@@ -1623,7 +1744,7 @@ footer#footer img.social {
     background-color: #FFF;
     padding: 14px 24px;
     border-radius: 80px;
-    width: 377px
+    width: 454px
 }
 
 .polls .searchbar input {
@@ -1657,14 +1778,19 @@ footer#footer img.social {
     font-weight: 600;
 }
 
-.polls .header {
+.polls h1 i {
+    margin-left: 10px
+}
+
+.polls>.header {
     padding: 11px 27px;
     margin-bottom: 19px;
-    background-color: rgba(0, 122, 243, 1);
+    background-color: rgba(0, 9, 44, 1);
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
     border-radius: 5px;
 }
 
-.polls .header p {
+.polls>.header p {
     margin-bottom: 0;
     font-size: 16px;
     font-weight: 600;
@@ -1675,8 +1801,6 @@ footer#footer img.social {
     padding: 30px 27px;
     border-radius: 10px;
     margin-bottom: 14px;
-    position: relative;
-    cursor: pointer;
 }
 
 .polls .poll h3 {
@@ -1688,35 +1812,119 @@ footer#footer img.social {
 .polls .poll h6 {
     font-size: 14px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
+    color: #FFF;
     margin-bottom: 0;
 }
 
-.polls .poll .fa-circle {
-    margin-right: 10px;
-    font-size: 10px;
+.polls .poll h6#open-poll {
+    cursor: pointer;
 }
 
-.polls .options {
-    position: absolute;
-    right: 20px;
-    top: 60px;
-    width: 110px;
-    background-color: #FFF;
+.polls .poll h6 i {
+    margin-left: 10px
+}
+
+/* opened card  */
+.open-poll-card {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px 10px 0 0;
+    margin-bottom: 15px;
+}
+
+.open-poll-card .body {
+    padding: 33px 37px;
+}
+
+.open-poll-card .header {
+    margin-bottom: 44px;
+}
+
+.open-poll-card h6#startdate {
+    margin-bottom: 15px;
+    text-align: center
+}
+
+.open-poll-card .header button {
+    font-size: 12px;
+    font-weight: 400;
+    padding: 10px 12px;
+    margin: 0;
+    background-color: rgba(8, 29, 67, 1);
+    color: rgba(255, 255, 255, 0.3)
+}
+
+.open-poll-card .header button.active {
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF
+}
+
+.open-poll-card .header button#chart-btn {
+    border-radius: 10px 0 0 10px;
+}
+
+.open-poll-card .header button#leaderboerd-btn {
+    border-radius: 0 10px 10px 0;
+}
+
+.open-poll-card .candidate img {
     border-radius: 10px;
-    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.1);
-    z-index: 1;
-    padding: 9px 18px
+    cursor: pointer;
 }
 
-.polls .options p {
-    color: rgba(6, 25, 71, 1);
+.open-poll-card .candidate h3 {
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer
+}
+
+.open-poll-card .candidate p {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 4px;
+}
+
+.open-poll-card .candidate .bar {
+    height: 7px;
+    border-radius: 60px;
+    background-color: rgba(0, 122, 243, 0.3);
+}
+
+.open-poll-card .candidate .indicator {
+    height: 100%;
+    background-color: #FFF;
+    border-radius: 60px;
+}
+
+.open-poll-card .candidate h2 {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.open-poll-card .candidate h5 {
     font-size: 14px;
     font-weight: 400;
-    margin-bottom: 0;
-    line-height: 25px;
+    color: rgba(255, 255, 255, 1)
+}
+
+.open-poll-card footer {
+    padding: 22px 37px;
+    background-color: rgba(6, 25, 71, 1);
+    border-radius: 0 0 10px 10px;
+}
+
+.open-poll-card footer p {
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    ;
+}
+
+.open-poll-card footer p .fa-share-alt {
+    margin-right: 10px;
+}
+
+.open-poll-card footer p .fa-angle-up {
+    margin-left: 10px;
 }
 
 /* filter modal  */
@@ -1796,17 +2004,13 @@ footer#footer img.social {
     margin-bottom: 39px;
 }
 
-.single-poll header h1 {
-    font-size: 22px;
-    font-weight: 600;
+.single-poll header h4 {
+    font-size: 14px;
+    font-weight: 400;
 }
 
-.single-poll header h1 i {
-    margin-right: 19px
-}
-
-.single-poll header h1 i {
-    margin-right: 19px
+.single-poll header h4 i {
+    margin-right: 13px
 }
 
 .single-poll header .searchbar {
@@ -1825,108 +2029,6 @@ footer#footer img.social {
 
 .single-poll header input::placeholder {
     color: rgba(0, 0, 0, 0.25)
-}
-
-.single-poll .poll .body {
-    background-color: rgba(4, 19, 54, 1);
-    border-radius: 10px 10px 0 0;
-    padding: 33px 37px
-}
-
-.single-poll .poll .header {
-    margin-bottom: 44px;
-}
-
-.single-poll .poll h6#startdate {
-    margin-bottom: 15px;
-    text-align: center
-}
-
-.single-poll .poll .header button {
-    font-size: 12px;
-    font-weight: 400;
-    padding: 10px 12px;
-    margin: 0;
-    background-color: rgba(8, 29, 67, 1);
-    color: rgba(255, 255, 255, 0.3)
-}
-
-.single-poll .poll .header button img {
-    margin-right: 7px;
-}
-
-.single-poll .poll button.active {
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF
-}
-
-.single-poll .poll button#chart-btn {
-    border-radius: 10px 0 0 10px;
-}
-
-.single-poll .poll button#leaderboerd-btn {
-    border-radius: 0 10px 10px 0;
-}
-
-.single-poll .poll .candidate img {
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.single-poll .poll .candidate h3 {
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.single-poll .poll .candidate p {
-    font-size: 12px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7);
-    margin-bottom: 4px;
-}
-
-.single-poll .poll .candidate .bar {
-    height: 7px;
-    border-radius: 60px;
-    background-color: rgba(0, 122, 243, 0.3);
-}
-
-.single-poll .poll .candidate .indicator {
-    height: 100%;
-    background-color: #FFF;
-    border-radius: 60px;
-}
-
-.single-poll .poll .candidate h2 {
-    font-size: 18px;
-    font-weight: 700;
-}
-
-.single-poll .poll .candidate h5 {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.7)
-}
-
-.single-poll .poll footer {
-    padding: 22px 37px;
-    background-color: rgba(6, 25, 71, 1);
-    border-radius: 0 0 10px 10px;
-}
-
-.single-poll .poll footer p {
-    font-size: 14px;
-    font-weight: 700;
-    cursor: pointer;
-}
-
-.single-poll .poll footer p .fa-angle-down {
-    margin-left: 10px;
-}
-
-.single-poll .poll footer p .fa-share-alt {
-    margin-right: 10px;
 }
 
 /* share modal  */
@@ -2090,22 +2192,37 @@ footer#footer img.social {
 
 
 /* story  */
-.story .create-story {
-    background-color: rgba(10, 24, 61, 1);
-    border-radius: 10px;
-    padding: 20px 24px;
-    margin-bottom: 37px;
+.story .stories-header {
+    margin-bottom: 34px;
 }
 
-.story .create-story h3 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 14px;
+.story .stories-header .searchbar {
+    background-color: #FFF;
+    border-radius: 80px;
+    padding: 16px 19px
 }
 
-.story .create-story .img-container,
+.story .stories-header .searchbar input {
+    font-size: 16px;
+    font-weight: 400;
+    width: 100%
+}
+
+.story .stories-header button {
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 12px 0;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.story .stories-header button img {
+    margin-right: 15px
+}
+
 .story .story .img-container,
-.story .story .comment .img-container,
 .search .story .img-container {
     height: 50px;
     width: 50px;
@@ -2113,35 +2230,13 @@ footer#footer img.social {
     overflow: hidden;
 }
 
-.story .create-story .img-container img#profile-img,
 .story .story .img-container img#profile-img,
-.story .story .comment .img-container img.profile-img,
 .search .story .comment .img-container img.profile-img {
     width: 100%;
     height: auto;
     object-fit: cover;
     object-position: top;
     min-height: 100%;
-}
-
-.story .create-story input {
-    font-size: 14px;
-    font-weight: 400;
-    padding: 17px 24px;
-    background-color: #FFF;
-    border-radius: 30px;
-    width: 100%
-}
-
-.story .create-story p {
-    font-size: 16px;
-    font-weight: 600;
-    margin-left: 33px;
-    cursor: pointer;
-}
-
-.story .create-story p img {
-    margin-right: 10px
 }
 
 .story .story {
@@ -2166,7 +2261,7 @@ footer#footer img.social {
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
     font-weight: 400;
-    margin-right: 40px
+    margin-right: 25px
 }
 
 .story .story .options {
@@ -2207,6 +2302,15 @@ footer#footer img.social {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px
+}
+
+.story .story h6 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: right;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .story .story img#story-img {
@@ -2261,11 +2365,26 @@ footer#footer img.social {
 }
 
 .story .story .comment {
-    padding: 22px 24px;
+    padding: 15px 22px;
+}
+
+.story .story .comment .img-container {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.story .story .comment .img-container img.profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
 }
 
 .story .story .comment .input {
-    padding: 14px 19px;
+    padding: 10px 17px;
     border-radius: 5px;
     background-color: #FFF;
 }
@@ -2282,9 +2401,10 @@ footer#footer img.social {
 }
 
 .story .story .comment button {
+    width: 100%;
     font-size: 16px;
     font-weight: 700;
-    padding: 13px;
+    padding: 10px 17px;
     border-radius: 5px;
     background-color: rgba(0, 122, 243, 1);
 }
@@ -2330,6 +2450,104 @@ footer#footer img.social {
     padding: 5px 10px;
     border-radius: 5px;
     background-color: rgba(0, 122, 243, 1);
+}
+
+/* recomendations  */
+.story-recomentdations {
+    padding: 13px;
+    background-color: rgba(4, 19, 54, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 10px;
+}
+
+.story-recomentdations h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 17px;
+}
+
+.story-recomentdations .story {
+    margin-bottom: 22px
+}
+
+.story-recomentdations .story:last-child {
+    margin-bottom: 0
+}
+
+.story-recomentdations .story .img-container {
+    height: 32px;
+    width: 32px;
+    border-radius: 50%;
+    overflow: hidden;
+    /* margin-right: 0 !important; */
+    /* margin-right: 9px */
+}
+
+.story-recomentdations .story .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
+}
+
+.story-recomentdations .story .details {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important
+}
+
+.story-recomentdations .story:last-child .details {
+    border-bottom: none !important
+}
+
+.story-recomentdations .story h3 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
+}
+
+.story-recomentdations .story h4 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 3px;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+
+.dm .story-recomentdations {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm .story-recomentdations h2,
+.dm .story-recomentdations .story h3,
+.dm .story-recomentdations .story h4,
+.dm .story-recomentdations .story p {
+    color: rgba(0, 0, 0, 1)
+}
+
+.dm .story-recomentdations .story button {
+    color: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8) !important;
+}
+
+
+
+.story-recomentdations .story p {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: #FFF
+}
+
+.story-recomentdations .story button {
+    font-size: 14px;
+    font-weight: 400;
+    background-color: transparent;
+    margin-bottom: 16px;
+    padding: 6px 10px;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: 30px;
 }
 
 /* write story modal  */
@@ -2611,8 +2829,31 @@ img#return-btn {
 .story .comments {
     border-radius: 10px;
     background-color: rgba(10, 24, 61, 1);
-    padding: 19px 24px;
-    margin-top: 21px;
+    padding: 0 24px;
+}
+
+.story .comments .comment {
+    padding: 0 !important;
+    margin-bottom: 25px;
+}
+
+/* .story .comments .comment:last-child {
+    margin-bottom: 0 !important;
+} */
+
+.story .comments h2 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.story .comments h5#loadMore {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.8);
+    padding-bottom: 18px;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .story .comments .img-container {
@@ -2633,7 +2874,7 @@ img#return-btn {
 .story .comments .comment-body {
     display: inline-block;
     padding: 14px 20px;
-    background-color: rgba(6, 25, 71, 1);
+    background-color: rgba(20, 34, 71, 1);
     border-radius: 10px;
     margin-bottom: 10px;
 }
@@ -2720,42 +2961,195 @@ img#return-btn {
 .profile .profile {
     background-color: rgba(10, 24, 61, 1);
     border-radius: 10px;
-    padding: 27px 52px 17px 27px;
+    padding: 15px 19px;
     margin-bottom: 25px;
-    cursor: pointer;
+    color: #FFF
 }
 
-.profile .profile img#profile-img {
-    border-radius: 8px;
+.profile .profile .img-container {
+    height: 47px;
+    width: 47px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.profile .profile h3 {
-    color: rgba(135, 195, 254, 1);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 10px;
+.profile .profile .img-container img#profile-img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
 }
 
-.profile .profile p {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 12px;
-    font-weight: 400;
-    margin-bottom: 35px;
+.profile .profile h5 {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.profile .profile i {
+    color: #FFF !important
 }
 
 .profile .profile h4 {
-    font-size: 12px;
+    font-size: 17px;
     font-weight: 600;
+    line-height: 25px;
+}
+
+.profile .profile p {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 25px;
+    margin-bottom: 16px;
+}
+
+.profile .profile p span {
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+}
+
+.profile .profile h6 {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
 }
 
 .profile .profile .fa-eye {
-    color: #FFF;
     margin-right: 10px;
 }
 
-.profile .profile .fa-share-alt {
-    color: rgba(0, 122, 243, 1);
+/* .profile .profile .big-img {
+    height: 250px;
+    overflow: hidden;
+} */
+
+.profile .profile .big-img img {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    object-position: center;
 }
+
+/* recomentdations */
+.profile-recomentdations {
+    background-color: rgba(4, 19, 54, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 12px 15px;
+    border-radius: 10px;
+}
+
+.profile-recomentdations h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+
+.profile-recomentdations .profile {
+    margin-bottom: 22px
+}
+
+.profile-recomentdations .profile:last-child {
+    margin-bottom: 0
+}
+
+.profile-recomentdations .profile .img-container {
+    height: 41px;
+    width: 41px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile-recomentdations .profile .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
+}
+
+.profile-recomentdations .profile .details {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important
+}
+
+.profile-recomentdations .profile:last-child .details {
+    border-bottom: none !important
+}
+
+.profile-recomentdations .profile h3 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+.profile-recomentdations .profile button {
+    font-size: 14px;
+    font-weight: 400;
+    background-color: transparent;
+    margin-bottom: 16px;
+    padding: 6px 10px;
+    color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.8) !important;
+    border-radius: 30px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.story-recomentdations .story h4 {
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 3px;
+    color: rgba(255, 255, 255, 0.7)
+}
+
+
+.dm .story-recomentdations {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm .story-recomentdations h2,
+.dm .story-recomentdations .story h3,
+.dm .story-recomentdations .story h4,
+.dm .story-recomentdations .story p {
+    color: rgba(0, 0, 0, 1)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* filter modal  */
 #polls-modal {
@@ -3563,15 +3957,23 @@ img#return-btn {
 
 /* user-profile */
 .user-widget {
-    border-radius: 10px;
+    height: 211px;
+    border-radius: 10px 10px 0 0;
     background-color: rgba(0, 122, 243, 1);
-    padding: 13px 25px;
-    margin-bottom: 27px;
+    position: relative;
+}
+
+.user-main {
+    border-radius: 10px;
+    background-color: rgba(4, 19, 54, 1);
 }
 
 .user-widget .img-container {
-    height: 173px;
-    width: 173px;
+    position: absolute;
+    bottom: -78px;
+    left: 32px;
+    height: 155px;
+    width: 155px;
     border-radius: 50%;
     overflow: hidden;
     border: solid 4px #FFF !important
@@ -3585,97 +3987,114 @@ img#return-btn {
     min-height: 100%;
 }
 
-.user-widget .img-container img#change-img {
+.user-widget img#change-img {
     position: absolute;
-    bottom: 0px;
-    right: 60px
-}
-
-.user-widget h1 {
-    font-size: 44px;
-    font-weight: 700;
-    line-height: 40px;
-}
-
-.user-widget h4 {
-    font-size: 20px;
-    font-weight: 400;
+    bottom: -70px;
+    left: 175px;
 }
 
 .user-widget button {
+    background-color: #FFF;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    position: absolute;
+    right: 45px;
+    top: 25px
+}
+
+.user-widget button i {
+    font-size: 20px;
+    color: rgba(0, 122, 243, 1)
+}
+
+.user-main .bio {
+    padding: 0 30px;
+}
+
+.user-main .bio button {
+    border-radius: 30px;
+    border: 1px solid rgba(0, 122, 243, 1) !important;
+    background-color: transparent;
+    color: rgba(0, 122, 243, 1);
+    padding: 8px 7px
+}
+
+.user-main .bio h1 {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+}
+
+.user-main .bio h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 9px;
+}
+
+.user-main .bio h3 {
     font-size: 16px;
     font-weight: 700;
     color: rgba(0, 122, 243, 1);
-    background-color: #FFF;
-    padding: 12px 20px;
-    border-radius: 40px;
-}
-
-.user-aside section {
-    background-color: rgba(4, 19, 54, 1);
-    border-radius: 10px;
-    padding: 30px 0;
-    margin-bottom: 25px;
-}
-
-.user-aside section:last-child {
     margin-bottom: 0;
 }
 
-.user-aside button {
+.user-main .bio h3 span {
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1)
+}
+
+.user-main .bio .impresssions h3 {
+    color: #FFF;
+}
+
+.user-main .bio .impresssions h3 span {
+    color: rgba(255, 255, 255, 0.7)
+}
+
+.user-main .page-nav {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important
+}
+
+.user-main .page-nav button {
+    padding: 16px 31px;
     background-color: transparent;
-    margin-bottom: 24px;
-    width: 100%;
-    text-align: left;
 }
 
-.user-aside button:last-child {
-    margin-bottom: 0;
+.user-main .page-nav button svg,
+.user-main .page-nav button i,
+.user-main .page-nav button img {
+    margin-right: 10px;
 }
 
-.user-aside button.active {
-    border-left: solid 5px rgba(0, 122, 243, 1) !important;
-    color: rgba(0, 122, 243, 1);
+.user-main .page-nav p {
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    color: rgba(255, 255, 255, 0.5)
 }
 
-.user-aside button svg {
-    margin-left: 25px;
-    margin-right: 29px;
-}
-
-.user-aside button svg path {
-    margin-left: 25px;
-    margin-right: 29px;
-    fill: rgba(255, 255, 255, 0.5);
-}
-
-.user-aside button.active svg path {
-    margin-left: 20px;
-    fill: #007AF3
-}
-
-.story-header,
-.aspirant-header {
-    padding: 23px 19px;
-    background-color: rgba(4, 19, 54, 1);
-    border-radius: 5px;
-    margin-bottom: 28px;
-}
-
-.story-header h1,
-.aspirant-header h1 {
-    font-size: 28px;
+.user-main .page-nav h3 {
+    font-size: 20px;
     font-weight: 700;
 }
 
-.story-header a {
-    font-size: 12px;
-    font-weight: 400;
+.user-main .page-nav button.active {
+    border-bottom: 2px solid rgba(0, 122, 243, 1) !important
+}
+
+/* stories card and profile card */
+.user-main .story .story,
+.user-main .profile .profile {
+    margin-bottom: 0;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important
 }
 
 .empty {
     text-align: center;
-    padding-top: 50px;
+    padding-top: 50px 0;
 }
 
 .empty p {
@@ -3684,141 +4103,46 @@ img#return-btn {
     font-weight: 700
 }
 
-.story-header img,
-.aspirant-header img {
-    margin-right: 8px;
+/* aside  */
+.user-aside {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    padding: 0 19px;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important
 }
 
-.story-header button,
-.aspirant-header button {
-    font-size: 14px;
-    font-weight: 700;
-    padding: 11px;
-    background-color: rgba(0, 122, 243, 1);
-    border-radius: 5px;
-}
-
-.story-header button,
-.aspirant-header button {
-    font-size: 14px;
-    font-weight: 700;
-    padding: 11px;
-    background-color: rgba(0, 122, 243, 1);
-    border-radius: 5px;
-}
-
-.settings header {
-    border-radius: 10px 10px 0 0;
-    background-color: rgba(0, 122, 243, 1);
-    padding: 22px 45px
-}
-
-.settings header h1 {
-    font-size: 20px;
-    font-weight: 700;
-}
-
-.settings .body {
-    border-radius: 0 0 10px 10px;
-    background-color: rgba(10, 24, 61, 1);
-    padding: 40px 45px
-}
-
-.settings .body label {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    margin-bottom: 5px;
-}
-
-.settings .body input {
-    display: block;
-    /* width: 329px; */
+.user-aside button {
+    background-color: transparent;
+    padding: 17px 0;
     width: 100%;
-    border-radius: 100px;
-    background-color: rgba(255, 255, 255, 0.2);
-    font-size: 14px;
-    font-weight: 400;
-    padding: 19px 17px;
-    margin-bottom: 43px;
-    color: #FFF
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
 
-.settings .body input::placeholder {
-    color: rgba(255, 255, 255, 0.5)
+.user-aside button:last-child {
+    border-bottom: unset !important
 }
 
-.settings .body button {
-    display: block;
-    margin-right: 0;
-    margin-left: auto;
-    border-radius: 40px;
-    background-color: rgba(0, 122, 243, 1);
-    font-size: 16px;
-    font-weight: 700;
-    padding: 12px 42px;
+.user-aside button.active {
+    color: rgba(0, 122, 243, 1);
 }
 
+.user-aside button svg {
+    margin-right: 15px;
+}
 
+.user-aside button svg path {
+    margin-left: 25px;
+    margin-right: 29px;
+    fill: #FFF;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.user-aside button.active svg path {
+    margin-left: 20px;
+    fill: #007AF3
+}
 
 /* wallet */
-.wallet .header section {
-    padding: 0 15px;
-    border-radius: 5px;
-    background-color: rgba(6, 25, 71, 1);
-}
-
-.wallet .header section.withdrawl {
-    padding: 6px 15px;
-}
-
-.wallet .header section.category button {
-    width: 100%;
-    height: 60px;
-    background-color: transparent;
-    font-size: 10px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.5)
-}
-
-.wallet .header section.category button.active {
-    color: rgba(0, 122, 243, 1);
-    border-bottom: solid 2px rgba(0, 122, 243, 1) !important;
-}
-
-.wallet .header section.category button svg {
-    margin-right: 11px
-}
-
-.wallet .header section.category button.active svg path {
-    fill: rgba(0, 122, 243, 1);
-}
-
-.wallet .header section.history {
-    border-radius: 5px;
-    background-color: rgba(6, 25, 71, 1);
-    height: 60px;
-    padding: 6px
-}
-
 .wallet .header section.history button {
     width: 100%;
     padding: 5px 0;
@@ -3901,19 +4225,10 @@ img#return-btn {
     text-align: center;
     font-size: 34px;
     font-weight: 400;
-    margin-top: 78px
+    padding: 78px 0
 }
 
 /* history */
-.wallet .history h1 {
-    font-size: 28px;
-    font-weight: 700;
-    line-height: 38px;
-    color: rgba(255, 255, 255, 0.5);
-    padding-bottom: 11px;
-    border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
-}
-
 .wallet .history .header {
     padding: 0 27px;
 }
@@ -3930,7 +4245,7 @@ img#return-btn {
     font-weight: 400;
     color: #FFF;
     border: none !important;
-    margin-top: 50px
+    padding: 50px 0
 }
 
 .wallet .history-empty h1 i {
@@ -4064,64 +4379,38 @@ img#return-btn {
     color: rgba(0, 122, 243, 1)
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* pay setting  */
 .payout-setting {
-    background-color: rgba(6, 25, 71, 1);
+    border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+    /* background-color: rgba(6, 25, 71, 1); */
     padding: 25px;
     border-radius: 10px;
 }
 
 .payout-setting h1 {
-    font-size: 30px;
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.payout-setting h1 {
+    font-size: 24px;
     font-weight: 400;
     margin-bottom: 10px;
 }
 
-.payout-setting h2 {
-    font-size: 18px;
-    font-weight: 400;
-    margin-bottom: 40px;
-}
-
-.payout-setting .bank {
-    padding: 20px 43px;
-    background-color: rgba(4, 21, 63, 1);
-}
-
-.payout-setting .bank h1 {
-    font-size: 24px;
-    font-weight: 400;
-    margin-bottom: 8px;
-}
-
-.payout-setting .bank h3 {
+.payout-setting h3 {
     font-size: 16px;
     font-weight: 400;
-    margin-bottom: 13px;
+    margin-bottom: 24px;
     line-height: 20px;
 }
 
-.payout-setting .bank h3 span {
+.payout-setting h3 span {
     color: rgba(255, 50, 50, 1)
 }
 
-.payout-setting .bank .success-msg {
+.payout-setting .success-msg {
     background-color: rgba(88, 159, 88, 1);
     padding: 8px 10px;
     border-radius: 5px;
@@ -4129,27 +4418,27 @@ img#return-btn {
     width: 80%
 }
 
-.payout-setting .bank .success-msg h4 {
+.payout-setting .success-msg h4 {
     font-size: 16px;
     font-weight: 400;
     color: rgba(0, 29, 0, 1)
 }
 
-.payout-setting .bank .success-msg i {
+.payout-setting .success-msg i {
     color: rgba(0, 29, 0, 1);
     cursor: pointer;
 }
 
-.payout-setting .bank label {
+.payout-setting label {
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 400;
     margin-bottom: 15px;
 }
 
-.payout-setting .bank input,
-.payout-setting .bank select {
-    width: 80%;
+.payout-setting input,
+.payout-setting select {
+    width: 70%;
     font-size: 18px;
     font-weight: 400;
     margin-bottom: 31px;
@@ -4158,19 +4447,97 @@ img#return-btn {
     background-color: rgba(255, 255, 255, 1);
 }
 
-.payout-setting .bank select {
-    background-color: rgba(255, 255, 255, 0.2);
-    color: #FFF
+.payout-setting select {
+    /* background-color: rgba(255, 255, 255, 0.2); */
+    color: rgba(4, 19, 54, 1)
 }
 
-.payout-setting .bank button {
-    width: 80%;
+.payout-setting button {
+    width: 70%;
     border-radius: 40px;
     padding: 12px 0;
     font-size: 16px;
     font-weight: 700;
     background-color: rgba(0, 122, 243, 1);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.settings header {
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 22px 45px
+}
+
+.settings header h1 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.settings .body {
+    border-radius: 0 0 10px 10px;
+    background-color: rgba(10, 24, 61, 1);
+    padding: 40px 45px
+}
+
+.settings .body label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.settings .body input {
+    display: block;
+    /* width: 329px; */
+    width: 100%;
+    border-radius: 100px;
+    background-color: rgba(255, 255, 255, 0.2);
+    font-size: 14px;
+    font-weight: 400;
+    padding: 19px 17px;
+    margin-bottom: 43px;
+    color: #FFF
+}
+
+.settings .body input::placeholder {
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.settings .body button {
+    display: block;
+    margin-right: 0;
+    margin-left: auto;
+    border-radius: 40px;
+    background-color: rgba(0, 122, 243, 1);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 12px 42px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4486,10 +4853,18 @@ img#return-btn {
     color: rgba(255, 255, 255, 0.6)
 }
 
+.courses-page .single-page .details li {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 8px;
+    color: rgba(255, 255, 255, 0.9)
+}
+
 .courses-page .single-page .details h4 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 9px;
+    line-height: 24px;
 }
 
 .courses-page .single-page .details p {
@@ -4500,11 +4875,34 @@ img#return-btn {
     line-height: 24px
 }
 
-.courses-page .single-page .details li {
+.courses-page .single-page .details h4#instructor {
+    margin-bottom: 20px;
+}
+
+.courses-page .single-page .details h4#name {
+    margin-bottom: 4px;
+}
+
+.courses-page .single-page .details h6 {
     font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 8px;
-    color: rgba(255, 255, 255, 0.9)
+    font-weight: 500;
+    margin-bottom: 14px;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.courses-page .single-page .details .img-container {
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 14px;
+}
+
+.courses-page .single-page .details .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
 }
 
 
@@ -4523,7 +4921,7 @@ img#return-btn {
 
 
 
-/* dashboard in progress */
+/* dashboard, user section for both completed and in progress */
 .dashboard .header span {
     font-size: 16px;
     font-weight: 400;
@@ -4534,10 +4932,63 @@ img#return-btn {
     margin-right: 17px
 }
 
-.dashboard .header i {
-    font-size: 40px;
+/* slider for admin toggle  */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 51px;
+    height: 30px;
     margin-right: 14px
 }
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #FFF;
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 3px;
+    top: 8%;
+    /* bottom: 4px; */
+    background-color: rgba(0, 122, 243, 1);
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: rgba(0, 122, 243, 0.5);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px #FFF;
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(19px);
+    -ms-transform: translateX(19px);
+    transform: translateX(19px);
+}
+
+/* end of slider  */
 
 .dashboard .header p {
     font-size: 14px;
@@ -4660,7 +5111,22 @@ img#return-btn {
 
 
 
-/* single course page in progress */
+/* single course page in progress for user */
+.course-page {
+    padding-top: 147px;
+}
+
+.course-page h6 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-bottom: 36px;
+}
+
+.course-page h6 i {
+    margin-right: 14px
+}
+
 .course-page .widget {
     background-color: rgba(6, 25, 71, 1);
     padding: 21px 23px
@@ -4826,17 +5292,6 @@ img#return-btn {
     padding-top: 48px
 }
 
-.course-page .main h6 {
-    font-size: 16px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 36px;
-}
-
-.course-page .main h6 i {
-    margin-right: 14px
-}
-
 .course-page .main .header {
     margin-bottom: 40px
 }
@@ -4897,6 +5352,10 @@ img#return-btn {
     background-color: transparent;
 }
 
+.course-page .main .page button:last-child {
+    margin-right: 0
+}
+
 .course-page .main .page button span {
     display: block;
     font-size: 18px;
@@ -4915,14 +5374,6 @@ img#return-btn {
     color: rgba(0, 122, 243, 1);
 }
 
-/* .course-page .main .page select {
-    color: #FFF;
-    background-color: rgba(0, 122, 243, 1);
-    border-radius: 40px;
-    padding: 11px 20px;
-    width: 317px
-} */
-
 .course-page .main .page h4 {
     color: rgba(0, 122, 243, 1);
     font-size: 16px;
@@ -4940,6 +5391,34 @@ img#return-btn {
 /* resources  */
 .course-page .ebooks {
     margin: 25px 0 98px 0
+}
+
+.course-page .ebooks .ebooks-carousel {
+    display: flex;
+    overflow-x: scroll;
+}
+
+.course-page .ebooks .ebooks-carousel .ebook {
+    width: 178px;
+    min-width: 178px;
+    margin-right: 62px
+}
+
+.course-page .ebooks .ebooks-carousel .ebook:last-child {
+    margin-right: 0
+}
+
+.course-page .ebooks .ebooks-carousel::-webkit-scrollbar {
+    height: 5px
+}
+
+.course-page .ebooks .ebooks-carousel::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.course-page .ebooks .ebooks-carousel::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
 }
 
 .course-page .ebooks h2 {
@@ -5020,7 +5499,7 @@ img#return-btn {
 
 
 
-/* quiz */
+/* quiz page */
 .course-page .quiz p {
     font-size: 16px;
     font-weight: 700;
@@ -5085,6 +5564,147 @@ img#return-btn {
     padding: 10px 18px
 }
 
+/* quiz review page  */
+/* failed widget  */
+.course-page .result-failed,
+.course-page .widget-failed {
+    border-radius: 10px;
+    background-color: rgba(255, 223, 220, 1);
+    padding: 19px 43px;
+    margin-bottom: 60px;
+}
+
+.course-page .result-failed h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255, 0, 0, 1);
+    margin-bottom: 4px;
+}
+
+.course-page .result-failed h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: rgba(255, 0, 0, 1);
+}
+
+.course-page .result-failed button {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 60px;
+    padding: 10px 18px
+}
+
+.course-page .widget-failed i {
+    color: rgba(255, 0, 0, 1);
+    float: left;
+}
+
+.course-page .widget-failed h4 {
+    color: rgba(255, 0, 0, 1);
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+
+
+/* passed widget  */
+.course-page .result-passed,
+.course-page .widget-passed {
+    border-radius: 10px;
+    background-color: rgba(88, 159, 88, 1);
+    padding: 19px 43px;
+    margin-bottom: 60px;
+}
+
+.course-page .result-passed h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.course-page .result-passed h4 {
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.course-page .result-passed button {
+    font-size: 16px;
+    font-weight: 500;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 60px;
+    padding: 10px 18px
+}
+
+.course-page .widget-passed i {
+    float: left;
+}
+
+.course-page .widget-passed h4 {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+
+/* certificates page  */
+.certificates {
+    margin-bottom: 115px;
+}
+
+.certificates .row>div {
+    margin-bottom: 30px;
+}
+
+.certificates img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+}
+
+.certificates h4 {
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 4px;
+}
+
+.certificates p {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 5px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.certificates a {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 0;
+    color: rgba(0, 122, 243, 1)
+}
+
+.certificates a i {
+    margin-right: 10px
+}
+
+
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
 
 
 
@@ -5098,7 +5718,7 @@ img#return-btn {
 
 
 
-/* admin course page  */
+/* course admin page  */
 .admin .button-container {
     border-radius: 50px;
     background-color: rgba(6, 25, 71, 1);
@@ -5134,6 +5754,11 @@ img#return-btn {
     background-color: transparent;
     color: #FFF;
     margin-bottom: 38px;
+}
+
+/* courses */
+.admin .courses {
+    margin-bottom: 90px;
 }
 
 .admin .courses .course {
@@ -5172,6 +5797,7 @@ img#return-btn {
 .admin .courses .course p {
     font-size: 12px;
     font-weight: 400;
+    display: inline-block;
 }
 
 .admin .courses .course button {
@@ -5185,6 +5811,9 @@ img#return-btn {
 .admin .courses .course h4 {
     font-size: 14px;
     font-weight: 400;
+    color: rgba(255, 255, 255, 0.5);
+    margin-left: 12px;
+    display: inline-block;
 }
 
 #edit {
@@ -5679,29 +6308,32 @@ textarea::placeholder {
 @media (min-width: 1400px) {}
 
 @media (min-width: 1120px) and (max-width: 1399px) {
+    .home .signup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .home .signup input {
+        padding: 12px 15px;
+    }
+
+    .home .signup button#create {
+        width: 100%;
+        padding: 10px 0 !important;
+        font-size: 14px;
+    }
 
     /* home feed  */
-    .home-feed .main .stories .carousel .story {
-        min-width: 220px;
-    }
-
-    .home-feed .main .stories .carousel .story .img-container {
-        height: 150px;
-    }
-
-    .home-feed .main .stories .carousel .story .like-btn {
-        top: 8px;
-        right: 8px;
-    }
-
-    .home-feed .main .stories .carousel .story p {
-        font-size: 12px;
-    }
-
     .home-feed .main button {
         font-size: 10px;
         padding: 10px;
         margin-left: 10px;
+    }
+
+    /* login prompt  */
+    .login-prompt button {
+        font-size: 14px;
+        padding: 9px 21px;
     }
 
     /* stories  */
@@ -5801,6 +6433,11 @@ textarea::placeholder {
         border-radius: 15px;
     }
 
+    .profile-recomentdations .profile .img-container {
+        height: 35px;
+        width: 35px;
+    }
+
     /* single aspirant page  */
     .single-profile .aside .poll-active,
     .single-profile .aside .history {
@@ -5886,11 +6523,6 @@ textarea::placeholder {
     }
 
     /* user profile  */
-    .user-widget .img-container {
-        height: 100px;
-        width: 100px;
-    }
-
     .user-widget h1 {
         font-size: 25px;
         line-height: 30px;
@@ -5930,6 +6562,16 @@ textarea::placeholder {
 @media (min-width: 992px) and (max-width: 1119px) {
 
     /* home  */
+    .home .text h1 {
+        font-size: 31px;
+        line-height: 40px;
+    }
+
+    .home .text p {
+        font-size: 14px;
+        line-height: 24px;
+    }
+
     .home .main h1 {
         font-size: 35px;
         line-height: 45px;
@@ -5945,12 +6587,19 @@ textarea::placeholder {
         margin-bottom: 40px;
     }
 
-    #signup .form input {
-        padding: 12px 20px;
+    /* signup  */
+    .home .signup {
+        padding: 20px 10px;
+        margin-bottom: 30px;
     }
 
-    #signup .form button#create {
-        padding: 12px 115px !important;
+    .home .signup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .home .signup input {
+        padding: 12px 15px;
     }
 
     /* verification  */
@@ -5969,27 +6618,50 @@ textarea::placeholder {
     }
 
     /* home feed  */
-    .home-feed .main .stories .carousel .story {
-        min-width: 220px;
+    /* profile widget  */
+    .profile-widget .profile .top .img-container {
+        height: 60px;
+        width: 60px;
     }
 
-    .home-feed .main .stories .carousel .story .img-container {
-        height: 150px;
+    .profile-widget .profile .name {
+        padding: 35px 0 27px;
     }
 
-    .home-feed .main .stories .carousel .story .like-btn {
-        top: 8px;
-        right: 8px;
+    .profile-widget .profile .name h2 {
+        font-size: 16px;
+        line-height: 18px;
     }
 
-    .home-feed .main .stories .carousel .story p {
+    .profile-widget .profile .name h3 {
+        font-size: 14px;
+    }
+
+    .profile-widget .profile h4 {
         font-size: 12px;
     }
 
-    .home-feed .main button {
-        font-size: 10px;
-        padding: 10px;
-        margin-left: 10px;
+    .profile-widget .profile .stats h5 {
+        font-size: 12px;
+    }
+
+    /* login prompt  */
+    .login-prompt {
+        padding: 30px 50px;
+    }
+
+    .login-prompt p {
+        font-size: 16px;
+    }
+
+    .login-prompt button {
+        font-size: 14px;
+        padding: 9px 21px;
+    }
+
+    .login-prompt i {
+        top: 15px;
+        right: 20px;
     }
 
     /* stories  */
@@ -6124,29 +6796,17 @@ textarea::placeholder {
         font-size: 14px;
     }
 
-    .polls .poll {
+    .open-poll-card .body {
         padding: 10px 15px;
     }
 
-    .polls .poll h3 {
+    .open-poll-card .body h3 {
         font-size: 14px;
         margin-bottom: 7px;
     }
 
-    .polls .poll h6 {
+    .open-poll-card .body h6 {
         font-size: 12px;
-    }
-
-    .polls .options {
-        right: 12px;
-        top: 14px;
-        width: 60px;
-        padding: 5px;
-    }
-
-    .polls .options p {
-        font-size: 10px;
-        line-height: 15px;
     }
 
     /* single polls page  */
@@ -6178,9 +6838,27 @@ textarea::placeholder {
     }
 
     .profile .header button {
-        padding: 10px;
+        padding: 10px 4px;
         font-size: 14px;
         border-radius: 15px;
+    }
+
+    .profile-recomentdations .profile .img-container {
+        height: 32px;
+        width: 32px;
+    }
+
+    .profile-recomentdations {
+        padding: 12px 10px;
+    }
+
+    .profile .profile {
+        padding: 15px 10px;
+    }
+
+    .profile .profile .img-container {
+        height: 35px;
+        width: 35px;
     }
 
     /* single aspirant page  */
@@ -6277,45 +6955,24 @@ textarea::placeholder {
     }
 
     /* user profile  */
+    .user-widget {
+        height: 200px;
+    }
+
     .user-widget .img-container {
-        height: 100px;
-        width: 100px;
+        height: 120px;
+        width: 120px;
+        bottom: -60px;
+        left: 30px
     }
 
-    .user-widget h1 {
-        font-size: 25px;
-        line-height: 30px;
+    .user-widget img#change-img {
+        bottom: -50px;
+        left: 144px;
     }
 
-    .user-widget h4 {
-        font-size: 20px;
-    }
-
-    .user-widget button {
-        font-size: 14px;
-    }
-
-    .user-widget .img-container img#change-img {
-        right: 44px;
-    }
-
-    .user-aside section {
-        padding: 15px 0;
-        margin-bottom: 20px;
-    }
-
-    .user-aside button {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .user-aside button.active {
-        border-left: solid 3px rgba(0, 122, 243, 1) !important;
-    }
-
-    .user-aside button svg {
-        margin-left: 15px;
-        margin-right: 15px;
+    .empty p {
+        font-size: 18px;
     }
 
     .settings header {
@@ -6416,49 +7073,107 @@ textarea::placeholder {
         margin-bottom: 25px;
     }
 
-    .home .main #google-btn button,
-    .home .main #google-btn>span>button {
-        width: 80%;
+    .home header {
+        margin-bottom: 50px;
     }
 
-    .home .main h3 {
+    .home .body {
         margin-bottom: 40px;
-        max-width: 80%
     }
 
-    .home .main button.home-btn {
-        width: 80%;
+    .home .text img {
+        width: 150px;
     }
 
-    #signup {
-        top: 5% !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 640px;
+    .home .text h1 {
+        font-size: 30px;
+        line-height: 35px;
+        margin-bottom: 15px;
     }
 
-    #signup .form {
+    .home .text p {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 0;
+    }
+
+    /* login  */
+    .home .login {
+        margin-bottom: 30px;
+        padding: 20px 10px
+    }
+
+    .home .login h1 {
+        font-size: 18px;
+    }
+
+    .home .login h4 {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .home .login label {
+        font-size: 14px;
+    }
+
+    .home .login input {
+        font-size: 14px;
+        padding: 13px 20px;
+    }
+
+    .home .login input#login-password {
+        margin-bottom: 16px;
+    }
+
+    .home .login button#proceed {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+
+    .home .login h6 {
+        font-size: 12px;
+    }
+
+    /* signup  */
+    .home .signup {
+        padding: 20px 10px;
+        margin-bottom: 30px;
+    }
+
+    .home .signup h1 {
+        font-size: 18px;
+    }
+
+    .home .signup h4 {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .home .signup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .home .signup input {
+        padding: 12px 15px;
+    }
+
+    .home .signup button#create {
         width: 100%;
+        padding: 12px 0 !important;
+        font-size: 14px;
     }
 
-    #signup .form input {
-        padding: 12px 20px;
+    /* footer  */
+    .home footer#footer {
+        margin-top: 0;
+        border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
+        padding: 20px 0;
     }
 
-    #signup .form button#create {
-        padding: 12px 90px !important;
-    }
-
-    /* loginModal  */
-    #loginModal {
-        width: 500px;
-    }
-
-    #loginModal input {
-        padding: 12px 18px;
+    .home footer#footer .text a {
+        font-size: 12px;
+        margin: 0 40px 0 0;
     }
 
     /* verification  */
@@ -6497,6 +7212,10 @@ textarea::placeholder {
 
     nav li img.theme {
         margin-bottom: 10px;
+    }
+
+    nav li button {
+        margin-left: 0;
     }
 
     /* aside  */
@@ -6545,6 +7264,14 @@ textarea::placeholder {
 
     .home-feed .aside .polls h4 {
         font-size: 10px;
+    }
+
+    /* aside sticky  */
+    .aside-sticky {
+        /* position: sticky !important;
+            top: 80px !important;
+            overflow-y: scroll; */
+        height: unset;
     }
 
     /* home feed  */
@@ -6633,80 +7360,59 @@ textarea::placeholder {
         font-size: 10px;
     }
 
-    .home-feed .main .stories .carousel .story {
-        min-width: 220px;
-    }
-
-    .home-feed .main .stories .carousel .story .img-container {
-        height: 150px;
-    }
-
-    .home-feed .main .stories .carousel .story .like-btn {
-        top: 8px;
-        right: 8px;
-    }
-
-    .home-feed .main .stories .carousel .story p {
-        font-size: 12px;
-    }
-
-    .profile .profile {
-        padding: 15px;
-    }
-
-    .home-feed .main .profiles .header h3 {
-        font-size: 15px;
-    }
-
-    .home-feed .main .profiles .header p {
-        font-size: 10px;
-    }
-
-    .profile .profile h3 {
-        font-size: 15px;
-        margin-bottom: 5px;
-    }
-
-    .profile .profile p {
-        font-size: 10px;
-        margin-bottom: 20px;
-    }
-
-    .profile .profile h4 {
-        font-size: 8px;
-    }
-
-    .profile .profile .vote-img {
-        height: 20px
-    }
-
     .home-feed .main button {
         font-size: 10px;
         padding: 10px;
         margin-left: 10px;
     }
 
-    /* stories  */
-    .story .create-story h3 {
-        font-size: 15px;
+    /* profile widget  */
+    .profile-widget {
+        display: none;
     }
 
-    .story .create-story .img-container,
+    /* login prompt  */
+    .login-prompt {
+        padding: 30px 50px;
+    }
+
+    .login-prompt p {
+        font-size: 16px;
+    }
+
+    .login-prompt button {
+        font-size: 14px;
+        padding: 9px 21px;
+    }
+
+    .login-prompt i {
+        top: 15px;
+        right: 20px;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 500px;
+        height: 367px;
+        padding: 32px !important
+    }
+
+    /* stories  */
+    .story .stories-header .searchbar {
+        border-radius: 20px;
+        padding: 13px 11px;
+    }
+
+    .story .stories-header button {
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
     .story .story .img-container,
     .story .story .comment .img-container,
     .search .story .img-container {
         height: 35px;
         width: 35px;
-    }
-
-    .story .create-story input {
-        font-size: 12px;
-        padding: 10px;
-        border-radius: 12px;
-    }
-
-    .story .create-story p {
-        font-size: 12px;
     }
 
     .story .story h3 {
@@ -6809,8 +7515,9 @@ textarea::placeholder {
         width: 35px;
     }
 
-    .story .comments .comment-body {
-        padding: 10px;
+    .story .comments .comment {
+        padding: 0 !important;
+        margin-bottom: 10px;
     }
 
     .story .comments .comment-body h3 {
@@ -6857,29 +7564,17 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .polls .poll {
+    .open-poll-card .body {
         padding: 10px;
     }
 
-    .polls .poll h3 {
+    .open-poll-card .body h3 {
         font-size: 12px;
         margin-bottom: 7px;
     }
 
-    .polls .poll h6 {
+    .open-poll-card .body h6 {
         font-size: 10px;
-    }
-
-    .polls .options {
-        right: 12px;
-        top: 14px;
-        width: 60px;
-        padding: 5px;
-    }
-
-    .polls .options p {
-        font-size: 10px;
-        line-height: 15px;
     }
 
     /* share poll modal  */
@@ -6922,8 +7617,12 @@ textarea::placeholder {
         border-radius: 10px;
     }
 
-    .profile .header button i {
+    .profile-recomentdations {
         display: none
+    }
+
+    .profile .profile p {
+        font-size: 14px;
     }
 
     /* single aspirant page  */
@@ -7072,65 +7771,41 @@ textarea::placeholder {
 
     /* user profile  */
     .user-widget {
-        padding: 13px;
+        height: 150px;
     }
 
     .user-widget .img-container {
         height: 100px;
         width: 100px;
+        bottom: -50px;
+        left: 25px
     }
 
-    .user-widget h1 {
+    .user-widget img#change-img {
+        position: absolute;
+        bottom: -51px;
+        left: 116px;
+    }
+
+    .user-main .bio button {
+        font-size: 14px;
+    }
+
+    .user-main .bio h1 {
         font-size: 20px;
-        line-height: 30px;
+        line-height: 25px;
     }
 
-    .user-widget h4 {
-        font-size: 16px;
+    .user-main .bio h4 {
+        font-size: 14px;
     }
 
-    .user-widget button {
-        font-size: 12px;
-        padding: 12px 14px
+    .user-main .bio h3 {
+        font-size: 14px;
     }
 
-    .user-widget .img-container img#change-img {
-        right: 4px;
-    }
-
-    .user-aside section {
-        padding: 15px 0;
-        margin-bottom: 20px;
-    }
-
-    .user-aside button {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .user-aside button.active {
-        border-left: solid 3px rgba(0, 122, 243, 1) !important;
-    }
-
-    .user-aside button svg {
-        margin-left: 5px;
-        margin-right: 10px;
-    }
-
-    .story-header,
-    .aspirant-header {
-        padding: 10px;
-    }
-
-    .story-header h1,
-    .aspirant-header h1 {
-        font-size: 15px;
-    }
-
-    .story-header button,
-    .aspirant-header button {
-        font-size: 12px;
-        /* padding: 5px; */
+    .user-main .page-nav button {
+        padding: 8px 23px;
     }
 
     .empty p {
@@ -7158,6 +7833,27 @@ textarea::placeholder {
     .settings .body button {
         font-size: 14px;
         padding: 12px 30px;
+    }
+
+
+
+
+
+
+
+
+    /* aside  */
+    .user-aside {
+        padding: 0 10px;
+    }
+
+    .user-aside button {
+        padding: 10px 0;
+        font-size: 12px;
+    }
+
+    .user-aside button svg {
+        margin-right: 10px;
     }
 
     /* terms and conditions  */
@@ -7294,69 +7990,115 @@ textarea::placeholder {
         margin-left: 12px;
     }
 
+    .home header {
+        margin-bottom: 55px;
+    }
+
+    .home .body {
+        margin-bottom: 60px;
+    }
+
+    .home .text h1 {
+        font-size: 25px;
+        line-height: 32px;
+        margin-bottom: 15px;
+    }
+
+    .home .text p {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 0;
+    }
+
     .home .main h1 {
         font-size: 22px;
         line-height: unset;
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .home .main h2 {
         font-size: 16px;
         margin-bottom: 25px;
+        text-align: center;
     }
 
-    .home .main #google-btn button,
-    .home .main #google-btn>span>button {
-        width: 80%;
+    .home .main #google-btn {
+        display: flex;
+        justify-content: center;
     }
 
     .home .main h3 {
         margin-bottom: 40px;
-        max-width: 80%
+        text-align: center;
     }
 
-    .home .main button.home-btn {
-        width: 80%;
+    .home .main button.home-btn.two {
+        margin: 0 auto 70px
     }
 
-    #signup {
-        top: 5% !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 520px;
+    .home .main h5 {
+        margin-bottom: 30px !important;
     }
 
-    #signup .form {
-        width: 100%;
+    /* login  */
+    .home .login {
+        margin-bottom: 30px;
     }
 
-    #signup .form input {
-        padding: 12px 20px;
-    }
-
-    #signup .form button#create {
-        padding: 12px 90px !important;
-    }
-
-    /* loginModal  */
-    #loginModal {
-        width: 500px;
-        height: 595px
-    }
-
-    #loginModal input {
-        padding: 12px 18px;
-    }
-
-    #loginModal .w-400 {
-        width: 350px;
-    }
-
-    #loginModal h6 {
+    .home .login label {
         font-size: 14px;
+    }
+
+    .home .login input {
+        font-size: 14px;
+        padding: 13px 20px;
+    }
+
+    .home .login input#login-password {
+        margin-bottom: 16px;
+    }
+
+    .home .login button#proceed {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+
+    .home .login h6 {
+        font-size: 12px;
+    }
+
+    /* signup  */
+    .home .signup {
+        padding: 20px 10px;
+        margin-bottom: 30px;
+    }
+
+    .home .signup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .home .signup input {
+        padding: 12px 15px;
+    }
+
+    .home .signup button#create {
+        width: 100%;
+        padding: 12px 0 !important;
+        font-size: 14px;
+    }
+
+    /* footer  */
+    .home footer#footer {
+        margin-top: 0;
+        border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
+        padding: 20px 0;
+    }
+
+    .home footer#footer .text a {
+        font-size: 12px;
+        margin: 0 30px 0 0;
     }
 
     /* verification  */
@@ -7427,7 +8169,25 @@ textarea::placeholder {
         margin-bottom: 10px;
     }
 
+    nav li button {
+        margin-left: 0;
+    }
+
+    /* aside  */
+    .aside-sticky {
+        overflow-y: unset;
+        height: unset;
+    }
+
     /* home feed  */
+    .home-feed .aside .content {
+        display: none;
+    }
+
+    .home-feed .aside .polls {
+        display: none;
+    }
+
     .home-feed .main .header h1 {
         font-size: 23px;
     }
@@ -7521,23 +8281,6 @@ textarea::placeholder {
         font-size: 10px;
     }
 
-    .home-feed .main .stories .carousel .story {
-        min-width: 220px;
-    }
-
-    .home-feed .main .stories .carousel .story .img-container {
-        height: 150px;
-    }
-
-    .home-feed .main .stories .carousel .story .like-btn {
-        top: 8px;
-        right: 8px;
-    }
-
-    .home-feed .main .stories .carousel .story p {
-        font-size: 12px;
-    }
-
     .home-feed .main .profiles .header h3 {
         font-size: 15px;
     }
@@ -7546,54 +8289,63 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .profile .profile {
-        padding: 10px;
-    }
-
-    .profile .profile h3 {
-        font-size: 15px;
-    }
-
-    .profile .profile p {
-        font-size: 11px;
-    }
-
-    .profile .profile .vote-img {
-        height: 25px;
-    }
-
-    .profile .profile h4 {
-        font-size: 10px;
-    }
-
     .home-feed .main button {
         font-size: 10px;
         padding: 8px 10px;
         margin-left: 10px;
     }
 
-    /* stories  */
-    .story .create-story h3 {
-        font-size: 15px;
+    /* profile widget  */
+    .profile-widget {
+        display: none;
     }
 
-    .story .create-story .img-container,
+    /* login prompt  */
+    .login-prompt {
+        padding: 25px 30px;
+    }
+
+    .login-prompt p {
+        font-size: 16px;
+    }
+
+    .login-prompt button {
+        font-size: 14px;
+        padding: 9px 21px;
+    }
+
+    .login-prompt i {
+        top: 10px;
+        right: 15px;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 500px;
+        height: 340px;
+        padding: 25px !important
+    }
+
+    /* stories  */
+    .story .stories-header {
+        margin-bottom: 20px;
+    }
+
+    .story .stories-header .searchbar {
+        border-radius: 20px;
+        padding: 13px 11px;
+    }
+
+    .story .stories-header button {
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
     .story .story .img-container,
     .story .story .comment .img-container,
     .search .story .img-container {
         height: 35px;
         width: 35px;
-    }
-
-    .story .create-story input {
-        font-size: 12px;
-        padding: 10px;
-        border-radius: 12px;
-    }
-
-    .story .create-story p {
-        font-size: 12px;
-        margin-left: 20px
     }
 
     .story .story h3 {
@@ -7706,6 +8458,11 @@ textarea::placeholder {
         padding: 10px;
     }
 
+    .story .comments .comment {
+        padding: 0 !important;
+        margin-bottom: 10px;
+    }
+
     .story .comments .comment-body h3 {
         font-size: 12px;
     }
@@ -7794,29 +8551,21 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .polls .poll {
+    .open-poll-card .body {
         padding: 10px;
     }
 
-    .polls .poll h3 {
-        font-size: 12px;
+    .open-poll-card .body h3 {
+        font-size: 14px;
         margin-bottom: 7px;
     }
 
-    .polls .poll h6 {
-        font-size: 10px;
+    .open-poll-card .candidate h2 {
+        font-size: 14px;
     }
 
-    .polls .options {
-        right: 12px;
-        top: 14px;
-        width: 60px;
-        padding: 5px;
-    }
-
-    .polls .options p {
+    .open-poll-card .body h6 {
         font-size: 10px;
-        line-height: 15px;
     }
 
     /* share poll modal  */
@@ -7874,8 +8623,24 @@ textarea::placeholder {
         border-radius: 10px;
     }
 
-    .profile .header button i {
-        display: none
+    .profile .profile {
+        padding: 10px;
+    }
+
+    .profile .profile .img-container {
+        height: 42px;
+        width: 42px;
+    }
+
+    .profile .profile p {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 25px;
+        margin-bottom: 16px;
+    }
+
+    .profile-recomentdations {
+        display: none;
     }
 
     /* single aspirant page  */
@@ -8024,66 +8789,41 @@ textarea::placeholder {
 
     /* user profile  */
     .user-widget {
-        padding: 13px;
+        height: 150px;
     }
 
     .user-widget .img-container {
         height: 100px;
         width: 100px;
+        bottom: -50px;
+        left: 20px
     }
 
-    .user-widget h1 {
-        font-size: 20px;
-        line-height: 30px;
+    .user-widget img#change-img {
+        position: absolute;
+        bottom: -51px;
+        left: 112px;
     }
 
-    .user-widget h4 {
-        font-size: 16px;
+    .user-main .bio button {
+        font-size: 14px;
     }
 
-    .user-widget button {
-        font-size: 10px;
-        padding: 5px 8px;
-        border-radius: 5px;
+    .user-main .bio h1 {
+        font-size: 18px;
+        line-height: 25px;
     }
 
-    .user-widget .img-container img#change-img {
-        right: 17px;
+    .user-main .bio h4 {
+        font-size: 14px;
     }
 
-    .user-aside section {
-        padding: 15px 0;
-        margin-bottom: 20px;
+    .user-main .bio h3 {
+        font-size: 14px;
     }
 
-    .user-aside button {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .user-aside button.active {
-        border-left: solid 3px rgba(0, 122, 243, 1) !important;
-    }
-
-    .user-aside button svg {
-        margin-left: 5px;
-        margin-right: 10px;
-    }
-
-    .story-header,
-    .aspirant-header {
-        padding: 10px;
-    }
-
-    .story-header h1,
-    .aspirant-header h1 {
-        font-size: 15px;
-    }
-
-    .story-header button,
-    .aspirant-header button {
-        font-size: 12px;
-        /* padding: 5px; */
+    .user-main .page-nav button {
+        padding: 8px 23px;
     }
 
     .empty p {
@@ -8111,6 +8851,15 @@ textarea::placeholder {
     .settings .body button {
         font-size: 14px;
         padding: 12px 30px;
+    }
+
+    /* user aside  */
+    .user-aside {
+        padding: 0 10px;
+    }
+
+    .user-aside button svg {
+        margin-right: 10px;
     }
 
     /* terms and conditions  */
@@ -8269,108 +9018,143 @@ textarea::placeholder {
         margin-left: 12px;
     }
 
+    .home header {
+        margin-bottom: 50px;
+    }
+
+    .home .body {
+        margin-bottom: 40px;
+    }
+
+    .home .text h1 {
+        font-size: 25px;
+        line-height: 32px;
+        margin-bottom: 15px;
+    }
+
+    .home .text p {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 0;
+    }
+
     .home .main h1 {
         font-size: 18px;
         line-height: unset;
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .home .main h2 {
         font-size: 16px;
         margin-bottom: 25px;
+        text-align: center;
     }
 
-    .home .main #google-btn button,
-    .home .main #google-btn>span>button {
-        width: 80%;
+    .home .main #google-btn {
+        display: flex;
+        justify-content: center;
+    }
+
+    .home .main #google-btn button {
+        margin-bottom: 0;
+    }
+
+    .home .main .or {
+        margin: 8px auto;
     }
 
     .home .main h3 {
-        margin-bottom: 40px;
-        max-width: 60%
+        margin: 0 auto 40px;
+        text-align: center;
     }
 
     .home .main button.home-btn {
-        width: 60%;
+        display: block;
+        margin: 0 auto 31px
     }
 
-    #signup {
-        top: 2% !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 320px;
-        height: 600px
+    .home .main h5 {
+        margin-bottom: 30px !important;
     }
 
-    #signup .form {
-        width: 100%;
+    /* login  */
+    .home .login {
+        margin-bottom: 30px;
+        padding: 20px 10px
     }
 
-    #signup h1 {
-        margin: 0 0 8px 0;
-        font-size: 16px;
+    .home .login h1 {
+        font-size: 20px;
     }
 
-    #signup h4 {
-        font-size: 12px;
-        margin: 0 auto 8px;
+    .home .login h4 {
+        font-size: 13px;
+        margin: 0 auto 15px;
     }
 
-    #signup .form label {
-        font-size: 10px;
-    }
-
-    #signup .form input {
-        padding: 8px 12px;
-        margin-bottom: 15px;
-        font-size: 12px;
-    }
-
-    #signup .form p {
-        margin-bottom: 8px;
-    }
-
-    #signup .form button#create {
-        padding: 12px 90px !important;
-    }
-
-    /* loginModal  */
-    #loginModal {
-        width: 360px;
-        height: 545px
-    }
-
-    #loginModal h1 {
-        font-size: 16px;
-    }
-
-    #loginModal h4 {
-        font-size: 12px;
-    }
-
-    #loginModal label {
-        font-size: 12px;
-    }
-
-    #loginModal input {
-        padding: 12px 18px;
-        font-size: 12px;
-    }
-
-    #loginModal .w-400 {
-        width: 95%;
-    }
-
-    #loginModal button#proceed {
-        font-size: 12px;
-        padding: 10px 0;
-    }
-
-    #loginModal h6 {
+    .home .login label {
         font-size: 14px;
+    }
+
+    .home .login input {
+        font-size: 14px;
+        padding: 13px 20px;
+    }
+
+    .home .login input#login-password {
+        margin-bottom: 16px;
+    }
+
+    .home .login button#proceed {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+
+    .home .login h6 {
+        font-size: 12px;
+    }
+
+    /* signup  */
+    .home .signup {
+        padding: 20px 10px;
+        margin-bottom: 30px;
+    }
+
+    .home .signup h1 {
+        font-size: 18px;
+    }
+
+    .home .signup h4 {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .home .signup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .home .signup input {
+        padding: 12px 15px;
+    }
+
+    .home .signup button#create {
+        width: 100%;
+        padding: 12px 0 !important;
+        font-size: 14px;
+    }
+
+    /* footer  */
+    .home footer#footer {
+        margin-top: 0;
+        border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
+        padding: 20px 0;
+    }
+
+    .home footer#footer .text a {
+        font-size: 12px;
+        margin: 0 30px 0 0;
     }
 
     /* verification  */
@@ -8456,7 +9240,25 @@ textarea::placeholder {
         margin-bottom: 10px;
     }
 
+    nav li button {
+        margin-left: 0;
+    }
+
+    /* aside  */
+    .aside-sticky {
+        overflow-y: unset;
+        height: unset;
+    }
+
     /* home feed  */
+    .home-feed .aside .content {
+        display: none;
+    }
+
+    .home-feed .aside .polls {
+        display: none;
+    }
+
     .home-feed .main .header h1 {
         font-size: 21px;
     }
@@ -8551,50 +9353,12 @@ textarea::placeholder {
         font-size: 10px;
     }
 
-    .home-feed .main .stories .carousel .story {
-        min-width: 220px;
-    }
-
-    .home-feed .main .stories .carousel .story .img-container {
-        height: 150px;
-    }
-
-    .home-feed .main .stories .carousel .story .like-btn {
-        top: 8px;
-        right: 8px;
-    }
-
-    .home-feed .main .stories .carousel .story p {
-        font-size: 12px;
-    }
-
     .home-feed .main .profiles .header h3 {
         font-size: 14px;
     }
 
     .home-feed .main .profiles .header p {
         font-size: 12px;
-    }
-
-    .profile .profile {
-        padding: 10px;
-    }
-
-    .profile .profile h3 {
-        font-size: 15px;
-    }
-
-    .profile .profile p {
-        font-size: 11px;
-        margin-bottom: 20px;
-    }
-
-    .profile .profile .vote-img {
-        height: 25px;
-    }
-
-    .profile .profile h4 {
-        font-size: 10px;
     }
 
     .home-feed .main button {
@@ -8607,32 +9371,59 @@ textarea::placeholder {
         width: 60px;
     }
 
+    /* profile widget  */
+    .profile-widget {
+        display: none;
+    }
+
+    /* login prompt  */
+    .login-prompt {
+        padding: 10px 30px;
+    }
+
+    .login-prompt p {
+        font-size: 12px;
+        margin-bottom: 10px !important;
+    }
+
+    .login-prompt button {
+        font-size: 14px;
+        padding: 9px 21px;
+    }
+
+    .login-prompt i {
+        top: 15px;
+        right: 20px;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 370px;
+        height: 340px;
+        padding: 15px !important
+    }
+
     /* stories  */
-    .story .create-story {
-        padding: 10px;
+    .story .stories-header {
+        margin-bottom: 20px;
     }
 
-    .story .create-story h3 {
-        font-size: 15px;
+    .story .stories-header .searchbar {
+        border-radius: 20px;
+        padding: 11px;
+        margin-bottom: 20px;
     }
 
-    .story .create-story .img-container,
+    .story .stories-header button {
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
     .story .story .img-container,
     .story .story .comment .img-container,
     .search .story .img-container {
         height: 30px;
         width: 30px;
-    }
-
-    .story .create-story input {
-        font-size: 12px;
-        padding: 10px;
-        border-radius: 12px;
-    }
-
-    .story .create-story p {
-        font-size: 12px;
-        margin-left: 20px
     }
 
     .story .story h3 {
@@ -8646,7 +9437,7 @@ textarea::placeholder {
     }
 
     .story .story h4 {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 20px;
     }
 
@@ -8770,6 +9561,11 @@ textarea::placeholder {
         padding: 10px;
     }
 
+    .story .comments .comment {
+        padding: 0 !important;
+        margin-bottom: 10px;
+    }
+
     .story .comments .comment-body h3 {
         font-size: 12px;
     }
@@ -8858,33 +9654,30 @@ textarea::placeholder {
         font-size: 10px;
     }
 
-    .polls .poll {
+    .open-poll-card .body {
         padding: 5px;
     }
 
-    .polls .poll h3 {
-        font-size: 10px;
+    .open-poll-card .body h3 {
+        font-size: 14px;
         margin-bottom: 7px;
     }
 
-    .polls .poll h6 {
+    .open-poll-card .body h6 {
         font-size: 8px;
     }
 
-    .polls .poll h6#status-text {
-        display: none;
-    }
-
-    .polls .options {
-        right: 12px;
-        top: 14px;
-        width: 60px;
-        padding: 5px;
-    }
-
-    .polls .options p {
+    .open-poll-card .header button {
         font-size: 10px;
-        line-height: 15px;
+        padding: 9px;
+    }
+
+    .open-poll-card .candidate h2 {
+        font-size: 12px;
+    }
+
+    .open-poll-card .candidate h5 {
+        font-size: 12px;
     }
 
     /* share poll modal  */
@@ -8967,6 +9760,18 @@ textarea::placeholder {
         padding: 10px;
         font-size: 13px;
         border-radius: 10px;
+    }
+
+    .profile .profile {
+        padding: 10px;
+    }
+
+    .profile .profile p {
+        font-size: 14px;
+    }
+
+    .profile-recomentdations {
+        display: none;
     }
 
     /* single aspirant page  */
@@ -9119,66 +9924,53 @@ textarea::placeholder {
 
     /* user profile  */
     .user-widget {
-        padding: 13px;
+        height: 150px;
     }
 
     .user-widget .img-container {
         height: 80px;
         width: 80px;
+        bottom: -40px;
+        left: 15px
     }
 
-    .user-widget h1 {
-        font-size: 16px;
-        line-height: 20px;
+    .user-widget img#change-img {
+        bottom: -38px;
+        left: 91px;
     }
 
-    .user-widget h4 {
-        font-size: 12px;
+    .user-main .bio button {
+        font-size: 14px;
     }
 
-    .user-widget button {
+    .user-main .bio h1 {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    .user-main .bio h4 {
+        font-size: 14px;
+    }
+
+    .user-main .bio h3 {
+        font-size: 14px;
+    }
+
+    .user-main .page-nav button {
+        padding: 8px 10px;
         font-size: 10px;
-        padding: 5px 8px;
-        border-radius: 5px;
     }
 
-    .user-widget .img-container img#change-img {
-        right: 12px;
+    .user-main .page-nav button svg {
+        display: none;
     }
 
-    .user-aside section {
-        padding: 15px 0;
-        margin-bottom: 20px;
-    }
-
-    .user-aside button {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .user-aside button.active {
-        border-left: solid 3px rgba(0, 122, 243, 1) !important;
-    }
-
-    .user-aside button svg {
-        margin-left: 5px;
-        margin-right: 10px;
-    }
-
-    .story-header,
-    .aspirant-header {
-        padding: 10px;
-    }
-
-    .story-header h1,
-    .aspirant-header h1 {
-        font-size: 12px;
-    }
-
-    .story-header button,
-    .aspirant-header button {
+    .user-main .page-nav p {
         font-size: 10px;
-        padding: 5px;
+    }
+
+    .empty p {
+        font-size: 18px;
     }
 
     .empty p {
@@ -9206,6 +9998,20 @@ textarea::placeholder {
     .settings .body button {
         font-size: 14px;
         padding: 12px 30px;
+    }
+
+    /* user aside  */
+    .user-aside {
+        padding: 0 10px;
+    }
+
+    .user-aside button {
+        padding: 10px 0;
+        font-size: 12px;
+    }
+
+    .user-aside button svg {
+        margin-right: 10px;
     }
 
     /* terms and conditions  */
@@ -9377,20 +10183,42 @@ textarea::placeholder {
         margin-left: 10px;
     }
 
+    .home header {
+        margin-bottom: 50px;
+    }
+
+    .home .body {
+        margin-bottom: 40px;
+    }
+
+    .home .text h1 {
+        font-size: 25px;
+        line-height: 32px;
+        margin-bottom: 15px;
+    }
+
+    .home .text p {
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 0;
+    }
+
     .home .main h1 {
         font-size: 14px;
         line-height: unset;
         margin-bottom: 20px;
+        text-align: center;
     }
 
     .home .main h2 {
         font-size: 10px;
         margin-bottom: 25px;
+        text-align: center;
     }
 
     .home .main #google-btn button {
-        width: 100%;
         padding: 0px !important;
+        margin-bottom: 0;
     }
 
     .home .main #google-btn>span>button {
@@ -9398,10 +10226,15 @@ textarea::placeholder {
         padding: 11px !important
     }
 
+    .home .main .or {
+        margin: 8px auto;
+    }
+
     .home .main h3 {
         margin-bottom: 40px;
         max-width: 100%;
-        font-size: 12px
+        font-size: 12px;
+        text-align: center;
     }
 
     .home .main button.home-btn {
@@ -9410,85 +10243,91 @@ textarea::placeholder {
         padding: 10px 0;
     }
 
-    #signup {
-        top: 2% !important;
-        bottom: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        width: 320px;
-        height: 600px
+    .home .main h5 {
+        font-size: 14px;
+        margin-bottom: 30px !important;
     }
 
-    #signup .form {
-        width: 100%;
+    /* login  */
+    .home .login {
+        margin-bottom: 30px;
+        padding: 20px 10px
     }
 
-    #signup h1 {
-        margin: 0 0 8px 0;
-        font-size: 16px;
+    .home .login h1 {
+        font-size: 20px;
     }
 
-    #signup h4 {
-        font-size: 12px;
-        margin: 0 auto 8px;
+    .home .login h4 {
+        font-size: 13px;
+        margin: 0 auto 15px;
     }
 
-    #signup .form label {
-        font-size: 10px;
-    }
-
-    #signup .form input {
-        padding: 8px 12px;
-        margin-bottom: 15px;
-        font-size: 12px;
-    }
-
-    #signup .form p {
-        margin-bottom: 8px;
-    }
-
-    #signup .form button#create {
-        padding: 12px 90px !important;
-    }
-
-    /* loginModal  */
-    #loginModal {
-        width: 90%;
-        height: 545px
-    }
-
-    #loginModal h1 {
-        font-size: 16px;
-    }
-
-    #loginModal h4 {
-        font-size: 12px;
-    }
-
-    #loginModal label {
-        font-size: 12px;
-    }
-
-    #loginModal input {
-        padding: 12px 18px;
-        font-size: 12px;
-    }
-
-    #loginModal .w-400 {
-        width: 95%;
-    }
-
-    #loginModal button#proceed {
-        font-size: 12px;
-        padding: 10px 0;
-    }
-
-    #loginModal h6 {
+    .home .login label {
         font-size: 14px;
     }
 
+    .home .login input {
+        font-size: 14px;
+        padding: 13px 20px;
+    }
+
+    .home .login input#login-password {
+        margin-bottom: 16px;
+    }
+
+    .home .login button#proceed {
+        font-size: 14px;
+        padding: 12px 0;
+    }
+
+    .home .login h6 {
+        font-size: 12px;
+    }
+
+    /* signup  */
+    .home .signup {
+        padding: 20px 10px;
+        margin-bottom: 30px;
+    }
+
+    .home .signup h1 {
+        font-size: 18px;
+    }
+
+    .home .signup h4 {
+        font-size: 12px;
+        line-height: 18px;
+    }
+
+    .home .signup label {
+        margin-bottom: 8px;
+        font-size: 14px;
+    }
+
+    .home .signup input {
+        padding: 12px 15px;
+    }
+
+    .home .signup button#create {
+        width: 100%;
+        padding: 12px 0 !important;
+        font-size: 14px;
+    }
+
+    /* footer  */
+    .home footer#footer {
+        margin-top: 0;
+        border-top: solid 2px rgba(255, 255, 255, 0.1) !important;
+        padding: 20px 0;
+    }
+
+    .home footer#footer .text a {
+        font-size: 12px;
+        margin: 0 10px 0 0;
+    }
+
+    /* verification modal  */
     #verification {
         width: 340px;
     }
@@ -9571,13 +10410,30 @@ textarea::placeholder {
         margin-bottom: 10px;
     }
 
+    nav li button {
+        margin-left: 0;
+    }
+
     /* aside  */
     .home-feed .avatar {
         height: 40px;
         width: 40px;
     }
 
+    .aside-sticky {
+        overflow-y: unset;
+        height: unset;
+    }
+
     /* home feed  */
+    .home-feed .aside .content {
+        display: none;
+    }
+
+    .home-feed .aside .polls {
+        display: none;
+    }
+
     .home-feed .main .header h1 {
         font-size: 20px;
     }
@@ -9673,23 +10529,6 @@ textarea::placeholder {
         padding: 0 8px;
     }
 
-    .home-feed .main .stories .carousel .story {
-        min-width: 220px;
-    }
-
-    .home-feed .main .stories .carousel .story .img-container {
-        height: 150px;
-    }
-
-    .home-feed .main .stories .carousel .story .like-btn {
-        top: 8px;
-        right: 8px;
-    }
-
-    .home-feed .main .stories .carousel .story p {
-        font-size: 12px;
-    }
-
     .home-feed .main .stories .header h4 i {
         margin-right: 5px;
     }
@@ -9702,27 +10541,6 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .profile .profile {
-        padding: 10px;
-    }
-
-    .profile .profile h3 {
-        font-size: 15px;
-    }
-
-    .profile .profile p {
-        font-size: 11px;
-        margin-bottom: 20px;
-    }
-
-    .profile .profile .vote-img {
-        height: 25px;
-    }
-
-    .profile .profile h4 {
-        font-size: 10px;
-    }
-
     .home-feed .main button {
         font-size: 10px;
         padding: 8px 10px;
@@ -9733,36 +10551,59 @@ textarea::placeholder {
         width: 40px;
     }
 
+    /* profile widget  */
+    .profile-widget {
+        display: none;
+    }
+
+    /* login prompt  */
+    .login-prompt {
+        padding: 10px;
+    }
+
+    .login-prompt p {
+        font-size: 12px;
+        margin-bottom: 10px !important;
+    }
+
+    .login-prompt button {
+        font-size: 14px;
+        padding: 9px 21px;
+    }
+
+    .login-prompt i {
+        top: 15px;
+        right: 20px;
+    }
+
+    /* loginModal  */
+    #loginModal {
+        width: 350px;
+        height: 340px;
+        padding: 10px !important
+    }
+
     /* stories  */
-    .story .create-story {
-        padding: 5px;
+    .story .stories-header {
+        margin-bottom: 20px;
     }
 
-    .story .create-story h3 {
-        font-size: 15px;
+    .story .stories-header .searchbar {
+        border-radius: 20px;
+        padding: 11px;
+        margin-bottom: 20px;
     }
 
-    .story .create-story .img-container,
+    .story .stories-header button {
+        font-size: 14px;
+        border-radius: 20px;
+    }
+
     .story .story .img-container,
     .story .story .comment .img-container,
     .search .story .img-container {
         height: 27px;
         width: 27px;
-    }
-
-    .story .create-story input {
-        font-size: 10px;
-        padding: 8px;
-        border-radius: 10px;
-    }
-
-    .story .create-story p {
-        font-size: 10px;
-        margin-left: 20px
-    }
-
-    .story .create-story p img {
-        margin-right: 8px;
     }
 
     .story .story h3 {
@@ -9776,7 +10617,7 @@ textarea::placeholder {
     }
 
     .story .story h4 {
-        font-size: 12px;
+        font-size: 14px;
         line-height: 20px;
     }
 
@@ -9904,6 +10745,11 @@ textarea::placeholder {
         padding: 10px;
     }
 
+    .story .comments .comment {
+        padding: 0 !important;
+        margin-bottom: 5px;
+    }
+
     .story .comments .comment-body h3 {
         font-size: 12px;
     }
@@ -9993,33 +10839,30 @@ textarea::placeholder {
         font-size: 10px;
     }
 
-    .polls .poll {
+    .open-poll-card .body {
         padding: 5px;
     }
 
-    .polls .poll h3 {
-        font-size: 10px;
+    .open-poll-card .body h3 {
+        font-size: 12px;
         margin-bottom: 7px;
     }
 
-    .polls .poll h6 {
-        font-size: 8px;
-    }
-
-    .polls .poll h6#status-text {
-        display: none;
-    }
-
-    .polls .options {
-        right: 12px;
-        top: 14px;
-        width: 60px;
-        padding: 5px;
-    }
-
-    .polls .options p {
+    .open-poll-card .header button {
         font-size: 10px;
-        line-height: 15px;
+        padding: 9px;
+    }
+
+    .open-poll-card .candidate h2 {
+        font-size: 12px;
+    }
+
+    .open-poll-card .candidate h5 {
+        font-size: 12px;
+    }
+
+    .open-poll-card .body h6 {
+        font-size: 8px;
     }
 
     /* share poll modal  */
@@ -10110,6 +10953,18 @@ textarea::placeholder {
         padding: 10px;
         font-size: 13px;
         border-radius: 10px;
+    }
+
+    .profile .profile {
+        padding: 10px;
+    }
+
+    .profile .profile p {
+        font-size: 14px;
+    }
+
+    .profile-recomentdations {
+        display: none;
     }
 
     /* single aspirant page  */
@@ -10270,70 +11125,53 @@ textarea::placeholder {
 
     /* user profile  */
     .user-widget {
-        padding: 13px;
+        height: 150px;
     }
 
     .user-widget .img-container {
         height: 80px;
         width: 80px;
+        bottom: -40px;
+        left: 15px
     }
 
-    .user-widget h1 {
-        font-size: 16px;
-        line-height: 20px;
+    .user-widget img#change-img {
+        bottom: -38px;
+        left: 91px;
     }
 
-    .user-widget h4 {
-        font-size: 12px;
+    .user-main .bio button {
+        font-size: 14px;
     }
 
-    .user-widget button {
+    .user-main .bio h1 {
+        font-size: 18px;
+        line-height: 25px;
+    }
+
+    .user-main .bio h4 {
+        font-size: 14px;
+    }
+
+    .user-main .bio h3 {
+        font-size: 14px;
+    }
+
+    .user-main .page-nav button {
+        padding: 8px 10px;
         font-size: 10px;
-        padding: 5px 8px;
-        border-radius: 5px;
     }
 
-    .user-widget .img-container img#change-img {
-        right: -8px;
+    .user-main .page-nav button svg {
+        display: none;
     }
 
-    .user-aside section {
-        padding: 15px 0;
-        margin-bottom: 20px;
-    }
-
-    .user-aside button {
-        font-size: 12px;
-        margin-bottom: 15px;
-    }
-
-    .user-aside button.active {
-        border-left: solid 3px rgba(0, 122, 243, 1) !important;
-    }
-
-    .user-aside button svg {
-        margin-left: 5px;
-        margin-right: 10px;
-    }
-
-    .story-header,
-    .aspirant-header {
-        padding: 10px;
-    }
-
-    .story-header h1,
-    .aspirant-header h1 {
-        font-size: 12px;
-    }
-
-    .story-header button,
-    .aspirant-header button {
+    .user-main .page-nav p {
         font-size: 10px;
-        padding: 5px;
     }
 
     .empty p {
-        font-size: 16px;
+        font-size: 18px;
     }
 
     .settings header {
@@ -10357,6 +11195,20 @@ textarea::placeholder {
     .settings .body button {
         font-size: 14px;
         padding: 12px 30px;
+    }
+
+    /* user aside  */
+    .user-aside {
+        padding: 0 10px;
+    }
+
+    .user-aside button {
+        padding: 10px 0;
+        font-size: 12px;
+    }
+
+    .user-aside button svg {
+        margin-right: 10px;
     }
 
     /* terms and conditions  */
@@ -10562,6 +11414,39 @@ body #root>.container-fluid.dm {
     border-left: solid 2px #010A20
 }
 
+element.style {}
+
+.dm a,
+.dm h1,
+.dm h2,
+.dm h3,
+.dm h4,
+.dm h5,
+.dm h6,
+.dm div,
+.dm p,
+.dm span,
+.dm button,
+.dm select,
+.dm label {
+    color: rgba(4, 19, 54, 1);
+}
+
+[type=button]:not(:disabled),
+[type=reset]:not(:disabled),
+[type=submit]:not(:disabled),
+button:not(:disabled) {
+    cursor: pointer;
+}
+
+.dm nav li button {
+    color: #007AF3 !important
+}
+
+.dm nav li button#signup-nav-btn {
+    color: #FFF !important
+}
+
 /* home  */
 .home.dm {
     background-color: rgba(249, 252, 255, 1);
@@ -10584,6 +11469,54 @@ body #root>.container-fluid.dm {
 
 .dm footer#footer .bottom a {
     color: rgba(10, 24, 61, 1)
+}
+
+/* login  */
+.dm.home .login,
+.dm.home .login input {
+    border: solid 1px rgba(10, 24, 61, 0.1) !important;
+}
+
+.dm.home .login h1,
+.dm.home .login label,
+.dm.home .login h6 {
+    color: rgba(0, 0, 0, 1) !important
+}
+
+.dm.home .login h4 {
+    color: rgba(0, 0, 0, 0.8)
+}
+
+.dm.home .login .or span {
+    border: solid 1px rgba(10, 24, 61, 0.2) !important;
+}
+
+.dm.home .login .or h6 {
+    color: rgba(10, 24, 61, 1)
+}
+
+/* signup  */
+.dm.home header button {
+    border: none !important;
+    color: rgba(0, 0, 0, 1)
+}
+
+.dm.home .signup,
+.dm.home .signup input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm.home .signup h1,
+.dm.home .signup label {
+    color: rgba(0, 0, 0, 1)
+}
+
+.dm.home .signup h4 {
+    color: rgba(0, 0, 0, 0.8)
+}
+
+.dm.home .signup .or span {
+    border: solid 1px rgba(10, 24, 61, 0.2) !important;
 }
 
 /* aside  */
@@ -10689,13 +11622,46 @@ footer#footer.dm .bottom {
     border-top: 1px solid rgba(10, 24, 61, 0.1) !important
 }
 
+/* profile widget  */
+.dm .profile-widget .profile {
+    background-color: #FFF;
+    border: solid 1px rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .profile-widget .profile .name,
+.dm .profile-widget .profile .stats {
+    border-bottom: solid 1px rgba(10, 24, 61, 0.15) !important;
+}
+
+.dm profile-widget .profile .name h2 {
+    color: rgba(0, 0, 0, 1)
+}
+
+.dm .profile-widget .profile h4 {
+    color: rgba(0, 0, 0, 0.6)
+}
+
+/* login prompt  */
+.dm .login-prompt {
+    background-color: rgba(255, 255, 255, 0.8)
+}
+
+.dm .login-prompt button#login-btn {
+    border: 1px solid rgba(0, 122, 243, 1) !important;
+    color: rgba(0, 122, 243, 1)
+}
+
+.dm .login-prompt button#signup-btn {
+    color: #FFF
+}
+
 /* polls  */
 .dm .polls .searchbar {
     border: 1px solid rgba(10, 24, 61, 0.1) !important;
     box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.06);
 }
 
-.dm .polls .header {
+.dm .polls>.header {
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     background-color: rgba(10, 24, 61, 0.08);
 }
@@ -10706,7 +11672,20 @@ footer#footer.dm .bottom {
 }
 
 .dm .polls .poll h6 {
-    color: rgba(10, 24, 61, 0.5)
+    color: #000;
+}
+
+.dm .open-poll-card {
+    background-color: #FFF;
+}
+
+.dm .open-poll-card .body {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+.dm .open-poll-card .body h6 {
+    color: rgba(0, 0, 0, 1)
 }
 
 /* single polls  */
@@ -10715,59 +11694,52 @@ footer#footer.dm .bottom {
     box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.06);
 }
 
-.dm .single-poll .poll .header button {
+.dm .open-poll-card .body button {
     background-color: #FFF;
     border: solid 1px rgba(0, 122, 243, 1) !important;
     color: rgba(0, 122, 243, 1)
 }
 
-.dm .single-poll .poll button.active {
+.dm .open-poll-card .body button.active {
     background-color: rgba(0, 122, 243, 1);
     color: #FFF
 }
 
-.dm .single-poll .poll .body {
+.dm .open-poll-card .body {
     background-color: #FFF;
     border: 1px solid rgba(10, 24, 61, 0.1) !important
 }
 
-.dm .single-poll .poll .candidate p {
+.dm .open-poll-card .body .candidate p {
     color: rgba(10, 24, 61, 1)
 }
 
-.dm .single-poll .poll .candidate .bar {
+.dm .open-poll-card .body .candidate .bar {
     background-color: rgba(10, 24, 61, 0.2)
 }
 
-.dm .single-poll .poll .candidate .indicator {
+.dm .open-poll-card .body .candidate .indicator {
     background-color: rgba(10, 24, 61, 1);
 }
 
-.dm .single-poll .poll .candidate h5 {
+.dm .open-poll-card .body .candidate h5 {
     color: rgba(10, 24, 61, 1)
 }
 
-.dm .single-poll .poll footer {
+.dm .open-poll-card footer {
     background-color: #FFF;
     border: 1px solid rgba(0, 0, 0, 0.1)
 }
 
 /* stories  */
-.dm .story .create-story {
-    background-color: #FFF;
-    border: 1px solid rgba(10, 24, 61, 0.1) !important;
-    box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
-}
-
-.dm .story .create-story input {
+.dm .story .stories-header .searchbar {
     border: 1px solid rgba(10, 24, 61, 0.1) !important
 }
 
-.dm .story .create-story p {
-    color: rgba(10, 24, 61, 0.)
+.dm .story .stories-header button {
+    color: #FFF
 }
 
-.dm .story .create-story .img-container,
 .dm .story .story .img-container,
 .dm .story .story .comment .img-container,
 .dm .search .story .img-container {
@@ -10817,10 +11789,18 @@ footer#footer.dm .bottom {
     color: #FFF
 }
 
+.dm .story .story h6 {
+    color: rgba(0, 0, 0, 0.5)
+}
+
+.dm .story .comments h5#loadMore {
+    color: rgba(0, 0, 0, 0.7)
+}
+
 /* single story page  */
 .dm .story .comments {
     background-color: #FFF;
-    border: 1px solid rgba(10, 24, 61, 0.1) !important
+    /* border: 1px solid rgba(10, 24, 61, 0.1) !important */
 }
 
 .dm .story .comments .comment-body {
@@ -11125,72 +12105,6 @@ footer#footer.dm .bottom {
     color: #000
 }
 
-/* sign up modal  */
-#signup.dm {
-    position: absolute;
-    background-color: rgba(249, 252, 255, 1) !important;
-}
-
-#signup.dm i {
-    color: rgba(10, 24, 61, 0.5);
-}
-
-#signup.dm h1 {
-    color: rgba(10, 24, 61, 1)
-}
-
-#signup.dm h4 {
-    color: rgba(10, 24, 61, 0.7)
-}
-
-#signup.dm .or span {
-    border: solid 1px rgba(10, 24, 61, 0.1) !important
-}
-
-#signup.dm .form label {
-    color: rgba(10, 24, 61, 1)
-}
-
-#signup.dm .form input {
-    color: rgba(10, 24, 61, 1);
-    border: 1px solid rgba(10, 24, 61, 0.1) !important
-}
-
-/* login modal */
-#loginModal.dm {
-    position: absolute;
-    background-color: rgba(249, 252, 255, 1) !important;
-}
-
-#loginModal.dm h1 {
-    color: rgba(10, 24, 61, 1)
-}
-
-#loginModal.dm h4 {
-    color: rgba(10, 24, 61, 0.7);
-
-}
-
-#loginModal.dm .or span {
-    border: 1px solid rgba(10, 24, 61, 0.1) !important
-}
-
-#loginModal.dm .or h6 {
-    color: rgba(10, 24, 61, 1)
-}
-
-#loginModal.dm label {
-    color: rgba(10, 24, 61, 1)
-}
-
-#loginModal.dm input {
-    border: 1px solid rgba(10, 24, 61, 0.1) !important
-}
-
-#loginModal.dm h6 {
-    color: rgba(10, 24, 61, 1)
-}
-
 /* verfication modal  */
 #verification.dm {
     position: absolute;
@@ -11377,4 +12291,14 @@ footer#footer.dm .bottom {
 
 .delete-write-modal.dm button#cancel {
     border: 1px solid rgba(0, 122, 243, 1) !important
+}
+
+/* loginModal */
+#loginModal.dm i {
+    color: rgba(0, 0, 0, 1)
+}
+
+#loginModal.dm button#bt-1 {
+    border: 1px solid rgba(0, 122, 243, 1) !important;
+    color: rgba(0, 122, 243, 1)
 }

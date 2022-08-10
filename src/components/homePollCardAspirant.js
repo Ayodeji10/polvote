@@ -4,6 +4,7 @@ import axios from "axios";
 import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
 import { useNavigate } from 'react-router-dom';
+import LoginModal from './loginModal';
 Modal.setAppElement('#root')
 
 function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetchcurrentPollAndParties }) {
@@ -18,17 +19,22 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
     const [multipleVotesModal, setMultipleVotesModal] = useState(false)
     const [voteSuccessModal, setVoteSuccessModal] = useState(false)
     const [voteRevokeModal, setVoteRevokeModal] = useState(false)
+    const [loginModal, setLoginModal] = useState(false)
 
     // chech for duplicate vote 
     const [multiple, setMultiple] = useState([{ firstname: "", lastname: "" }])
     const checkVote = () => {
-        const filteredVotes = currentPoll.aspirant.filter(aspirant => aspirant.votes.filter(vote => vote === context.user._id).length > 0)
-        // console.log(filteredVotes)
-        if (filteredVotes.length < 1) {
-            setVoteModal(true)
+        if (localStorage.getItem('ballotbox_token') === null) {
+            setLoginModal(true)
         } else {
-            setMultiple(filteredVotes)
-            setMultipleVotesModal(true)
+            const filteredVotes = currentPoll.aspirant.filter(aspirant => aspirant.votes.filter(vote => vote === context.user._id).length > 0)
+            // console.log(filteredVotes)
+            if (filteredVotes.length < 1) {
+                setVoteModal(true)
+            } else {
+                setMultiple(filteredVotes)
+                setMultipleVotesModal(true)
+            }
         }
     }
 
@@ -43,7 +49,6 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
             headers: { 'Authorization': `Bearer ${context.user.token}` },
             data: { aspiid: aspirantId }
         }).then((response) => {
-            // window.location.reload()
             console.log(response)
             setVoteModal(false)
             setVoteSuccessModal(true)
@@ -64,8 +69,6 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
             fetchcurrentPollAndParties()
             setMultipleVotesModal(false)
             setVoteRevokeModal(true)
-            // window.location.reload()
-            // console.log(response)
         }, (error) => {
             // console.log(error)
         })
@@ -117,9 +120,6 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
                                 </clipPath>
                             </defs>
                         </svg>
-
-                        // <img src="/img/Group 515.svg" alt="voted" className='img-fluid vote-img' onClick={checkVote} /> :
-                        // <img src="/img/Group 516.svg" alt="vote" className='img-fluid vote-img' onClick={checkVote} />
                     }
                 </div>
             </div>
@@ -160,6 +160,9 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
                 <h3>Vote Revoked Successfully!!</h3>
                 <p>You have successfully revoked your vote for {multiple[0].firstname} {multiple[0].lastname}</p>
             </Modal>
+
+            {/* login modal */}
+            {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
         </div>
     )
 }
