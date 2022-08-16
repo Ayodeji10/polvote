@@ -72,7 +72,7 @@ function Profiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-12">
-                                    <Link to={"/create-aspirant"}><button><i className="far fa-edit" />Create Aspirant Profile</button></Link>
+                                    <Link to={"/create-aspirant"}><button><i className="far fa-edit" />Write Aspirant Profile</button></Link>
                                 </div>
                                 <div className="col-lg-2 col-md-2 col-sm-2 col-5">
                                     {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
@@ -162,8 +162,8 @@ function Profiles() {
                     <div className="col-lg-3">
                         <div className="aside-sticky">
                             <div className="profile-recomentdations">
-                                <h2>Other Aspirant Profiles</h2>
-                                {aspirantList.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
+                                <h2>Recommended Aspirants</h2>
+                                {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
                                     return (
                                         <div className="profile row" key={index}>
                                             <div className="col-lg-2 col-md-1">
@@ -172,8 +172,8 @@ function Profiles() {
                                                 </div>
                                             </div>
                                             <div className="col-lg-10 col-md-11 details">
-                                                <h3>{each.overview}</h3>
-                                                <button>Read more</button>
+                                                <h3>{each.overview.substring(0, 160)}...</h3>
+                                                <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
                                             </div>
                                         </div>
                                     )

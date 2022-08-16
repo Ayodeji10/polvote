@@ -78,6 +78,8 @@ function HomePollCard({ pollId }) {
 
     const [live, setLive] = useState(false)
 
+    const [seeMore, setSeeMore] = useState(true)
+
     return (
         <>
             {!fetchLoading &&
@@ -123,11 +125,24 @@ function HomePollCard({ pollId }) {
                             </>
                             :
                             <>
-                                {currentPoll.aspirant.sort((a, b) => b.votes.length - a.votes.length).map((aspirant, index) => {
-                                    return (
-                                        <HomePollCardAspirant aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} fetchcurrentPollAndParties={fetchcurrentPollAndParties} />
-                                    )
-                                })}
+                                {seeMore ?
+                                    <>
+                                        {currentPoll.aspirant.sort((a, b) => b.votes.length - a.votes.length).slice(0, 3).map((aspirant, index) => {
+                                            return (
+                                                <HomePollCardAspirant aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} fetchcurrentPollAndParties={fetchcurrentPollAndParties} />
+                                            )
+                                        })}
+                                        <h4 id='more' className='mb-0' onClick={() => setSeeMore(false)}>See More<i className="fa-solid fa-angle-down" /></h4>
+                                    </> :
+                                    <>
+                                        {currentPoll.aspirant.sort((a, b) => b.votes.length - a.votes.length).map((aspirant, index) => {
+                                            return (
+                                                <HomePollCardAspirant aspirant={aspirant} pollToTal={pollToTal} key={index} parties={parties} currentPoll={currentPoll} fetchcurrentPollAndParties={fetchcurrentPollAndParties} />
+                                            )
+                                        })}
+                                        {currentPoll.aspirant.length > 3 && <h4 id='more' className='mb-0' onClick={() => setSeeMore(true)}>See Less<i className="fa-solid fa-angle-up" /></h4>}
+                                    </>
+                                }
                             </>
                         }
                     </div>

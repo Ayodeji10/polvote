@@ -47,7 +47,6 @@ const Home = () => {
 
     const [aspirants, setAspirants] = useState([])
     const [aspirantFetch, setAspirantFetch] = useState(true)
-    const [profileLength, setProfileLength] = useState(3)
     const fetchAspirants = async () => {
         const response = await axios
             .get(`${API.API_ROOT}/aspirant`)
@@ -62,17 +61,6 @@ const Home = () => {
         fetchStories()
         fetchAspirants()
     }, [])
-
-    // get story likes
-    const [userTotalLikes, setUserTotalLikes] = useState(0)
-    let storyWallet = stories.filter(story => story.userid === context.user._id).reduce((total, story) => {
-        let increament = story.likes.length
-        total += (increament)
-        return total
-    }, 0)
-    useEffect(() => {
-        setUserTotalLikes(storyWallet)
-    }, [stories])
 
     // google ad
     // useEffect(() => {
@@ -159,7 +147,6 @@ const Home = () => {
                                     <h4 onClick={() => setWriteStoryModal(true)}><i className="fas fa-edit" />Write New Story</h4>
                                     {/* write story modal  */}
                                     {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
-                                    <h4 onClick={() => navigate('/stories')}>See all Stories</h4>
                                 </div>
                             </div>
                             <div className="story">
@@ -173,6 +160,9 @@ const Home = () => {
                                         }).reverse()}
                                     </>
                                 }
+                            </div>
+                            <div className="d-flex justify-content-end">
+                                <button id="all-stories" onClick={() => navigate('/stories')}>See More Stories<i className="fa-solid fa-angle-right" /></button>
                             </div>
                         </div>
                         {/* adds  */}
@@ -212,13 +202,13 @@ const Home = () => {
                         </div> */}
                         {/* profiles  */}
                         <div className="profiles">
-                            <div className="header d-flex justify-content-between align-items-center mb-3">
+                            <div className="header d-flex justify-content-between align-items-center">
                                 <h3 className="mb-0">Recently added profiles</h3>
                                 <Link to={'/create-aspirant'}><p className="mb-0"><i className="fas fa-edit" />Write Aspirant Profile</p></Link>
                             </div>
                             {!aspirantFetch &&
                                 <div className="profile">
-                                    {aspirants.filter(aspirant => aspirant.status === "1").slice(Math.max(aspirants.filter(aspirant => aspirant.status === "1").length - profileLength, 1)).map((aspirant, index) => {
+                                    {aspirants.filter(aspirant => aspirant.status === "1").slice(Math.max(aspirants.filter(aspirant => aspirant.status === "1").length - 3, 1)).map((aspirant, index) => {
                                         return (
                                             <SingleProfileCard aspirant={aspirant} key={index} />
                                         )
@@ -226,8 +216,7 @@ const Home = () => {
                                 </div>
                             }
                             <div className="d-flex justify-content-end align-items-center mt-4">
-                                <button onClick={() => navigate('/profiles')} id="go-to-profile">Go to Profiles</button>
-                                <button onClick={() => setProfileLength(prev => prev + 1)} id="load-more">Load More Profiles</button>
+                                <button onClick={() => navigate('/profiles')} id="load-more">See More Profiles<i className="fa-solid fa-angle-right" /></button>
                             </div>
                         </div>
                         {/* Ekiti polls  */}
@@ -249,7 +238,6 @@ const Home = () => {
                             }
                             <div className="d-flex justify-content-end align-items-center mt-4">
                                 <button onClick={() => navigate('/profiles')} id="go-to-profile">Go to Profiles</button>
-                                {/* <button onClick={() => setProfileLength(prev => prev + 1)} id="load-more">Load More Profiles</button> */}
                             </div>
                         </div>
                         {/* osun polls  */}
@@ -384,42 +372,48 @@ const Home = () => {
                     {localStorage.getItem('ballotbox_token') !== null &&
                         <div className="profile-widget col-lg-3">
                             <div className="aside-sticky">
-                                <div className="profile">
-                                    <div className="top" style={{
-                                        backgroundImage: context.user.coverimage != undefined && `url(${context.user.coverimage})`,
-                                        backgroundRepeat: "no-repeat",
-                                        backgroundSize: "cover"
-                                        // backgroundColor: 'unset' 
-                                    }}>
-                                        <div className="img-container">
-                                            {context.user.image !== null && context.user.image !== undefined ?
-                                                <img src={context.user.image} alt="profile-img" id='profile-img' /> :
-                                                <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
-                                            }
-                                        </div>
-                                    </div>
-                                    <div className="name">
-                                        <h2>{context.user.firstname} {context.user.lastname}</h2>
-                                        <h3 className="mb-0">{context.user.username}</h3>
-                                    </div>
-                                    <div className="stats">
-                                        <div className="d-flex justify-content-between mb-2">
-                                            <h4>No of stories published</h4>
-                                            <h5>{stories.filter(story => story.userid === context.user._id).length}</h5>
-                                        </div>
-                                        <div className="d-flex justify-content-between mb-2">
-                                            <h4>No of profiles created</h4>
-                                            <h5>{aspirants.filter(aspirant => aspirant.creatorid === context.user._id).length}</h5>
-                                        </div>
-                                        <div className="d-flex justify-content-between">
-                                            <h4>Impressions of your post</h4>
-                                            <h5>{userTotalLikes}</h5>
-                                        </div>
-                                    </div>
-                                    <div className="info">
-                                        <h4>Access exclusive courses on political governance around the world</h4>
-                                        <Link to="/courses">Learn more</Link>
-                                    </div>
+                                <div className="story-recomentdations mb-3">
+                                    <h2>Recommended Stories</h2>
+                                    {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
+                                        return (
+                                            <div className="story row" key={index}>
+                                                <div className="col-2">
+                                                    <div className="img-container">
+                                                        {each.userimage === null || each.userimage === undefined ?
+                                                            <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
+                                                            <img src={each.userimage} alt="avatar" id='profile-img' />
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <div className="col-10 details">
+                                                    <h3>{each.fullname}</h3>
+                                                    <h4>{each.username}</h4>
+                                                    {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
+                                                        return <p key={index}>{text.substring(0, 200)}{text.length > 200 && "..."}</p>
+                                                    })}
+                                                    <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                                <div className="profile-recomentdations">
+                                    <h2>Recommended Aspirants</h2>
+                                    {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
+                                        return (
+                                            <div className="profile row" key={index}>
+                                                <div className="col-lg-2 col-md-1">
+                                                    <div className="img-container">
+                                                        <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-10 col-md-11 details">
+                                                    <h3>{each.overview.substring(0, 160)}...</h3>
+                                                    <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
                                 </div>
                             </div>
                         </div>

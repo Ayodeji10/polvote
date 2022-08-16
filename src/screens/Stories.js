@@ -81,7 +81,7 @@ function Stories() {
                             <>
                                 {stories.filter(story => story.status !== "1").map((story, index) => {
                                     return (
-                                        <StoryCard story={story} index={index} key={index} />
+                                        <StoryCard story={story} index={index} key={index} fetchStories={fetchStories} />
                                     )
                                 }).reverse()
                                 }
@@ -92,7 +92,7 @@ function Stories() {
                     </div>
                     <div className="col-lg-3">
                         <div className="aside-sticky">
-                            <div className="story-recomentdations">
+                            <div className="story-recomentdations mb-3">
                                 <h2>Recommended Stories</h2>
                                 {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
                                     return (
@@ -109,9 +109,9 @@ function Stories() {
                                                 <h3>{each.fullname}</h3>
                                                 <h4>{each.username}</h4>
                                                 {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
-                                                    return <p key={index}>{text}</p>
+                                                    return <p key={index}>{text.substring(0, 200)}{text.length > 200 && "..."}</p>
                                                 })}
-                                                <button>Read more</button>
+                                                <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
                                             </div>
                                         </div>
                                     )

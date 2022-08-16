@@ -72,9 +72,9 @@ function Comments({ comment, id }) {
                         </div>
                         <p className="mb-0">{comment.comment}</p>
                     </div>
-                    <div className="d-flex align-items-center mb-3">
-                        <h5 className="mb-0" onClick={() => likeComment(comment._id)}>Like ({comment.likes.length})</h5>
-                        <h5 className="mb-0" onClick={() => setShowReplyInput(!showReplyInput)}>Reply</h5>
+                    <div className="d-flex align-items-center mb-0">
+                        <h5 className="mb-0" id='like-btn' onClick={() => likeComment(comment._id)}>Like</h5>
+                        <h5 className="mb-0" id="reply-btn" onClick={() => setShowReplyInput(!showReplyInput)}>Reply</h5>
                         {/* <h6 className="mb-0">2 Mins</h6> */}
                     </div>
                 </div>

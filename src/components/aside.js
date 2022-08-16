@@ -18,6 +18,47 @@ function Aside() {
 
     const [userOPtions, setUserOptions] = useState(false)
 
+    // fetch stories, aspirants, and presidential poll
+    const [stories, setStories] = useState([])
+    const [storyFetch, setStoryFetch] = useState(true)
+    const fetchStories = async () => {
+        const response = await axios
+            .get(`${API.API_ROOT}/story`)
+            .catch((error) => [
+                console.log('Err', error)
+            ]);
+        setStories(response.data)
+        setStoryFetch(false)
+    }
+
+    const [aspirants, setAspirants] = useState([])
+    const [aspirantFetch, setAspirantFetch] = useState(true)
+    const fetchAspirants = async () => {
+        const response = await axios
+            .get(`${API.API_ROOT}/aspirant`)
+            .catch((error) => [
+                console.log('Err', error)
+            ]);
+        setAspirants(response.data)
+        setAspirantFetch(false)
+    }
+
+    useEffect(() => {
+        fetchStories()
+        fetchAspirants()
+    }, [])
+
+    // get story likes
+    const [userTotalLikes, setUserTotalLikes] = useState(0)
+    let storyWallet = stories.filter(story => story.userid === context.user._id).reduce((total, story) => {
+        let increament = story.likes.length
+        total += (increament)
+        return total
+    }, 0)
+    useEffect(() => {
+        setUserTotalLikes(storyWallet)
+    }, [stories])
+
     // fetch polls 
     const [polls, setPolls] = useState([])
     const fetchPolls = async () => {
@@ -75,22 +116,38 @@ function Aside() {
     return (
         <div className='aside-sticky'>
             {/* user  */}
-            {window.location.pathname !== "/" && localStorage.getItem('ballotbox_token') !== null &&
-                <div className="user d-flex justify-content-between align-items-center mb-lg-5 mb-3" >
-                    <div className="d-flex" style={{ cursor: "pointer" }} onClick={() => navigate("/user-profile")}>
-                        <div className="avatar">
-                            {context.user.image !== null && context.user.image !== undefined ?
-                                <img src={context.user.image} alt="avatar" id='profile-img' /> :
-                                <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
-                            }
-                        </div>
-                        <div className="d-flex flex-column justify-content-center">
-                            <p>Welcome</p>
-                            <h3 className="mb-0">{context.user.email}</h3>
-                        </div>
+            <div className="user d-flex justify-content-between align-items-center mb-3" >
+                <div className="d-flex" style={{ cursor: "pointer" }} onClick={() => navigate("/user-profile")}>
+                    <div className="avatar">
+                        {context.user.image !== null && context.user.image !== undefined ?
+                            <img src={context.user.image} alt="avatar" id='profile-img' /> :
+                            <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' />
+                        }
                     </div>
-                    <i style={{ cursor: "pointer" }} className="fas fa-ellipsis-v" onMouseOver={() => setUserOptions(true)} />
-                </div >
+                    <div className="d-flex flex-column justify-content-center">
+                        <p>Welcome</p>
+                        <h3 className="mb-0">{context.user.email}</h3>
+                    </div>
+                </div>
+                <i style={{ cursor: "pointer" }} className="fas fa-ellipsis-v" onMouseOver={() => setUserOptions(true)} />
+            </div >
+
+            {/* stats  */}
+            {localStorage.getItem('ballotbox_token') !== null &&
+                <div className="stats mb-3">
+                    <div className="d-flex justify-content-between mb-2">
+                        <h4>No of stories published</h4>
+                        <h5>{!storyFetch && stories.filter(story => story.userid === context.user._id).length}</h5>
+                    </div>
+                    <div className="d-flex justify-content-between mb-2">
+                        <h4>No of profiles created</h4>
+                        <h5>{!aspirantFetch && aspirants.filter(aspirant => aspirant.creatorid === context.user._id).length}</h5>
+                    </div>
+                    <div className="d-flex justify-content-between">
+                        <h4>Impressions of your post</h4>
+                        <h5>{!storyFetch && userTotalLikes}</h5>
+                    </div>
+                </div>
             }
 
             {/* settings  */}

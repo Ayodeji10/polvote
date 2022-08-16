@@ -94,7 +94,7 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
                     <h3>{((aspirant.votes.length / pollToTal) * 100).toFixed(1)}%</h3>
                     <h6 className=" mb-0">{aspirant.votes.length} Vote{aspirant.votes.length > 1 && "s"}</h6>
                 </div>
-                <div className="col-lg-1 col-md-2 col-sm-2 col-2 d-flex justify-content-end">
+                <div className="col-lg-1 col-md-2 col-sm-2 col-2">
                     {aspirant.votes.filter(vote => vote === context.user._id).length > 0 ?
                         <svg width={40} height={40} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" onClick={checkVote} >
                             <g opacity="0.2">

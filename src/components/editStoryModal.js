@@ -164,7 +164,7 @@ function EditStoryModal({ story, handleEditStoryModal, index, openModal }) {
                 <div>
                     {/* <button id="draft">Save as Draft</button> */}
                     <p>{editError}</p>
-                    <button id="post" onClick={editStory}>{editLoading ? "loading..." : "Edit Story"}</button>
+                    <button id="post" onClick={editStory}>{editLoading ? "loading..." : "Update Story"}</button>
                 </div>
             </div>
         </Modal >

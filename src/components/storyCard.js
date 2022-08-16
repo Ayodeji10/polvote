@@ -9,7 +9,7 @@ import EditStoryModal from './editStoryModal';
 import DeleteStoryModal from './deleteStoryModal';
 import Comment from '../components/comments'
 
-function StoryCard({ story, index }) {
+function StoryCard({ story, index, fetchStories }) {
     // context 
     const { context } = useContext(DataContext)
 
@@ -51,7 +51,8 @@ function StoryCard({ story, index }) {
             setLoading(false)
             setText("")
             setCommentLenght(prev => prev + 1)
-            window.location.reload()
+            fetchStories()
+            // window.location.reload()
         }, (error) => {
             // console.log(error)
             setLoading(false)
@@ -109,6 +110,35 @@ function StoryCard({ story, index }) {
         setDeleteStoryModal(variable)
     ]
 
+    // get time stamp 
+    const [storytime, setStoryTIme] = useState("")
+    const [storyDate, setStoryDate] = useState("")
+
+    const getDate = () => {
+        let today = new Date()  // today's date
+        let d = new Date(story.createdAt) // story date
+
+        // get days differenece
+        const time = Math.abs(today - d)
+        const days = Math.ceil(time / (1000 * 60 * 60 * 24))
+
+        // set date 
+        if (days <= 1) {
+            setStoryTIme(`${parseInt(story.createdAt.substring(11, 13)) + 1} ${story.createdAt.substring(13, 16)} ${story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}`)
+        } else {
+            setStoryTIme(`${parseInt(story.createdAt.substring(11, 13)) + 1} ${story.createdAt.substring(13, 16)} ${story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}`)
+            if (days < 30) {
+                setStoryDate(`${days - 1} day${days - 1 > 1 ? "s" : ""} ago`)
+            } else {
+                setStoryDate(`${story.createdAt.substring(8, 10)}-${story.createdAt.substring(5, 7)}-${story.createdAt.substring(0, 4)}`)
+            }
+        }
+    }
+
+    useEffect(() => {
+        getDate()
+    }, [])
+
     return (
         <div className="story">
             <div className="body">
@@ -128,17 +158,26 @@ function StoryCard({ story, index }) {
                         }}>{story.fullname}</h3>
                         <div className="d-flex">
                             <p className="mb-0">{story.username}</p>
-                            <p className="mb-0">{story.createdAt.substring(8, 10)}-{story.createdAt.substring(5, 7)}-{story.createdAt.substring(0, 4)}</p>
-                            <p className='mb-0'>{parseInt(story.createdAt.substring(11, 13)) + 1}{story.createdAt.substring(13, 16)} {story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}</p>
+                            {storyDate && <p>{storyDate}</p>}
+                            {storytime && <p className='mb-0'>{storytime}</p>}
                         </div>
                     </div>
                     <div className="col-1" onClick={() => setOptions(!options)}>
                         <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
+                                {/* <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
                                     <i className="fa-solid fa-link"></i>
                                     <h4 className='mb-0'>Copy Link</h4>
+                                </div> */}
+                                <div className="mb-1" onClick={() => navigate(`/stories/${story._id}`)}>
+                                    <h4 className='mb-0'>Open Story</h4>
+                                </div>
+                                <div className="mb-1">
+                                    <h4 className='mb-0'>Follow Aaron</h4>
+                                </div>
+                                <div className="mb-1">
+                                    <h4 className='mb-0' onClick={() => setShareStoryModal(true)}>Share Story</h4>
                                 </div>
                                 {story.userid === context.user._id &&
                                     <>
@@ -246,6 +285,7 @@ function StoryCard({ story, index }) {
             {editStoryModal && <EditStoryModal story={story} index={index} openModal={editStoryModal} handleEditStoryModal={handleEditStoryModal} />}
             {/* deleteStoryModal  */}
             {deleteStoryModal && <DeleteStoryModal story={story} openModal={deleteStoryModal} handleDeleteStoryModal={handleDeleteStoryModal} />}
+            {/* comments  */}
             {window.location.pathname !== "/user-profile" && localStorage.getItem('ballotbox_token') !== null &&
                 <>
                     <div className="comment">
@@ -278,7 +318,7 @@ function StoryCard({ story, index }) {
                             {story.comments.slice(0, commentLength).map((comment, index) => {
                                 return <Comment comment={comment} id={story._id} key={index} />
                             })}
-                            {commentLength <= 2 && <h5 id='loadMore' onClick={() => setCommentLength(story.comments.length)}>Load more comments</h5>}
+                            {story.comments.length > 2 && <h5 id='loadMore' onClick={() => setCommentLength(story.comments.length)}>Load more comments</h5>}
                         </div>
                     }
                 </>
