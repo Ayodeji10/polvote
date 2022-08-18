@@ -1298,6 +1298,7 @@ nav .profile-img a {
 .home-feed .main .profiles .header p {
     font-size: 14px;
     font-weight: 700;
+    cursor: pointer;
 }
 
 .home-feed .main .profiles .header p i {
@@ -1576,6 +1577,10 @@ footer#footer img.social {
     border-radius: 10px;
 }
 
+.stats div {
+    cursor: pointer
+}
+
 .stats h4 {
     margin-bottom: 0;
     font-size: 14px;
@@ -1728,9 +1733,23 @@ footer#footer img.social {
 }
 
 .polls h1 {
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     font-size: 28px;
     font-weight: 600;
+    cursor: pointer
+}
+
+.polls .options {
+    display: inline-block;
+    padding: 17px;
+    background-color: #FFF;
+}
+
+.polls .options p {
+    color: rgba(10, 24, 61, 1);
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer
 }
 
 .polls h1 i {
@@ -1738,8 +1757,8 @@ footer#footer img.social {
 }
 
 .polls>.header {
-    padding: 11px 27px;
-    margin-bottom: 19px;
+    padding: 13px 16px;
+    margin: 30px 0 19px 0;
     background-color: rgba(0, 9, 44, 1);
     border: 1px solid rgba(0, 0, 0, 0.1) !important;
     border-radius: 5px;
@@ -1753,7 +1772,7 @@ footer#footer img.social {
 
 .polls .poll {
     background-color: rgba(10, 24, 61, 1);
-    padding: 30px 27px;
+    padding: 27px 15px;
     border-radius: 10px;
     margin-bottom: 14px;
 }
@@ -2149,12 +2168,15 @@ footer#footer img.social {
 /* story  */
 .story .stories-header {
     margin-bottom: 34px;
+    position: sticky;
+    top: 70px;
+    z-index: 2;
 }
 
 .story .stories-header .searchbar {
     background-color: #FFF;
     border-radius: 80px;
-    padding: 16px 19px
+    padding: 19px 21px
 }
 
 .story .stories-header .searchbar input {
@@ -2216,7 +2238,7 @@ footer#footer img.social {
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
     font-weight: 400;
-    margin-right: 25px
+    margin: 0 25px 0 0
 }
 
 .story .story .options {
@@ -2367,8 +2389,7 @@ footer#footer img.social {
 
 /* .replies */
 .story .comments .comment .replies {
-    /* background-color: red; */
-    margin-left: 70px;
+    margin: 20px 0 0 50px;
 }
 
 .story .comments .comment .replies .img-container {
@@ -2788,7 +2809,7 @@ img#return-btn {
 }
 
 .story .comments .comment {
-    padding: 0 0 25px 0 !important;
+    padding: 0 0 20px 0 !important;
 }
 
 .story .comments h2 {
@@ -2884,6 +2905,12 @@ img#return-btn {
 
 
 /* profile */
+.profile .header {
+    position: sticky;
+    top: 70px;
+    z-index: 2;
+}
+
 .profile .header .searchbar {
     padding: 18px 27px;
     background-color: #FFF;
@@ -2922,7 +2949,8 @@ img#return-btn {
     border-radius: 10px;
     padding: 15px 19px;
     margin-bottom: 25px;
-    color: #FFF
+    color: #FFF;
+    position: relative;
 }
 
 .profile .profile .img-container {
@@ -2951,7 +2979,8 @@ img#return-btn {
 }
 
 .profile .profile i {
-    color: #FFF !important
+    color: #FFF !important;
+    cursor: pointer
 }
 
 .profile .profile h4 {
@@ -2972,10 +3001,6 @@ img#return-btn {
     cursor: pointer;
 }
 
-.dm .profile .profile p span {
-    color: rgba(0, 0, 0, 0.5)
-}
-
 .profile .profile h6 {
     font-size: 14px;
     font-weight: 400;
@@ -2991,6 +3016,36 @@ img#return-btn {
     height: 300px;
     object-fit: cover;
     object-position: center;
+}
+
+.profile .profile .options {
+    position: absolute;
+    top: 30px;
+    right: 22px;
+    background-color: rgba(10, 24, 61, 1);
+    border-radius: 5px;
+    padding: 13px 15px;
+}
+
+.profile .profile .options h4 {
+    font-size: 16px;
+    font-weight: 400;
+    color: #FFF;
+    margin-bottom: 5px;
+    cursor: pointer
+}
+
+.dm .profile .profile p span,
+.dm .profile .profile i {
+    color: rgba(0, 0, 0, 0.5) !important
+}
+
+.dm .profile .profile .options {
+    background-color: #FFF;
+}
+
+.dm .profile .profile .options h4 {
+    color: rgba(10, 24, 61, 1)
 }
 
 /* profile image modal  */
@@ -3997,10 +4052,22 @@ img#return-btn {
 .user-widget img#change-img {
     position: absolute;
     bottom: -70px;
-    left: 170px;
+    left: 175px;
     height: 28px;
     width: 28px;
     cursor: pointer;
+}
+
+.user-widget #profilePicLoader {
+    position: absolute;
+    bottom: -70px;
+    left: 175px;
+    font-size: 20px;
+    color: #FFF
+}
+
+.dm .user-widget #profilePicLoader {
+    color: rgba(4, 19, 54, 1)
 }
 
 .user-widget button {
@@ -4170,6 +4237,15 @@ img#return-btn {
     border-radius: 10px !important;
     padding: 36px 59px !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+#edit-profile::-webkit-scrollbar {
+    width: 5px;
+}
+
+#edit-profile::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
 }
 
 #edit-profile i.fa-circle-xmark,
@@ -4542,8 +4618,16 @@ img#return-btn {
 }
 
 .payout-setting select {
-    /* background-color: rgba(255, 255, 255, 0.2); */
-    color: rgba(4, 19, 54, 1)
+    color: rgba(4, 19, 54, 1);
+
+    /* custom arrow btn  */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8, <svg width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M6.46824 6.80994L11.8083 1.50758C11.9319 1.38495 12 1.22124 12 1.04668C12 0.872118 11.9319 0.708408 11.8083 0.585771L11.4151 0.195289C11.1589 -0.0587998 10.7425 -0.0587998 10.4867 0.195289L6.00249 4.64781L1.51326 0.190349C1.38965 0.0677119 1.22487 0 1.04916 0C0.873261 0 0.708482 0.0677119 0.584775 0.190349L0.191706 0.580831C0.0680971 0.703565 0 0.867178 0 1.04174C0 1.2163 0.0680971 1.38001 0.191706 1.50264L5.53664 6.80994C5.66064 6.93287 5.8262 7.00039 6.00219 7C6.17888 7.00039 6.34434 6.93287 6.46824 6.80994Z" fill="black" /></svg>');
+    background-position: right 30px top 50%;
+    background-repeat: no-repeat;
+    background-size: 10px;
 }
 
 .payout-setting button {
@@ -6507,6 +6591,10 @@ textarea::placeholder {
         font-size: 12px;
     }
 
+    .polls>.header p {
+        font-size: 14px;
+    }
+
     .polls h1 {
         font-size: 25px;
     }
@@ -6766,10 +6854,14 @@ textarea::placeholder {
 
     .story .create-story .img-container,
     .story .story .img-container,
-    .story .story .comment .img-container,
     .search .story .img-container {
         height: 40px;
         width: 40px;
+    }
+
+    .story .story .comment button img,
+    .story .comments .comment .replies button img {
+        display: none;
     }
 
     .story .create-story input {
@@ -6803,9 +6895,10 @@ textarea::placeholder {
     }
 
     .story .comments .img-container,
+    .story .story .comment .img-container,
     .story .comments .comment .replies .img-container {
-        height: 40px;
-        width: 40px;
+        height: 30px;
+        width: 30px;
     }
 
     .story .comments .comment-body {
@@ -6887,20 +6980,20 @@ textarea::placeholder {
         padding: 11px 15px;
     }
 
-    .polls .header p {
-        font-size: 14px;
+    .polls>.header p {
+        font-size: 12px;
     }
 
-    .open-poll-card .body {
-        padding: 10px 15px;
+    .polls h1 {
+        font-size: 25px;
     }
 
-    .open-poll-card .body h3 {
-        font-size: 14px;
+    .polls .poll h3 {
+        font-size: 12px;
         margin-bottom: 7px;
     }
 
-    .open-poll-card .body h6 {
+    .polls .poll h6 {
         font-size: 12px;
     }
 
@@ -7666,17 +7759,21 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .open-poll-card .body {
-        padding: 10px;
+    .polls>.header p {
+        font-size: 12px;
     }
 
-    .open-poll-card .body h3 {
+    .polls h1 {
+        font-size: 25px;
+    }
+
+    .polls .poll h3 {
         font-size: 12px;
         margin-bottom: 7px;
     }
 
-    .open-poll-card .body h6 {
-        font-size: 10px;
+    .polls .poll h6 {
+        font-size: 12px;
     }
 
     /* share poll modal  */
@@ -7937,13 +8034,6 @@ textarea::placeholder {
         padding: 12px 30px;
     }
 
-
-
-
-
-
-
-
     /* aside  */
     .user-aside {
         padding: 0 10px;
@@ -8070,6 +8160,12 @@ textarea::placeholder {
 
     .payout-setting .bank button {
         width: 100%;
+    }
+
+    /* edit profile modal  */
+    #edit-profile {
+        width: 500px;
+        padding: 25px 40px !important;
     }
 }
 
@@ -8657,21 +8753,21 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .open-poll-card .body {
-        padding: 10px;
+    .polls>.header p {
+        font-size: 12px;
     }
 
-    .open-poll-card .body h3 {
-        font-size: 14px;
+    .polls h1 {
+        font-size: 25px;
+    }
+
+    .polls .poll h3 {
+        font-size: 12px;
         margin-bottom: 7px;
     }
 
-    .open-poll-card .candidate h2 {
-        font-size: 14px;
-    }
-
-    .open-poll-card .body h6 {
-        font-size: 10px;
+    .polls .poll h6 {
+        font-size: 12px;
     }
 
     /* share poll modal  */
@@ -9102,6 +9198,12 @@ textarea::placeholder {
         width: 480px;
         height: 487px;
         padding: 32px 56px !important;
+    }
+
+    /* edit profile modal  */
+    #edit-profile {
+        width: 450px;
+        padding: 25px 40px !important;
     }
 }
 
@@ -9760,21 +9862,21 @@ textarea::placeholder {
         padding: 5px;
     }
 
-    .polls .header p {
-        font-size: 10px;
+    .polls>.header p {
+        font-size: 12px;
     }
 
-    .open-poll-card .body {
-        padding: 5px;
+    .polls h1 {
+        font-size: 25px;
     }
 
-    .open-poll-card .body h3 {
-        font-size: 14px;
+    .polls .poll h3 {
+        font-size: 12px;
         margin-bottom: 7px;
     }
 
-    .open-poll-card .body h6 {
-        font-size: 8px;
+    .polls .poll h6 {
+        font-size: 12px;
     }
 
     .open-poll-card .header button {
@@ -10271,6 +10373,30 @@ textarea::placeholder {
 
     #withdrawalModal .proceed h2 {
         font-size: 24px;
+    }
+
+    /* edit profile modal  */
+    #edit-profile {
+        width: 380px;
+        padding: 25px 40px !important;
+    }
+
+    #edit-profile h1,
+    #editPassword h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    #edit-profile label,
+    #editPassword label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    #edit-profile input,
+    #editPassword input {
+        font-size: 12px;
+        margin-bottom: 20px;
     }
 }
 
@@ -10949,17 +11075,21 @@ textarea::placeholder {
         padding: 5px;
     }
 
-    .polls .header p {
-        font-size: 10px;
+    .polls>.header p {
+        font-size: 12px;
     }
 
-    .open-poll-card .body {
-        padding: 5px;
+    .polls h1 {
+        font-size: 25px;
     }
 
-    .open-poll-card .body h3 {
+    .polls .poll h3 {
         font-size: 12px;
         margin-bottom: 7px;
+    }
+
+    .polls .poll h6 {
+        font-size: 12px;
     }
 
     .open-poll-card .header button {
@@ -11472,6 +11602,30 @@ textarea::placeholder {
 
     #withdrawalModal .proceed h2 {
         font-size: 24px;
+    }
+
+    /* edit profile modal  */
+    #edit-profile {
+        width: 355px;
+        padding: 25px 15px !important;
+    }
+
+    #edit-profile h1,
+    #editPassword h1 {
+        font-size: 20px;
+        margin-bottom: 15px;
+    }
+
+    #edit-profile label,
+    #editPassword label {
+        font-size: 14px;
+        margin-bottom: 5px;
+    }
+
+    #edit-profile input,
+    #editPassword input {
+        font-size: 12px;
+        margin-bottom: 20px;
     }
 }
 
@@ -12300,6 +12454,31 @@ footer#footer.dm .bottom {
 
 .story-write-modal.dm .story p {
     color: rgba(10, 24, 61, 1)
+}
+
+/* edit story modal  */
+#edit-profile.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+    height: 90%;
+    overflow-y: scroll
+}
+
+#edit-profile.dm::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 10px;
+}
+
+#edit-profile.dm i {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+#edit-profile.dm input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+#edit-profile.dm button {
+    color: #FFF
 }
 
 /* redirect to poll modal  */

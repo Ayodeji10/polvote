@@ -88,7 +88,7 @@ const Login = () => {
                 setLoading(false);
                 if (response.status === 422) {
                     setError("kindly Check your mail to verify this account")
-                    setPassword('')
+                    setLoginPassword('')
                 }
                 else {
                     setUserSession(response.data.token);
@@ -305,7 +305,7 @@ const Login = () => {
                             }
                             {/* login  */}
                             {view === "login" &&
-                                <div className="login">
+                                <form className="login" onSubmit={(e) => handleLogin(e)}>
                                     <h1>Login to Vote on Ballot Box</h1>
                                     <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
                                     <div id="google-btn">
@@ -348,11 +348,11 @@ const Login = () => {
                                     <p className="error-msg">{error}</p>
                                     <button id="proceed" onClick={(e) => handleLogin(e)}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Login"}</button>
                                     <h6>Don’t have an account? <span onClick={() => setView("signup")}>Signup</span></h6>
-                                </div>
+                                </form>
                             }
                             {/* signup  */}
                             {view === "signup" &&
-                                <div className="signup">
+                                <form className="signup" onSubmit={handleSignUp}>
                                     <h1>Signup on Polvote</h1>
                                     <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
                                     <div className="row justify-content-center mb-4">
@@ -416,7 +416,7 @@ const Login = () => {
                                     <p className="error-msg">{error}</p>
                                     <button id="create" className="mb-3" onClick={handleSignUp}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Create Account"}</button>
                                     <h6 onClick={() => setView("login")}>Already have an account? <span>Login</span></h6>
-                                </div>
+                                </form>
                             }
                         </div>
                     </div>

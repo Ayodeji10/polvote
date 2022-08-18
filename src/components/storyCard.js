@@ -8,6 +8,7 @@ import ShareStoryModal from './shareStoryModal';
 import EditStoryModal from './editStoryModal';
 import DeleteStoryModal from './deleteStoryModal';
 import Comment from '../components/comments'
+import LoginModal from './loginModal';
 
 function StoryCard({ story, index, fetchStories }) {
     // context 
@@ -31,33 +32,38 @@ function StoryCard({ story, index, fetchStories }) {
         document.getElementById('add-image').click()
     }
 
+    // login modal 
+    const [loginModal, setLoginModal] = useState(false)
+
     const comment = () => {
-        setLoading(true)
-        const fd = new FormData()
-        fd.append('comment', text)
-        if (commentImg !== null & commentImg !== undefined) {
-            fd.append('image', commentImg)
+        if (localStorage.getItem('ballotbox_token') !== null) {
+            setLoading(true)
+            const fd = new FormData()
+            fd.append('comment', text)
+            if (commentImg !== null & commentImg !== undefined) {
+                fd.append('image', commentImg)
+            }
+            // console.log(Array.from(fd))
+            axios({
+                url: `${API.API_ROOT}/story/addcomment/${story._id}`,
+                method: "patch",
+                headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
+                data: fd
+            }).then((response) => {
+                // console.log(response)
+                setLoading(false)
+                setText("")
+                setCommentLenght(prev => prev + 1)
+                fetchStories()
+                // window.location.reload()
+            }, (error) => {
+                // console.log(error)
+                setLoading(false)
+                // setError('Something went wrong, please try again')
+            })
+        } else {
+            setLoginModal(true)
         }
-
-        console.log(Array.from(fd))
-
-        axios({
-            url: `${API.API_ROOT}/story/addcomment/${story._id}`,
-            method: "patch",
-            headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
-            data: fd
-        }).then((response) => {
-            // console.log(response)
-            setLoading(false)
-            setText("")
-            setCommentLenght(prev => prev + 1)
-            fetchStories()
-            // window.location.reload()
-        }, (error) => {
-            // console.log(error)
-            setLoading(false)
-            // setError('Something went wrong, please try again')
-        })
     }
 
     // lenght of comment showed 
@@ -65,19 +71,23 @@ function StoryCard({ story, index, fetchStories }) {
 
     // like 
     const like = () => {
-        axios({
-            url: `${API.API_ROOT}/story/likers/${story._id}`,
-            method: "patch",
-            headers: { 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` },
-        }).then((response) => {
-            if (response.data.message === "New Likes Added Successfully") {
-                setStoryLike(1)
-            }
-            if (response.data.Success === "Unliked Successfully") {
-                setStoryLike(0)
-            }
-        }, (error) => {
-        })
+        if (localStorage.getItem('ballotbox_token') !== null) {
+            axios({
+                url: `${API.API_ROOT}/story/likers/${story._id}`,
+                method: "patch",
+                headers: { 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` },
+            }).then((response) => {
+                if (response.data.message === "New Likes Added Successfully") {
+                    setStoryLike(1)
+                }
+                if (response.data.Success === "Unliked Successfully") {
+                    setStoryLike(0)
+                }
+            }, (error) => {
+            })
+        } else {
+            setLoginModal(true)
+        }
     }
 
     // show like on load
@@ -143,23 +153,23 @@ function StoryCard({ story, index, fetchStories }) {
         <div className="story">
             <div className="body">
                 <div className="row mb-3 align-items-center">
-                    <div className="col-2 col-sm-1 col-md-1 col-lg-1">
+                    <div className="col-11 d-flex align-items-center gap-3">
                         <div className="img-container">
                             {story.userimage === null || story.userimage === undefined ?
                                 <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
                                 <img src={story.userimage} alt="avatar" id='profile-img' />
                             }
                         </div>
-                    </div>
-                    <div className="col-9 col-sm-10 col-md-10 col-lg-10 d-flex flex-column justify-content-center">
-                        <h3 onClick={(e) => {
-                            e.preventDefault()
-                            navigate(`/user/${story.userid}`)
-                        }}>{story.fullname}</h3>
-                        <div className="d-flex">
-                            <p className="mb-0">{story.username}</p>
-                            {storyDate && <p>{storyDate}</p>}
-                            {storytime && <p className='mb-0'>{storytime}</p>}
+                        <div>
+                            <h3 onClick={(e) => {
+                                e.preventDefault()
+                                navigate(`/user/${story.userid}`)
+                            }}>{story.fullname}</h3>
+                            <div className="d-flex">
+                                <p className="mb-0">{story.username}</p>
+                                {storyDate && <p>{storyDate}</p>}
+                                {storytime && <p className='mb-0'>{storytime}</p>}
+                            </div>
                         </div>
                     </div>
                     <div className="col-1" onClick={() => setOptions(!options)}>
@@ -273,7 +283,13 @@ function StoryCard({ story, index, fetchStories }) {
                         <i className={storyLike === 0 ? "fa-regular fa-heart" : "fa-solid fa-heart"} onClick={like} />
                         <span>{story.likes.length + storyLike}</span>
                     </div>
-                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => setShareStoryModal(true)}>
+                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => {
+                        if (localStorage.getItem('ballotbox_token') !== null) {
+                            setShareStoryModal(true)
+                        } else {
+                            setLoginModal(true)
+                        }
+                    }}>
                         <img src={context.darkMode ? "/img/share-lm.png" : "/img/share.png"} alt="share" />
                         <span>{story.shares.length}</span>
                     </div>
@@ -286,7 +302,7 @@ function StoryCard({ story, index, fetchStories }) {
             {/* deleteStoryModal  */}
             {deleteStoryModal && <DeleteStoryModal story={story} openModal={deleteStoryModal} handleDeleteStoryModal={handleDeleteStoryModal} />}
             {/* comments  */}
-            {window.location.pathname !== "/user-profile" && localStorage.getItem('ballotbox_token') !== null &&
+            {window.location.pathname !== "/user-profile" &&
                 <>
                     <div className="comment">
                         <div className="row align-items-center">
@@ -309,6 +325,8 @@ function StoryCard({ story, index, fetchStories }) {
                             </div>
                             <div className="col-3">
                                 <button onClick={comment}><img src="/img/send.png" alt="send" />{loading ? "loading" : "Send"}</button>
+                                {/* login modal */}
+                                {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
                             </div>
                         </div>
                     </div>
@@ -316,7 +334,7 @@ function StoryCard({ story, index, fetchStories }) {
                         <div className="comments">
                             <h2>Comments</h2>
                             {story.comments.slice(0, commentLength).map((comment, index) => {
-                                return <Comment comment={comment} id={story._id} key={index} />
+                                return <Comment comment={comment} fetchStories={fetchStories} id={story._id} key={index} />
                             })}
                             {story.comments.length > 2 && <h5 id='loadMore' onClick={() => setCommentLength(story.comments.length)}>Load more comments</h5>}
                         </div>

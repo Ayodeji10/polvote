@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
 import { DataContext } from "../dataContext";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../components/apiRoot";
 import Nav from '../components/nav'
@@ -8,11 +8,11 @@ import Aside from "../components/aside";
 import LoginPrompt from "../components/loginPrompt";
 import Footer from "../components/footer";
 import Modal from 'react-modal'
-import HomeStoryCard from "../components/homeStoryCard";
 import SingleProfileCard from "../components/singleProfileCard";
 import HomePollCard from "../components/homePollCard";
 import WriteStoryModal from "../components/writeStoryModal";
 import StoryCard from "../components/storyCard";
+import LoginModal from "../components/loginModal"
 // import Helmet from "react-helmet";
 // import Ad1 from "../components/ad1"
 // import { Adsense } from '@ctrl/react-adsense';
@@ -25,14 +25,15 @@ const Home = () => {
     // history 
     const navigate = useNavigate()
 
-    // story modal 
+    // modals 
     const [writeStoryModal, setWriteStoryModal] = useState(false)
+    const [loginModal, setLoginModal] = useState(false)
 
     const handleWriteStoryModal = (variable) => {
         setWriteStoryModal(variable)
     }
 
-    // fetch stories, aspirants, and presidential poll
+    // fetch stories and aspirants
     const [stories, setStories] = useState([])
     const [storyFetch, setStoryFetch] = useState(true)
     const fetchStories = async () => {
@@ -119,7 +120,7 @@ const Home = () => {
                     {/* gutter  */}
                     {/* <div className="col-lg-1 col-md-0" /> */}
                     {/* main  */}
-                    <div className={`main ${localStorage.getItem('ballotbox_token') === null ? "col-lg-8 col-md-9" : "col-lg-6 col-md-9"} `}>
+                    <div className="main col-lg-6 col-md-9">
                         {/* header  */}
                         <div className="header">
                             <h1>Explore Politics, Learn and Share Insights Online</h1>
@@ -144,7 +145,13 @@ const Home = () => {
                             <div className="header d-flex justify-content-between align-items-center">
                                 <h3>Recent Stories</h3>
                                 <div className="d-flex align-items-center">
-                                    <h4 onClick={() => setWriteStoryModal(true)}><i className="fas fa-edit" />Write New Story</h4>
+                                    <h4 onClick={() => {
+                                        if (localStorage.getItem('ballotbox_token') !== null) {
+                                            setWriteStoryModal(true)
+                                        } else {
+                                            setLoginModal(true)
+                                        }
+                                    }}><i className="fas fa-edit" />Write New Story</h4>
                                     {/* write story modal  */}
                                     {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
                                 </div>
@@ -204,7 +211,13 @@ const Home = () => {
                         <div className="profiles">
                             <div className="header d-flex justify-content-between align-items-center">
                                 <h3 className="mb-0">Recently added profiles</h3>
-                                <Link to={'/create-aspirant'}><p className="mb-0"><i className="fas fa-edit" />Write Aspirant Profile</p></Link>
+                                <p className="mb-0" onClick={() => {
+                                    if (localStorage.getItem('ballotbox_token') !== null) {
+                                        navigate('/create-aspirant')
+                                    } else {
+                                        setLoginModal(true)
+                                    }
+                                }}><i className="fas fa-edit" />Write Aspirant Profile</p>
                             </div>
                             {!aspirantFetch &&
                                 <div className="profile">
@@ -225,7 +238,13 @@ const Home = () => {
                         <div className="profiles">
                             <div className="header d-flex justify-content-between align-items-center mb-3">
                                 <h3 className="mb-0">More profiles</h3>
-                                <Link to={'/create-aspirant'}><p className="mb-0"><i className="fas fa-edit" />Write Aspirant Profile</p></Link>
+                                <p className="mb-0" onClick={() => {
+                                    if (localStorage.getItem('ballotbox_token') !== null) {
+                                        navigate('/create-aspirant')
+                                    } else {
+                                        setLoginModal(true)
+                                    }
+                                }}><i className="fas fa-edit" />Write Aspirant Profile</p>
                             </div>
                             {!aspirantFetch &&
                                 <div className="profile">
@@ -369,57 +388,58 @@ const Home = () => {
                         {/* footer  */}
                         <Footer />
                     </div>
-                    {localStorage.getItem('ballotbox_token') !== null &&
-                        <div className="profile-widget col-lg-3">
-                            <div className="aside-sticky">
-                                <div className="story-recomentdations mb-3">
-                                    <h2>Recommended Stories</h2>
-                                    {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
-                                        return (
-                                            <div className="story row" key={index}>
-                                                <div className="col-2">
-                                                    <div className="img-container">
-                                                        {each.userimage === null || each.userimage === undefined ?
-                                                            <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
-                                                            <img src={each.userimage} alt="avatar" id='profile-img' />
-                                                        }
-                                                    </div>
-                                                </div>
-                                                <div className="col-10 details">
-                                                    <h3>{each.fullname}</h3>
-                                                    <h4>{each.username}</h4>
-                                                    {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
-                                                        return <p key={index}>{text.substring(0, 200)}{text.length > 200 && "..."}</p>
-                                                    })}
-                                                    <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
+                    <div className="profile-widget col-lg-3">
+                        <div className="aside-sticky">
+                            <div className="story-recomentdations mb-3">
+                                <h2>Recommended Stories</h2>
+                                {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
+                                    return (
+                                        <div className="story row" key={index}>
+                                            <div className="col-2">
+                                                <div className="img-container">
+                                                    {each.userimage === null || each.userimage === undefined ?
+                                                        <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
+                                                        <img src={each.userimage} alt="avatar" id='profile-img' />
+                                                    }
                                                 </div>
                                             </div>
-                                        )
-                                    })}
-                                </div>
-                                <div className="profile-recomentdations">
-                                    <h2>Recommended Aspirants</h2>
-                                    {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
-                                        return (
-                                            <div className="profile row" key={index}>
-                                                <div className="col-lg-2 col-md-1">
-                                                    <div className="img-container">
-                                                        <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
-                                                    </div>
-                                                </div>
-                                                <div className="col-lg-10 col-md-11 details">
-                                                    <h3>{each.overview.substring(0, 160)}...</h3>
-                                                    <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
+                                            <div className="col-10 details">
+                                                <h3>{each.fullname}</h3>
+                                                <h4>{each.username}</h4>
+                                                {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
+                                                    return <p key={index}>{text.substring(0, 200)}{text.length > 200 && "..."}</p>
+                                                })}
+                                                <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
+                            <div className="profile-recomentdations">
+                                <h2>Recommended Aspirants</h2>
+                                {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
+                                    return (
+                                        <div className="profile row" key={index}>
+                                            <div className="col-lg-2 col-md-1">
+                                                <div className="img-container">
+                                                    <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
                                                 </div>
                                             </div>
-                                        )
-                                    })}
-                                </div>
+                                            <div className="col-lg-10 col-md-11 details">
+                                                <h3>{each.overview.substring(0, 160)}...</h3>
+                                                <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
+                                            </div>
+                                        </div>
+                                    )
+                                })}
                             </div>
                         </div>
-                    }
+                    </div>
                 </div>
             </div>
+            {/* login modal */}
+            {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+            {/* login prompt  */}
             {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
         </div>
     );

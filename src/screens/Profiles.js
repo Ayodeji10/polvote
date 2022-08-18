@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
@@ -10,6 +10,7 @@ import Modal from 'react-modal'
 import LoginPrompt from '../components/loginPrompt';
 import Loader from '../components/loader';
 import SingleProfileCard from '../components/singleProfileCard';
+import LoginModal from '../components/loginModal'
 Modal.setAppElement('#root')
 
 
@@ -19,6 +20,8 @@ function Profiles() {
 
     // navigate 
     const navigate = useNavigate()
+
+    const [loginModal, setLoginModal] = useState(false)
 
     const [filterModal, setFilterModal] = useState(false)
     const [pageLoading, setPageLoading] = useState(true)
@@ -72,7 +75,15 @@ function Profiles() {
                                     </div>
                                 </div>
                                 <div className="col-lg-5 col-md-5 col-sm-5 col-12">
-                                    <Link to={"/create-aspirant"}><button><i className="far fa-edit" />Write Aspirant Profile</button></Link>
+                                    <button onClick={() => {
+                                        if (localStorage.getItem('ballotbox_token') !== null) {
+                                            navigate('/create-aspirant')
+                                        } else {
+                                            setLoginModal(true)
+                                        }
+                                    }}><i className="far fa-edit" />Write Aspirant Profile</button>
+                                    {/* login modal */}
+                                    {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
                                 </div>
                                 <div className="col-lg-2 col-md-2 col-sm-2 col-5">
                                     {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}

@@ -166,21 +166,21 @@ function UserProfile() {
     // upload cover image 
     useEffect(() => {
         if (coverImgae !== null) {
+            setCoverPhotoLoader(true)
             const fd = new FormData()
             fd.append('image', coverImgae)
             console.log(coverImgae)
             console.log(Array.from(fd))
-            setCoverPhotoLoader(true)
             axios({
                 url: `${API.API_ROOT}/users/coverimage`,
                 method: "post",
                 headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
                 data: fd
             }).then((response) => {
-                setCoverPhotoLoader(false)
                 console.log(response)
                 // navigate(`/edit-aspirant/setup-aspirant/${id}`)
                 setContext({ ...context, user: { ...context.user, coverimage: response.data.coverimage } })
+                setCoverPhotoLoader(false)
             }, (error) => {
                 setCoverPhotoLoader(false)
                 // setError('Something went wrong, please try again')
@@ -202,23 +202,21 @@ function UserProfile() {
     // // upload profile pic, check if it is updated and upload immediately
     useEffect(() => {
         if (profilePic !== null) {
+            setProfilePicLoader(true)
             const fd = new FormData()
             fd.append('image', profilePic)
-            // console.log(profilePic)
-            // console.log(Array.from(fd))
-            setProfilePicLoader(true)
             axios({
                 url: `${API.API_ROOT}/users/addimage`,
                 method: "post",
                 headers: { "Content-Type": "multipart/form-data", 'Authorization': `Bearer ${context.user.token}` },
                 data: fd
             }).then((response) => {
-                setProfilePicLoader(false)
-                console.log(response)
+                // console.log(response)
                 setContext({ ...context, user: { ...context.user, image: response.data.image } })
+                setProfilePicLoader(false)
             }, (error) => {
                 setProfilePicLoader(false)
-                console.log(error)
+                // console.log(error)
             })
         }
     }, [profilePic])
@@ -318,7 +316,7 @@ function UserProfile() {
                                 backgroundSize: "cover",
                                 backgroundPosition: "center"
                             }}>
-                                <button className='d-flex justify-content-center align-items-center' onClick={coverPhoto}><i className="fa-solid fa-pen" /></button>
+                                <button className='d-flex justify-content-center align-items-center' onClick={coverPhoto}>{coverPhotoLoader ? <i className="fa-solid fa-spinner fa-spin" /> : <i className="fa-solid fa-pen" />}</button>
                                 <input type="file" accept='image/*' id='cover-pic' hidden onChange={(e) => setCoverImage(e.target.files[0])} />
                                 <div className="img-container">
                                     {context.user.image !== null && context.user.image !== undefined ?
@@ -329,7 +327,7 @@ function UserProfile() {
                                         setProfilePic(e.target.files[0]);
                                     }} />
                                 </div>
-                                {context.darkMode ? <img id="change-img" src="img/add-img2.png" alt="change-profile-pic" onClick={profilePhoto} /> : <img id="change-img" src="img/add-img.png" alt="change-profile-pic" onClick={profilePhoto} />}
+                                {profilePicLoader ? <i className="fa-solid fa-spinner fa-spin" id='profilePicLoader' /> : <img id="change-img" src={`img/add-img${context.darkMode ? "2" : ""}.png`} alt="change-profile-pic" onClick={profilePhoto} />}
                             </div>
                             <div className="bio">
                                 <div className="d-flex justify-content-end mt-3 mb-lg-5 mb-md-4 mb-sm-3 mb-2">
@@ -378,13 +376,13 @@ function UserProfile() {
                             {context.profileView === "articles" &&
                                 <>
                                     <div className="d-flex justify-content-between page-nav">
-                                        <button className={articleView === "stories" && "active"} onClick={() => setArticleView("stories")}>Stories</button>
-                                        <button className={articleView === "aspirants" && "active"} onClick={() => setArticleView("aspirants")}>Aspirant Profiles</button>
-                                        <button className={articleView === "courses" && "active"} onClick={() => setArticleView("courses")}>Courses</button>
+                                        <button className={context.articleView === "stories" && "active"} onClick={() => setContext({ ...context, articleView: "stories" })}>Stories</button>
+                                        <button className={context.articleView === "aspirants" && "active"} onClick={() => setContext({ ...context, articleView: "aspirants" })}>Aspirant Profiles</button>
+                                        <button className={context.articleView === "courses" && "active"} onClick={() => setContext({ ...context, articleView: "courses" })}>Courses</button>
                                     </div>
 
                                     {/* stories */}
-                                    {articleView === "stories" &&
+                                    {context.articleView === "stories" &&
                                         <>
                                             {storiesLoading ?
                                                 <Loader pageLoading={storiesLoading} /> :
@@ -414,7 +412,7 @@ function UserProfile() {
                                     }
 
                                     {/* profile  */}
-                                    {articleView === 'aspirants' &&
+                                    {context.articleView === 'aspirants' &&
                                         <>
                                             {aspirantLoading ?
                                                 <Loader pageLoading={aspirantLoading} /> :
@@ -440,7 +438,7 @@ function UserProfile() {
                                         </>
                                     }
 
-                                    {articleView == "courses" &&
+                                    {context.articleView == "courses" &&
                                         <div className='empty'>
                                             <h1>Coming Soon!!!</h1>
                                         </div>
@@ -468,7 +466,7 @@ function UserProfile() {
                                     <select name="category" id="category" onChange={(e) => setContext({ ...context, user: { ...context.user, bankcountry: e.target.value } })}>
                                         <option value="">-- Select country --</option>
                                         {countries.map((country) => {
-                                            return <option value={country.country} key={country._id}>{country.country}</option>
+                                            return <option value={country.country} selected key={country._id}>{country.country}</option>
                                         })}
                                     </select>
                                     <label htmlFor="accountname">Account Name</label>

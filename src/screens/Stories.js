@@ -10,6 +10,7 @@ import LoginPrompt from '../components/loginPrompt';
 import { useNavigate } from "react-router-dom";
 import Loader from '../components/loader';
 import WriteStoryModal from '../components/writeStoryModal';
+import LoginModal from '../components/loginModal';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -47,6 +48,8 @@ function Stories() {
         setWriteStoryModal(variable)
     }
 
+    const [loginModal, setLoginModal] = useState(false)
+
     return (
         <div className={`container-fluid ${context.darkMode ? 'dm' : ""}`}>
             <Nav />
@@ -70,7 +73,16 @@ function Stories() {
                                     </div>
                                 </div>
                                 <div className="col-lg-5 col-md-6 col-sm-6">
-                                    <button className='d-flex align-items-center justify-content-center' onClick={() => setWriteStoryModal(true)}><img src="/img/edit.png" alt="write" />Write New Story</button>
+                                    <button className='d-flex align-items-center justify-content-center' onClick={() => {
+                                        if (localStorage.getItem('ballotbox_token') !== null) {
+                                            setWriteStoryModal(true)
+                                        } else {
+                                            setLoginModal(true)
+                                        }
+                                    }}><img src="/img/edit.png" alt="write" />Write New Story</button>
+                                    {/* login modal */}
+                                    {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+                                    {/* write story modal  */}
                                     {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
                                 </div>
                             </div>

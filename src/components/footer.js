@@ -31,11 +31,6 @@ function Footer() {
                         <a href="https://www.facebook.com/Polvoteofficial-115809974445682/" target="_blank"><img src="/img/fb.png" alt="facebook" className='social' /></a>
                         <a href="https://www.instagram.com/polvoteofficial/" target="_blank"><img src="/img/insta.png" alt="instagram" className='social' /></a>
                         <a href="https://twitter.com/pol_vote?t=iVqZBrU9MA793b4K1-YLwQ" target="_blank"><img src="/img/twitter.png" alt="twitter" className='social' /></a>
-                        {/* <img src="/img/linkedin.png" alt="linkedIn" className='social' />
-                        <img src="/img/fb.png" alt="facebook" className='social' />
-                        <img src="/img/insta.png" alt="instagram" className='social' />
-                        <img src="/img/twitter.png" alt="twitter" className='social' />
-                        <img src="/img/tiktok.png" alt="tiktok" className='social' /> */}
                     </div>
                 </div>
             </div>

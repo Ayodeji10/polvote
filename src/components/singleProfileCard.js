@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react'
 import { DataContext } from "../dataContext";
+import { useNavigate } from "react-router-dom";
 import ShareProfileModal from './shareProfileModal';
 import RedirectToPoll from './redirectToPollModal';
 import Modal from 'react-modal'
@@ -8,6 +9,9 @@ Modal.setAppElement('#root')
 function SingleProfileCard({ aspirant }) {
     // context 
     const { context } = useContext(DataContext)
+
+    // navigate 
+    const navigate = useNavigate()
 
     const [seeMore, setSeeMore] = useState(false)
 
@@ -26,6 +30,8 @@ function SingleProfileCard({ aspirant }) {
 
     const [profileImageModal, setProfileImageModal] = useState(false)
 
+    const [options, setOptions] = useState(false)
+
     return (
         <>
             <div className="profile">
@@ -36,8 +42,18 @@ function SingleProfileCard({ aspirant }) {
                         </div>
                         <h5 className='mb-0'>{aspirant.firstname} {aspirant.lastname}</h5>
                     </div>
-                    <div className="col-1 d-flex justify-content-end">
+                    <div className="col-1 d-flex justify-content-end" onClick={() => setOptions(!options)}>
                         <i className="fa-solid fa-ellipsis-vertical" />
+                        {!options ? "" :
+                            <div className="options">
+                                <div className="mb-1">
+                                    <h4 className='mb-0' onClick={() => navigate(`/profiles/single/${aspirant._id}`)}>Open Profile</h4>
+                                </div>
+                                <div className="mb-1">
+                                    <h4 className='mb-0' onClick={() => setShareProfileModal(true)}>Share Profile</h4>
+                                </div>
+                            </div>
+                        }
                     </div>
                 </div>
                 <h4 className='mb-0'>Overview</h4>

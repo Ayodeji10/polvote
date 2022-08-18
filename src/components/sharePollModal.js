@@ -23,16 +23,16 @@ function SharePollModal({ isOpen, handleShareStoryModal, shareLink }) {
             <h3>Share on:</h3>
             <div className="row mb-5">
                 <div className="col-3">
-                    <img src="/img/facebook.png" alt="facebook" className='img-fluid' />
+                    <a href="https://web.facebook.com" target="_blank"><img src="/img/facebook.png" alt="facebook" className='img-fluid' /></a>
                 </div>
                 <div className="col-3">
-                    <img src="/img/Whatsapp.png" alt="whatsapp" className='img-fluid' />
+                    <a href="https://web.whatsapp.com" target="_blank"><img src="/img/Whatsapp.png" alt="whatsapp" className='img-fluid' /></a>
                 </div>
                 <div className="col-3">
-                    <img src="/img/twit.png" alt="twitter" className='img-fluid' />
+                    <a href="https://twitter.com/home" target="_blank"><img src="/img/twit.png" alt="twitter" className='img-fluid' /></a>
                 </div>
                 <div className="col-3">
-                    <img src="/img/Instagram.png" alt="instagram" className='img-fluid' />
+                    <a href="https://www.instagram.com" target="_blank"><img src="/img/Instagram.png" alt="instagram" className='img-fluid' /></a>
                 </div>
             </div>
             <h3>Copy Link</h3>
