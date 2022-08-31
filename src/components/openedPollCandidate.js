@@ -93,7 +93,9 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                 <div className="candidate mb-3">
                     <div className="row align-items-center">
                         <div className="col-lg-2 col-md-2 col-sm-2 col-2">
-                            <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
+                            <div className="aspirant-img">
+                                <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" />
+                            </div>
                         </div>
                         <div className="col-lg-8 col-md-7 col-sm-7 col-7">
                             <h4 onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h4>
@@ -111,25 +113,33 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                 <div className="candidate mb-3">
                     <div className="row align-items-center">
                         <div className="col-2">
-                            <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
+                            <div className="aspirant-img">
+                                <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
+                            </div>
                         </div>
-                        <div className="col-lg-7 col-md-6 col-sm-6 col-6">
+                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
                             <h3 className="mb-0" onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h3>
                             <p>{aspirant.politparty}</p>
                             <div className="bar">
                                 <div className="indicator" style={{ width: `${(aspirant.votes.length / pollVotes) * 100}%` }} />
                             </div>
                         </div>
-                        <div className="col-2 d-flex flex-column justify-content-between align-items-end">
-                            <h2>{((aspirant.votes.length / pollVotes) * 100).toFixed(1)}%</h2>
-                            <h5 className="mb-0">{aspirant.votes.length} Vote{aspirant.votes.length > 1 && "s"}</h5>
+                        <div className="col-lg-4 col-md-4 col-sm-4 col-4 d-flex justify-content-between align-items-center">
+                            <div>
+                                <h2>{((aspirant.votes.length / pollVotes) * 100).toFixed(1)}%</h2>
+                                <h5 className="mb-0">{aspirant.votes.length} Vote{aspirant.votes.length > 1 && "s"}</h5>
+                            </div>
+                            <button className={`d-flex justify-content-center flex-column align-items-center ${aspirant.votes.filter(vote => vote === context.user._id).length > 0 && 'voted'}`} onClick={checkVote}>
+                                {aspirant.votes.filter(vote => vote === context.user._id).length > 0 && <i className="fa-solid fa-check" />}
+                                <span>Vote{aspirant.votes.filter(vote => vote === context.user._id).length > 0 && "d"}</span>
+                            </button>
                         </div>
-                        <div className="col-lg-1 col-md-2 col-sm-2 col-2">
+                        {/* <div className="col-lg-1 col-md-2 col-sm-2 col-2">
                             {aspirant.votes.filter(vote => vote === context.user._id).length > 0 ?
                                 <img src="/img/Group 515.svg" alt="voted" onClick={checkVote} className="vote-img" /> :
                                 <img src="/img/Group 516.svg" alt="vote" onClick={checkVote} className="vote-img" />
                             }
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             }

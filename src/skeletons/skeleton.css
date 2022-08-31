@@ -1,0 +1,353 @@
+/* polls  */
+.poll-skeleton {
+    padding: 33px 25px;
+    border-radius: 10px;
+    background-color: rgba(4, 19, 54, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.poll-skeleton .title {
+    background-color: #B2BEB5;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.poll-skeleton .votes {
+    background-color: #B2BEB5;
+    padding: 8px;
+    border-radius: 5px;
+    width: 120px
+}
+
+.poll-skeleton button {
+    border: solid 1px #FFF !important;
+    background-color: #B2BEB5;
+}
+
+.poll-skeleton button div {
+    width: 40px;
+    padding: 10px
+}
+
+.poll-skeleton button.btn-1 {
+    border-radius: 10px 0 0 10px !important;
+}
+
+.poll-skeleton button.btn-2 {
+    border-radius: 0 10px 10px 0 !important;
+}
+
+.poll-skeleton .aspirant .profile-img {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    background-color: #B2BEB5;
+}
+
+.poll-skeleton .aspirant .name {
+    height: 13px;
+    width: 100%;
+    border-radius: 10px;
+    background-color: #B2BEB5;
+    margin-bottom: 10px;
+}
+
+.poll-skeleton .aspirant .name:last-child {
+    margin-bottom: 0px;
+}
+
+.poll-skeleton .aspirant .votes {
+    height: 20px;
+    width: 70%;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    margin-bottom: 10px;
+}
+
+.poll-skeleton .aspirant .percent {
+    height: 10px;
+    width: 70%;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    /* margin-bottom: 10px; */
+}
+
+.poll-skeleton .aspirant .vote-btn {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #B2BEB5;
+}
+
+.dm .poll-skeleton {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, .1) !important;
+}
+
+
+
+
+
+
+/* story keleton  */
+.story-skeleton {
+    border-radius: 10px;
+    background-color: rgba(4, 19, 54, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.story-skeleton .body {
+    padding: 24px 24px 10px 24px;
+}
+
+.story-skeleton .profile-img {
+    background-color: #B2BEB5;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.story-skeleton .name {
+    height: 20px;
+    width: 300px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    margin-bottom: 10px;
+}
+
+.story-skeleton .username {
+    display: inline-block;
+    height: 10px;
+    width: 120px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    margin-right: 30px
+}
+
+.story-skeleton .time {
+    display: inline-block;
+    height: 10px;
+    width: 60px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+.story-skeleton .time {
+    color: #B2BEB5
+}
+
+.story-skeleton .text {
+    height: 15px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+.story-skeleton .img {
+    height: 100px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+.story-skeleton .widget {
+    border-top: solid 1px #FFF !important;
+    height: 50px;
+    background-color: #B2BEB5;
+    /* background-color: rgb(184, 183, 183); */
+}
+
+.story-skeleton .widget .widget-sm {
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+    background-color: rgb(209, 206, 206);
+    border-radius: 5px;
+}
+
+.story-skeleton .comment {
+    border-top: solid 1px #FFF !important;
+    border-radius: 0 0 10px 10px;
+    padding: 5px 24px;
+    background-color: #B2BEB5;
+    /* background-color: rgb(184, 183, 183); */
+}
+
+.story-skeleton .comment .profile-img {
+    background-color: rgb(209, 206, 206);
+}
+
+.story-skeleton .input {
+    border-radius: 5px;
+    height: 30px;
+    width: 90%;
+    background-color: rgb(209, 206, 206);
+}
+
+.story-skeleton .button {
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    background-color: rgb(209, 206, 206);
+}
+
+.dm .story-skeleton {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, .1) !important;
+
+}
+
+
+
+
+
+
+
+
+
+
+/* profile card */
+.profile-skeleton {
+    padding: 15px 19px;
+    background-color: #0a183d;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dm .profile-skeleton {
+    background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, .1) !important;
+}
+
+
+.profile-skeleton .profile-img {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    background-color: #B2BEB5;
+}
+
+.profile-skeleton .name {
+    height: 20px;
+    width: 50%;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+.profile-skeleton .overview {
+    height: 20px;
+    width: 150px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+.profile-skeleton .text {
+    height: 20px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+.profile-skeleton .image {
+    height: 150px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+}
+
+
+
+
+
+
+
+
+
+/* recomended stories  */
+.rec-story {
+    position: relative;
+    overflow: hidden;
+}
+
+.rec-story .img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    background-color: #B2BEB5;
+}
+
+.rec-story .name {
+    height: 15px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    margin-bottom: 10px;
+}
+
+.rec-story .username {
+    height: 10px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    margin-bottom: 10px;
+}
+
+.rec-story .story {
+    height: 60px;
+    border-radius: 5px;
+    background-color: #B2BEB5;
+    margin-bottom: 10px !important;
+}
+
+.rec-story .button {
+    height: 30px;
+    width: 100px;
+    border-radius: 30px;
+    background-color: #B2BEB5;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* animations  */
+.animation-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: loading 2s infinite;
+}
+
+.animation-content {
+    width: 50%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    transform: skewX(-20deg);
+    box-shadow: 0 0 30px 30px rgba(255, 255, 255, 0.05);
+}
+
+.dm .animation-content {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+@keyframes loading {
+    0% {
+        transform: translateX(-150%)
+    }
+
+    50% {
+        transform: translateX(-60%)
+    }
+
+    100% {
+        transform: translateX(150%)
+    }
+}

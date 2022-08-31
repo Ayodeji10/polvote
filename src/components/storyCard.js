@@ -149,11 +149,66 @@ function StoryCard({ story, index, fetchStories }) {
         getDate()
     }, [])
 
+    // followers 
+    const [followers, setFollowers] = useState([])
+    const [followersLoading, setFollowersLoading] = useState(true)
+    const fetchFollowers = () => {
+        axios.get(`${API.API_ROOT}/follow/followers/${story.userid}`,
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                // console.log(response)
+                setFollowers(response.data.followers)
+                setFollowersLoading(false)
+            }).catch(error => {
+                console.error(error)
+            })
+    }
+
+    useEffect(() => {
+        fetchFollowers()
+    }, [])
+
+    // follow 
+    const [followLoading, setFollowLoading] = useState(false)
+    const follow = () => {
+        setFollowLoading(true)
+        axios.post(`${API.API_ROOT}/follow`,
+            { followedid: story.userid },
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                // console.log(response)
+                fetchFollowers()
+                setFollowLoading(false)
+                setOptions(false)
+            }).catch(error => {
+                console.error(error)
+                setFollowLoading(false)
+            })
+    }
+
+    // unfollow 
+    const [unfollowLoading, setUnfollowLoading] = useState(false)
+    const unfollow = () => {
+        setUnfollowLoading(true)
+        axios.patch(`${API.API_ROOT}/follow/unfollow/${story.userid}`,
+            { followedid: story.userid },
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                // console.log(response)
+                fetchFollowers()
+                setUnfollowLoading(false)
+                setOptions(false)
+            }).catch(error => {
+                console.error(error)
+                setUnfollowLoading(false)
+            })
+    }
+
     return (
         <div className="story">
             <div className="body">
                 <div className="row mb-3 align-items-center">
-                    <div className="col-11 d-flex align-items-center gap-3">
+                    <div className="col-11 d-flex align-items-center gap-lg-3 gap-md-3 gap-sm-2 gap-2">
                         <div className="img-container">
                             {story.userimage === null || story.userimage === undefined ?
                                 <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
@@ -176,28 +231,51 @@ function StoryCard({ story, index, fetchStories }) {
                         <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                {/* <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
-                                    <i className="fa-solid fa-link"></i>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
+                                    <i className="fa-solid fa-copy" />
                                     <h4 className='mb-0'>Copy Link</h4>
-                                </div> */}
-                                <div className="mb-1" onClick={() => navigate(`/stories/${story._id}`)}>
-                                    <h4 className='mb-0'>Open Story</h4>
                                 </div>
-                                <div className="mb-1">
-                                    <h4 className='mb-0'>Follow Aaron</h4>
+                                <div className="d-flex align-items-center mb-1">
+                                    <i className="fa-solid fa-retweet" />
+                                    <h4 className='mb-0' onClick={() => {
+                                        if (localStorage.getItem('ballotbox_token') === null) {
+                                            setLoginModal(true)
+                                        } else {
+                                            setShareStoryModal(true)
+                                        }
+                                    }}>Re-Post</h4>
                                 </div>
-                                <div className="mb-1">
-                                    <h4 className='mb-0' onClick={() => setShareStoryModal(true)}>Share Story</h4>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/${story._id}`)}>
+                                    <i className="fa-solid fa-arrow-up-right-from-square" />
+                                    <h4 className='mb-0'>Open Post</h4>
                                 </div>
-                                {story.userid === context.user._id &&
+                                {story.userid !== context.user._id && localStorage.getItem('ballotbox_token') !== null &&
+                                    <>
+                                        {!followersLoading &&
+                                            <>
+                                                {followers.filter(follower => follower.followerid === context.user._id && follower.status === 0).length === 0 ?
+                                                    <div className="d-flex align-items-center mb-1" onClick={follow}>
+                                                        {followLoading ? <i className="fa-solid fa-spinner fa-spin" /> : <i className="fa-solid fa-user-plus" />}
+                                                        <h4 className='mb-0'>{followLoading ? "following" : "Follow"} {story.username}</h4>
+                                                    </div> :
+                                                    <div className="d-flex align-items-center mb-1" onClick={unfollow}>
+                                                        {unfollowLoading ? <i className="fa-solid fa-spinner fa-spin" /> : <i className="fa-solid fa-user-minus" />}
+                                                        <h4 className='mb-0'>{unfollowLoading ? "unfollowing" : "Unfollow"} {story.username}</h4>
+                                                    </div>
+                                                }
+                                            </>
+                                        }
+                                    </>
+                                }
+                                {story.userid === context.user._id && localStorage.getItem('ballotbox_token') !== null &&
                                     <>
                                         <div className="d-flex align-items-center mb-1" onClick={() => setEditStoryModal(true)}>
-                                            <i className="fa-solid fa-pen-to-square"></i>
-                                            <h4 className='mb-0'>Edit Story</h4>
+                                            <i className="fa-solid fa-pen-to-square" />
+                                            <h4 className='mb-0'>Edit Post</h4>
                                         </div>
                                         <div className="d-flex align-items-center mb-1" onClick={() => setDeleteStoryModal(true)} >
-                                            <i className="fa-solid fa-trash-can"></i>
-                                            <h4 className='mb-0'>Delete Story</h4>
+                                            <i className="fa-solid fa-trash-can" />
+                                            <h4 className='mb-0'>Delete Post</h4>
                                         </div>
                                     </>
                                 }
@@ -237,7 +315,7 @@ function StoryCard({ story, index, fetchStories }) {
                         <div className="row mb-3 align-items-center">
                             <div className="col-2 col-sm-1 col-md-1 col-lg-1">
                                 <div className="img-container">
-                                    {story.storyinfo.length === 0 ?
+                                    {story.storyinfo[0].userimage === null || story.storyinfo[0].userimage === undefined ?
                                         <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
                                         <img src={story.storyinfo[0].userimage} alt="avatar" id='profile-img' />
                                     }

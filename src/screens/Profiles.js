@@ -10,7 +10,9 @@ import Modal from 'react-modal'
 import LoginPrompt from '../components/loginPrompt';
 import Loader from '../components/loader';
 import SingleProfileCard from '../components/singleProfileCard';
-import LoginModal from '../components/loginModal'
+import AuthModals from '../components/authenticationModlas';
+import ProfileSkeleton from '../skeletons/profileSkeleton';
+import RecomendedAspirants from '../components/recomendedAspirants';
 Modal.setAppElement('#root')
 
 
@@ -21,7 +23,10 @@ function Profiles() {
     // navigate 
     const navigate = useNavigate()
 
+    // auth modals 
     const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     const [filterModal, setFilterModal] = useState(false)
     const [pageLoading, setPageLoading] = useState(true)
@@ -46,10 +51,17 @@ function Profiles() {
     }, [])
 
     const searchProfile = (e) => {
-        // console.log(e.target.value)
-        const people = aspirantList.filter(aspirant => `${aspirant.firstname} ${aspirant.lastname}`.toLowerCase().includes(e.target.value.toLowerCase()) && aspirant.status == 1)
-        // console.log(people)
-        setAspirants(people)
+        const wordArray = e.target.value.toLowerCase().split(" ") // create array from input
+        const wordSpace = wordArray.filter(word => word.length > 1) // remove spacing
+        wordSpace.forEach(word => {                               // filter aspirant list for each word
+            const people = aspirantList.filter(aspirant => `${aspirant.firstname} ${aspirant.lastname}`.toLowerCase().indexOf(word) !== -1 && aspirant.status == 1)
+            setAspirants(people)
+        })
+
+        // // console.log(e.target.value)
+        // const people = aspirantList.filter(aspirant => `${aspirant.firstname} ${aspirant.lastname}`.toLowerCase().includes(e.target.value.toLowerCase()) && aspirant.status == 1)
+        // // console.log(people)
+        // setAspirants(people)
     }
 
     return (
@@ -81,9 +93,7 @@ function Profiles() {
                                         } else {
                                             setLoginModal(true)
                                         }
-                                    }}><i className="far fa-edit" />Write Aspirant Profile</button>
-                                    {/* login modal */}
-                                    {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+                                    }}><i className="far fa-edit" />New Aspirant Profile</button>
                                 </div>
                                 <div className="col-lg-2 col-md-2 col-sm-2 col-5">
                                     {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
@@ -91,7 +101,7 @@ function Profiles() {
                             </div>
                         </div>
                         {/* filter modal  */}
-                        <Modal isOpen={filterModal} onRequestClose={() => setFilterModal(false)} id="polls-modal">
+                        {/* <Modal isOpen={filterModal} onRequestClose={() => setFilterModal(false)} id="polls-modal">
                             <div className="header d-flex justify-content-between align-items-center">
                                 <i className="fas fa-filter" />
                                 <h3 className="mb-0">Filter Profile Result</h3>
@@ -155,9 +165,14 @@ function Profiles() {
                                 </div>
                             </div>
                             <button>Show Result</button>
-                        </Modal>
+                        </Modal> */}
                         {pageLoading ?
-                            <Loader pageLoading={pageLoading} />
+                            <>
+                                {/* <Loader pageLoading={pageLoading} /> */}
+                                <ProfileSkeleton />
+                                <ProfileSkeleton />
+                                <ProfileSkeleton />
+                            </>
                             :
                             <>
                                 {aspirants.sort((a, b) => a.aspirantviews.length - b.aspirantviews.length).filter((aspirant) => aspirant.status == 1).map((aspirant, index) => {
@@ -172,29 +187,15 @@ function Profiles() {
                     </div>
                     <div className="col-lg-3">
                         <div className="aside-sticky">
-                            <div className="profile-recomentdations">
-                                <h2>Recommended Aspirants</h2>
-                                {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
-                                    return (
-                                        <div className="profile row" key={index}>
-                                            <div className="col-lg-2 col-md-1">
-                                                <div className="img-container">
-                                                    <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-10 col-md-11 details">
-                                                <h3>{each.overview.substring(0, 160)}...</h3>
-                                                <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                            <RecomendedAspirants />
                         </div>
                     </div>
                 </div>
             </div>
-            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
+            {/* login prompt  */}
+            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt setLoginModal={setLoginModal} setSignupModal={setSignupModal} />}
         </div>
     )
 }

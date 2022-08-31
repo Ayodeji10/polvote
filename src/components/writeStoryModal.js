@@ -84,7 +84,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
     return (
         <Modal isOpen={openModal} onRequestClose={() => handleWriteStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`}>
             <i className="far fa-times-circle" onClick={() => handleWriteStoryModal(false)} />
-            <h2>Write New Story</h2>
+            <h2>New Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-1 mb-md-2 mb-lg-3 mb-sm-3">
                 <div className="d-flex align-items-center">
                     <div className="img-container">
@@ -116,7 +116,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
             </div>
             <div className="d-flex justify-content-between align-items-center">
                 <div className="d-flex align-items-center">
-                    <span>Add to your story</span>
+                    <span>Add Image</span>
                     <i className="fas fa-camera" onClick={addImage} />
                     <input type="file" hidden id='add-image1' accept='image/*' multiple onChange={handlePreviewer} />
                     {/* <i className="fas fa-microphone" /> */}
@@ -125,7 +125,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
                 <div>
                     <p>{storyError}</p>
                     {/* <button id="draft">Save as Draft</button> */}
-                    {storyLoading ? <button id="post" disabled >Loading...</button> : <button id="post" onClick={writeStory}>Post Story</button>}
+                    {storyLoading ? <button id="post" disabled >Loading...</button> : <button id="post" onClick={writeStory}>Post</button>}
                 </div>
             </div>
         </Modal>

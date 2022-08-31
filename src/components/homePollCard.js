@@ -4,6 +4,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Modal from 'react-modal'
 import HomePollCardAspirant from './homePollCardAspirant';
+import PollSkeleton from '../skeletons/pollSkeleton'
 Modal.setAppElement('#root')
 
 function HomePollCard({ pollId }) {
@@ -82,45 +83,81 @@ function HomePollCard({ pollId }) {
 
     return (
         <>
-            {!fetchLoading &&
+            {fetchLoading ?
+                <PollSkeleton /> :
                 <div className="poll">
                     <div className="main">
-                        <div className="header d-flex justify-content-between align-items-center">
-                            <div>
+                        <div className="header row justify-content-between align-items-center">
+                            <div className='col-6'>
                                 <h3>{currentPoll.polltitle}</h3>
                                 <p className="mb-0">{live ? livePollTotalVotes : pollToTal} Total Votes</p>
                             </div>
-                            <div className="d-flex">
-                                <button id="chart-btn" className={!live && "active"} onClick={() => setLive(false)}>Polvote Result</button>
-                                <button id="leaderboerd-btn" className={live && 'active'} onClick={() => setLive(true)}>Live Result</button>
+                            <div className="col-5 d-flex align-items-center">
+                                <label className="switch">
+                                    <input type="checkbox" checked={live} onClick={() => setLive(!live)} />
+                                    <span className="slider" />
+                                </label>
+                                <p className="mb-0" onClick={() => setLive(!live)}>{live ? "Switch to Polvote Result" : "Switch to Election Result"}</p>
                             </div>
                         </div>
                         {live ?
                             <>
-                                <h6>Poll starts on {`${currentPoll.livevotedate.substring(8, 10)}-${currentPoll.livevotedate.substring(5, 7)}-${currentPoll.livevotedate.substring(0, 4)}`}</h6>
-                                {
-                                    currentPoll.aspirant.sort((a, b) => b.livevote - a.livevote).map((aspirant, index) => {
-                                        return (
-                                            <div className="candidate mb-3" key={index}>
-                                                <div className="row align-items-center">
-                                                    <div className="col-lg-2 col-md-2 col-sm-2 col-2">
-                                                        <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
-                                                    </div>
-                                                    <div className="col-lg-8 col-md-7 col-sm-7 col-7">
-                                                        <h4 onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h4>
-                                                        <p>{aspirant.politparty}</p>
-                                                        <div className="bar">
-                                                            <div className="indicator" style={{ width: `${(aspirant.livevote / livePollTotal) * 100}%` }} />
+                                <h6>Election Date is {`${currentPoll.livevotedate.substring(8, 10)}-${currentPoll.livevotedate.substring(5, 7)}-${currentPoll.livevotedate.substring(0, 4)}`}</h6>
+                                {seeMore ?
+                                    <>
+                                        {currentPoll.aspirant.sort((a, b) => b.livevote - a.livevote).slice(0, 3).map((aspirant, index) => {
+                                            return (
+                                                <div className="candidate mb-3" key={index}>
+                                                    <div className="row align-items-center">
+                                                        <div className="col-lg-2 col-md-2 col-sm-2 col-2">
+                                                            <div className="aspirant-img">
+                                                                <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-lg-8 col-md-7 col-sm-7 col-7">
+                                                            <h4 onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h4>
+                                                            <p>{aspirant.politparty}</p>
+                                                            <div className="bar">
+                                                                <div className="indicator" style={{ width: `${(aspirant.livevote / livePollTotal) * 100}%` }} />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-lg-2 col-md-2 col-sm-2 col-2 d-flex flex-column justify-content-between align-items-end">
+                                                            <h3>{((aspirant.livevote / livePollTotal) * 100).toFixed(1)}%</h3>
+                                                            <h6 className=" mb-0">{aspirant.livevote} Vote{aspirant.livevote > 1 && "s"}</h6>
                                                         </div>
                                                     </div>
-                                                    <div className="col-lg-2 col-md-2 col-sm-2 col-2 d-flex flex-column justify-content-between align-items-end">
-                                                        <h3>{((aspirant.livevote / livePollTotal) * 100).toFixed(1)}%</h3>
-                                                        <h6 className=" mb-0">{aspirant.livevote} Vote{aspirant.livevote > 1 && "s"}</h6>
+                                                </div>
+                                            )
+                                        })}
+                                        <h4 id='more' className='mb-0' onClick={() => setSeeMore(false)}>See More<i className="fa-solid fa-angle-down" /></h4>
+                                    </> :
+                                    <>
+                                        {currentPoll.aspirant.sort((a, b) => b.livevote - a.livevote).map((aspirant, index) => {
+                                            return (
+                                                <div className="candidate mb-3" key={index}>
+                                                    <div className="row align-items-center">
+                                                        <div className="col-lg-2 col-md-2 col-sm-2 col-2">
+                                                            <div className="aspirant-img">
+                                                                <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-lg-8 col-md-7 col-sm-7 col-7">
+                                                            <h4 onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h4>
+                                                            <p>{aspirant.politparty}</p>
+                                                            <div className="bar">
+                                                                <div className="indicator" style={{ width: `${(aspirant.livevote / livePollTotal) * 100}%` }} />
+                                                            </div>
+                                                        </div>
+                                                        <div className="col-lg-2 col-md-2 col-sm-2 col-2 d-flex flex-column justify-content-between align-items-end">
+                                                            <h3>{((aspirant.livevote / livePollTotal) * 100).toFixed(1)}%</h3>
+                                                            <h6 className=" mb-0">{aspirant.livevote} Vote{aspirant.livevote > 1 && "s"}</h6>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        )
-                                    })
+                                            )
+                                        })}
+                                        {currentPoll.aspirant.length > 3 && <h4 id='more' className='mb-0' onClick={() => setSeeMore(true)}>See Less<i className="fa-solid fa-angle-up" /></h4>}
+                                    </>
                                 }
                             </>
                             :

@@ -20,14 +20,17 @@ function OpenedPollCard({ poll, liveVotes, pollVotes, setOpened, fetchPolls, fet
     return (
         <div className='open-poll-card'>
             <div className="body">
-                <div className="header d-flex justify-content-between align-items-center">
-                    <div>
+                <div className="row header justify-content-between align-items-center">
+                    <div className='col-6'>
                         <h3>{poll.polltitle}</h3>
                         <p className="mb-0">{live ? liveVotes.toFixed(0) : pollVotes.toFixed(0)} Total Votes</p>
                     </div>
-                    <div className="d-flex">
-                        <button id="chart-btn" className={!live && "active"} onClick={() => setLive(false)}>Polvote Results</button>
-                        <button id="leaderboerd-btn" className={live && 'active'} onClick={() => setLive(true)}>Live Results</button>
+                    <div className="col-5 d-flex align-items-center">
+                        <label className="switch">
+                            <input type="checkbox" checked={live} onClick={() => setLive(!live)} />
+                            <span className="slider" />
+                        </label>
+                        <h4 className="mb-0" onClick={() => setLive(!live)}>{live ? "Switch to Polvote Result" : "Switch to Election Result"}</h4>
                     </div>
                 </div>
                 {live ?

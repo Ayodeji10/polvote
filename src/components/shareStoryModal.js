@@ -77,7 +77,7 @@ function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
     return (
         <Modal isOpen={openModal} onRequestClose={() => handleShareStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
             <i className="far fa-times-circle" onClick={() => handleShareStoryModal(false)} />
-            <h2>Write New Story</h2>
+            <h2>Re-Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <div className="d-flex align-items-center">
                     <div className="img-container">
@@ -145,7 +145,7 @@ function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
             </div>
             <div className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
-                    <span>Add to your story</span>
+                    <span>Add Image</span>
                     <i className="fas fa-camera" onClick={() => addShareImage(index)} />
                     <input type="file" hidden id={`add-image${index}`} accept='image/*' multiple max="3" onChange={handleSharePreviewer} />
                     {/* <i className="fas fa-microphone" /> */}
@@ -154,7 +154,7 @@ function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
                 <div>
                     {/* <button id="draft">Save as Draft</button> */}
                     <p>{shareError}</p>
-                    <button id="post" onClick={shareStory}>{shareLoading ? "loading..." : "Post Story"}</button>
+                    <button id="post" onClick={shareStory}>{shareLoading ? "loading..." : "Re-Post"}</button>
                 </div>
             </div>
         </Modal>

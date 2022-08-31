@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -8,11 +8,16 @@ import Aside from "../components/aside";
 import LoginPrompt from "../components/loginPrompt";
 import Footer from "../components/footer";
 import Modal from 'react-modal'
-import SingleProfileCard from "../components/singleProfileCard";
+import Loader from "../components/loader";
+// import SingleProfileCard from "../components/singleProfileCard";
 import HomePollCard from "../components/homePollCard";
 import WriteStoryModal from "../components/writeStoryModal";
 import StoryCard from "../components/storyCard";
-import LoginModal from "../components/loginModal"
+import StorySkeleton from "../skeletons/storySkeleton";
+import RecommendedStories from "../components/recommendedStories";
+import RecomendedAspirants from "../components/recomendedAspirants";
+import ProfileSkeleton from "../skeletons/profileSkeleton";
+import AuthModals from "../components/authenticationModlas";
 // import Helmet from "react-helmet";
 // import Ad1 from "../components/ad1"
 // import { Adsense } from '@ctrl/react-adsense';
@@ -28,40 +33,73 @@ const Home = () => {
     // modals 
     const [writeStoryModal, setWriteStoryModal] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     const handleWriteStoryModal = (variable) => {
         setWriteStoryModal(variable)
     }
 
+    // useRef and callback 
+    const myRef = useRef()
+
+    useEffect(() => {
+        console.log("my ref", myRef.current)
+        const observer = new IntersectionObserver((entries) => {
+            const entry = entries[0]
+            if (entry.isIntersecting) {
+                setPageNumber(prev => {
+                    return prev + 1
+                });
+            }
+            // console.log(entry)
+        })
+        observer.observe(myRef.current)
+    }, [])
+
     // fetch stories and aspirants
     const [stories, setStories] = useState([])
     const [storyFetch, setStoryFetch] = useState(true)
-    const fetchStories = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/story`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        setStories(response.data)
-        setStoryFetch(false)
+    const [loadMore, setLoadMore] = useState(true)
+    const [pageNumber, setPageNumber] = useState(1)
+    const fetchStories = () => {
+        axios({
+            method: "GET",
+            url: `${API.API_ROOT}/story?page=${pageNumber}&limit=10`
+        }).then(response => {
+            // console.log(response.data)
+            if (stories.length === 0) {
+                setStories(response.data.stories)
+                setStoryFetch(false)
+            } else {
+                setStories(prevStories => {
+                    return [...prevStories, ...response.data.stories]
+                })
+                setStoryFetch(false)
+            }
+            if (response.data.next === null || response.data.next === undefined) {
+                setLoadMore(false)
+            }
+        }).catch(error => {
+            console.log(error)
+        })
     }
 
-    const [aspirants, setAspirants] = useState([])
-    const [aspirantFetch, setAspirantFetch] = useState(true)
-    const fetchAspirants = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/aspirant`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        setAspirants(response.data)
-        setAspirantFetch(false)
-    }
+    // const [aspirants, setAspirants] = useState([])
+    // const [aspirantFetch, setAspirantFetch] = useState(true)
+    // const fetchAspirants = async () => {
+    //     const response = await axios
+    //         .get(`${API.API_ROOT}/aspirant`)
+    //         .catch((error) => [
+    //             console.log('Err', error)
+    //         ]);
+    //     setAspirants(response.data)
+    //     setAspirantFetch(false)
+    // }
 
     useEffect(() => {
         fetchStories()
-        fetchAspirants()
-    }, [])
+    }, [pageNumber])
 
     // google ad
     // useEffect(() => {
@@ -125,7 +163,7 @@ const Home = () => {
                         <div className="header">
                             <h1>Explore Politics, Learn and Share Insights Online</h1>
                             <div className="searchbar d-flex align-items-center justify-content-between">
-                                <input type="text" placeholder="Search for Polls, Stories, and Profiles" value={context.homeSearchKey} onChange={(e) => setContext({ ...context, homeSearchKey: e.target.value })} onKeyPress={handleKeyPress} />
+                                <input type="text" placeholder="Search for Polls, Posts, and Profiles" value={context.homeSearchKey} onChange={(e) => setContext({ ...context, homeSearchKey: e.target.value })} onKeyPress={handleKeyPress} />
                                 <img src="img/search-normal.png" alt="search" onClick={search} />
                             </div>
                         </div>
@@ -143,7 +181,7 @@ const Home = () => {
                         {/* stories  */}
                         <div className="stories">
                             <div className="header d-flex justify-content-between align-items-center">
-                                <h3>Recent Stories</h3>
+                                <h3>Recent Posts</h3>
                                 <div className="d-flex align-items-center">
                                     <h4 onClick={() => {
                                         if (localStorage.getItem('ballotbox_token') !== null) {
@@ -151,25 +189,26 @@ const Home = () => {
                                         } else {
                                             setLoginModal(true)
                                         }
-                                    }}><i className="fas fa-edit" />Write New Story</h4>
+                                    }}><i className="fas fa-edit" />New Post</h4>
                                     {/* write story modal  */}
                                     {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
                                 </div>
                             </div>
                             <div className="story">
-                                {!storyFetch &&
+                                {storyFetch ?
+                                    <StorySkeleton /> :
                                     <>
-                                        {stories.filter(story => story.image.length !== 0 && story.storyinfo.length === 0 && story.status !== "1").slice(Math.max(stories.filter(story => story.image.length !== 0 && story.storyinfo.length === 0 && story.status !== "1").length - 3, 1)).map((story, index) => {
+                                        {stories.filter(story => story.status !== "1").slice(0, 3).map((story, index) => {
                                             return (
                                                 <StoryCard story={story} key={index} />
                                                 // <HomeStoryCard story={story} key={index} />
                                             )
-                                        }).reverse()}
+                                        })}
                                     </>
                                 }
                             </div>
                             <div className="d-flex justify-content-end">
-                                <button id="all-stories" onClick={() => navigate('/stories')}>See More Stories<i className="fa-solid fa-angle-right" /></button>
+                                <button id="all-stories" onClick={() => navigate('/stories')}>See More Posts<i className="fa-solid fa-angle-right" /></button>
                             </div>
                         </div>
                         {/* adds  */}
@@ -207,8 +246,10 @@ const Home = () => {
                                 </div>
                             </div>
                         </div> */}
+
+
                         {/* profiles  */}
-                        <div className="profiles">
+                        {/* <div className="profiles">
                             <div className="header d-flex justify-content-between align-items-center">
                                 <h3 className="mb-0">Recently added profiles</h3>
                                 <p className="mb-0" onClick={() => {
@@ -219,7 +260,8 @@ const Home = () => {
                                     }
                                 }}><i className="fas fa-edit" />Write Aspirant Profile</p>
                             </div>
-                            {!aspirantFetch &&
+                            {aspirantFetch ?
+                                <ProfileSkeleton /> :
                                 <div className="profile">
                                     {aspirants.filter(aspirant => aspirant.status === "1").slice(Math.max(aspirants.filter(aspirant => aspirant.status === "1").length - 3, 1)).map((aspirant, index) => {
                                         return (
@@ -231,11 +273,48 @@ const Home = () => {
                             <div className="d-flex justify-content-end align-items-center mt-4">
                                 <button onClick={() => navigate('/profiles')} id="load-more">See More Profiles<i className="fa-solid fa-angle-right" /></button>
                             </div>
-                        </div>
+                        </div> */}
+
+
                         {/* Ekiti polls  */}
-                        <HomePollCard pollId="626dd7317f225bf461a81abb" />
+                        <HomePollCard pollId="62e863bdd1a0da9580d7121b" />
+
+                        {/* more stories  */}
+                        <div className="stories">
+                            <div className="header d-flex justify-content-between align-items-center">
+                                <h3>More Posts</h3>
+                                <div className="d-flex align-items-center">
+                                    <h4 onClick={() => {
+                                        if (localStorage.getItem('ballotbox_token') !== null) {
+                                            setWriteStoryModal(true)
+                                        } else {
+                                            setLoginModal(true)
+                                        }
+                                    }}><i className="fas fa-edit" />New Post</h4>
+                                    {/* write story modal  */}
+                                    {writeStoryModal && <WriteStoryModal openModal={writeStoryModal} handleWriteStoryModal={handleWriteStoryModal} />}
+                                </div>
+                            </div>
+                            <div className="story">
+                                {storyFetch ?
+                                    <StorySkeleton /> :
+                                    <>
+                                        {stories.filter((story, index) => story.status !== "1" && index !== 0 && index !== 1 && index !== 2).map((story, index) => {
+                                            return (
+                                                <StoryCard story={story} key={index} />
+                                            )
+                                        })}
+                                        <Loader pageLoading={loadMore} />
+                                    </>
+                                }
+                                <div ref={myRef}></div>
+                            </div>
+                            <div className="d-flex justify-content-end">
+                                <button id="all-stories" onClick={() => navigate('/stories')}>See More Posts<i className="fa-solid fa-angle-right" /></button>
+                            </div>
+                        </div>
                         {/* more profiles  */}
-                        <div className="profiles">
+                        {/* <div className="profiles">
                             <div className="header d-flex justify-content-between align-items-center mb-3">
                                 <h3 className="mb-0">More profiles</h3>
                                 <p className="mb-0" onClick={() => {
@@ -246,7 +325,8 @@ const Home = () => {
                                     }
                                 }}><i className="fas fa-edit" />Write Aspirant Profile</p>
                             </div>
-                            {!aspirantFetch &&
+                            {aspirantFetch ?
+                                <ProfileSkeleton /> :
                                 <div className="profile">
                                     {aspirants.filter(aspirant => aspirant.status === "1").slice(0, 4).map((aspirant, index) => {
                                         return (
@@ -258,9 +338,11 @@ const Home = () => {
                             <div className="d-flex justify-content-end align-items-center mt-4">
                                 <button onClick={() => navigate('/profiles')} id="go-to-profile">Go to Profiles</button>
                             </div>
-                        </div>
+                        </div> */}
+
                         {/* osun polls  */}
-                        <HomePollCard pollId="626dd7ac7f225bf461a81b00" />
+                        {/* <HomePollCard pollId="626dd7ac7f225bf461a81b00" /> */}
+
                         {/* adds  */}
                         {/* <div className="adds mt-5">
                             <div className="row">
@@ -390,57 +472,16 @@ const Home = () => {
                     </div>
                     <div className="profile-widget col-lg-3">
                         <div className="aside-sticky">
-                            <div className="story-recomentdations mb-3">
-                                <h2>Recommended Stories</h2>
-                                {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
-                                    return (
-                                        <div className="story row" key={index}>
-                                            <div className="col-2">
-                                                <div className="img-container">
-                                                    {each.userimage === null || each.userimage === undefined ?
-                                                        <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
-                                                        <img src={each.userimage} alt="avatar" id='profile-img' />
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div className="col-10 details">
-                                                <h3>{each.fullname}</h3>
-                                                <h4>{each.username}</h4>
-                                                {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
-                                                    return <p key={index}>{text.substring(0, 200)}{text.length > 200 && "..."}</p>
-                                                })}
-                                                <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            <div className="profile-recomentdations">
-                                <h2>Recommended Aspirants</h2>
-                                {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
-                                    return (
-                                        <div className="profile row" key={index}>
-                                            <div className="col-lg-2 col-md-1">
-                                                <div className="img-container">
-                                                    <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-10 col-md-11 details">
-                                                <h3>{each.overview.substring(0, 160)}...</h3>
-                                                <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                            <RecommendedStories />
+                            <RecomendedAspirants />
                         </div>
                     </div>
                 </div>
             </div>
-            {/* login modal */}
-            {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
             {/* login prompt  */}
-            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
+            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt setLoginModal={setLoginModal} setSignupModal={setSignupModal} />}
         </div>
     );
 }

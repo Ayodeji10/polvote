@@ -21,7 +21,7 @@ const Login = () => {
     // modals 
     const [view, setView] = useState("main")
     const [verificationModal, setVerificationModal] = useState(false)
-    const [forgotPasswordModal, setForgotPasswordModal] = useState(false)
+    const [forgotPasswordModal, setForgotPasswordModal] = useState(true)
     const [verificationView, setVerificationView] = useState('email')
 
     // otp 
@@ -45,7 +45,8 @@ const Login = () => {
     const [number, setNumber] = useState("")
     const [password, setPassword] = useState("")
 
-    const handleSignUp = () => {
+    const handleSignUp = (e) => {
+        e.preventDefault()
         setError(null)
         setLoading(true)
         if (firstName === "" || lastName === "" || username === "" || email === "" || number === "" || password === "") {
@@ -352,7 +353,7 @@ const Login = () => {
                             }
                             {/* signup  */}
                             {view === "signup" &&
-                                <form className="signup" onSubmit={handleSignUp}>
+                                <form className="signup" onSubmit={(e) => handleSignUp(e)}>
                                     <h1>Signup on Polvote</h1>
                                     <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
                                     <div className="row justify-content-center mb-4">

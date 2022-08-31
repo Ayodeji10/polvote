@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
-function LoginPrompt() {
+function LoginPrompt({ setLoginModal, setSignupModal }) {
     // history 
     const navigate = useNavigate()
 
@@ -16,8 +16,8 @@ function LoginPrompt() {
                             <p className='mb-0'>Login or Sign up to participate in a poll, read political stories, discover political aspirants, earn and many more</p>
                         </div>
                         <div className="col-lg-3 col-md-4 col-sm-5 d-flex justify-content-lg-end justify-content-md-end justify-content-sm-end">
-                            <button id='login-btn' onClick={() => navigate("/login")}>Login</button>
-                            <button id='signup-btn' onClick={() => navigate("/login")}>Sign Up</button>
+                            <button id='login-btn' onClick={() => setLoginModal(true)}>Login</button>
+                            <button id='signup-btn' onClick={() => setSignupModal(true)}>Sign Up</button>
                         </div>
                     </div>
                 </div>

@@ -22,7 +22,7 @@ function PollCard({ poll, pollVotes, liveVotes, fetchPolls }) {
                     <h6>{poll.category}</h6>
                 </div>
                 <div className="col-2">
-                    <h6>{pollVotes} Polls</h6>
+                    <h6>{pollVotes.toFixed(0)} Polls</h6>
                 </div>
                 <div className="col-2">
                     <h6>{poll.startdate.substring(0, 10)}</h6>

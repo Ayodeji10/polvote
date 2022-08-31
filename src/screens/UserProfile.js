@@ -11,6 +11,8 @@ import SingleProfileCard from '../components/singleProfileCard';
 import WriteStoryModal from '../components/writeStoryModal';
 import Loader from '../components/loader';
 import Modal from 'react-modal'
+import MyProfileSvg from '../components/svg/MyProfileSvg';
+import MyWalletSvg from '../components/svg/MyWalletSvg';
 Modal.setAppElement('#root')
 
 function UserProfile() {
@@ -27,7 +29,6 @@ function UserProfile() {
         }
     }, [])
 
-    const [articleView, setArticleView] = useState("stories")
     const [walletView, setWalletView] = useState('stories')
 
     // modal 
@@ -87,28 +88,57 @@ function UserProfile() {
     }
 
     // fetch aspirants, storie, countries and transactions
-    const [aspirantLoading, setAspirantLoading] = useState(true)
+    // const [aspirantLoading, setAspirantLoading] = useState(true)
     const [aspirants, setAspirants] = useState([])
-    const fetchAspirants = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/aspirant`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        setAspirants(response.data)
-        setAspirantLoading(false)
-    }
+    // const fetchAspirants = async () => {
+    //     const response = await axios
+    //         .get(`${API.API_ROOT}/aspirant`)
+    //         .catch((error) => [
+    //             console.log('Err', error)
+    //         ]);
+    //     setAspirants(response.data)
+    //     setAspirantLoading(false)
+    // }
 
-    const [storiesLoading, setStoriesLoading] = useState(true)
+    // const [storiesLoading, setStoriesLoading] = useState(true)
     const [stories, setStories] = useState([])
-    const fetchStories = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/story`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        setStories(response.data)
-        setStoriesLoading(false)
+    // const fetchStories = async () => {
+    //     const response = await axios
+    //         .get(`${API.API_ROOT}/story`)
+    //         .catch((error) => [
+    //             console.log('Err', error)
+    //         ]);
+    //     setStories(response.data)
+    //     setStoriesLoading(false)
+    // }
+
+    // get story likes
+    const [userTotalLikes, setUserTotalLikes] = useState(0)
+    let storyTotalLikes = stories.filter(story => story.userid === context.user._id).reduce((total, story) => {
+        let increament = story.likes.length
+        total += (increament)
+        return total
+    }, 0)
+    useEffect(() => {
+        setUserTotalLikes(storyTotalLikes)
+    }, [stories])
+
+    const [dataLoading, setDataLoading] = useState(true)
+    const getUserData = () => {
+        axios.post(`${API.API_ROOT}/users/viewprofile`, { userid: context.user._id }, { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("ballotbox_token")}` } })
+            .then(response => {
+                // console.log(response)
+                if (response.data.message !== "Token is not valid") {
+                    setStories(response.data.story)
+                    setAspirants(response.data.aspirant)
+                    // setStoriesLoading(false)
+                    // setAspirantLoading(false)
+                }
+                setDataLoading(false)
+            }).catch(error => {
+                console.error(error)
+                setDataLoading(false)
+            })
     }
 
     // get story wallet total
@@ -146,11 +176,25 @@ function UserProfile() {
         setHistoryLoading(false)
     }
 
+    // followers 
+    const [followers, setFollowers] = useState([])
+    const fetchFollowers = () => {
+        axios.get(`${API.API_ROOT}/follow/followers/${context.user._id}`,
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                // console.log(response)
+                setFollowers(response.data.followers)
+                // setLoading(false)
+            }).catch(error => {
+                console.error(error)
+            })
+    }
+
     useEffect(() => {
-        fetchAspirants();
-        fetchStories();
+        getUserData()
         fetchCountries();
         fetchHistory();
+        fetchFollowers()
     }, [])
 
     // cover picture 
@@ -351,6 +395,7 @@ function UserProfile() {
                                 </div>
                                 <h1 className='mb-0'>{context.user.firstname} {context.user.lastname}</h1>
                                 <h4>{context.user.username}</h4>
+                                {/* followers  */}
                                 <div className="row mb-3">
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-5">
                                         <h3>0 <span>Followers</span></h3>
@@ -361,10 +406,10 @@ function UserProfile() {
                                 </div>
                                 <div className="row mb-lg-4 mb-md-3 mb-sm-3 mb-3 impresssions">
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-4">
-                                        <h3>{stories.filter(story => story.userid === context.user._id).length} <span>Stories</span></h3>
+                                        <h3>{stories.filter(story => story.userid === context.user._id).length} <span>Posts</span></h3>
                                     </div>
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-4">
-                                        <h3>200 <span>Likes</span></h3>
+                                        <h3>{userTotalLikes} <span>Like{userTotalLikes !== 1 && "s"}</span></h3>
                                     </div>
                                     <div className="col-lg-3 col-md-6 col-sm-6 col-4">
                                         <h3>{aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").length} <span>Aspirant Profiles</span></h3>
@@ -376,7 +421,7 @@ function UserProfile() {
                             {context.profileView === "articles" &&
                                 <>
                                     <div className="d-flex justify-content-between page-nav">
-                                        <button className={context.articleView === "stories" && "active"} onClick={() => setContext({ ...context, articleView: "stories" })}>Stories</button>
+                                        <button className={context.articleView === "stories" && "active"} onClick={() => setContext({ ...context, articleView: "stories" })}>Posts</button>
                                         <button className={context.articleView === "aspirants" && "active"} onClick={() => setContext({ ...context, articleView: "aspirants" })}>Aspirant Profiles</button>
                                         <button className={context.articleView === "courses" && "active"} onClick={() => setContext({ ...context, articleView: "courses" })}>Courses</button>
                                     </div>
@@ -384,8 +429,8 @@ function UserProfile() {
                                     {/* stories */}
                                     {context.articleView === "stories" &&
                                         <>
-                                            {storiesLoading ?
-                                                <Loader pageLoading={storiesLoading} /> :
+                                            {dataLoading ?
+                                                <Loader pageLoading={dataLoading} /> :
                                                 <>
                                                     {stories.filter(story => story.userid === context.user._id).length < 1 ?
                                                         <div className="empty">
@@ -414,8 +459,8 @@ function UserProfile() {
                                     {/* profile  */}
                                     {context.articleView === 'aspirants' &&
                                         <>
-                                            {aspirantLoading ?
-                                                <Loader pageLoading={aspirantLoading} /> :
+                                            {dataLoading ?
+                                                <Loader pageLoading={dataLoading} /> :
                                                 <>
                                                     {aspirants.filter((aspirant) => aspirant.creatorid === context.user._id && aspirant.status === "1").length < 1 ?
                                                         <div className="empty">
@@ -493,7 +538,7 @@ function UserProfile() {
                                                     <path d="M17.5833 0.25H2.41667C1.225 0.25 0.25 1.225 0.25 2.41667V17.5833C0.25 18.775 1.225 19.75 2.41667 19.75H17.5833C18.775 19.75 19.75 18.775 19.75 17.5833V2.41667C19.75 1.225 18.775 0.25 17.5833 0.25ZM8.91667 15.4167H4.58333C3.9875 15.4167 3.5 14.9292 3.5 14.3333C3.5 13.7375 3.9875 13.25 4.58333 13.25H8.91667C9.5125 13.25 10 13.7375 10 14.3333C10 14.9292 9.5125 15.4167 8.91667 15.4167ZM12.1667 11.0833H7.83333C7.2375 11.0833 6.75 10.5958 6.75 10C6.75 9.40417 7.2375 8.91667 7.83333 8.91667H12.1667C12.7625 8.91667 13.25 9.40417 13.25 10C13.25 10.5958 12.7625 11.0833 12.1667 11.0833ZM15.4167 6.75H11.0833C10.4875 6.75 10 6.2625 10 5.66667C10 5.07083 10.4875 4.58333 11.0833 4.58333H15.4167C16.0125 4.58333 16.5 5.07083 16.5 5.66667C16.5 6.2625 16.0125 6.75 15.4167 6.75Z" fill="white" fillOpacity="0.6" />
                                                 </svg>
                                             }
-                                            Stories</button>
+                                            Posts</button>
                                         <button className={walletView === 'courses' && 'active'} onClick={() => setWalletView('courses')}>
                                             {context.darkMode ?
                                                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -572,8 +617,8 @@ function UserProfile() {
 
                                     {walletView === 'stories' &&
                                         <>
-                                            {storiesLoading ?
-                                                <Loader pageLoading={storiesLoading} /> :
+                                            {dataLoading ?
+                                                <Loader pageLoading={dataLoading} /> :
                                                 <>
                                                     {stories.filter(story => story.userid === context.user._id).length < 1 ?
                                                         <div className="empty">
@@ -666,7 +711,7 @@ function UserProfile() {
                                                 </div>
                                             </div>
                                             {historyLoading ?
-                                                <Loader pageLoading={storiesLoading} /> :
+                                                <Loader pageLoading={dataLoading} /> :
                                                 <>
                                                     {history.filter((history => history.userid === context.user._id)).length < 1 ?
                                                         <div className="history-empty">
@@ -718,22 +763,11 @@ function UserProfile() {
                         <div className="aside-sticky">
                             <div className="user-aside">
                                 <button className={context.profileView === "articles" && "active"} onClick={() => setContext({ ...context, profileView: 'articles' })}>
-                                    {context.darkMode ?
-                                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3307 9.7513C17.3307 10.9006 16.8742 12.0028 16.0615 12.8154C15.2489 13.6281 14.1467 14.0846 12.9974 14.0846C11.8481 14.0846 10.7459 13.6281 9.93327 12.8154C9.12061 12.0028 8.66406 10.9006 8.66406 9.7513C8.66406 8.60203 9.12061 7.49983 9.93327 6.68717C10.7459 5.87451 11.8481 5.41797 12.9974 5.41797C14.1467 5.41797 15.2489 5.87451 16.0615 6.68717C16.8742 7.49983 17.3307 8.60203 17.3307 9.7513ZM15.1641 9.7513C15.1641 10.3259 14.9358 10.877 14.5295 11.2834C14.1231 11.6897 13.572 11.918 12.9974 11.918C12.4228 11.918 11.8717 11.6897 11.4653 11.2834C11.059 10.877 10.8307 10.3259 10.8307 9.7513C10.8307 9.17667 11.059 8.62557 11.4653 8.21924C11.8717 7.81291 12.4228 7.58464 12.9974 7.58464C13.572 7.58464 14.1231 7.81291 14.5295 8.21924C14.9358 8.62557 15.1641 9.17667 15.1641 9.7513Z" fill="white" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.9987 1.08398C6.41745 1.08398 1.08203 6.4194 1.08203 13.0007C1.08203 19.5819 6.41745 24.9173 12.9987 24.9173C19.5799 24.9173 24.9154 19.5819 24.9154 13.0007C24.9154 6.4194 19.5799 1.08398 12.9987 1.08398ZM3.2487 13.0007C3.2487 15.2648 4.02111 17.3492 5.3157 19.0045C6.22486 17.8105 7.39776 16.843 8.74275 16.1773C10.0877 15.5117 11.5684 15.166 13.0691 15.1673C14.5504 15.1659 16.0124 15.5026 17.3439 16.1518C18.6753 16.801 19.841 17.7456 20.7521 18.9135C21.6908 17.6824 22.3228 16.2455 22.5958 14.7216C22.8689 13.1978 22.7752 11.6308 22.3224 10.1504C21.8696 8.66995 21.0709 7.31862 19.9921 6.20819C18.9134 5.09776 17.5858 4.26017 16.1191 3.7647C14.6524 3.26924 13.0888 3.13015 11.5577 3.35896C10.0266 3.58776 8.57197 4.17787 7.3142 5.08046C6.05642 5.98305 5.03166 7.17218 4.3247 8.54945C3.61773 9.92672 3.24889 11.4525 3.2487 13.0007ZM12.9987 22.7507C10.7605 22.754 8.58982 21.984 6.85403 20.571C7.55271 19.5708 8.48265 18.7541 9.56474 18.1906C10.6468 17.627 11.8491 17.3331 13.0691 17.334C14.274 17.333 15.4616 17.6195 16.5335 18.1697C17.6054 18.7199 18.5306 19.5178 19.2322 20.4973C17.4829 21.9562 15.2765 22.7538 12.9987 22.7507Z" fill="white" />
-                                        </svg> :
-                                        <svg width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.3346 9.7513C17.3346 10.9006 16.8781 12.0028 16.0654 12.8154C15.2528 13.6281 14.1506 14.0846 13.0013 14.0846C11.852 14.0846 10.7498 13.6281 9.93717 12.8154C9.12451 12.0028 8.66797 10.9006 8.66797 9.7513C8.66797 8.60203 9.12451 7.49983 9.93717 6.68717C10.7498 5.87451 11.852 5.41797 13.0013 5.41797C14.1506 5.41797 15.2528 5.87451 16.0654 6.68717C16.8781 7.49983 17.3346 8.60203 17.3346 9.7513ZM15.168 9.7513C15.168 10.3259 14.9397 10.877 14.5334 11.2834C14.127 11.6897 13.5759 11.918 13.0013 11.918C12.4267 11.918 11.8756 11.6897 11.4692 11.2834C11.0629 10.877 10.8346 10.3259 10.8346 9.7513C10.8346 9.17667 11.0629 8.62557 11.4692 8.21924C11.8756 7.81291 12.4267 7.58464 13.0013 7.58464C13.5759 7.58464 14.127 7.81291 14.5334 8.21924C14.9397 8.62557 15.168 9.17667 15.168 9.7513Z" fill="black" />
-                                            <path fill-rule="evenodd" clip-rule="evenodd" d="M13.0007 1.08398C6.4194 1.08398 1.08398 6.4194 1.08398 13.0007C1.08398 19.5819 6.4194 24.9173 13.0007 24.9173C19.5819 24.9173 24.9173 19.5819 24.9173 13.0007C24.9173 6.4194 19.5819 1.08398 13.0007 1.08398ZM3.25065 13.0007C3.25065 15.2648 4.02307 17.3492 5.31765 19.0045C6.22682 17.8105 7.39971 16.843 8.7447 16.1773C10.0897 15.5117 11.5704 15.166 13.0711 15.1673C14.5523 15.1659 16.0144 15.5026 17.3458 16.1518C18.6773 16.801 19.8429 17.7456 20.7541 18.9135C21.6927 17.6824 22.3247 16.2455 22.5978 14.7216C22.8708 13.1978 22.7771 11.6308 22.3244 10.1504C21.8716 8.66995 21.0728 7.31862 19.9941 6.20819C18.9154 5.09776 17.5878 4.26017 16.1211 3.7647C14.6544 3.26924 13.0908 3.13015 11.5597 3.35896C10.0286 3.58776 8.57393 4.17787 7.31615 5.08046C6.05838 5.98305 5.03361 7.17218 4.32665 8.54945C3.61969 9.92672 3.25085 11.4525 3.25065 13.0007ZM13.0007 22.7507C10.7624 22.754 8.59177 21.984 6.85598 20.571C7.55466 19.5708 8.4846 18.7541 9.56669 18.1906C10.6488 17.627 11.851 17.3331 13.0711 17.334C14.2759 17.333 15.4636 17.6195 16.5355 18.1697C17.6074 18.7199 18.5325 19.5178 19.2342 20.4973C17.4849 21.9562 15.2785 22.7538 13.0007 22.7507Z" fill="black" />
-                                        </svg>
-                                    }
+                                    <MyProfileSvg />
                                     My Profile
                                 </button>
                                 <button className={context.profileView === "wallet" && "active"} onClick={() => setContext({ ...context, profileView: "wallet" })}>
-                                    <svg width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M19.96 7.3331H18.6667V3.99977C18.6667 3.82295 18.5964 3.65339 18.4714 3.52836C18.3464 3.40334 18.1768 3.3331 18 3.3331H2C1.82319 3.3331 1.65362 3.26286 1.5286 3.13784C1.40357 3.01281 1.33333 2.84324 1.33333 2.66643C1.33333 2.48962 1.40357 2.32005 1.5286 2.19503C1.65362 2.07 1.82319 1.99977 2 1.99977H17.7333C17.9101 1.99977 18.0797 1.92953 18.2047 1.8045C18.3298 1.67948 18.4 1.50991 18.4 1.3331C18.4 1.15629 18.3298 0.986719 18.2047 0.861694C18.0797 0.73667 17.9101 0.666432 17.7333 0.666432H2C1.7426 0.661125 1.48667 0.706584 1.24683 0.80021C1.007 0.893837 0.787966 1.0338 0.602238 1.2121C0.41651 1.3904 0.267729 1.60354 0.164396 1.83935C0.0610619 2.07516 0.00519958 2.32903 0 2.58643V16.5864C0.000872594 16.9486 0.073176 17.307 0.212769 17.6411C0.352362 17.9753 0.556503 18.2786 0.8135 18.5337C1.0705 18.7889 1.3753 18.9908 1.71046 19.128C2.04561 19.2652 2.40453 19.3349 2.76667 19.3331H18C18.1768 19.3331 18.3464 19.2629 18.4714 19.1378C18.5964 19.0128 18.6667 18.8432 18.6667 18.6664V15.3331H19.96C20.0441 15.3395 20.1287 15.3286 20.2085 15.3011C20.2883 15.2737 20.3616 15.2302 20.4241 15.1734C20.4865 15.1166 20.5366 15.0477 20.5715 14.9708C20.6063 14.894 20.6251 14.8108 20.6267 14.7264V8.05977C20.6289 7.87655 20.5611 7.6994 20.4373 7.56438C20.3134 7.42937 20.1427 7.34666 19.96 7.3331ZM19.3333 13.9998H13.6133C12.9301 13.9754 12.2845 13.6809 11.8182 13.1809C11.352 12.6809 11.1033 12.0163 11.1267 11.3331C11.1033 10.6499 11.352 9.98525 11.8182 9.48526C12.2845 8.98526 12.9301 8.69076 13.6133 8.66643H19.3333V13.9998Z" fill="#0A183D" fill-opacity="0.6" />
-                                    </svg>
+                                    <MyWalletSvg />
                                     My Wallet
                                 </button>
                                 <button className={context.profileView === "pay" && "active"} onClick={() => setContext({ ...context, profileView: 'pay' })}>
@@ -791,7 +825,7 @@ function UserProfile() {
                                     Logout
                                 </button>
                                 {/* logout modal  */}
-                                <Modal isOpen={logoutModal} onRequestClose={() => setLogoutModal(false)} id="logoutModal">
+                                <Modal isOpen={logoutModal} onRequestClose={() => setLogoutModal(false)} id="logoutModal" className={`${context.darkMode ? 'dm' : ""}`}>
                                     <div className="d-flex flex-column align-items-center">
                                         <h3>Are you sure you want to Logout?</h3>
                                         <button id="log-out" onClick={(e) => {

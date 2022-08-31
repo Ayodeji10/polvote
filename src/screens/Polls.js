@@ -3,21 +3,25 @@ import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
 import PollCard from '../components/pollCard';
+import AuthModals from '../components/authenticationModlas';
 import Loader from '../components/loader';
 import LoginPrompt from '../components/loginPrompt';
 import Modal from 'react-modal'
+import RecommendedStories from '../components/recommendedStories';
+import RecomendedAspirants from '../components/recomendedAspirants';
 Modal.setAppElement('#root')
 
 function Polls() {
     // context 
     const { context } = useContext(DataContext)
 
-    // history 
-    const navigate = useNavigate()
+    // auth modals 
+    const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     // const [filterModal, setFilterModal] = useState(false)
     const [activePolls, setActivePolls] = useState(true)
@@ -39,36 +43,6 @@ function Polls() {
     }
     useEffect(() => {
         fetchPolls()
-    }, [])
-
-    // fetch stories and aspirants
-    const [stories, setStories] = useState([])
-    const [storyFetch, setStoryFetch] = useState(true)
-    const fetchStories = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/story`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        setStories(response.data)
-        setStoryFetch(false)
-    }
-
-    const [aspirants, setAspirants] = useState([])
-    const [aspirantFetch, setAspirantFetch] = useState(true)
-    const fetchAspirants = async () => {
-        const response = await axios
-            .get(`${API.API_ROOT}/aspirant`)
-            .catch((error) => [
-                console.log('Err', error)
-            ]);
-        setAspirants(response.data)
-        setAspirantFetch(false)
-    }
-
-    useEffect(() => {
-        fetchStories()
-        fetchAspirants()
     }, [])
 
     const searchPolls = (e) => {
@@ -154,57 +128,16 @@ function Polls() {
                                 })}
                             </>
                         }
-                        {/* footer  */}
-                        <Footer />
                     </div>
                     <div className="profile-widget col-lg-3">
                         <div className="aside-sticky">
-                            <div className="story-recomentdations mb-3">
-                                <h2>Recommended Stories</h2>
-                                {stories.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 3).map((each, index) => { ///slice(0) at the beginning is to duplicate the stories array
-                                    return (
-                                        <div className="story row" key={index}>
-                                            <div className="col-2">
-                                                <div className="img-container">
-                                                    {each.userimage === null || each.userimage === undefined ?
-                                                        <img src="/img/place.jpg" className="img-fluid" alt="avatar" id='profile-img' /> :
-                                                        <img src={each.userimage} alt="avatar" id='profile-img' />
-                                                    }
-                                                </div>
-                                            </div>
-                                            <div className="col-10 details">
-                                                <h3>{each.fullname}</h3>
-                                                <h4>{each.username}</h4>
-                                                {each.story.split("\r\n").filter((each, index) => index === 0).map((text, index) => {
-                                                    return <p key={index}>{text.substring(0, 200)}{text.length > 200 && "..."}</p>
-                                                })}
-                                                <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
-                            <div className="profile-recomentdations">
-                                <h2>Recommended Aspirants</h2>
-                                {aspirants.slice(0).sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
-                                    return (
-                                        <div className="profile row" key={index}>
-                                            <div className="col-lg-2 col-md-1">
-                                                <div className="img-container">
-                                                    <img src={each.image === null || each.image === undefined ? `img/user (1) 1.png` : `${each.image}`} id="profile-img" alt="profile-img" className="img-fluid" />
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-10 col-md-11 details">
-                                                <h3>{each.overview.substring(0, 160)}...</h3>
-                                                <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
-                                            </div>
-                                        </div>
-                                    )
-                                })}
-                            </div>
+                            <RecommendedStories />
+                            <RecomendedAspirants />
                         </div>
                     </div>
                 </div>
+                {/* footer  */}
+                <Footer />
             </div>
 
             {/* filter modal */}
@@ -248,7 +181,10 @@ function Polls() {
                 </div>
                 <button>Show Result</button>
             </Modal> */}
-            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt />}
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
+            {/* login prompt  */}
+            {localStorage.getItem('ballotbox_token') === null && <LoginPrompt setLoginModal={setLoginModal} setSignupModal={setSignupModal} />}
         </div>
     )
 }

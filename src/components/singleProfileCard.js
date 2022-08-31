@@ -43,7 +43,7 @@ function SingleProfileCard({ aspirant }) {
                         <h5 className='mb-0'>{aspirant.firstname} {aspirant.lastname}</h5>
                     </div>
                     <div className="col-1 d-flex justify-content-end" onClick={() => setOptions(!options)}>
-                        <i className="fa-solid fa-ellipsis-vertical" />
+                        <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
                                 <div className="mb-1">

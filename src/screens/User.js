@@ -16,6 +16,13 @@ function User() {
     // history 
     const navigate = useNavigate()
 
+    // redirect if user is not logged in 
+    useEffect(() => {
+        if (localStorage.getItem('ballotbox_token') === null) {
+            navigate('/')
+        }
+    }, [])
+
     // params 
     const { id } = useParams()
 
@@ -45,7 +52,7 @@ function User() {
     const getUserData = () => {
         axios.post(`${API.API_ROOT}/users/viewprofile`, { userid: id }, { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem("ballotbox_token")}` } })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 if (response.data.message !== "Token is not valid") {
                     setStories(response.data.story)
                     setAspirants(response.data.aspirant)
@@ -61,6 +68,17 @@ function User() {
         getUserData()
     }, [])
 
+    // get story likes
+    const [userTotalLikes, setUserTotalLikes] = useState()
+    let storyTotalLikes = stories.filter(story => story.userid === id).reduce((total, story) => {
+        let increament = story.likes.length
+        total += (increament)
+        return total
+    }, 0)
+    useEffect(() => {
+        setUserTotalLikes(storyTotalLikes)
+    }, [stories])
+
     // users array 
     const [users, setUsers] = useState([])
     const fetchUsers = async () => {
@@ -69,11 +87,80 @@ function User() {
             .catch((error) => [
                 console.log('Err', error)
             ]);
-        console.log(response)
+        // console.log(response)
         setUsers(response.data)
     }
+
+    // followers 
+    const [followers, setFollowers] = useState([])
+    const [followersLoading, setFollowersLoading] = useState(true)
+    const fetchFollowers = () => {
+        axios.get(`${API.API_ROOT}/follow/followers/${id}`,
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                // console.log(response)
+                setFollowers(response.data.followers)
+                setFollowersLoading(false)
+            }).catch(error => {
+                console.error(error)
+            })
+    }
+
+    // following 
+    const [following, setFollowing] = useState([])
+    const fetchFollowing = () => {
+        axios.get(`${API.API_ROOT}/follow/following/${id}`,
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                // console.log(response)
+                setFollowing(response.data.followers)
+            }).catch(error => {
+                console.error(error)
+            })
+    }
+
+    // follow 
+    const [followLoading, setFollowLoading] = useState(false)
+    const follow = () => {
+        setFollowLoading(true)
+        axios.post(`${API.API_ROOT}/follow`,
+            { followedid: id },
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                console.log(response)
+                fetchFollowers()
+                setFollowLoading(false)
+                // setFollowers(response.data.followers)
+                // setFollowersLoading(false)
+            }).catch(error => {
+                console.error(error)
+                setFollowLoading(false)
+            })
+    }
+
+    // unfollow 
+    const [unfollowLoading, setUnfollowLoading] = useState(false)
+    const unfollow = () => {
+        setUnfollowLoading(true)
+        axios.patch(`${API.API_ROOT}/follow/unfollow/${id}`,
+            { followedid: id },
+            { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
+            .then(response => {
+                console.log(response)
+                fetchFollowers()
+                setUnfollowLoading(false)
+                // setFollowers(response.data.followers)
+                // setFollowersLoading(false)
+            }).catch(error => {
+                console.error(error)
+                setUnfollowLoading(false)
+            })
+    }
+
     useEffect(() => {
         fetchUsers()
+        fetchFollowers()
+        fetchFollowing()
     }, [])
 
     return (
@@ -85,7 +172,7 @@ function User() {
                     {pageLoading ?
                         <Loader pageLoading={pageLoading} /> :
                         <div className="row">
-                            <div className="col-lg- col-md-9 col-12 order-lg-1 order-md-1 order-sm-2 order-2">
+                            <div className="col-lg-9 col-12">
                                 <div className="user-main">
                                     <div className="user-widget" style={{
                                         backgroundImage: currentUser.coverimage != undefined && `url(${currentUser.coverimage})`,
@@ -94,31 +181,36 @@ function User() {
                                         backgroundSize: "cover",
                                         backgroundPosition: "center"
                                     }}>
-                                        {/* <button onClick={coverPhoto}><i className="fa-solid fa-pen" /></button> */}
-                                        {/* <input type="file" accept='image/*' id='cover-pic' hidden onChange={(e) => setCoverImage(e.target.files[0])} /> */}
                                         <div className="img-container">
                                             {currentUser.image !== null && currentUser.image !== undefined ?
                                                 <img src={currentUser.image} alt="profile-img" id='profile-img' /> :
                                                 <img src="/img/place.jpg" alt="profile-img" id='profile-img' />
                                             }
-                                            {/* <input type="file" accept='image/*' hidden id='profile-pic' onChange={(e) => {
-                                            setProfilePic(e.target.files[0]);
-                                        }} /> */}
                                         </div>
-                                        {/* {context.darkMode ? <img id="change-img" src="img/add-img2.png" alt="change-profile-pic" onClick={profilePhoto} /> : <img id="change-img" src="img/add-img.png" alt="change-profile-pic" onClick={profilePhoto} />} */}
                                     </div>
                                     <div className="bio">
                                         <div className="d-flex justify-content-end mt-3 mb-lg-5 mb-md-4 mb-sm-3 mb-2">
-                                            <button><i className="fa-solid fa-plus" />Follow</button>
+                                            {/* follow btn  */}
+                                            {/* {!followersLoading &&
+                                                <> */}
+                                            {followers.filter(follower => follower.followerid === context.user._id && follower.status === 0).length === 0 ?
+                                                <button onClick={follow}>{followLoading ? <><i className="fa-solid fa-spinner fa-spin" />following</> : <><i className="fa-solid fa-plus" />Follow</>}</button> :
+                                                <button onClick={unfollow}>{unfollowLoading ? <><i className="fa-solid fa-spinner fa-spin" />unfollowing</> : "Unfollow"}</button>
+                                            }
+                                            {/* </>
+                                            } */}
+                                            {/* <button onClick={unfollow}>{unfollowLoading ? <><i className="fa-solid fa-spinner fa-spin" />unfollowing</> : <><i className="fa-solid fa-minus" />Unfollow</>}</button> :
+                                            <button onClick={follow}>{followLoading ? <><i className="fa-solid fa-spinner fa-spin" />following</> : <><i className="fa-solid fa-plus" />Follow</>}</button> */}
                                         </div>
                                         <h1 className='mb-0'>{currentUser.firstname} {currentUser.lastname}</h1>
                                         <h4>{currentUser.username}</h4>
+                                        {/* followers  */}
                                         <div className="row mb-3">
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-5">
-                                                <h3>0 <span>Followers</span></h3>
+                                                <h3>{followers.filter(follower => follower.status === 0).length} <span>Followers</span></h3>
                                             </div>
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-5">
-                                                <h3>0 <span>Following</span></h3>
+                                                <h3>{following.length} <span>Following</span></h3>
                                             </div>
                                         </div>
                                         <div className="row mb-lg-4 mb-md-3 mb-sm-3 mb-3 impresssions">
@@ -126,7 +218,7 @@ function User() {
                                                 <h3>{stories.length} <span>Stories</span></h3>
                                             </div>
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-4">
-                                                <h3>200 <span>Likes</span></h3>
+                                                <h3>{userTotalLikes} <span>Like{userTotalLikes !== 0 && "s"}</span></h3>
                                             </div>
                                             <div className="col-lg-3 col-md-6 col-sm-6 col-4">
                                                 <h3>{aspirants.length} <span>Aspirant Profiles</span></h3>
@@ -206,9 +298,9 @@ function User() {
                                 </div>
                                 <Footer />
                             </div>
-                            <div className="col-lg-3 col-md-3 col-12 order-lg-2 order-md-2 order-sm-1 order-1 mb-lg-0 mb-md-0 mb-sm-4 mb-4">
+                            <div className="col-lg-3 col-md-3">
                                 <div className="aside-sticky">
-                                    <div className="story-recomentdations mb-3">
+                                    <div className="story-recomentdations user-rec mb-3">
                                         <h2>People also viewed</h2>
                                         {users.sort(function () { return .5 - Math.random() }).slice(0, 4).map((each, index) => {
                                             return (
@@ -224,7 +316,10 @@ function User() {
                                                     <div className="col-10 details">
                                                         <h3>{each.firstname} {each.lastname}</h3>
                                                         <h4 className="mb-2">{each.username}</h4>
-                                                        <button>Read more</button>
+                                                        <button onClick={() => {
+                                                            navigate(`/user/${each._id}`);
+                                                            window.location.reload()
+                                                        }}>View Profile</button>
                                                     </div>
                                                 </div>
                                             )

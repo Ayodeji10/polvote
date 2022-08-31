@@ -1128,17 +1128,18 @@ nav .profile-img a {
 .home-feed .main .poll .main .header p {
     font-size: 14px;
     font-weight: 400;
-    color: rgba(255, 255, 255, 0.7)
+    color: rgba(255, 255, 255, 0.7);
+    cursor: pointer;
 }
 
-.home-feed .main .poll .main .header button {
+/* .home-feed .main .poll .main .header button {
     font-size: 12px;
     font-weight: 400;
     padding: 10px 12px;
     margin: 0;
     background-color: rgba(8, 29, 67, 1);
     color: rgba(255, 255, 255, 0.3)
-}
+} */
 
 .home-feed .main .poll .main .header {
     margin-bottom: 44px;
@@ -1149,17 +1150,9 @@ nav .profile-img a {
     padding-right: 6px;
 }
 
-.home-feed .main .poll .main .header button.active {
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF
-}
 
-.home-feed .main .poll .main .header button#chart-btn {
-    border-radius: 10px 0 0 10px;
-}
-
-.home-feed .main .poll .main .header button#leaderboerd-btn {
-    border-radius: 0 10px 10px 0;
+.dm .slider {
+    background-color: rgba(10, 24, 61, 0.05);
 }
 
 .home-feed .main .poll .main h6 {
@@ -1167,14 +1160,21 @@ nav .profile-img a {
     margin-bottom: 30px;
 }
 
-.home-feed .main .poll .main .header img {
-    margin-right: 7px;
+
+
+.home-feed .main .poll .main .candidate .aspirant-img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.home-feed .main .poll .main .candidate img {
-    border-radius: 5px;
-    min-width: 100%;
-    cursor: pointer;
+.home-feed .main .poll .main .candidate .aspirant-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
 }
 
 .home-feed .main .poll .main .candidate h4 {
@@ -1213,11 +1213,34 @@ nav .profile-img a {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.7);
+    text-align: left;
 }
 
-.home-feed .main .poll .main .candidate svg {
-    cursor: pointer
+.home-feed .main .poll .main .candidate button {
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 10px;
+    height: 40px;
+    width: 58px;
+    padding: 10px 0
 }
+
+.dm .home-feed .main .poll .main .candidate button span {
+    color: #FFF;
+}
+
+.home-feed .main .poll .main .candidate button.voted {
+    background-color: rgba(0, 122, 243, 0.6);
+    padding: 25px 0
+}
+
+
+
+/* .home-feed .main .poll .main .candidate svg {
+    cursor: pointer
+} */
 
 .home-feed .main .poll footer {
     background-color: rgba(6, 25, 71, 1);
@@ -1635,56 +1658,272 @@ footer#footer img.social {
 
 /* loginModal  */
 #loginModal {
-    top: 20% !important;
+    top: 5% !important;
     bottom: 0 !important;
     left: 0 !important;
     right: 0 !important;
     margin-left: auto !important;
     margin-right: auto !important;
-    width: 552px;
-    height: 367px;
+    width: 440px;
+    height: 600px;
     background-color: rgba(10, 24, 61, 1) !important;
-    border-radius: 10px !important;
-    padding: 32px 43px !important;
-    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 20px 32px !important;
 }
 
-#loginModal i {
+#loginModal i.fa-circle-xmark {
     float: right
 }
 
-#loginModal img {
-    margin: 20px 0 40px 0;
-    height: 51px
+#loginModal h1 {
+    color: #FFF;
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    font-weight: 700;
 }
 
-#loginModal p {
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 40px;
+#loginModal h4 {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 375px;
+    margin: 0 auto 20px;
+    line-height: 20px;
 }
 
-#loginModal button {
+#loginModal #google-btn button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 100px !important;
+    /* margin-bottom: 12px; */
+}
+
+#loginModal #google-btn button.metro {
+    padding: 10px 15px !important;
+    text-transform: lowercase;
+}
+
+#loginModal #google-btn button.metro i {
+    float: unset;
+}
+
+#loginModal #google-btn button span {
+    color: rgba(10, 24, 61, 1)
+}
+
+#loginModal .or {
+    width: 100%;
+    margin: 20px 0;
+}
+
+#loginModal .or span {
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    width: 175px
+}
+
+#loginModal .or h6 {
+    margin: 0 16px
+}
+
+#loginModal label {
+    display: block;
     font-size: 16px;
     font-weight: 600;
-    padding: 9px 31px;
-    border-radius: 30px;
+    margin-bottom: 8px
+}
+
+#loginModal input {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 400;
+    margin-bottom: 18px;
+    padding: 15px 25px;
+    border-radius: 100px;
+}
+
+#loginModal input::placeholder {
+    color: rgba(10, 24, 61, 0.5)
+}
+
+#loginModal input#login-password {
+    margin-bottom: 14px;
+}
+
+#loginModal input#remember {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0 8px 0 0;
+}
+
+#loginModal label#remember-label {
+    display: inline-block;
+    width: unset;
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(0, 122, 243, 1);
+    margin-bottom: 0;
+}
+
+#loginModal h5 {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+    /* margin-bottom: 22px; */
+}
+
+#loginModal button#proceed {
+    width: 100%;
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    padding: 16px 0;
+    border-radius: 100px;
+    margin-bottom: 17px;
+}
+
+#loginModal button#proceed i {
+    margin-left: 10px;
+    color: #FFF;
+}
+
+#loginModal h6 {
+    font-size: 16px;
+    font-weight: 400;
+    text-align: center;
     color: #FFF
 }
 
-#loginModal button#bt-1 {
-    border: 1px solid rgba(255, 255, 255, 1) !important;
-    background-color: transparent;
+#loginModal h6 span {
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer
 }
-
-#loginModal button#bt-2 {
-    background-color: rgba(0, 122, 243, 1);
-}
-
 
 #loginModal.dm {
     position: absolute;
     background-color: rgba(249, 252, 255, 1) !important;
+}
+
+/* signup modal  */
+#signupModal {
+    top: 5% !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    width: 590px;
+    height: 680px;
+    background-color: rgba(10, 24, 61, 1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 20px !important;
+    padding: 20px 32px !important;
+}
+
+#signupModal i.fa-circle-xmark {
+    float: right
+}
+
+#signupModal h1 {
+    color: #FFF;
+    text-align: center;
+    margin: 0 0 10px 0;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+#signupModal h4 {
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 422px;
+    margin: 0 auto 20px;
+    line-height: 20px;
+}
+
+#signupModal #google-btn button {
+    width: 100%;
+    justify-content: center;
+    border-radius: 100px !important;
+    /* margin-bottom: 12px; */
+}
+
+#signupModal #google-btn button.metro {
+    padding: 10px 15px !important;
+    text-transform: lowercase;
+}
+
+#signupModal #google-btn button.metro i {
+    float: unset;
+}
+
+#signupModal #google-btn button span {
+    color: rgba(10, 24, 61, 1)
+}
+
+#signupModal .or {
+    width: 100%;
+    margin: 20px 0;
+}
+
+#signupModal .or span {
+    border: solid 1px rgba(255, 255, 255, 0.1) !important;
+    width: 70%
+}
+
+#signupModal .or h6 {
+    margin: 0 16px
+}
+
+#signupModal label {
+    display: block;
+    color: #FFF;
+    margin-bottom: 3px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+#signupModal input {
+    border-radius: 100px;
+    background-color: #FFF;
+    width: 100%;
+    color: black !important;
+    padding: 18px 20px;
+    margin-bottom: 26px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+#signupModal button#create {
+    width: unset;
+    display: block;
+    margin: 0px auto;
+    color: #FFF !important;
+    background-color: rgba(0, 122, 243, 1) !important;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 135px !important;
+    border-radius: 50px;
+}
+
+#signupModal h6 {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+#signupModal h6 span {
+    color: rgba(0, 122, 243, 1);
+    cursor: pointer;
+    border: 0 !important
 }
 
 
@@ -1743,6 +1982,11 @@ footer#footer img.social {
     display: inline-block;
     padding: 17px;
     background-color: #FFF;
+    border-radius: 5px
+}
+
+.dm .polls .options {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
 }
 
 .polls .options p {
@@ -1806,11 +2050,16 @@ footer#footer img.social {
 }
 
 .open-poll-card .body {
-    padding: 33px 37px;
+    padding: 25px;
 }
 
 .open-poll-card .header {
     margin-bottom: 44px;
+}
+
+.open-poll-card .header h4 {
+    font-size: 14px;
+    font-weight: 400;
 }
 
 .open-poll-card h6#startdate {
@@ -1818,31 +2067,19 @@ footer#footer img.social {
     text-align: center
 }
 
-.open-poll-card .header button {
-    font-size: 12px;
-    font-weight: 400;
-    padding: 10px 12px;
-    margin: 0;
-    background-color: rgba(8, 29, 67, 1);
-    color: rgba(255, 255, 255, 0.3)
+.open-poll-card .candidate .aspirant-img {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 
-.open-poll-card .header button.active {
-    background-color: rgba(0, 122, 243, 1);
-    color: #FFF
-}
-
-.open-poll-card .header button#chart-btn {
-    border-radius: 10px 0 0 10px;
-}
-
-.open-poll-card .header button#leaderboerd-btn {
-    border-radius: 0 10px 10px 0;
-}
-
-.open-poll-card .candidate img {
-    border-radius: 10px;
-    cursor: pointer;
+.open-poll-card .candidate .aspirant-img img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+    min-height: 100%;
 }
 
 .open-poll-card .candidate h3 {
@@ -1879,6 +2116,32 @@ footer#footer img.social {
     font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 1)
+}
+
+.open-poll-card .candidate button,
+.dm .open-poll-card .candidate button {
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1) !important;
+    border-radius: 10px;
+    height: 40px;
+    width: 58px;
+    padding: 10px 0
+}
+
+.open-poll-card .candidate button i,
+.dm .open-poll-card .candidate button i {
+    margin: 0;
+    color: #FFF
+}
+
+.open-poll-card .candidate button span {
+    color: #FFF;
+}
+
+.open-poll-card .candidate button.voted {
+    background-color: rgba(0, 122, 243, 0.6);
 }
 
 .open-poll-card footer {
@@ -2171,6 +2434,11 @@ footer#footer img.social {
     position: sticky;
     top: 70px;
     z-index: 2;
+    background-color: #0A183D;
+}
+
+.dm .story .stories-header {
+    background-color: #FFFFFF;
 }
 
 .story .stories-header .searchbar {
@@ -2278,7 +2546,8 @@ footer#footer img.social {
 .story .story h4 {
     font-size: 16px;
     font-weight: 400;
-    line-height: 24px
+    line-height: 24px;
+    margin-bottom: 0;
 }
 
 .story .story h4 span {
@@ -2673,7 +2942,7 @@ footer#footer img.social {
 #share-story-modal {
     top: 5% !important;
     width: 684px;
-    min-height: 650px;
+    max-height: 500px;
 }
 
 .story-write-modal .story {
@@ -2909,6 +3178,11 @@ img#return-btn {
     position: sticky;
     top: 70px;
     z-index: 2;
+    background-color: #00091F
+}
+
+.dm .profile .header {
+    background-color: #F9FCFF
 }
 
 .profile .header .searchbar {
@@ -2938,10 +3212,10 @@ img#return-btn {
 
 /* loader  */
 .loaderContainer {
-    height: 30vh;
+    /* height: 30vh; */
     display: flex;
     justify-content: center;
-    padding-top: 50px;
+    padding: 50px 0 30px 0;
 }
 
 .profile .profile {
@@ -3016,6 +3290,7 @@ img#return-btn {
     height: 300px;
     object-fit: cover;
     object-position: center;
+    cursor: pointer
 }
 
 .profile .profile .options {
@@ -3025,6 +3300,7 @@ img#return-btn {
     background-color: rgba(10, 24, 61, 1);
     border-radius: 5px;
     padding: 13px 15px;
+    border: 1px solid rgba(255, 255, 255, 0.4) !important;
 }
 
 .profile .profile .options h4 {
@@ -3042,6 +3318,7 @@ img#return-btn {
 
 .dm .profile .profile .options {
     background-color: #FFF;
+    border: 1px solid rgba(10, 24, 61, 0.1) !important;
 }
 
 .dm .profile .profile .options h4 {
@@ -3201,18 +3478,6 @@ img#return-btn {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* filter modal  */
 #polls-modal {
     top: 10% !important;
@@ -3286,22 +3551,6 @@ img#return-btn {
 
 
 /* single profile  */
-.single-profile .aside .return span {
-    font-size: 14px;
-    font-weight: 400;
-    color: rgba(255, 255, 255, 0.5)
-}
-
-.single-profile .aside .return i {
-    margin-right: 13px;
-    color: rgba(255, 255, 255, 0.5)
-}
-
-.single-profile .aside .return i {
-    margin-right: 13px;
-    color: rgba(255, 255, 255, 0.5)
-}
-
 .single-profile .aside img#profile-img {
     border-radius: 10px;
     margin-bottom: 35px;
@@ -3314,19 +3563,19 @@ img#return-btn {
     padding: 26px;
     border-radius: 10px;
     background-color: rgba(6, 25, 71, 1);
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .single-profile .aside .poll-active h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
-    margin-bottom: 13px;
+    margin-bottom: 10px;
 }
 
 .single-profile .aside .poll-active p {
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    margin-bottom: 25px;
+    margin-bottom: 18px;
 }
 
 .single-profile .aside .poll-active span {
@@ -3419,7 +3668,7 @@ img#return-btn {
 }
 
 .single-profile .aside .poll-active h6 {
-    font-size: 12px;
+    font-size: 14px;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.7);
     line-height: 20px;
@@ -3452,20 +3701,56 @@ img#return-btn {
     color: rgba(255, 255, 255, 0.7)
 }
 
-.single-profile .main .searchbar {
-    width: 250px;
-    background-color: #FFF;
-    border-radius: 80px;
-    padding: 15px 21px;
-    margin-bottom: 30px;
+.single-profile .return span {
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.5)
 }
 
-.single-profile .main .searchbar input {
+.single-profile .return i {
+    margin-right: 13px;
+    color: rgba(255, 255, 255, 0.5)
+}
+
+.single-profile .main .header {
+    position: sticky;
+    top: 70px;
+    z-index: 2;
+    background-color: #00091F !important
+}
+
+.dm .single-profile .main .header {
+    background-color: #F9FCFF !important
+}
+
+.single-profile .main .header {
+    background-color: #F9FCFF
+}
+
+.single-profile .main .header .searchbar {
+    padding: 18px 27px;
+    background-color: #FFF;
+    border-radius: 80px;
+}
+
+.single-profile .main .header .searchbar input {
+    font-size: 18px;
+    font-weight: 400;
     width: 100%
 }
 
-.single-profile .main .searchbar img {
-    cursor: pointer;
+.single-profile .main .header button {
+    padding: 18px 0;
+    font-size: 18px;
+    font-weight: 400;
+    width: 100%;
+    background-color: rgba(0, 122, 243, 1);
+    color: #FFF;
+    border-radius: 80px;
+}
+
+.single-profile .main .header button i {
+    margin-right: 10px;
 }
 
 .single-profile .main h2 {
@@ -4105,6 +4390,7 @@ img#return-btn {
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;
+    /* padding-top: 30px; */
 }
 
 .user-main .bio h4 {
@@ -6531,6 +6817,10 @@ textarea::placeholder {
         margin-left: 10px;
     }
 
+    .switch {
+        width: 55px;
+    }
+
     /* login prompt  */
     .login-prompt button {
         font-size: 14px;
@@ -6623,21 +6913,6 @@ textarea::placeholder {
     }
 
     /* aspirants page  */
-    .profile .header .searchbar {
-        padding: 10px 15px;
-        border-radius: 15px;
-    }
-
-    .profile .header .searchbar input {
-        font-size: 14px;
-    }
-
-    .profile .header button {
-        padding: 10px;
-        font-size: 14px;
-        border-radius: 15px;
-    }
-
     .profile-recomentdations .profile .img-container {
         height: 35px;
         width: 35px;
@@ -6792,6 +7067,10 @@ textarea::placeholder {
         margin-bottom: 40px;
     }
 
+    .switch {
+        width: 85px;
+    }
+
     /* signup  */
     .home .signup {
         padding: 20px 10px;
@@ -6845,6 +7124,28 @@ textarea::placeholder {
     .login-prompt i {
         top: 15px;
         right: 20px;
+    }
+
+    /* home polls  */
+    .switch {
+        width: 45px;
+        margin-right: 10px
+    }
+
+    .slider {
+        width: 44px;
+        /* margin-right: 20px */
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(12px);
+        -ms-transform: translateX(12px);
+        transform: translateX(12px);
+    }
+
+    .home-feed .main .poll .main .candidate .aspirant-img {
+        height: 60px;
+        width: 60px;
     }
 
     /* stories  */
@@ -6982,6 +7283,32 @@ textarea::placeholder {
 
     .polls>.header p {
         font-size: 12px;
+    }
+
+    .switch {
+        width: 25px;
+        margin-right: 35px;
+        height: 25px
+    }
+
+    .slider {
+        width: 44px;
+    }
+
+    .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+    }
+
+    .open-poll-card .candidate .aspirant-img {
+        height: 60px;
+        width: 60px;
     }
 
     .polls h1 {
@@ -7461,6 +7788,18 @@ textarea::placeholder {
         font-size: 10px;
     }
 
+    .stats {
+        padding: 10px;
+    }
+
+    .stats h4 {
+        font-size: 12px;
+    }
+
+    .stats h5 {
+        font-size: 12px;
+    }
+
     /* aside sticky  */
     .aside-sticky {
         /* position: sticky !important;
@@ -7558,7 +7897,7 @@ textarea::placeholder {
     .home-feed .main button {
         font-size: 10px;
         padding: 10px;
-        margin-left: 10px;
+        /* margin-left: 10px; */
     }
 
     /* profile widget  */
@@ -7593,6 +7932,10 @@ textarea::placeholder {
     }
 
     /* stories  */
+    .story .stories-header {
+        top: 80px
+    }
+
     .story .stories-header .searchbar {
         border-radius: 20px;
         padding: 13px 11px;
@@ -7763,6 +8106,27 @@ textarea::placeholder {
         font-size: 12px;
     }
 
+    .switch {
+        width: 25px;
+        margin-right: 35px;
+        height: 25px
+    }
+
+    .slider {
+        width: 44px;
+    }
+
+    .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+    }
+
     .polls h1 {
         font-size: 25px;
     }
@@ -7801,6 +8165,10 @@ textarea::placeholder {
     }
 
     /* aspirants page  */
+    .profile .header {
+        top: 80px
+    }
+
     .profile .header .searchbar {
         padding: 10px 15px;
         border-radius: 15px;
@@ -7822,6 +8190,11 @@ textarea::placeholder {
 
     .profile .profile p {
         font-size: 14px;
+    }
+
+    /* profile image odal  */
+    #profileImgModal {
+        width: 600px !important;
     }
 
     /* single aspirant page  */
@@ -8046,6 +8419,10 @@ textarea::placeholder {
 
     .user-aside button svg {
         margin-right: 10px;
+    }
+
+    .user-rec {
+        display: none;
     }
 
     /* terms and conditions  */
@@ -8494,7 +8871,7 @@ textarea::placeholder {
     .home-feed .main button {
         font-size: 10px;
         padding: 8px 10px;
-        margin-left: 10px;
+        /* margin-left: 10px; */
     }
 
     /* profile widget  */
@@ -8531,6 +8908,7 @@ textarea::placeholder {
     /* stories  */
     .story .stories-header {
         margin-bottom: 20px;
+        top: 80px
     }
 
     .story .stories-header .searchbar {
@@ -8757,6 +9135,45 @@ textarea::placeholder {
         font-size: 12px;
     }
 
+    .open-poll-card .header {
+        margin-bottom: 20px;
+    }
+
+    .switch {
+        width: 25px;
+        margin-right: 35px;
+        height: 25px
+    }
+
+    .slider {
+        width: 44px;
+        /* margin-right: 20px */
+    }
+
+    .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+    }
+
+    .open-poll-card .body {
+        padding: 15px;
+    }
+
+    .open-poll-card .candidate .aspirant-img {
+        height: 70px;
+        width: 70px;
+    }
+
+    .open-poll-card .body h3 {
+        font-size: 16px;
+    }
+
     .polls h1 {
         font-size: 25px;
     }
@@ -8810,6 +9227,10 @@ textarea::placeholder {
     }
 
     /* aspirants page  */
+    .profile .header {
+        top: 80px
+    }
+
     .profile .header .searchbar {
         padding: 10px 15px;
         border-radius: 15px;
@@ -8843,6 +9264,13 @@ textarea::placeholder {
 
     .profile-recomentdations {
         display: none;
+    }
+
+    /* profile image odal  */
+    #profileImgModal {
+        width: 550px !important;
+        top: 5% !important;
+        max-height: 400px;
     }
 
     /* single aspirant page  */
@@ -9062,6 +9490,10 @@ textarea::placeholder {
 
     .user-aside button svg {
         margin-right: 10px;
+    }
+
+    .user-rec {
+        display: none;
     }
 
     /* terms and conditions  */
@@ -9501,36 +9933,60 @@ textarea::placeholder {
 
     .home-feed .main .poll .main .header p,
     .single-poll .poll .header p {
-        font-size: 12px;
+        font-size: 14px;
+    }
+
+    .switch {
+        width: 25px;
+        margin-right: 35px;
+        height: 25px
+    }
+
+    .slider {
+        width: 44px;
+        /* margin-right: 20px */
+    }
+
+    .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+    }
+
+    .home-feed .main .poll .main .candidate .aspirant-img {
+        height: 50px;
+        width: 50px;
     }
 
     .home-feed .main .poll .main .candidate h4,
     .single-poll .poll .candidate h3 {
-        font-size: 13px;
+        font-size: 15px;
         margin-bottom: 0;
     }
 
     .home-feed .main .poll .main .candidate p,
     .single-poll .poll .candidate p {
-        font-size: 10px;
+        font-size: 14px;
         margin-bottom: 5px;
     }
 
     .home-feed .main .poll .main .candidate h3,
     .single-poll .poll .candidate h2 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .home-feed .main .poll .main .candidate h6,
     .single-poll .poll .candidate h5 {
-        font-size: 10px;
+        font-size: 14px;
     }
 
-    .home-feed .main .poll .main .candidate img.vote-img,
-    .single-poll .poll .candidate img.vote-img {
-        height: 40px;
-        width: auto;
-        min-width: unset;
+    .home-feed .main .poll .main .candidate button {
+        width: 45px;
     }
 
     .home-feed .main .poll footer,
@@ -9540,7 +9996,7 @@ textarea::placeholder {
 
     .home-feed .main .poll footer p,
     .single-poll .poll footer p {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .home-feed .main .poll footer p i,
@@ -9550,7 +10006,7 @@ textarea::placeholder {
 
     .home-feed .main .poll footer button {
         padding: 8px 10px;
-        font-size: 10px;
+        font-size: 14px;
     }
 
     .home-feed .main .poll footer button i {
@@ -9562,7 +10018,7 @@ textarea::placeholder {
     }
 
     .home-feed .main .stories .header h4 {
-        font-size: 10px;
+        font-size: 14px;
     }
 
     .home-feed .main .profiles .header h3 {
@@ -9576,7 +10032,7 @@ textarea::placeholder {
     .home-feed .main button {
         font-size: 10px;
         padding: 8px 10px;
-        margin-left: 10px;
+        /* margin-left: 10px; */
     }
 
     footer#footer .top img.logo {
@@ -9618,12 +10074,13 @@ textarea::placeholder {
     /* stories  */
     .story .stories-header {
         margin-bottom: 20px;
+        top: 80px
     }
 
     .story .stories-header .searchbar {
         border-radius: 20px;
         padding: 11px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .story .stories-header button {
@@ -9639,17 +10096,17 @@ textarea::placeholder {
     }
 
     .story .story h3 {
-        font-size: 12px;
+        font-size: 14px;
         margin-bottom: 2px;
     }
 
     .story .story p {
-        font-size: 10px;
+        font-size: 14px;
         margin-right: 20px;
     }
 
     .story .story h4 {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 20px;
     }
 
@@ -9866,6 +10323,19 @@ textarea::placeholder {
         font-size: 12px;
     }
 
+    .open-poll-card .header {
+        margin-bottom: 20px;
+    }
+
+    .open-poll-card .body h3 {
+        font-size: 14px;
+    }
+
+    .open-poll-card .candidate .aspirant-img {
+        height: 50px;
+        width: 50px;
+    }
+
     .polls h1 {
         font-size: 25px;
     }
@@ -9879,9 +10349,8 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .open-poll-card .header button {
-        font-size: 10px;
-        padding: 9px;
+    .open-poll-card .body {
+        padding: 10px;
     }
 
     .open-poll-card .candidate h2 {
@@ -9890,6 +10359,10 @@ textarea::placeholder {
 
     .open-poll-card .candidate h5 {
         font-size: 12px;
+    }
+
+    .open-poll-card footer {
+        padding: 18px
     }
 
     /* share poll modal  */
@@ -9958,10 +10431,14 @@ textarea::placeholder {
     }
 
     /* aspirants page  */
+    .profile .header {
+        top: 80px
+    }
+
     .profile .header .searchbar {
         padding: 10px 15px;
         border-radius: 10px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .profile .header .searchbar input {
@@ -9984,6 +10461,18 @@ textarea::placeholder {
 
     .profile-recomentdations {
         display: none;
+    }
+
+    /* profile image odal  */
+    #profileImgModal {
+        width: 370px !important;
+        top: 5% !important;
+        max-height: 360px;
+    }
+
+    #profileImgModal img {
+        padding: 0;
+        height: auto
     }
 
     /* single aspirant page  */
@@ -10224,6 +10713,10 @@ textarea::placeholder {
 
     .user-aside button svg {
         margin-right: 10px;
+    }
+
+    .user-rec {
+        display: none;
     }
 
     /* terms and conditions  */
@@ -10704,41 +11197,65 @@ textarea::placeholder {
 
     .home-feed .main .poll .main .header p,
     .single-poll .poll .header p {
-        font-size: 12px;
+        font-size: 14px;
+    }
+
+    .switch {
+        width: 80px;
+        margin-right: 0;
+        height: 25px
+    }
+
+    .slider {
+        width: 44px;
+        margin-right: 5px
+    }
+
+    .slider:before {
+        height: 20px;
+        width: 20px;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(18px);
+        -ms-transform: translateX(18px);
+        transform: translateX(18px);
+    }
+
+    .home-feed .main .poll .main .candidate .aspirant-img {
+        height: 50px;
+        width: 50px;
     }
 
     .home-feed .main .poll .main .candidate h4,
     .single-poll .poll .candidate h3 {
-        font-size: 13px;
+        font-size: 15px;
         margin-bottom: 0;
     }
 
     .home-feed .main .poll .main .candidate p,
     .single-poll .poll .candidate p {
-        font-size: 10px;
+        font-size: 13px;
         margin-bottom: 5px;
     }
 
     .home-feed .main .poll .main .candidate h3,
     .single-poll .poll .candidate h2 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .home-feed .main .poll .main .candidate h6,
     .single-poll .poll .candidate h5 {
-        font-size: 10px;
+        font-size: 13px;
     }
 
-    .home-feed .main .poll .main .candidate img.vote-img,
-    .single-poll .poll .candidate img.vote-img {
-        height: 40px;
-        width: auto;
-        min-width: unset;
+    .home-feed .main .poll .main .candidate button {
+        width: 40px;
     }
 
     .home-feed .main .poll footer,
     .single-poll .poll footer {
-        padding: 14px 20px;
+        padding: 10px 5px;
     }
 
     .home-feed .main .poll footer p,
@@ -10753,7 +11270,7 @@ textarea::placeholder {
 
     .home-feed .main .poll footer button {
         padding: 8px 10px;
-        font-size: 10px;
+        font-size: 14px;
     }
 
     .home-feed .main .poll footer button i {
@@ -10765,7 +11282,7 @@ textarea::placeholder {
     }
 
     .home-feed .main .stories .header h4 {
-        font-size: 10px;
+        font-size: 14px;
         padding: 0 8px;
     }
 
@@ -10782,9 +11299,9 @@ textarea::placeholder {
     }
 
     .home-feed .main button {
-        font-size: 10px;
+        font-size: 14px;
         padding: 8px 10px;
-        margin-left: 10px;
+        /* margin-left: 10px; */
     }
 
     footer#footer .top img.logo {
@@ -10826,12 +11343,13 @@ textarea::placeholder {
     /* stories  */
     .story .stories-header {
         margin-bottom: 20px;
+        top: 80px
     }
 
     .story .stories-header .searchbar {
         border-radius: 20px;
         padding: 11px;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 
     .story .stories-header button {
@@ -10842,22 +11360,22 @@ textarea::placeholder {
     .story .story .img-container,
     .story .story .comment .img-container,
     .search .story .img-container {
-        height: 27px;
-        width: 27px;
+        height: 30px;
+        width: 30px;
     }
 
     .story .story h3 {
-        font-size: 12px;
+        font-size: 14px;
         margin-bottom: 2px;
     }
 
     .story .story p {
-        font-size: 10px;
+        font-size: 13px;
         margin-right: 20px;
     }
 
     .story .story h4 {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 20px;
     }
 
@@ -11079,6 +11597,27 @@ textarea::placeholder {
         font-size: 12px;
     }
 
+    .open-poll-card .header {
+        margin-bottom: 20px;
+    }
+
+    .open-poll-card .header h4 {
+        margin-left: 10px;
+    }
+
+    .open-poll-card .body {
+        padding: 10px;
+    }
+
+    .open-poll-card .body h3 {
+        font-size: 14px;
+    }
+
+    .open-poll-card .candidate .aspirant-img {
+        height: 40px;
+        width: 40px;
+    }
+
     .polls h1 {
         font-size: 25px;
     }
@@ -11092,11 +11631,6 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .open-poll-card .header button {
-        font-size: 10px;
-        padding: 9px;
-    }
-
     .open-poll-card .candidate h2 {
         font-size: 12px;
     }
@@ -11107,6 +11641,10 @@ textarea::placeholder {
 
     .open-poll-card .body h6 {
         font-size: 8px;
+    }
+
+    .open-poll-card footer {
+        padding: 15px;
     }
 
     /* share poll modal  */
@@ -11183,10 +11721,14 @@ textarea::placeholder {
     }
 
     /* aspirants page  */
+    .profile .header {
+        top: 80px
+    }
+
     .profile .header .searchbar {
         padding: 10px 15px;
         border-radius: 10px;
-        margin-bottom: 12px;
+        margin-bottom: 10px;
     }
 
     .profile .header .searchbar input {
@@ -11209,6 +11751,18 @@ textarea::placeholder {
 
     .profile-recomentdations {
         display: none;
+    }
+
+    /* profile image odal  */
+    #profileImgModal {
+        width: 340px !important;
+        top: 5% !important;
+        max-height: 390px;
+    }
+
+    #profileImgModal img {
+        padding: 0;
+        height: auto
     }
 
     /* single aspirant page  */
@@ -11453,6 +12007,10 @@ textarea::placeholder {
 
     .user-aside button svg {
         margin-right: 10px;
+    }
+
+    .user-rec {
+        display: none;
     }
 
     /* terms and conditions  */
@@ -12094,8 +12652,6 @@ footer#footer.dm .bottom {
 }
 
 /* single profile page  */
-.dm .single-profile .aside .return span,
-.dm .single-profile .aside .return i,
 .dm .single-profile .aside .poll-active h6,
 .dm .single-profile .aside .history p {
     color: rgba(10, 24, 61, 1)
@@ -12115,6 +12671,11 @@ footer#footer.dm .bottom {
 .dm .single-profile .main button#edit,
 .dm .single-profile .main button#manage-profile {
     color: #FFF
+}
+
+.dm .single-profile .return span,
+.dm .single-profile .return i {
+    color: rgba(10, 24, 61, 1)
 }
 
 .dm .single-profile .main .info {
@@ -12376,6 +12937,17 @@ footer#footer.dm .bottom {
 
 #forgot-password.dm .content h3 {
     color: rgba(10, 24, 61, 1)
+}
+
+/* logout modal  */
+#logoutModal.dm {
+    position: absolute;
+    background-color: #FFF !important;
+    border: solid 1px rgba(10, 24, 61, 0.1) !important
+}
+
+#logoutModal.dm button#cancel-log {
+    border: solid 1px rgba(0, 122, 243, 1) !important
 }
 
 /* profile image modal  */

@@ -74,7 +74,7 @@ function EditStoryModal({ story, handleEditStoryModal, index, openModal }) {
     return (
         <Modal isOpen={openModal} onRequestClose={() => handleEditStoryModal(false)} className={`story-write-modal edit-story-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
             <i className="far fa-times-circle" onClick={() => handleEditStoryModal(false)} />
-            <h2>Edit Story</h2>
+            <h2>Edit Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <div className="d-flex align-items-center">
                     <div className="img-container">
@@ -155,7 +155,7 @@ function EditStoryModal({ story, handleEditStoryModal, index, openModal }) {
             }
             <div className="d-flex justify-content-between">
                 <div className="d-flex align-items-center">
-                    <span>Add to your story</span>
+                    <span>Add Image</span>
                     <i className="fas fa-camera" onClick={() => addShareImage(index)} />
                     <input type="file" hidden id={`add-image${index}`} accept='image/*' multiple max="3" onChange={handleSharePreviewer} />
                     {/* <i className="fas fa-microphone" /> */}
@@ -164,7 +164,7 @@ function EditStoryModal({ story, handleEditStoryModal, index, openModal }) {
                 <div>
                     {/* <button id="draft">Save as Draft</button> */}
                     <p>{editError}</p>
-                    <button id="post" onClick={editStory}>{editLoading ? "loading..." : "Update Story"}</button>
+                    <button id="post" onClick={editStory}>{editLoading ? "loading..." : "Update Post"}</button>
                 </div>
             </div>
         </Modal >
