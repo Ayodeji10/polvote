@@ -56,7 +56,7 @@ function RecommendedStories() {
                             <h3>{each.fullname}</h3>
                             <h4>{each.username}</h4>
                             <p>{each.story.substring(0, 100)}{each.story.length > 200 && "..."}</p>
-                            <button onClick={() => navigate(`/stories/${each._id}`)}>Read more</button>
+                            <button onClick={() => navigate(`/stories/${each.story.split("\r\n")[0].replaceAll(' ', '-')}/${each._id}`)}>Read more</button>
                         </div>
                     </div>
                 )

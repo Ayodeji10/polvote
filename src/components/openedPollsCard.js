@@ -35,7 +35,7 @@ function OpenedPollCard({ poll, liveVotes, pollVotes, setOpened, fetchPolls, fet
                 </div>
                 {live ?
                     <>
-                        <h6 id='startdate'>Poll starts on {`${poll.livevotedate.substring(8, 10)}-${poll.livevotedate.substring(5, 7)}-${poll.livevotedate.substring(0, 4)}`}</h6>
+                        <h6 id='startdate'>Election Date is {`${poll.livevotedate.substring(8, 10)}-${poll.livevotedate.substring(5, 7)}-${poll.livevotedate.substring(0, 4)}`}</h6>
                         {
                             poll.aspirant.sort((a, b) => b.livevote - a.livevote).map((aspirant, index) => {
                                 return (

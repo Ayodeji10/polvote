@@ -5,7 +5,7 @@ import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
-function DeleteStoryModal({ story, openModal, handleDeleteStoryModal }) {
+function DeleteStoryModal({ story, openModal, setDeleteStoryModal }) {
     // context 
     const { context } = useContext(DataContext)
 
@@ -24,12 +24,12 @@ function DeleteStoryModal({ story, openModal, handleDeleteStoryModal }) {
     }
 
     return (
-        <Modal isOpen={openModal} onRequestClose={() => handleDeleteStoryModal(false)} className={`delete-write-modal ${context.darkMode ? 'dm' : ""}`}>
-            <i className="far fa-times-circle" onClick={() => handleDeleteStoryModal(false)} />
+        <Modal isOpen={openModal} onRequestClose={() => setDeleteStoryModal(false)} className={`delete-write-modal ${context.darkMode ? 'dm' : ""}`}>
+            <i className="far fa-times-circle" onClick={() => setDeleteStoryModal(false)} />
             <h1>Delete Story</h1>
             <p>Are you sure you want to delete this story?</p>
             <div className="d-flex justify-content-between">
-                <button onClick={() => handleDeleteStoryModal(false)} id="cancel">Cancel</button>
+                <button onClick={() => setDeleteStoryModal(false)} id="cancel">Cancel</button>
                 <button onClick={deleteStory} id="delete">{loading ? "Loading..." : "Delete"}</button>
             </div>
         </Modal>

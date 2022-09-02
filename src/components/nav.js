@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import { DataContext } from "../dataContext";
+import AuthModals from "./authenticationModlas";
 import NavAspirantsSvg from "./svg/NavAspirantsSvg";
 import NavHomeSvg from "./svg/NavHomeSvg";
 import NavPollsSvg from "./svg/NavPollsSvg";
@@ -10,8 +11,10 @@ const Nav = () => {
 
     const { context, setContext } = useContext(DataContext)
 
-    // history 
-    const navigate = useNavigate()
+    // modals 
+    const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     // toggle nav height 
     window.addEventListener('scroll', () => {
@@ -71,10 +74,10 @@ const Nav = () => {
                                 {localStorage.getItem('ballotbox_token') === null ?
                                     <>
                                         <li className={`nav-item ${window.location.pathname.includes("/stories") && 'active'}`}>
-                                            <button onClick={() => navigate("/login")}>Login</button>
+                                            <button onClick={() => setLoginModal(true)}>Login</button>
                                         </li>
                                         <li className={`nav-item ${window.location.pathname.includes("/stories") && 'active'}`}>
-                                            <button id="signup-nav-btn" onClick={() => navigate("/login")}>Sign Up</button>
+                                            <button id="signup-nav-btn" onClick={() => setSignupModal(true)}>Sign Up</button>
                                         </li>
                                     </> :
                                     <li className="nav-item profile-img d-flex align-items-center">
@@ -91,6 +94,8 @@ const Nav = () => {
                     </div>
                 </nav>
             </div>
+            {/* auth modals  */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
         </div>
     );
 };

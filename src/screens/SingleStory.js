@@ -12,6 +12,7 @@ import StoryCard from '../components/storyCard'
 import AuthModals from '../components/authenticationModlas'
 import Loader from '../components/loader';
 import RecommendedStories from '../components/recommendedStories'
+// import { Helmet } from 'react-helmet'
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -27,15 +28,8 @@ function SingleStory() {
     const [signupModal, setSignupModal] = useState(false)
     const [verificationModal, setVerificationModal] = useState(false)
 
-    // redirect if user is not logged in 
-    // useEffect(() => {
-    //     if (localStorage.getItem('ballotbox_token') === null) {
-    //         navigate('/')
-    //     }
-    // }, [])
-
     // params 
-    const { id } = useParams()
+    const { any, id } = useParams()
 
     // increase views 
     useEffect(() => {
@@ -74,6 +68,17 @@ function SingleStory() {
             console.log(error)
         })
     }
+
+    // append story url 
+    useEffect(() => {
+        if (story.story === null || story.story === undefined) {
+
+        } else {
+            let storyAppend = story.story.split("\r\n")[0].replaceAll(' ', '-')
+            window.history.replaceState({ page: 2 }, `${storyAppend}/${id}`, `/stories/${storyAppend}/${id}`);
+        }
+    }, [story])
+
     useEffect(() => {
         if (id && id !== '') fetchStory()
     }, [id])
@@ -83,7 +88,6 @@ function SingleStory() {
     const myRef = useRef()
 
     useEffect(() => {
-        console.log("my ref", myRef.current)
         const observer = new IntersectionObserver((entries) => {
             const entry = entries[0]
             if (entry.isIntersecting) {
@@ -106,7 +110,6 @@ function SingleStory() {
             method: "GET",
             url: `${API.API_ROOT}/story?page=${pageNumber}&limit=10`
         }).then(response => {
-            console.log(response.data)
             if (stories.length === 0) {
                 setStories(response.data.stories)
             } else {
@@ -144,6 +147,22 @@ function SingleStory() {
                         {pageLoading ?
                             <Loader pageLoading={pageLoading} /> :
                             <>
+                                {/* helmet  */}
+                                {/* <Helmet>
+                                    <title>{story.story.split("\r\n")[0]}</title>
+
+                                    <meta property="og:type" content="website" />
+                                    <meta property="og:url" content="https://polvote.com/" />
+                                    <meta property="og:title" content={story.story.split("\r\n")[0]} />
+                                    <meta property="og:description" content="Explore Politics, Learn and Share Insights Online" />
+                                    <meta property="og:image" content={story.image[0]} />
+
+                                    <meta property="twitter:card" content="summary_large_image" />
+                                    <meta property="twitter:url" content="https://polvote.com/" />
+                                    <meta property="twitter:title" content={story.story.split("\r\n")[0]} />
+                                    <meta property="twitter:description" content="Explore Politics, Learn and Share Insights Online" />
+                                    <meta property="twitter:image" content={story.image[0]} />
+                                </Helmet> */}
                                 <StoryCard story={story} />
                                 <h4 className='mb-3'>other stories</h4>
                                 {stories.filter(story => story.status !== "1").map((story, index) => {

@@ -5,7 +5,7 @@ import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
-function EditStoryModal({ story, handleEditStoryModal, index, openModal }) {
+function EditStoryModal({ story, setEditStoryModal, index, openModal }) {
     // context 
     const { context } = useContext(DataContext)
 
@@ -72,8 +72,8 @@ function EditStoryModal({ story, handleEditStoryModal, index, openModal }) {
     }
 
     return (
-        <Modal isOpen={openModal} onRequestClose={() => handleEditStoryModal(false)} className={`story-write-modal edit-story-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
-            <i className="far fa-times-circle" onClick={() => handleEditStoryModal(false)} />
+        <Modal isOpen={openModal} onRequestClose={() => setEditStoryModal(false)} className={`story-write-modal edit-story-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
+            <i className="far fa-times-circle" onClick={() => setEditStoryModal(false)} />
             <h2>Edit Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <div className="d-flex align-items-center">

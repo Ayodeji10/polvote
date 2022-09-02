@@ -144,7 +144,7 @@ function UserProfile() {
     // get story wallet total
     const [storyTotal, setStoryTotal] = useState(0)
     let storyWallet = stories.filter(story => story.userid === context.user._id).reduce((total, story) => {
-        let increament = story.storyviews.filter(view => view.status === "0" || view.status === "3").length * 2// multiplied by conversion rate
+        let increament = story.storyviews.filter(view => view.status === "0" || view.status === "3").length * 5// multiplied by conversion rate (5naira per view of story)
         total += (increament)
         return total
     }, 0)
@@ -648,7 +648,7 @@ function UserProfile() {
                                                                                             <path d="M11 11C12.6569 11 14 9.65685 14 8C14 6.34315 12.6569 5 11 5C9.34315 5 8 6.34315 8 8C8 9.65685 9.34315 11 11 11Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                                                         </svg>
                                                                                     }
-                                                                                    {story.storyviews.length} View{story.storyviews.length > 1 && "s"}
+                                                                                    {story.storyviews.length} View{story.storyviews.length !== 1 && "s"}
                                                                                 </span>
                                                                                 <span>
                                                                                     {context.darkMode ?
@@ -665,7 +665,7 @@ function UserProfile() {
                                                                                             <path d="M17 15C17 13.9391 17.4214 12.9217 18.1716 12.1716C18.9217 11.4214 19.9391 11 21 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                                                                                         </svg>
                                                                                     }
-                                                                                    N{story.storyviews.filter(storyview => storyview.status === "0" || storyview.status === "0").length * 2}
+                                                                                    N{story.storyviews.filter(storyview => storyview.status === "0" || storyview.status === "0").length * 5}
                                                                                 </span>
                                                                             </div>
                                                                         </div>

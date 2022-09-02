@@ -17,9 +17,6 @@ function SingleProfileCard({ aspirant }) {
 
     const [shareProfileModal, setShareProfileModal] = useState(false)
 
-    const handleShareProfileModal = (variable) => {
-        setShareProfileModal(variable)
-    }
     const [shareLink] = useState(`https://polvote.com/profiles/single/${aspirant._id}`)
 
     const [redirectToPollModal, setRedirectToPollModal] = useState(false)
@@ -115,7 +112,7 @@ function SingleProfileCard({ aspirant }) {
                 </div>
             </div>
             {/* share and redirect modal  */}
-            {shareProfileModal && <ShareProfileModal shareProfileModal={shareProfileModal} shareLink={shareLink} handleShareProfileModal={handleShareProfileModal} />}
+            {shareProfileModal && <ShareProfileModal shareProfileModal={shareProfileModal} shareLink={shareLink} setShareProfileModal={setShareProfileModal} />}
             {redirectToPollModal && <RedirectToPoll isOpen={redirectToPollModal} handleRedirect={handleRedirect} name={`${aspirant.firstname} ${aspirant.lastname}`} pollId={aspirant.pollsdetails[0].pollid} />}
         </>
     )

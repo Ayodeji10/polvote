@@ -5,7 +5,7 @@ import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
-function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
+function ShareStoryModal({ story, index, setShareStoryModal, openModal }) {
     // context 
     const { context } = useContext(DataContext)
 
@@ -75,8 +75,8 @@ function ShareStoryModal({ story, index, handleShareStoryModal, openModal }) {
     }
 
     return (
-        <Modal isOpen={openModal} onRequestClose={() => handleShareStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
-            <i className="far fa-times-circle" onClick={() => handleShareStoryModal(false)} />
+        <Modal isOpen={openModal} onRequestClose={() => setShareStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
+            <i className="far fa-times-circle" onClick={() => setShareStoryModal(false)} />
             <h2>Re-Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <div className="d-flex align-items-center">

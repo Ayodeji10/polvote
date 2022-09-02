@@ -127,7 +127,7 @@ function User() {
             { followedid: id },
             { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 fetchFollowers()
                 setFollowLoading(false)
                 // setFollowers(response.data.followers)
@@ -146,7 +146,7 @@ function User() {
             { followedid: id },
             { headers: { 'content-type': 'application/json', 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` } })
             .then(response => {
-                console.log(response)
+                // console.log(response)
                 fetchFollowers()
                 setUnfollowLoading(false)
                 // setFollowers(response.data.followers)
@@ -228,7 +228,7 @@ function User() {
 
                                     {/* view  */}
                                     <div className="d-flex justify-content-between page-nav">
-                                        <button className={view === "stories" && "active"} onClick={() => setView("stories")}>Stories</button>
+                                        <button className={view === "stories" && "active"} onClick={() => setView("stories")}>Posts</button>
                                         <button className={view === "aspirants" && "active"} onClick={() => setView("aspirants")}>Aspirant Profiles</button>
                                         <button className={view === "courses" && "active"} onClick={() => setView("courses")}>Courses</button>
                                     </div>

@@ -75,6 +75,7 @@ function AuthModals({ loginModal, setLoginModal, signupModal, setSignupModal, ve
                 setUserSession(response.data.token)
                 setContext({ ...context, user: { token: response.data.token, ...response.data.user } })
                 setLoginModal(false)
+                setSignupModal(false)
             } else {
                 setLoading(false)
                 setError("Something went wrong... pls try again shrotly")
@@ -242,27 +243,27 @@ function AuthModals({ loginModal, setLoginModal, signupModal, setSignupModal, ve
                         <span></span>
                     </div>
                     <div className="row">
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="fname">First Name</label>
                             <input id="fname" type="text" placeholder="First Name" value={firstName} onChange={(e) => setFirstName(e.target.value)} />
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="lname">Last Name</label>
                             <input id="lname" type="text" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="Username">Username</label>
                             <input id="Username" type="text" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="Email">Email</label>
                             <input id="Email" type="text" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="number">Phone Number</label>
                             <input id="number" type="tel" placeholder="+234  |   700234567891" value={number} onChange={(e) => setNumber(e.target.value)} />
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div className="col-lg-6 col-md-6 col-12">
                             <label htmlFor="pass">Create Password</label>
                             <input id="pass" type="password" placeholder="***************" value={password} onChange={(e) => setPassword(e.target.value)} />
                         </div>

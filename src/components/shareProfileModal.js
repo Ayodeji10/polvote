@@ -3,7 +3,7 @@ import { DataContext } from "../dataContext";
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
-function ShareProfileModal({ shareLink, shareProfileModal, handleShareProfileModal }) {
+function ShareProfileModal({ shareLink, shareProfileModal, setShareProfileModal }) {
     // context 
     const { context } = useContext(DataContext)
 
@@ -15,8 +15,8 @@ function ShareProfileModal({ shareLink, shareProfileModal, handleShareProfileMod
         inputRef.current.select()
     }
     return (
-        <Modal isOpen={shareProfileModal} onRequestClose={() => handleShareProfileModal(false)} id="poll-share-modal" className={`${context.darkMode ? 'dm' : ""}`}>
-            <i className="fas fa-times" onClick={() => handleShareProfileModal(false)} />
+        <Modal isOpen={shareProfileModal} onRequestClose={() => setShareProfileModal(false)} id="poll-share-modal" className={`${context.darkMode ? 'dm' : ""}`}>
+            <i className="fas fa-times" onClick={() => setShareProfileModal(false)} />
             <h1>Share Profile of Aspirant on Polvote</h1>
             <p>You can explore Politics, Learn and Share Insights Online on Plvote</p>
             <h3>Share on:</h3>

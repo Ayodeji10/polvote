@@ -128,6 +128,8 @@ function Polls() {
                                 })}
                             </>
                         }
+                        {/* footer  */}
+                        <Footer />
                     </div>
                     <div className="profile-widget col-lg-3">
                         <div className="aside-sticky">
@@ -136,8 +138,7 @@ function Polls() {
                         </div>
                     </div>
                 </div>
-                {/* footer  */}
-                <Footer />
+
             </div>
 
             {/* filter modal */}

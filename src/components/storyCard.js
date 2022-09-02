@@ -9,6 +9,9 @@ import EditStoryModal from './editStoryModal';
 import DeleteStoryModal from './deleteStoryModal';
 import Comment from '../components/comments'
 import LoginModal from './loginModal';
+import ShareStoryModalOut from './shareStoryModalOut';
+import Modal from 'react-modal'
+Modal.setAppElement('#root')
 
 function StoryCard({ story, index, fetchStories }) {
     // context 
@@ -34,6 +37,9 @@ function StoryCard({ story, index, fetchStories }) {
 
     // login modal 
     const [loginModal, setLoginModal] = useState(false)
+
+    // image modal 
+    const [imageModal, setImageModal] = useState(false)
 
     const comment = () => {
         if (localStorage.getItem('ballotbox_token') !== null) {
@@ -99,26 +105,11 @@ function StoryCard({ story, index, fetchStories }) {
         }
     }, [])
 
-    // share story modal 
+    // story modals
     const [shareStoryModal, setShareStoryModal] = useState(false)
-
-    const handleShareStoryModal = (variable) => {
-        setShareStoryModal(variable)
-    }
-
-    // edit story 
     const [editStoryModal, setEditStoryModal] = useState(false)
-
-    const handleEditStoryModal = (variable) => [
-        setEditStoryModal(variable)
-    ]
-
-    // delete story modal 
     const [deleteStoryModal, setDeleteStoryModal] = useState(false)
-
-    const handleDeleteStoryModal = (variable) => [
-        setDeleteStoryModal(variable)
-    ]
+    const [shareStoryModalOut, setShareStoryModalOut] = useState(false)
 
     // get time stamp 
     const [storytime, setStoryTIme] = useState("")
@@ -231,7 +222,7 @@ function StoryCard({ story, index, fetchStories }) {
                         <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-')}/${story._id}`)}>
                                     <i className="fa-solid fa-copy" />
                                     <h4 className='mb-0'>Copy Link</h4>
                                 </div>
@@ -245,7 +236,7 @@ function StoryCard({ story, index, fetchStories }) {
                                         }
                                     }}>Re-Post</h4>
                                 </div>
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/.../${story._id}`)}>
                                     <i className="fa-solid fa-arrow-up-right-from-square" />
                                     <h4 className='mb-0'>Open Post</h4>
                                 </div>
@@ -292,7 +283,12 @@ function StoryCard({ story, index, fetchStories }) {
                             {
                                 story.image.length === 1 ?
                                     <div className="col-12" key={index}>
-                                        <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" />
+                                        <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" onClick={() => setImageModal(true)} />
+                                        <Modal isOpen={imageModal} onRequestClose={() => setImageModal(false)} id="profileImgModal" className={`${context.darkMode ? 'dm' : ""}`}>
+                                            <i className="fas fa-times" onClick={() => setImageModal(false)} />
+                                            {/* <img src={aspirant.image === null || aspirant.image === undefined ? `img/user (1) 1.png` : `${aspirant.image}`} onClick={() => setProfileImageModal(true)} alt="profile-img" className="img-fluid" /> */}
+                                            <img src={story.image[0]} alt="img" className="img-fluid" id="story-img" />
+                                        </Modal>
                                     </div> :
                                     <>
                                         {
@@ -363,7 +359,7 @@ function StoryCard({ story, index, fetchStories }) {
                     </div>
                     <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => {
                         if (localStorage.getItem('ballotbox_token') !== null) {
-                            setShareStoryModal(true)
+                            setShareStoryModalOut(true)
                         } else {
                             setLoginModal(true)
                         }
@@ -374,11 +370,13 @@ function StoryCard({ story, index, fetchStories }) {
                 </div>
             </div>
             {/* share modal  */}
-            {shareStoryModal && <ShareStoryModal story={story} index={index} openModal={shareStoryModal} handleShareStoryModal={handleShareStoryModal} />}
+            {shareStoryModal && <ShareStoryModal story={story} index={index} openModal={shareStoryModal} setShareStoryModal={setShareStoryModal} />}
             {/* edit story modal */}
-            {editStoryModal && <EditStoryModal story={story} index={index} openModal={editStoryModal} handleEditStoryModal={handleEditStoryModal} />}
+            {editStoryModal && <EditStoryModal story={story} index={index} openModal={editStoryModal} setEditStoryModal={setEditStoryModal} />}
             {/* deleteStoryModal  */}
-            {deleteStoryModal && <DeleteStoryModal story={story} openModal={deleteStoryModal} handleDeleteStoryModal={handleDeleteStoryModal} />}
+            {deleteStoryModal && <DeleteStoryModal story={story} openModal={deleteStoryModal} setDeleteStoryModal={setDeleteStoryModal} />}
+            {/* share story out modal  */}
+            {shareStoryModalOut && <ShareStoryModalOut story={story} openModal={shareStoryModalOut} setShareStoryModalOut={setShareStoryModalOut} />}
             {/* comments  */}
             {window.location.pathname !== "/user-profile" &&
                 <>

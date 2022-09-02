@@ -97,7 +97,7 @@ function HomePollCard({ pollId }) {
                                     <input type="checkbox" checked={live} onClick={() => setLive(!live)} />
                                     <span className="slider" />
                                 </label>
-                                <p className="mb-0" onClick={() => setLive(!live)}>{live ? "Switch to Polvote Result" : "Switch to Election Result"}</p>
+                                <p className="mb-0 label" onClick={() => setLive(!live)}>{live ? "Switch to Polvote Result" : "Switch to Election Result"}</p>
                             </div>
                         </div>
                         {live ?

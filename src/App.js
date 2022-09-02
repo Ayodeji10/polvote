@@ -66,7 +66,7 @@ function App() {
           <Route exact path="/polls" element={<Polls />} />
           <Route exact path="/polls/:id" element={<SinglePoll />} />
           <Route exact path="/stories" element={<Stories />} />
-          <Route exact path="/stories/:id" element={<SingleStory />} />
+          <Route exact path="/stories/:any/:id" element={<SingleStory />} />
           <Route exact path="/profiles" element={<Profiles />} />
           <Route exact path="/profiles/single/:id" element={<SingleProfile />} />
           <Route exact path="/create-aspirant" element={<CreateAspirant1 />} />

@@ -138,7 +138,8 @@ function Aside() {
                                 <h3 className="mb-0">{context.user.email}</h3>
                             </div>
                         </div>
-                        <i style={{ cursor: "pointer" }} className="fas fa-ellipsis-v" onMouseOver={() => setUserOptions(true)} />
+                        <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} onMouseOver={() => setUserOptions(true)} />
+                        {/* <i style={{ cursor: "pointer" }} className="fas fa-ellipsis-v" onMouseOver={() => setUserOptions(true)} /> */}
                     </div >
 
                     {/* stats  */}
@@ -186,7 +187,7 @@ function Aside() {
                     <p onClick={() => {
                         setContext({ ...context, profileView: "stories" })
                         navigate('/user-profile')
-                    }}>My Stories</p>
+                    }}>My Posts</p>
                     <p onClick={() => setLogoutModal(true)}>Logout</p>
 
                     {/* logout modal  */}

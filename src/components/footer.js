@@ -30,7 +30,7 @@ function Footer() {
                         <a href="https://youtube.com/channel/UCkcn0Kv_w_Qe0MfZ7Hhe6lg" target="_blank"><img src="/img/youtube.png" alt="youtube" className='social' /></a>
                         <a href="https://www.facebook.com/Polvoteofficial-115809974445682/" target="_blank"><img src="/img/fb.png" alt="facebook" className='social' /></a>
                         <a href="https://www.instagram.com/polvoteofficial/" target="_blank"><img src="/img/insta.png" alt="instagram" className='social' /></a>
-                        <a href="https://twitter.com/pol_vote?t=iVqZBrU9MA793b4K1-YLwQ" target="_blank"><img src="/img/twitter.png" alt="twitter" className='social' /></a>
+                        <a href="https://twitter.com/PolvoteOfficial" target="_blank"><img src="/img/twitter.png" alt="twitter" className='social' /></a>
                     </div>
                 </div>
             </div>
