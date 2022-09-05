@@ -45,8 +45,9 @@ function RecomendedAspirants() {
                             </div>
                         </div>
                         <div className="col-lg-10 col-md-11 details">
+                            <h2>{each.firstname} {each.lastname}</h2>
                             <h3>{each.overview.substring(0, 160)}...</h3>
-                            <button onClick={() => navigate(`/profiles/single/${each._id}`)}>Read more</button>
+                            <button onClick={() => navigate(`/profiles/${each.firstname}-${each.lastname}/${each._id}`)}>Read more</button>
                         </div>
                     </div>
                 )

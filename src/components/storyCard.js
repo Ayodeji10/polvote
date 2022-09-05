@@ -10,6 +10,7 @@ import DeleteStoryModal from './deleteStoryModal';
 import Comment from '../components/comments'
 import LoginModal from './loginModal';
 import ShareStoryModalOut from './shareStoryModalOut';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -125,9 +126,9 @@ function StoryCard({ story, index, fetchStories }) {
 
         // set date 
         if (days <= 1) {
-            setStoryTIme(`${parseInt(story.createdAt.substring(11, 13)) + 1} ${story.createdAt.substring(13, 16)} ${story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}`)
+            setStoryTIme(`${parseInt(story.createdAt.substring(11, 13)) + 1}${story.createdAt.substring(13, 16)} ${story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}`)
         } else {
-            setStoryTIme(`${parseInt(story.createdAt.substring(11, 13)) + 1} ${story.createdAt.substring(13, 16)} ${story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}`)
+            setStoryTIme(`${parseInt(story.createdAt.substring(11, 13)) + 1}${story.createdAt.substring(13, 16)} ${story.createdAt.substring(11, 13) >= 12 ? 'PM' : 'AM'}`)
             if (days < 30) {
                 setStoryDate(`${days - 1} day${days - 1 > 1 ? "s" : ""} ago`)
             } else {
@@ -222,7 +223,7 @@ function StoryCard({ story, index, fetchStories }) {
                         <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-')}/${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-').replaceAll('?', '')}/${story._id}`)}>
                                     <i className="fa-solid fa-copy" />
                                     <h4 className='mb-0'>Copy Link</h4>
                                 </div>
@@ -236,11 +237,11 @@ function StoryCard({ story, index, fetchStories }) {
                                         }
                                     }}>Re-Post</h4>
                                 </div>
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/.../${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-').replaceAll('?', '')}/${story._id}`)}>
                                     <i className="fa-solid fa-arrow-up-right-from-square" />
                                     <h4 className='mb-0'>Open Post</h4>
                                 </div>
-                                {story.userid !== context.user._id && localStorage.getItem('ballotbox_token') !== null &&
+                                {/* {story.userid !== context.user._id && localStorage.getItem('ballotbox_token') !== null &&
                                     <>
                                         {!followersLoading &&
                                             <>
@@ -257,7 +258,7 @@ function StoryCard({ story, index, fetchStories }) {
                                             </>
                                         }
                                     </>
-                                }
+                                } */}
                                 {story.userid === context.user._id && localStorage.getItem('ballotbox_token') !== null &&
                                     <>
                                         <div className="d-flex align-items-center mb-1" onClick={() => setEditStoryModal(true)}>
@@ -277,13 +278,22 @@ function StoryCard({ story, index, fetchStories }) {
                 {/* <h4>{story.story}</h4> */}
                 <NewLineText text={story.story} />
                 {/* images  */}
-                <div className="row mb-4">
+                <div className="row mb-4 story-img">
                     {story.image.length !== 0 &&
                         <>
                             {
                                 story.image.length === 1 ?
                                     <div className="col-12" key={index}>
-                                        <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" onClick={() => setImageModal(true)} />
+                                        <LazyLoadImage
+                                            // alt={image.alt}
+                                            // height={image.height}
+                                            src={story.image[0]}
+                                            className="single-story-img"
+                                            placeholderSrc={process.env.PUBLIC_URL + 'img/persona.png'}
+                                            onClick={() => setImageModal(true)}
+                                        // width={image.width} 
+                                        />
+                                        {/* <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" onClick={() => setImageModal(true)} /> */}
                                         <Modal isOpen={imageModal} onRequestClose={() => setImageModal(false)} id="profileImgModal" className={`${context.darkMode ? 'dm' : ""}`}>
                                             <i className="fas fa-times" onClick={() => setImageModal(false)} />
                                             {/* <img src={aspirant.image === null || aspirant.image === undefined ? `img/user (1) 1.png` : `${aspirant.image}`} onClick={() => setProfileImageModal(true)} alt="profile-img" className="img-fluid" /> */}

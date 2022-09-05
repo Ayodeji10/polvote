@@ -68,7 +68,7 @@ function App() {
           <Route exact path="/stories" element={<Stories />} />
           <Route exact path="/stories/:any/:id" element={<SingleStory />} />
           <Route exact path="/profiles" element={<Profiles />} />
-          <Route exact path="/profiles/single/:id" element={<SingleProfile />} />
+          <Route exact path="/profiles/:any/:id" element={<SingleProfile />} />
           <Route exact path="/create-aspirant" element={<CreateAspirant1 />} />
           <Route exact path="/create-aspirant/setup-aspirant" element={<CreateAspirant2 />} />
           <Route exact path="/create-aspirant/submit-profile" element={<CreateAspirant3 />} />

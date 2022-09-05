@@ -205,17 +205,17 @@ function User() {
                                         <h1 className='mb-0'>{currentUser.firstname} {currentUser.lastname}</h1>
                                         <h4>{currentUser.username}</h4>
                                         {/* followers  */}
-                                        <div className="row mb-3">
+                                        {/* <div className="row mb-3">
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-5">
                                                 <h3>{followers.filter(follower => follower.status === 0).length} <span>Followers</span></h3>
                                             </div>
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-5">
                                                 <h3>{following.length} <span>Following</span></h3>
                                             </div>
-                                        </div>
+                                        </div> */}
                                         <div className="row mb-lg-4 mb-md-3 mb-sm-3 mb-3 impresssions">
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-4">
-                                                <h3>{stories.length} <span>Stories</span></h3>
+                                                <h3>{stories.length} <span>{stories.length === 1 ? "Story" : "Stories"}</span></h3>
                                             </div>
                                             <div className="col-lg-2 col-md-3 col-sm-3 col-4">
                                                 <h3>{userTotalLikes} <span>Like{userTotalLikes !== 0 && "s"}</span></h3>

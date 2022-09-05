@@ -396,17 +396,17 @@ function UserProfile() {
                                 <h1 className='mb-0'>{context.user.firstname} {context.user.lastname}</h1>
                                 <h4>{context.user.username}</h4>
                                 {/* followers  */}
-                                <div className="row mb-3">
+                                {/* <div className="row mb-3">
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-5">
                                         <h3>0 <span>Followers</span></h3>
                                     </div>
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-5">
                                         <h3>0 <span>Following</span></h3>
                                     </div>
-                                </div>
+                                </div> */}
                                 <div className="row mb-lg-4 mb-md-3 mb-sm-3 mb-3 impresssions">
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-4">
-                                        <h3>{stories.filter(story => story.userid === context.user._id).length} <span>Posts</span></h3>
+                                        <h3>{stories.filter(story => story.userid === context.user._id).length} <span>Post{stories.filter(story => story.userid === context.user._id).length !== 1 && "s"}</span></h3>
                                     </div>
                                     <div className="col-lg-2 col-md-3 col-sm-3 col-4">
                                         <h3>{userTotalLikes} <span>Like{userTotalLikes !== 1 && "s"}</span></h3>
@@ -801,7 +801,7 @@ function UserProfile() {
                                     Edit Password
                                 </button>
                                 {/* edit password modal */}
-                                <Modal isOpen={editPassword} onRequestClose={() => setEditPassword(false)} id="editPassword">
+                                <Modal isOpen={editPassword} onRequestClose={() => setEditPassword(false)} id="editPassword" className={`${context.darkMode ? 'dm' : ""}`}>
                                     <i className="fa-solid fa-circle-xmark" onClick={() => setEditPassword(false)} />
                                     <h1>Edit Password</h1>
                                     <label htmlFor="oldp">Current Password</label>

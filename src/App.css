@@ -2548,11 +2548,12 @@ footer#footer img.social {
     cursor: pointer;
 }
 
-.story .story img#story-img {
-    border-radius: 5px;
+.story span.lazy-load-image-background,
+.story span.lazy-load-image-loaded {
+    display: block !important;
 }
 
-.story .story img.single-story-img {
+.story .story .story-img img {
     width: 100%;
     height: auto;
     border-radius: 10px;
@@ -3275,6 +3276,21 @@ img#return-btn {
     margin-bottom: 0;
 }
 
+.profile .profile button {
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFF;
+    background-color: rgba(0, 122, 243, 1);
+    border-radius: 10px;
+    height: 40px;
+    width: 58px;
+    padding: 10px 0
+}
+
+.profile .profile button.voted {
+    background-color: rgba(0, 122, 243, 0.3);
+}
+
 .profile .profile .fa-eye {
     margin-right: 5px;
 }
@@ -3284,7 +3300,8 @@ img#return-btn {
     height: 300px;
     object-fit: cover;
     object-position: center;
-    cursor: pointer
+    cursor: pointer;
+    border-radius: 10px;
 }
 
 .profile .profile .options {
@@ -3406,6 +3423,13 @@ img#return-btn {
 
 .profile-recomentdations .profile:last-child .details {
     border-bottom: none !important
+}
+
+
+.profile-recomentdations .profile h2 {
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 3px;
 }
 
 .profile-recomentdations .profile h3 {
@@ -4585,6 +4609,8 @@ img#return-btn {
     padding: 36px 59px !important;
     border: 1px solid rgba(255, 255, 255, 0.1) !important;
 }
+
+
 
 
 
@@ -8108,6 +8134,10 @@ textarea::placeholder {
         margin-left: 40px;
     }
 
+    .story-recomentdations {
+        display: none;
+    }
+
     /* polls  */
     .polls .searchbar {
         padding: 10px 14px;
@@ -9044,6 +9074,10 @@ textarea::placeholder {
     .story .story .comment button {
         font-size: 12px;
         padding: 10px;
+    }
+
+    .story-recomentdations {
+        display: none;
     }
 
     /* stories modal  */
@@ -10254,6 +10288,10 @@ textarea::placeholder {
     .story .comments .comment .replies button {
         font-size: 12px;
         padding: 5px;
+    }
+
+    .story-recomentdations {
+        display: none;
     }
 
     /* stories modal  */
@@ -11575,6 +11613,10 @@ textarea::placeholder {
     .story .comments .comment .replies button {
         font-size: 12px;
         padding: 5px;
+    }
+
+    .story-recomentdations {
+        display: none;
     }
 
     /* stories modal  */
@@ -13270,6 +13312,20 @@ footer#footer.dm .bottom {
 }
 
 #edit-profile.dm button {
+    color: #FFF
+}
+
+/* edit password  */
+#editPassword.dm {
+    position: absolute;
+    background-color: rgba(249, 252, 255, 1) !important;
+}
+
+#editPassword.dm input {
+    border: 1px solid rgba(10, 24, 61, 0.1) !important
+}
+
+#editPassword.dm button {
     color: #FFF
 }
 

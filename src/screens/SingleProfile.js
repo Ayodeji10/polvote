@@ -22,7 +22,7 @@ function SingleProfile() {
     const { context, setContext } = useContext(DataContext)
 
     // params 
-    const { id } = useParams()
+    const { any, id } = useParams()
 
     // auth modals 
     const [loginModal, setLoginModal] = useState(false)

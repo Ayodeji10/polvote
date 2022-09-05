@@ -156,7 +156,7 @@ function AuthModals({ loginModal, setLoginModal, signupModal, setSignupModal, ve
             <Modal isOpen={loginModal} onRequestClose={() => setLoginModal(false)} id="loginModal" className={`${context.darkMode ? 'dm' : ""}`}>
                 <i className="fa-solid fa-circle-xmark" onClick={() => setLoginModal(false)} />
                 <form onSubmit={(e) => handleLogin(e)}>
-                    <h1>Login to Vote on Ballot Box</h1>
+                    <h1>Login to Vote on Polvote</h1>
                     <h4>Votes made on Polvote are only limited to Polvote and does not count for the National Election!</h4>
                     <div id="google-btn">
                         <GoogleLogin

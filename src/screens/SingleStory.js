@@ -69,16 +69,6 @@ function SingleStory() {
         })
     }
 
-    // append story url 
-    useEffect(() => {
-        if (story.story === null || story.story === undefined) {
-
-        } else {
-            let storyAppend = story.story.split("\r\n")[0].replaceAll(' ', '-')
-            window.history.replaceState({ page: 2 }, `${storyAppend}/${id}`, `/stories/${storyAppend}/${id}`);
-        }
-    }, [story])
-
     useEffect(() => {
         if (id && id !== '') fetchStory()
     }, [id])
