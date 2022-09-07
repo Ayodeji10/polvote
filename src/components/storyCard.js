@@ -10,7 +10,7 @@ import DeleteStoryModal from './deleteStoryModal';
 import Comment from '../components/comments'
 import LoginModal from './loginModal';
 import ShareStoryModalOut from './shareStoryModalOut';
-import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -284,7 +284,7 @@ function StoryCard({ story, index, fetchStories }) {
                             {
                                 story.image.length === 1 ?
                                     <div className="col-12" key={index}>
-                                        <LazyLoadImage
+                                        {/* <LazyLoadImage
                                             // alt={image.alt}
                                             // height={image.height}
                                             src={story.image[0]}
@@ -292,8 +292,8 @@ function StoryCard({ story, index, fetchStories }) {
                                             placeholderSrc={process.env.PUBLIC_URL + 'img/persona.png'}
                                             onClick={() => setImageModal(true)}
                                         // width={image.width} 
-                                        />
-                                        {/* <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" onClick={() => setImageModal(true)} /> */}
+                                        /> */}
+                                        <img src={story.image[0]} alt="img" className="single-story-img" id="story-img" onClick={() => setImageModal(true)} />
                                         <Modal isOpen={imageModal} onRequestClose={() => setImageModal(false)} id="profileImgModal" className={`${context.darkMode ? 'dm' : ""}`}>
                                             <i className="fas fa-times" onClick={() => setImageModal(false)} />
                                             {/* <img src={aspirant.image === null || aspirant.image === undefined ? `img/user (1) 1.png` : `${aspirant.image}`} onClick={() => setProfileImageModal(true)} alt="profile-img" className="img-fluid" /> */}
@@ -359,7 +359,7 @@ function StoryCard({ story, index, fetchStories }) {
             </div>
             <div className="widget">
                 <div className="row justify-content-md-center">
-                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => navigate(`/stories/${story._id}`)}>
+                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => navigate(`/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-').replaceAll('?', '')}/${story._id}`)}>
                         <img src={context.darkMode ? "/img/comments-lm.png" : "/img/comment.png"} alt="comment" />
                         <span>{story.comments.length + commentLenght}</span>
                     </div>

@@ -4408,7 +4408,7 @@ img#return-btn {
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;
-    /* padding-top: 30px; */
+    padding-top: 30px;
 }
 
 .user-main .bio h4 {

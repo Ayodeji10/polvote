@@ -41,7 +41,7 @@ function App() {
     homeSearchKey: "",
     profileView: "articles",
     articleView: "stories",
-    darkMode: true
+    darkMode: false
   })
 
   // save context to local storage

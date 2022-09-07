@@ -20,6 +20,8 @@ function StorySkeleton() {
                 </div>
                 <div className="text mb-2"></div>
                 <div className="text mb-2"></div>
+                <div className="text mb-2"></div>
+                <div className="text mb-4"></div>
                 <div className="img"></div>
             </div>
             <div className="widget">

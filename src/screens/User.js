@@ -192,12 +192,12 @@ function User() {
                                         <div className="d-flex justify-content-end mt-3 mb-lg-5 mb-md-4 mb-sm-3 mb-2">
                                             {/* follow btn  */}
                                             {/* {!followersLoading &&
-                                                <> */}
+                                                <>
                                             {followers.filter(follower => follower.followerid === context.user._id && follower.status === 0).length === 0 ?
                                                 <button onClick={follow}>{followLoading ? <><i className="fa-solid fa-spinner fa-spin" />following</> : <><i className="fa-solid fa-plus" />Follow</>}</button> :
                                                 <button onClick={unfollow}>{unfollowLoading ? <><i className="fa-solid fa-spinner fa-spin" />unfollowing</> : "Unfollow"}</button>
                                             }
-                                            {/* </>
+                                            </>
                                             } */}
                                             {/* <button onClick={unfollow}>{unfollowLoading ? <><i className="fa-solid fa-spinner fa-spin" />unfollowing</> : <><i className="fa-solid fa-minus" />Unfollow</>}</button> :
                                             <button onClick={follow}>{followLoading ? <><i className="fa-solid fa-spinner fa-spin" />following</> : <><i className="fa-solid fa-plus" />Follow</>}</button> */}
