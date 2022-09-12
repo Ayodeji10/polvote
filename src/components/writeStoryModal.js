@@ -2,6 +2,8 @@ import React, { useState, useContext } from 'react'
 import { DataContext } from "../dataContext";
 import axios from "axios";
 import { API } from "../components/apiRoot";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -12,6 +14,32 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
     const [anonymous, setAnonymous] = useState(false)
     const [storyText, setStoryText] = useState("")
     const [images, setImages] = useState([])
+
+    const modules = {
+        toolbar: [
+            // [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+            // [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                // { 'indent': '-1' }, { 'indent': '+1' }
+            ],
+            ['link',
+                // 'image', 'video'
+            ],
+            // ['clean']
+        ],
+        clipboard: {
+            // toggle to add extra line breaks when pasting HTML:
+            matchVisual: false,
+        }
+    }
+
+    const formats = [
+        'header', 'font', 'size',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image', 'video'
+    ]
 
     // handle image click 
     const addImage = () => {
@@ -84,7 +112,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
     return (
         <Modal isOpen={openModal} onRequestClose={() => handleWriteStoryModal(false)} className={`story-write-modal ${context.darkMode ? 'dm' : ""}`}>
             <i className="far fa-times-circle" onClick={() => handleWriteStoryModal(false)} />
-            <h2>New Post</h2>
+            <h2 className="header">New Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-1 mb-md-2 mb-lg-3 mb-sm-3">
                 <div className="d-flex align-items-center">
                     <div className="img-container">
@@ -104,7 +132,15 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
                                                 <option value={true}>Stay Anonymous</option>
                                             </select> */}
             </div>
-            <textarea name id cols={30} rows={6} placeholder="Share your thought" autoFocus={openModal} value={storyText} onChange={(e) => setStoryText(e.target.value)} />
+            <ReactQuill
+                theme="snow"
+                placeholder="Share your thought"
+                value={storyText}
+                onChange={setStoryText}
+                modules={modules}
+                formats={formats}
+            />
+            {/* <textarea name id cols={30} rows={6} placeholder="Share your thought" autoFocus={openModal} value={storyText} onChange={(e) => setStoryText(e.target.value)} /> */}
             <div className="row mb-3">
                 {images.map((image, index) => {
                     return (
@@ -125,7 +161,7 @@ function WriteStoryModal({ openModal, handleWriteStoryModal }) {
                 <div>
                     <p>{storyError}</p>
                     {/* <button id="draft">Save as Draft</button> */}
-                    {storyLoading ? <button id="post" disabled >Loading...</button> : <button id="post" onClick={writeStory}>Post</button>}
+                    {storyLoading ? <button id="post" disabled ><>Loading...  <i className="fa-solid fa-spinner fa-spin" /></></button> : <button id="post" onClick={writeStory}>Post</button>}
                 </div>
             </div>
         </Modal>

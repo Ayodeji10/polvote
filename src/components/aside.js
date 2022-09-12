@@ -5,7 +5,7 @@ import axios from "axios";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
 import WriteStoryModal from './writeStoryModal';
-import LoginModal from './loginModal';
+import AuthModals from './authenticationModlas';
 // import Ad1 from './ad1';
 import Modal from 'react-modal'
 import WriteStorySvg from './svg/writeStorySvg';
@@ -83,6 +83,8 @@ function Aside() {
     // modals
     const [writeStoryModal, setWriteStoryModal] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     const handleWriteStoryModal = (variable) => {
         setWriteStoryModal(variable)
@@ -273,8 +275,8 @@ function Aside() {
                     <span>New Aspirant Profile</span>
                 </span>
             </div>
-            {/* login modal */}
-            {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
 
             {/* courses  */}
             {/* <div className="courses">

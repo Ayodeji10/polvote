@@ -2,9 +2,9 @@ import React, { useState, useContext } from 'react'
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
+import AuthModals from './authenticationModlas';
 import Modal from 'react-modal'
 import { useNavigate } from 'react-router-dom';
-import LoginModal from './loginModal';
 Modal.setAppElement('#root')
 
 function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetchcurrentPollAndParties }) {
@@ -20,6 +20,8 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
     const [voteSuccessModal, setVoteSuccessModal] = useState(false)
     const [voteRevokeModal, setVoteRevokeModal] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     // chech for duplicate vote 
     const [multiple, setMultiple] = useState([{ firstname: "", lastname: "" }])
@@ -77,7 +79,7 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
     return (
         <div className="candidate mb-3">
             <div className="row align-items-center">
-                <div className="col-lg-2 col-md-2 col-sm-2 col-2">
+                <div className="col-2">
                     <div className="aspirant-img">
                         <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" />
                     </div>
@@ -141,8 +143,8 @@ function HomePollCardAspirant({ aspirant, pollToTal, parties, currentPoll, fetch
                 <p>You have successfully revoked your vote for {multiple[0].firstname} {multiple[0].lastname}</p>
             </Modal>
 
-            {/* login modal */}
-            {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
         </div>
     )
 }

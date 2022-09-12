@@ -6,6 +6,7 @@ import NavAspirantsSvg from "./svg/NavAspirantsSvg";
 import NavHomeSvg from "./svg/NavHomeSvg";
 import NavPollsSvg from "./svg/NavPollsSvg";
 import NavStoriesSvg from "./svg/NavStoriesSvg";
+import NotificationsSvg from "./svg/notificationsSvg";
 
 const Nav = () => {
 
@@ -62,6 +63,12 @@ const Nav = () => {
                                         Aspirants
                                     </Link>
                                 </li>
+                                {/* <li className={`nav-item br ${window.location.pathname.includes("/notifications") && 'active'}`}>
+                                    <Link to={"/notifications"} className="nav-link">
+                                        <NotificationsSvg />
+                                        Notifications
+                                    </Link>
+                                </li> */}
                                 {/* <li className="nav-item br"><a className="nav-link" id="course" href="#">Take Course</a></li> */}
                             </ul>
                             <ul className="navbar-nav nav2 align-items-center">
@@ -80,7 +87,7 @@ const Nav = () => {
                                             <button id="signup-nav-btn" onClick={() => setSignupModal(true)}>Sign Up</button>
                                         </li>
                                     </> :
-                                    <li className="nav-item profile-img d-flex align-items-center">
+                                    <li className="nav-item profile-img d-flex align-items-center ml-5">
                                         <Link to={"/user-profile"} className="nav-link">
                                             {context.user.image !== null && context.user.image !== undefined ?
                                                 <img src={context.user.image} alt="profile-img" id='profile-img' /> :

@@ -16,7 +16,7 @@ import StoryCard from "../components/storyCard";
 import StorySkeleton from "../skeletons/storySkeleton";
 import RecommendedStories from "../components/recommendedStories";
 import RecomendedAspirants from "../components/recomendedAspirants";
-import ProfileSkeleton from "../skeletons/profileSkeleton";
+// import ProfileSkeleton from "../skeletons/profileSkeleton";
 import AuthModals from "../components/authenticationModlas";
 // import Helmet from "react-helmet";
 // import Ad1 from "../components/ad1"
@@ -256,7 +256,7 @@ const Home = () => {
                                     if (localStorage.getItem('ballotbox_token') !== null) {
                                         navigate('/create-aspirant')
                                     } else {
-                                        setLoginModal(true)
+                                        setVerificationModal(true)
                                     }
                                 }}><i className="fas fa-edit" />Write Aspirant Profile</p>
                             </div>
@@ -321,7 +321,7 @@ const Home = () => {
                                     if (localStorage.getItem('ballotbox_token') !== null) {
                                         navigate('/create-aspirant')
                                     } else {
-                                        setLoginModal(true)
+                                        setVerificationModal(true)
                                     }
                                 }}><i className="fas fa-edit" />Write Aspirant Profile</p>
                             </div>

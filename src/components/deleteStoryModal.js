@@ -30,7 +30,7 @@ function DeleteStoryModal({ story, openModal, setDeleteStoryModal }) {
             <p>Are you sure you want to delete this story?</p>
             <div className="d-flex justify-content-between">
                 <button onClick={() => setDeleteStoryModal(false)} id="cancel">Cancel</button>
-                <button onClick={deleteStory} id="delete">{loading ? "Loading..." : "Delete"}</button>
+                <button onClick={deleteStory} id="delete">{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Delete"}</button>
             </div>
         </Modal>
     )

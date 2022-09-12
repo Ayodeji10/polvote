@@ -2,6 +2,8 @@ import React, { useContext, useState } from 'react'
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { DataContext } from "../dataContext";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
 
@@ -14,6 +16,32 @@ function EditStoryModal({ story, setEditStoryModal, index, openModal }) {
     const [newImages, setNewImages] = useState([])
     const [editStoryText, setEditStoryText] = useState(story.story)
     const [editAnonymous, setEditAnonymous] = useState(false)
+
+    const modules = {
+        toolbar: [
+            // [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+            // [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                // { 'indent': '-1' }, { 'indent': '+1' }
+            ],
+            ['link',
+                // 'image', 'video'
+            ],
+            // ['clean']
+        ],
+        clipboard: {
+            // toggle to add extra line breaks when pasting HTML:
+            matchVisual: false,
+        }
+    }
+
+    const formats = [
+        'header', 'font', 'size',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image', 'video'
+    ]
 
     // click to add image 
     const addShareImage = (index) => {
@@ -74,7 +102,7 @@ function EditStoryModal({ story, setEditStoryModal, index, openModal }) {
     return (
         <Modal isOpen={openModal} onRequestClose={() => setEditStoryModal(false)} className={`story-write-modal edit-story-modal ${context.darkMode ? 'dm' : ""}`} id='share-story-modal'>
             <i className="far fa-times-circle" onClick={() => setEditStoryModal(false)} />
-            <h2>Edit Post</h2>
+            <h2 className='header'>Edit Post</h2>
             <div className="d-flex justify-content-between align-items-center mb-3">
                 <div className="d-flex align-items-center">
                     <div className="img-container">
@@ -93,7 +121,15 @@ function EditStoryModal({ story, setEditStoryModal, index, openModal }) {
                     <option value={true}>Stay Anonymous</option>
                 </select> */}
             </div>
-            <textarea name id cols={30} rows={2} placeholder="Share your thought" value={editStoryText} onChange={(e) => setEditStoryText(e.target.value)} />
+            <ReactQuill
+                theme="snow"
+                placeholder="Share your thought"
+                value={editStoryText}
+                onChange={setEditStoryText}
+                modules={modules}
+                formats={formats}
+            />
+            {/* <textarea name id cols={30} rows={2} placeholder="Share your thought" value={editStoryText} onChange={(e) => setEditStoryText(e.target.value)} /> */}
             <div className="row">
                 {editImages.map((image, index) => {
                     return (

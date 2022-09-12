@@ -8,7 +8,7 @@ import ShareStoryModal from './shareStoryModal';
 import EditStoryModal from './editStoryModal';
 import DeleteStoryModal from './deleteStoryModal';
 import Comment from '../components/comments'
-import LoginModal from './loginModal';
+import AuthModals from './authenticationModlas';
 import ShareStoryModalOut from './shareStoryModalOut';
 // import { LazyLoadImage } from 'react-lazy-load-image-component';
 import Modal from 'react-modal'
@@ -21,26 +21,31 @@ function StoryCard({ story, index, fetchStories }) {
     // history 
     const navigate = useNavigate()
 
+    // story modals
+    const [shareStoryModal, setShareStoryModal] = useState(false)
+    const [editStoryModal, setEditStoryModal] = useState(false)
+    const [deleteStoryModal, setDeleteStoryModal] = useState(false)
+    const [shareStoryModalOut, setShareStoryModalOut] = useState(false)
+    const [imageModal, setImageModal] = useState(false)
+    // auth modals 
+    const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
+
     // utilities 
     const [options, setOptions] = useState(false)
     const [commentLenght, setCommentLenght] = useState(0)
     const [storyLike, setStoryLike] = useState(false)
+    const [seeMore, setSeeMore] = useState(false)
 
     // comment 
     const [text, setText] = useState("")
     const [commentImg, setCommentImg] = useState(null)
     const [loading, setLoading] = useState(false)
-
     // comment image
     const addImage = () => {
         document.getElementById('add-image').click()
     }
-
-    // login modal 
-    const [loginModal, setLoginModal] = useState(false)
-
-    // image modal 
-    const [imageModal, setImageModal] = useState(false)
 
     const comment = () => {
         if (localStorage.getItem('ballotbox_token') !== null) {
@@ -105,12 +110,6 @@ function StoryCard({ story, index, fetchStories }) {
             setStoryLike(1)
         }
     }, [])
-
-    // story modals
-    const [shareStoryModal, setShareStoryModal] = useState(false)
-    const [editStoryModal, setEditStoryModal] = useState(false)
-    const [deleteStoryModal, setDeleteStoryModal] = useState(false)
-    const [shareStoryModalOut, setShareStoryModalOut] = useState(false)
 
     // get time stamp 
     const [storytime, setStoryTIme] = useState("")
@@ -223,7 +222,7 @@ function StoryCard({ story, index, fetchStories }) {
                         <i className="fas fa-ellipsis-h" style={{ cursor: "pointer" }} />
                         {!options ? "" :
                             <div className="options">
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-').replaceAll('?', '')}/${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigator.clipboard.writeText(`https://polvote.com/stories/${story.story.replace(/(<([^>]+)>)/ig, '').replaceAll(' ', '-').replaceAll('?', '').substring(0, 45)}/${story._id}`)}>
                                     <i className="fa-solid fa-copy" />
                                     <h4 className='mb-0'>Copy Link</h4>
                                 </div>
@@ -237,7 +236,7 @@ function StoryCard({ story, index, fetchStories }) {
                                         }
                                     }}>Re-Post</h4>
                                 </div>
-                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-').replaceAll('?', '')}/${story._id}`)}>
+                                <div className="d-flex align-items-center mb-1" onClick={() => navigate(`/stories/${story.story.replace(/(<([^>]+)>)/ig, '').replaceAll(' ', '-').replaceAll('?', '').substring(0, 45)}/${story._id}`)}>
                                     <i className="fa-solid fa-arrow-up-right-from-square" />
                                     <h4 className='mb-0'>Open Post</h4>
                                 </div>
@@ -275,8 +274,27 @@ function StoryCard({ story, index, fetchStories }) {
                         }
                     </div>
                 </div>
-                {/* <h4>{story.story}</h4> */}
-                <NewLineText text={story.story} />
+                {/* text  */}
+                <div className="storyText">
+                    {story.story.split("\r\n").length > 1 ?
+                        <NewLineText text={story.story} /> :
+                        <>
+                            {!seeMore ?
+                                <div className='mb-2'>
+                                    <p style={{ display: "inline" }} dangerouslySetInnerHTML={{ __html: `${story.story.replaceAll('<p>', '').replaceAll('</p>', "").substring(0, 400)}` }}></p>
+                                    {story.story.replace(/(<([^>]+)>)/ig, '').length > 400 &&
+                                        <span style={{ cursor: "pointer" }} onClick={() => setSeeMore(true)}>...see more</span>
+                                    }
+                                </div>
+                                :
+                                <div className="mb-2">
+                                    <div dangerouslySetInnerHTML={{ __html: story.story }}></div>
+                                    <span style={{ cursor: "pointer" }} onClick={() => setSeeMore(false)}>...see less</span>
+                                </div>
+                            }
+                        </>
+                    }
+                </div>
                 {/* images  */}
                 <div className="row mb-4 story-img">
                     {story.image.length !== 0 &&
@@ -359,7 +377,7 @@ function StoryCard({ story, index, fetchStories }) {
             </div>
             <div className="widget">
                 <div className="row justify-content-md-center">
-                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => navigate(`/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-').replaceAll('?', '')}/${story._id}`)}>
+                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => navigate(`/stories/${story.story.replace(/(<([^>]+)>)/ig, '').replaceAll(' ', '-').replaceAll('?', '').substring(0, 45)}/${story._id}`)}>
                         <img src={context.darkMode ? "/img/comments-lm.png" : "/img/comment.png"} alt="comment" />
                         <span>{story.comments.length + commentLenght}</span>
                     </div>
@@ -367,13 +385,7 @@ function StoryCard({ story, index, fetchStories }) {
                         <i className={storyLike === 0 ? "fa-regular fa-heart" : "fa-solid fa-heart"} onClick={like} />
                         <span>{story.likes.length + storyLike}</span>
                     </div>
-                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => {
-                        if (localStorage.getItem('ballotbox_token') !== null) {
-                            setShareStoryModalOut(true)
-                        } else {
-                            setLoginModal(true)
-                        }
-                    }}>
+                    <div className="col-5 d-flex align-items-center justify-content-center" onClick={() => setShareStoryModalOut(true)}>
                         <img src={context.darkMode ? "/img/share-lm.png" : "/img/share.png"} alt="share" />
                         <span>{story.shares.length}</span>
                     </div>
@@ -411,8 +423,6 @@ function StoryCard({ story, index, fetchStories }) {
                             </div>
                             <div className="col-3">
                                 <button onClick={comment}><img src="/img/send.png" alt="send" />{loading ? "loading" : "Send"}</button>
-                                {/* login modal */}
-                                {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
                             </div>
                         </div>
                     </div>
@@ -427,6 +437,9 @@ function StoryCard({ story, index, fetchStories }) {
                     }
                 </>
             }
+
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
         </div>
         // }
     )

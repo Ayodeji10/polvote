@@ -10,7 +10,7 @@ function ShareStoryModalOut({ story, openModal, setShareStoryModalOut }) {
   // use ficus 
   const inputRef = useRef()
 
-  const [shareLink] = useState(`https://polvote.com/stories/${story.story.split("\r\n")[0].replaceAll(' ', '-')}/${story._id}`)
+  const [shareLink] = useState(`https://polvote.com/stories/${story.story.replace(/(<([^>]+)>)/ig, '').replaceAll(' ', '-').replaceAll('?', '').substring(0, 45)}/${story._id}`)
 
   const copy = () => {
     navigator.clipboard.writeText(shareLink)

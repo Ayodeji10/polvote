@@ -5,15 +5,15 @@ function NewlineText({ text }) {
     return (
         <>
             {!readMore ?
-                <h4 className='mb-2'>{text.substring(0, 300)}<span onClick={() => setReadMore(true)}>...see more</span></h4>
+                <p className='mb-2'>{text.substring(0, 300)}<span onClick={() => setReadMore(true)}>...see more</span></p>
                 :
                 <>
                     {text.split("\r\n").map((fragment, index) => {
                         return (
-                            <h4 key={index} className='mb-0'>
+                            <p key={index} className='mb-0'>
                                 {fragment}{index === text.split("\r\n").length - 1 && text.split("\r\n").length > 1 && <span onClick={() => setReadMore(false)}>...see less</span>}
                                 < br />
-                            </h4>
+                            </p>
                         )
                     })}
                     {/* <h4 onClick={() => setReadMore(true)}><span>...see less</span></h4> */}

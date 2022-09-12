@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { DataContext } from "../dataContext";
 import axios from "axios";
 import { API } from "../components/apiRoot";
+import AuthModals from './authenticationModlas';
 import LoginModal from './loginModal';
 import Modal from 'react-modal'
 Modal.setAppElement('#root')
@@ -20,6 +21,8 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
     const [voteSuccessModal, setVoteSuccessModal] = useState(false)
     const [voteRevokeModal, setVoteRevokeModal] = useState(false)
     const [loginModal, setLoginModal] = useState(false)
+    const [signupModal, setSignupModal] = useState(false)
+    const [verificationModal, setVerificationModal] = useState(false)
 
     // chech for duplicate vote 
     const [multiple, setMultiple] = useState([{ firstname: "", lastname: "" }])
@@ -40,8 +43,9 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
 
     // vote 
     const [votedAspirant, setVotedAspirant] = useState({})
+    const [voteLoading, setVoteLoading] = useState(false)
     const vote = (aspirantId) => {
-        // console.log(aspirantId)
+        setVoteLoading(true)
         const aspirant = poll.aspirant.filter(aspirant => aspirant.id === aspirantId)
         setVotedAspirant(aspirant[0])
         axios({
@@ -50,30 +54,30 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
             headers: { 'Authorization': `Bearer ${context.user.token}` },
             data: { aspiid: aspirantId }
         }).then((response) => {
-            // window.location.reload()
-            console.log(response)
             setVoteModal(false)
             setVoteSuccessModal(true)
-            if (window.location.pathname.includes === ("/polls")) {
+            if (window.location.pathname === ("/polls")) {
                 fetchPolls()
             } else {
                 fetchcurrentPollAndParties()
             }
+            setVoteLoading(false)
         }, (error) => {
-            // console.log(error)
+            setVoteLoading(false)
         })
     }
 
     // remove vote 
+    const [devoteLoading, setDevoteLoading] = useState(false)
     const devote = (aspirantId) => {
-        // console.log(aspirantId)
+        setDevoteLoading(true)
         axios({
             url: `${API.API_ROOT}/polls/voters/${poll._id}`,
             method: "patch",
             headers: { 'Authorization': `Bearer ${context.user.token}` },
             data: { aspiid: aspirantId }
         }).then((response) => {
-            if (window.location.pathname.includes === ("/polls")) {
+            if (window.location.pathname === ("/polls")) {
                 fetchPolls()
                 setMultipleVotesModal(false)
                 setVoteRevokeModal(true)
@@ -82,8 +86,9 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                 setMultipleVotesModal(false)
                 setVoteRevokeModal(true)
             }
+            setDevoteLoading(false)
         }, (error) => {
-            // console.log(error)
+            setDevoteLoading(false)
         })
     }
 
@@ -117,14 +122,14 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                                 <img src={aspirant.image === undefined ? "/images/user (1) 1.png" : `${aspirant.image}`} onClick={() => navigate(`/profiles/single/${aspirant.id}`)} alt="candidate-img" className="img-fluid" />
                             </div>
                         </div>
-                        <div className="col-lg-6 col-md-6 col-sm-6 col-6">
+                        <div className="col-lg-7 col-md-7 col-sm-7 col-6">
                             <h3 className="mb-0" onClick={() => navigate(`/profiles/single/${aspirant.id}`)}>{aspirant.firstname} {aspirant.lastname}</h3>
                             <p>{aspirant.politparty}</p>
                             <div className="bar">
                                 <div className="indicator" style={{ width: `${(aspirant.votes.length / pollVotes) * 100}%` }} />
                             </div>
                         </div>
-                        <div className="col-lg-4 col-md-4 col-sm-4 col-4 d-flex justify-content-between align-items-center">
+                        <div className="col-lg-3 col-md-3 col-sm-3 col-4 d-flex justify-content-between align-items-center">
                             <div>
                                 <h2>{((aspirant.votes.length / pollVotes) * 100).toFixed(1)}%</h2>
                                 <h5 className="mb-0">{aspirant.votes.length} Vote{aspirant.votes.length > 1 && "s"}</h5>
@@ -134,12 +139,6 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                                 <span>Vote{aspirant.votes.filter(vote => vote === context.user._id).length > 0 && "d"}</span>
                             </button>
                         </div>
-                        {/* <div className="col-lg-1 col-md-2 col-sm-2 col-2">
-                            {aspirant.votes.filter(vote => vote === context.user._id).length > 0 ?
-                                <img src="/img/Group 515.svg" alt="voted" onClick={checkVote} className="vote-img" /> :
-                                <img src="/img/Group 516.svg" alt="vote" onClick={checkVote} className="vote-img" />
-                            }
-                        </div> */}
                     </div>
                 </div>
             }
@@ -150,7 +149,7 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                 <p>Note: you can only vote for one aspirant in this category</p>
                 <div className="d-flex justify-content-between">
                     <button id="cancel" onClick={() => setVoteModal(false)}>Cancel</button>
-                    <button id="proceed" onClick={() => vote(aspirant.id)}>Proceed to Vote</button>
+                    <button id="proceed" onClick={() => vote(aspirant.id)}>{voteLoading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Proceed to Vote"}</button>
                 </div>
             </Modal>
 
@@ -160,7 +159,7 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                 <p>You can’t vote for multiple candidate in this category, Kindly revoke Vote for {multiple[0].firstname} {multiple[0].lastname}  to proceed with poll</p>
                 <div className="d-flex justify-content-between">
                     <button id="cancel" onClick={() => setMultipleVotesModal(false)}>Cancel</button>
-                    <button id="proceed" onClick={() => devote(aspirant.id)}>Revoke Previous Vote</button>
+                    <button id="proceed" onClick={() => devote(aspirant.id)}>{devoteLoading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Revoke Previous Vote"}</button>
                 </div>
             </Modal>
 
@@ -180,8 +179,8 @@ function OpenPollCandidate({ aspirant, poll, pollVotes, liveVotes, live, fetchPo
                 <p>You have successfully revoked your vote for {multiple[0].firstname} {multiple[0].lastname}</p>
             </Modal>
 
-            {/* login modal  */}
-            {loginModal && <LoginModal loginModal={loginModal} setLoginModal={setLoginModal} />}
+            {/* authentication */}
+            <AuthModals loginModal={loginModal} setLoginModal={setLoginModal} signupModal={signupModal} setSignupModal={setSignupModal} verificationModal={verificationModal} setVerificationModal={setVerificationModal} />
         </>
     )
 }

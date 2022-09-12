@@ -2,6 +2,7 @@ import React, { useEffect, useContext, useState } from 'react'
 import Nav from '../components/nav'
 import Footer from "../components/footer";
 import { Link, useNavigate } from "react-router-dom";
+import NewAspirantLineText from '../components/newAspirantLineText';
 import axios from "axios";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
@@ -88,7 +89,8 @@ function PreviewAspirant() {
             localStorage.removeItem('profileImg')
             navigate('/profiles')
         }, (error) => {
-            console.log(error)
+            // console.log(error)
+            setError("Something went wrong, please try again later")
             setLoading(false)
             setError('Something went wrong, please try again')
         })
@@ -139,20 +141,40 @@ function PreviewAspirant() {
                         <h2 className="mb-5">{context.newAspirant.firstName} {context.newAspirant.lastName}</h2>
                         <div className="info">
                             <h3>Overview</h3>
-                            <p>{context.newAspirant.overview}</p>
+                            {context.newAspirant.overview.split("\r\n").length > 1 ?
+                                <NewAspirantLineText text={context.newAspirant.overview} /> :
+                                <div className='mb-5' dangerouslySetInnerHTML={{ __html: context.newAspirant.overview }}></div>
+                            }
+                            {/* <p>{context.newAspirant.overview}</p> */}
                             <h3>Education</h3>
-                            <p>{context.newAspirant.education}</p>
+                            {context.newAspirant.education.split("\r\n").length > 1 ?
+                                <NewAspirantLineText text={context.newAspirant.education} /> :
+                                <div className='mb-5' dangerouslySetInnerHTML={{ __html: context.newAspirant.education }}></div>
+                            }
+                            {/* <p>{context.newAspirant.education}</p> */}
                             <h3>Politics</h3>
-                            <p>{context.newAspirant.politics}</p>
+                            {context.newAspirant.politics.split("\r\n").length > 1 ?
+                                <NewAspirantLineText text={context.newAspirant.politics} /> :
+                                <div className='mb-5' dangerouslySetInnerHTML={{ __html: context.newAspirant.politics }}></div>
+                            }
+                            {/* <p>{context.newAspirant.politics}</p> */}
                             <h3>Business Interest</h3>
-                            <p>{context.newAspirant.business}</p>
+                            {context.newAspirant.business.split("\r\n").length > 1 ?
+                                <NewAspirantLineText text={context.newAspirant.business} /> :
+                                <div className='mb-5' dangerouslySetInnerHTML={{ __html: context.newAspirant.business }}></div>
+                            }
+                            {/* <p>{context.newAspirant.business}</p> */}
                             <h3>Activism</h3>
-                            <p>{context.newAspirant.activism}</p>
+                            {context.newAspirant.activism.split("\r\n").length > 1 ?
+                                <NewAspirantLineText text={context.newAspirant.activism} /> :
+                                <div className='mb-5' dangerouslySetInnerHTML={{ __html: context.newAspirant.activism }}></div>
+                            }
+                            {/* <p>{context.newAspirant.activism}</p> */}
                         </div>
                         <p>{error}</p>
                         <div className="d-flex justify-content-end">
                             <Link to={'/create-aspirant/submit-profile'}><button id="back">Back</button></Link>
-                            <button id="proceed" onClick={submitProfile}>{loading ? "Loading..." : "Proceed to Submit"}</button>
+                            <button id="proceed" onClick={submitProfile}>{loading ? <>Loading...  <i className="fa-solid fa-spinner fa-spin" /></> : "Proceed to Submit"}</button>
                         </div>
 
                         {/* footer  */}

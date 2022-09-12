@@ -2,6 +2,8 @@ import React, { useContext, useState, useEffect } from 'react'
 import Nav from '../components/nav'
 import Aside from "../components/aside";
 import Footer from "../components/footer";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 import { Link, useNavigate } from "react-router-dom";
 import { DataContext } from "../dataContext";
 
@@ -18,6 +20,32 @@ function CreateAspirant2() {
             navigate('/')
         }
     }, [])
+
+    // text editor modules 
+    const modules = {
+        toolbar: [
+            // [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
+            // [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ 'list': 'ordered' }, { 'list': 'bullet' },
+                // { 'indent': '-1' }, { 'indent': '+1' }
+            ],
+            ['link',
+                // 'image', 'video'
+            ],
+            // ['clean']
+        ],
+        clipboard: {
+            // toggle to add extra line breaks when pasting HTML:
+            matchVisual: false,
+        }
+    }
+    const formats = [
+        'header', 'font', 'size',
+        'bold', 'italic', 'underline', 'strike', 'blockquote',
+        'list', 'bullet', 'indent',
+        'link', 'image', 'video'
+    ]
 
     // add history 
     const handleAddHstory = () => {
@@ -86,23 +114,63 @@ function CreateAspirant2() {
                             </div>
                             <div className="input">
                                 <label htmlFor="overview">Overview</label>
-                                <textarea name id="overview" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.overview} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, overview: e.target.value } })} />
+                                <ReactQuill
+                                    theme="snow"
+                                    placeholder="Type Here"
+                                    value={context.newAspirant.overview}
+                                    onChange={val => setContext({ ...context, newAspirant: { ...context.newAspirant, overview: val } })}
+                                    modules={modules}
+                                    formats={formats}
+                                />
+                                {/* <textarea name id="overview" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.overview} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, overview: e.target.value } })} /> */}
                             </div>
                             <div className="input">
                                 <label htmlFor="Education">Educational Background</label>
-                                <textarea name id="Education" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.education} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, education: e.target.value } })} />
+                                <ReactQuill
+                                    theme="snow"
+                                    placeholder="Type Here"
+                                    value={context.newAspirant.education}
+                                    onChange={val => setContext({ ...context, newAspirant: { ...context.newAspirant, education: val } })}
+                                    modules={modules}
+                                    formats={formats}
+                                />
+                                {/* <textarea name id="Education" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.education} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, education: e.target.value } })} /> */}
                             </div>
                             <div className="input">
                                 <label htmlFor="Politics">Political Career</label>
-                                <textarea name id="Politics" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.politics} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, politics: e.target.value } })} />
+                                <ReactQuill
+                                    theme="snow"
+                                    placeholder="Type Here"
+                                    value={context.newAspirant.politics}
+                                    onChange={val => setContext({ ...context, newAspirant: { ...context.newAspirant, politics: val } })}
+                                    modules={modules}
+                                    formats={formats}
+                                />
+                                {/* <textarea name id="Politics" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.politics} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, politics: e.target.value } })} /> */}
                             </div>
                             <div className="input">
                                 <label htmlFor="interest">Professional Career/Business Interest</label>
-                                <textarea name id="interest" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.business} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, business: e.target.value } })} />
+                                <ReactQuill
+                                    theme="snow"
+                                    placeholder="Type Here"
+                                    value={context.newAspirant.business}
+                                    onChange={val => setContext({ ...context, newAspirant: { ...context.newAspirant, business: val } })}
+                                    modules={modules}
+                                    formats={formats}
+                                />
+                                {/* <textarea name id="interest" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.business} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, business: e.target.value } })} /> */}
                             </div>
                             <div className="input">
                                 <label htmlFor="Activism">Awards</label>
-                                <textarea name id="Activism" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.activism} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, activism: e.target.value } })} />
+                                <ReactQuill
+                                    theme="snow"
+                                    placeholder="Type Here"
+                                    value={context.newAspirant.activism}
+                                    onChange={val => setContext({ ...context, newAspirant: { ...context.newAspirant, activism: val } })}
+                                    modules={modules}
+                                    formats={formats}
+                                />
+                                {/* <textarea name id="Activism" cols={30} rows={10} placeholder="Type Here" value={context.newAspirant.activism} onChange={(e) => setContext({ ...context, newAspirant: { ...context.newAspirant, activism: e.target.value } })} /> */}
                             </div>
                             {/* history  */}
                             <div className="history mt-5">

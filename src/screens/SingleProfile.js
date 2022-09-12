@@ -436,7 +436,7 @@ function SingleProfile() {
                                                 if (localStorage.getItem('ballotbox_token') !== null) {
                                                     navigate('/create-aspirant')
                                                 } else {
-                                                    setLoginModal(true)
+                                                    setVerificationModal(true)
                                                 }
                                             }}><i className="far fa-edit" />New Aspirant Profile</button>
                                         </div>

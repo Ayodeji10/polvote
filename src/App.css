@@ -171,7 +171,7 @@ nav li.active a svg path {
 }
 
 nav .nav2 {
-    padding-left: 38px;
+    padding-left: 20px;
     border-left: solid 2px rgba(255, 255, 255, 0.2)
 }
 
@@ -180,7 +180,7 @@ nav .profile-img {
     max-height: 45px;
     border-radius: 50%;
     overflow: hidden;
-    margin-left: 12px;
+    margin-left: 20px;
 }
 
 nav .profile-img img {
@@ -2050,6 +2050,12 @@ footer#footer img.social {
     margin-bottom: 44px;
 }
 
+.open-poll-card .header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
 .open-poll-card .header h4 {
     font-size: 14px;
     font-weight: 400;
@@ -2536,14 +2542,25 @@ footer#footer img.social {
     margin-bottom: 17px;
 }
 
-.story .story h4 {
+.story .story .storyText p,
+.story .story .storyText h1,
+.story .story .storyText h2,
+.story .story .storyText h3,
+.story .story .storyText h4,
+.story .story .storyText h5,
+.story .story .storyText h6 {
     font-size: 16px;
     font-weight: 400;
     line-height: 24px;
     margin-bottom: 0;
+    color: #FFF
 }
 
-.story .story h4 span {
+.story .story .storyText a {
+    color: blue
+}
+
+.story .story .storyText p span {
     color: rgba(255, 255, 255, 0.7);
     cursor: pointer;
 }
@@ -2820,7 +2837,7 @@ footer#footer img.social {
     float: right
 }
 
-.story-write-modal h2 {
+.story-write-modal h2.header {
     text-align: center;
     font-size: 24px;
     font-weight: 700;
@@ -2865,16 +2882,68 @@ footer#footer img.social {
     font-weight: 400;
 }
 
-.story-write-modal textarea {
-    font-size: 16px;
-    font-weight: 400;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: #FFF;
-    width: 100%;
-    margin-bottom: 10px;
+/* text editor  */
+.ql-snow .ql-stroke {
+    stroke: #FFF !important;
+}
+
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+    fill: #FFF;
+}
+
+.dm .ql-snow .ql-stroke {
+    stroke: #444 !important;
+}
+
+.dm .ql-snow .ql-fill,
+.dm .ql-snow .ql-stroke.ql-fill {
+    fill: #444;
+}
+
+.ql-container {
+    min-height: 120px
+}
+
+.ql-toolbar button {
+    padding: unset !important
+}
+
+.ql-tooltip[style],
+.ql-editing[style] {
+    left: 0 !important;
+
+}
+
+.ql-editor.ql-blank::before {
+    color: rgba(255, 255, 255, 0.4);
+    font-style: none !important;
+    left: 15px;
+    pointer-events: none;
+    position: absolute;
+    right: 15px;
+}
+
+.dm .ql-editor.ql-blank::before {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.ql-editor p a {
+    color: blue
+}
+
+.ql-snow .ql-editor p,
+.ql-snow .ql-editor ol,
+.ql-snow .ql-editor ul,
+.ql-snow .ql-editor pre,
+.ql-snow .ql-editor blockquote,
+.ql-snow .ql-editor h1,
+.ql-snow .ql-editor h2,
+.ql-snow .ql-editor h3,
+.ql-snow .ql-editor h4,
+.ql-snow .ql-editor h5,
+.ql-snow .ql-editor h6 {
+    font-size: 14px;
 }
 
 .story-write-modal img#post-img {
@@ -3284,7 +3353,7 @@ img#return-btn {
     border-radius: 10px;
     height: 40px;
     width: 58px;
-    padding: 10px 0
+    padding: 10px 0 !important
 }
 
 .profile .profile button.voted {
@@ -3821,7 +3890,7 @@ img#return-btn {
 .single-profile .main .info p {
     font-size: 14px;
     font-weight: 400;
-    margin-bottom: 50px;
+    /* margin-bottom: 50px; */
     color: rgba(255, 255, 255, 0.7);
     line-height: 24px;
 }
@@ -3953,13 +4022,6 @@ img#return-btn {
     object-position: top;
 }
 
-.form .input .img-container img.profile-img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: top;
-}
-
 .form h6,
 .form2 h6,
 .submit-profile h6 {
@@ -4071,6 +4133,26 @@ img#return-btn {
     font-size: 14px;
     font-weight: 400;
     margin-bottom: 9px;
+}
+
+.form2 .input p {
+    font-size: 12px;
+    font-weight: 400;
+    width: 100%;
+    color: #FFF;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    padding: 0;
+    margin-bottom: 0 !important;
+}
+
+.form2 .input p a {
+    color: blue
+}
+
+.dm .form2 .input p {
+    color: #000;
 }
 
 .form2 .input textarea {
@@ -5107,6 +5189,84 @@ img#return-btn {
     color: #FFF
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* notifications  */
+.notifications {
+    background-color: rgba(4, 19, 54, 1);
+    border-radius: 10px;
+    padding: 15px
+}
+
+.notifications .row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding-bottom: 21px;
+    margin-bottom: 19px;
+}
+
+.notifications .row:last-child {
+    border-bottom: none !important;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.notifications .fa-circle {
+    font-size: 10px;
+    color: rgba(0, 122, 243, 1)
+}
+
+.notifications .img-container {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.notifications .img-container img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: top;
+}
+
+.notifications p {
+    font-size: 15px;
+    font-weight: 400;
+    margin-bottom: 0;
+}
+
+.notifications p span {
+    font-weight: 700;
+}
+
+.notifications h4 {
+    font-size: 12px;
+    font-weight: 400;
+    color: rgba(255, 255, 255, 0.7);
+    margin-bottom: 17px;
+}
+
+.notifications button {
+    font-size: 16px;
+    font-weight: 400;
+    background-color: transparent;
+    color: rgba(0, 122, 243, 1);
+    border: 1px solid rgba(0, 122, 243, 1) !important;
+    padding: 6px 12px;
+    border-radius: 30px !important;
+    margin-top: 10px;
+}
 
 
 
@@ -6880,7 +7040,7 @@ textarea::placeholder {
         margin-right: 30px;
     }
 
-    .story .story h4 {
+    .story .story .storyText p {
         font-size: 14px;
         line-height: 20px;
     }
@@ -7111,16 +7271,6 @@ textarea::placeholder {
         width: 496px;
     }
 
-    /* nav  */
-    nav .nav2 {
-        padding-left: 0;
-        border-left: none;
-    }
-
-    nav .profile-img {
-        margin-left: 0;
-    }
-
     /* home feed  */
     /* profile widget  */
     .stats h5 {
@@ -7205,7 +7355,7 @@ textarea::placeholder {
         margin-right: 30px;
     }
 
-    .story .story h4 {
+    .story .story .storyText p {
         font-size: 14px;
         line-height: 20px;
     }
@@ -7250,7 +7400,7 @@ textarea::placeholder {
     .story-write-modal {
         top: 10% !important;
         width: 625px;
-        max-height: 90%;
+        /* max-height: 90%; */
     }
 
     .story-write-modal h2 {
@@ -7269,12 +7419,12 @@ textarea::placeholder {
         margin-bottom: 8px;
     }
 
-    .story-write-modal textarea {
+    .story-write-modal span {
         font-size: 14px;
     }
 
-    .story-write-modal span {
-        font-size: 14px;
+    .story-write-modal .ql-container {
+        min-height: 150px
     }
 
     .story-write-modal button#post {
@@ -8019,7 +8169,7 @@ textarea::placeholder {
         margin-right: 20px;
     }
 
-    .story .story h4 {
+    .story .story .storyText p {
         font-size: 14px;
         line-height: 20px;
     }
@@ -8062,7 +8212,7 @@ textarea::placeholder {
     .story-write-modal {
         top: 5% !important;
         width: 580px !important;
-        max-height: 90% !important;
+        /* max-height: 90% !important; */
     }
 
     .story-write-modal h2 {
@@ -8085,9 +8235,13 @@ textarea::placeholder {
         font-size: 14px;
     }
 
-    .story-write-modal textarea {
-        font-size: 14px;
+    .story-write-modal .ql-container {
+        min-height: 170px
     }
+
+    /* .story-write-modal textarea {
+        font-size: 14px;
+    } */
 
     .story-write-modal span {
         font-size: 14px;
@@ -9037,7 +9191,7 @@ textarea::placeholder {
         margin-right: 20px;
     }
 
-    .story .story h4 {
+    .story .story .storyText p {
         font-size: 14px;
         line-height: 20px;
     }
@@ -9174,7 +9328,7 @@ textarea::placeholder {
     .story-write-modal {
         top: 5% !important;
         width: 485px;
-        max-height: 90%;
+        /* max-height: 90%; */
     }
 
     .story-write-modal h2 {
@@ -9197,9 +9351,13 @@ textarea::placeholder {
         font-size: 14px;
     }
 
-    .story-write-modal textarea {
-        font-size: 14px;
+    .story-write-modal .ql-container {
+        min-height: 170px
     }
+
+    /* .story-write-modal textarea {
+        font-size: 14px;
+    } */
 
     .story-write-modal span {
         font-size: 14px;
@@ -10250,7 +10408,7 @@ textarea::placeholder {
         margin-right: 20px;
     }
 
-    .story .story h4 {
+    .story .story .storyText p {
         font-size: 16px;
         line-height: 20px;
     }
@@ -10408,7 +10566,7 @@ textarea::placeholder {
     .story-write-modal {
         top: 5% !important;
         width: 355px;
-        max-height: 90%;
+        /* max-height: 90%; */
     }
 
     .story-write-modal h2 {
@@ -10431,9 +10589,13 @@ textarea::placeholder {
         font-size: 14px;
     }
 
-    .story-write-modal textarea {
-        font-size: 14px;
+    .story-write-modal .ql-container {
+        min-height: 180px
     }
+
+    /* .story-write-modal textarea {
+        font-size: 14px;
+    } */
 
     .story-write-modal span {
         font-size: 14px;
@@ -10495,7 +10657,7 @@ textarea::placeholder {
     }
 
     .polls .poll h6 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .open-poll-card .body {
@@ -11548,14 +11710,19 @@ textarea::placeholder {
     }
 
     .story .stories-header .searchbar {
-        border-radius: 20px;
-        padding: 11px;
+        border-radius: 10px;
+        padding: 10px 15px;
         margin-bottom: 10px;
     }
 
+    .story .stories-header .searchbar input {
+        font-size: 13px;
+    }
+
     .story .stories-header button {
-        font-size: 14px;
-        border-radius: 20px;
+        font-size: 13px;
+        border-radius: 10px;
+        padding: 10px
     }
 
     .story .story .img-container,
@@ -11575,7 +11742,7 @@ textarea::placeholder {
         margin-right: 20px;
     }
 
-    .story .story h4 {
+    .story .story .storyText p {
         font-size: 16px;
         line-height: 20px;
     }
@@ -11742,7 +11909,7 @@ textarea::placeholder {
     .story-write-modal {
         top: 5% !important;
         width: 330px;
-        max-height: 90%;
+        /* max-height: 90%; */
     }
 
     .story-write-modal h2 {
@@ -11765,9 +11932,13 @@ textarea::placeholder {
         font-size: 12px;
     }
 
-    .story-write-modal textarea {
-        font-size: 12px;
+    .story-write-modal .ql-container {
+        min-height: 200px
     }
+
+    /* .story-write-modal textarea {
+        font-size: 12px;
+    } */
 
     .story-write-modal span {
         font-size: 12px;
@@ -11818,6 +11989,10 @@ textarea::placeholder {
         font-size: 14px;
     }
 
+    .open-poll-card .body p {
+        font-size: 14px;
+    }
+
     .open-poll-card .candidate .aspirant-img {
         height: 40px;
         width: 40px;
@@ -11833,7 +12008,7 @@ textarea::placeholder {
     }
 
     .polls .poll h6 {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .open-poll-card .candidate h2 {
@@ -12823,11 +12998,11 @@ footer#footer.dm .bottom {
     border: 1px solid rgba(10, 24, 61, 0.1) !important
 }
 
-.dm .story .story h4 {
+.dm .story .story .storyText p {
     color: rgba(0, 0, 0, 1)
 }
 
-.dm .story .story h4 span {
+.dm .story .story .storyText p span {
     color: rgba(0, 0, 0, 0.5)
 }
 

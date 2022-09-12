@@ -21,6 +21,7 @@ import EditAspirant3 from './screens/EditAspirant3';
 import Search from './screens/Search';
 import UserProfile from './screens/UserProfile';
 import User from "./screens/User";
+import Notifications from "./screens/Notifications";
 import Withdrawal from "./screens/Withdrawal";
 import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
@@ -80,6 +81,7 @@ function App() {
           <Route exact path="/user-profile" element={<UserProfile />} />
           <Route exact path="/withdrawal/:id" element={<Withdrawal />} />
           <Route exact path="/user/:id" element={<User />} />
+          {/* <Route exact path="/notifications" element={<Notifications />} /> */}
           <Route exact path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route exact path="/courses" element={<Courses />} />
