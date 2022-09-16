@@ -2556,6 +2556,16 @@ footer#footer img.social {
     color: #FFF
 }
 
+.dm .story .story .storyText p,
+.dm .story .story .storyText h1,
+.dm .story .story .storyText h2,
+.dm .story .story .storyText h3,
+.dm .story .story .storyText h4,
+.dm .story .story .storyText h5,
+.dm .story .story .storyText h6 {
+    color: #000
+}
+
 .story .story .storyText a {
     color: blue
 }

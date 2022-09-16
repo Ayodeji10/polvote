@@ -38,6 +38,20 @@ function StoryCard({ story, index, fetchStories }) {
     const [storyLike, setStoryLike] = useState(false)
     const [seeMore, setSeeMore] = useState(false)
 
+    // see more and increase views 
+    const IncreaseViews = () => {
+        setSeeMore(true);
+        axios({
+            url: `${API.API_ROOT}/story/storyviews/${story._id}`,
+            method: "patch",
+            headers: { 'Authorization': `Bearer ${context.user.token}` },
+        }).then((response) => {
+            // console.log(response)
+        }, (error) => {
+            // console.log(error)
+        })
+    }
+
     // comment 
     const [text, setText] = useState("")
     const [commentImg, setCommentImg] = useState(null)
@@ -84,17 +98,23 @@ function StoryCard({ story, index, fetchStories }) {
     // like 
     const like = () => {
         if (localStorage.getItem('ballotbox_token') !== null) {
+            if (storyLike === 1) {
+                setStoryLike(0)
+            } else {
+                setStoryLike(1)
+            }
             axios({
                 url: `${API.API_ROOT}/story/likers/${story._id}`,
                 method: "patch",
                 headers: { 'Authorization': `Bearer ${localStorage.getItem('ballotbox_token')}` },
             }).then((response) => {
-                if (response.data.message === "New Likes Added Successfully") {
-                    setStoryLike(1)
-                }
-                if (response.data.Success === "Unliked Successfully") {
-                    setStoryLike(0)
-                }
+                // console.log(response)
+                // if (response.data.message === "New Likes Added Successfully") {
+                //     setStoryLike(1)
+                // }
+                // if (response.data.Success === "Unliked Successfully") {
+                //     setStoryLike(0)
+                // }
             }, (error) => {
             })
         } else {
@@ -283,7 +303,7 @@ function StoryCard({ story, index, fetchStories }) {
                                 <div className='mb-2'>
                                     <p style={{ display: "inline" }} dangerouslySetInnerHTML={{ __html: `${story.story.replaceAll('<p>', '').replaceAll('</p>', "").substring(0, 400)}` }}></p>
                                     {story.story.replace(/(<([^>]+)>)/ig, '').length > 400 &&
-                                        <span style={{ cursor: "pointer" }} onClick={() => setSeeMore(true)}>...see more</span>
+                                        <span style={{ cursor: "pointer" }} onClick={IncreaseViews}>...see more</span>
                                     }
                                 </div>
                                 :

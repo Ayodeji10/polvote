@@ -1,4 +1,6 @@
 import React, { useState, useContext } from 'react'
+import axios from "axios";
+import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
 import ShareProfileModal from './shareProfileModal';
@@ -14,6 +16,19 @@ function SingleProfileCard({ aspirant }) {
     const navigate = useNavigate()
 
     const [seeMore, setSeeMore] = useState(false)
+
+    const IncreaseView = () => {
+        setSeeMore(true);
+        axios({
+            url: `${API.API_ROOT}/aspirant/aspirantviews/${aspirant._id}`,
+            method: "patch",
+            headers: { 'Authorization': `Bearer ${context.user.token}` },
+        }).then((response) => {
+            // console.log(response)
+        }, (error) => {
+            // console.log(error)
+        })
+    }
 
     const [shareProfileModal, setShareProfileModal] = useState(false)
 
@@ -54,7 +69,7 @@ function SingleProfileCard({ aspirant }) {
                     </div>
                 </div>
                 <h4 className='mb-0'>Overview</h4>
-                <p>{aspirant.overview} {!seeMore && <span onClick={() => setSeeMore(true)}>....see more</span>}</p>
+                <p>{aspirant.overview} {!seeMore && <span onClick={IncreaseView}>....see more</span>}</p>
                 {seeMore &&
                     <>
                         <h4>Educational Background</h4>

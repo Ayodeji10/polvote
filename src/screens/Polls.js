@@ -70,7 +70,7 @@ function Polls() {
                             </div>
                             {/* <button onClick={() => setFilterModal(true)}><i className="fas fa-filter" />Filter</button> */}
                         </div>
-                        <h1 onClick={() => setOptions(!options)}>{activePolls ? "Active Polls" : "Concluded Polls"}<i className="fa-solid fa-angle-down" /></h1>
+                        <h1 onClick={() => setOptions(!options)}>{activePolls ? "Active Polls" : "Concluded Polls"}<i className={`fa-solid fa-angle-${options ? "up" : "down"}`} /></h1>
                         {options &&
                             <div className="options">
                                 <p className='mb-1' onClick={() => {
@@ -95,7 +95,7 @@ function Polls() {
                                             <p>Votes</p>
                                         </div>
                                         <div className="col-2">
-                                            <p>Open Date</p>
+                                            <p>Start Date</p>
                                         </div>
                                         <div className="col-2">
                                             <p>End Date</p>
