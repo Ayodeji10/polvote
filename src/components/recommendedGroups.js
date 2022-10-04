@@ -4,7 +4,7 @@ import { API } from "../components/apiRoot";
 import { useNavigate } from "react-router-dom";
 import RecStoriesSkeleton from "../skeletons/recStoriesSkeleton";
 
-function RecommendedStories() {
+function RecommendedGroups() {
   // history
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function RecommendedStories() {
 
   return (
     <div className="story-recomentdations mb-3">
-      <h2>Recommended Posts</h2>
+      <h2>Recommended Groups</h2>
       {storyFetch && (
         <>
           {[1, 2, 3, 4, 5].map((n) => {
@@ -52,10 +52,7 @@ function RecommendedStories() {
           return (
             <div className="story row" key={index}>
               <div className="col-2">
-                <div
-                  className="img-container"
-                  onClick={() => navigate(`/user/${each.userid}`)}
-                >
+                <div className="img-container">
                   {each.userimage === null || each.userimage === undefined ? (
                     <img
                       src="/img/place.jpg"
@@ -69,14 +66,12 @@ function RecommendedStories() {
                 </div>
               </div>
               <div className="col-10 details">
-                <h3 onClick={() => navigate(`/user/${each.userid}`)}>
-                  {each.fullname}
-                </h3>
-                <h4>{each.username}</h4>
-                <p>
-                  {each.story.replace(/(<([^>]+)>)/gi, "").substring(0, 100)}
-                  {each.story.length > 200 && "..."}
-                </p>
+                <h3>{each.fullname}</h3>
+                <div className="mb-2 d-flex align-items-center">
+                  <h4>{each.username}</h4>
+                  <i className="fa-solid fa-circle" />
+                  <h4>20k members</h4>
+                </div>
                 <button
                   onClick={() =>
                     navigate(
@@ -88,7 +83,7 @@ function RecommendedStories() {
                     )
                   }
                 >
-                  Read more
+                  Join Group
                 </button>
               </div>
             </div>
@@ -98,4 +93,4 @@ function RecommendedStories() {
   );
 }
 
-export default RecommendedStories;
+export default RecommendedGroups;
