@@ -17,7 +17,7 @@ function CommentNotification({ not }) {
       })
       .then((response) => {
         console.log(response);
-        // navigate(`/stories/.../${not.itemid}`)
+        navigate(`/stories/.../${not.itemid}`);
       })
       .catch((error) => {
         console.error(error);
@@ -27,7 +27,11 @@ function CommentNotification({ not }) {
   return (
     <div className="row" onClick={changeStatus}>
       <div className="col-lg-2">
-        <div className="d-flex align-items-center justify-content-between">
+        <div
+          className={`d-flex align-items-center justify-content-${
+            not.status === 0 ? "between" : "end"
+          }`}
+        >
           {not.status === 0 && <i className="fa-solid fa-circle" />}
           <div className="img-container">
             {not.userimage === null || not.userimage === undefined ? (

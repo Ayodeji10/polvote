@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Nav from "../components/nav";
 import Aside from "../components/aside";
 import Footer from "../components/footer";
@@ -8,15 +8,13 @@ import { DataContext } from "../dataContext";
 import LoginPrompt from "../components/loginPrompt";
 import AuthModals from "../components/authenticationModlas";
 import { useNavigate } from "react-router-dom";
-import Loader from "../components/loader";
 import Modal from "react-modal";
-import StorySkeleton from "../skeletons/storySkeleton";
 import RecommendedGroups from "../components/recommendedGroups";
 import CreateGroupModal from "../components/createGroupModal";
-import GroupStoryCard from "../components/groupStoryCard";
+import Loader from "../components/loader";
 Modal.setAppElement("#root");
 
-function Groups() {
+function GroupList() {
   // context
   const { context } = useContext(DataContext);
 
@@ -28,54 +26,30 @@ function Groups() {
   const [signupModal, setSignupModal] = useState(false);
   const [verificationModal, setVerificationModal] = useState(false);
 
-  // useRef and callback
-  const myRef = useRef();
+  const [groups, setGroups] = useState([]);
+  const [groupsLoading, setGroupsLoading] = useState(true);
 
-  useEffect(() => {
-    // console.log("my ref", myRef.current)
-    const observer = new IntersectionObserver((entries) => {
-      const entry = entries[0];
-      if (entry.isIntersecting) {
-        setPageNumber((prev) => {
-          return prev + 1;
-        });
-      }
-      // console.log(entry)
-    });
-    observer.observe(myRef.current);
-  }, []);
-
-  // fetch stories
-  const [stories, setStories] = useState([]);
-  const [loadMore, setLoadMore] = useState(true);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  const fetchStories = () => {
-    axios({
-      method: "GET",
-      url: `${API.API_ROOT}/story?page=${pageNumber}&limit=10`,
-    })
+  const fetchGroups = () => {
+    axios
+      .get(`${API.API_ROOT}/group`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+        },
+      })
       .then((response) => {
-        // console.log(response.data)
-        if (stories.length === 0) {
-          setStories(response.data.stories);
-        } else {
-          setStories((prevStories) => {
-            return [...prevStories, ...response.data.stories];
-          });
-        }
-        if (response.data.next === null || response.data.next === undefined) {
-          setLoadMore(false);
-        }
+        setGroups(response.data);
+        setGroupsLoading(false);
+        // console.log(response);
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
       });
   };
 
   useEffect(() => {
-    fetchStories();
-  }, [pageNumber]);
+    fetchGroups();
+  }, []);
 
   // create group modal
   const [createGroupModal, setCreateGroupModal] = useState(false);
@@ -89,11 +63,9 @@ function Groups() {
           <div className="col-lg-3 col-md-3  aside">
             <Aside />
           </div>
-          {/* gutter  */}
-          {/* <div className="col-lg-1" /> */}
           {/* main  */}
           <div className="story col-lg-6 col-md-9">
-            {/* new story  */}
+            {/* new Group  */}
             <div className="stories-header">
               <div className="row">
                 <div className="col-lg-7 col-md-6 col-sm-6">
@@ -119,30 +91,46 @@ function Groups() {
               </div>
             </div>
             {/* Groups  */}
-            {stories.length === 0 ? (
-              <>
-                {[1, 2, 3, 4, 5].map((n) => {
-                  return <StorySkeleton key={n} />;
-                })}
-              </>
+            {groupsLoading ? (
+              <Loader pageLoading={groupsLoading} />
             ) : (
               <>
-                {stories
-                  .filter((story) => story.status !== "1")
-                  .map((story, index) => {
-                    return (
-                      <GroupStoryCard
-                        story={story}
-                        index={index}
-                        key={index}
-                        fetchStories={fetchStories}
-                      />
-                    );
-                  })}
-                <Loader pageLoading={loadMore} />
+                {groups.map((group, index) => {
+                  return (
+                    <div
+                      className="group-card"
+                      key={index}
+                      onClick={() => navigate(`/groups/${group._id}`)}
+                    >
+                      <div className="row align-items-center">
+                        <div className="col-9 d-flex align-items-center">
+                          <div className="img-container">
+                            {group.profileImage === null ||
+                            group.profileImage === undefined ? (
+                              <img src="/img/place.jpg" />
+                            ) : (
+                              <img src={group.profileImage} alt="avatar" />
+                            )}
+                            <img src="/img/candidate.png" alt="" />
+                          </div>
+                          <div>
+                            <h3>{group.groupname}</h3>
+                            <div className="d-flex align-items-center gap-2">
+                              <h6>{group.grouptype}</h6>
+                              <i className="fa-solid fa-circle" />
+                              <h6>20k members</h6>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="col-3 d-flex justify-content-end">
+                          <button>Join Group</button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </>
             )}
-            <div ref={myRef}></div>
             {/* footer  */}
             <Footer />
           </div>
@@ -173,4 +161,4 @@ function Groups() {
   );
 }
 
-export default Groups;
+export default GroupList;

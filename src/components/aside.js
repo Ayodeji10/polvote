@@ -14,7 +14,7 @@ import GroupFeedSvg from "./svg/GroupFeedSvg";
 import GroupFindFriendsSvg from "./svg/GroupFindFriendsSvg";
 Modal.setAppElement("#root");
 
-function Aside({ view, setView }) {
+function Aside() {
   // context
   const { context, setContext } = useContext(DataContext);
 
@@ -312,18 +312,27 @@ function Aside({ view, setView }) {
                 <span className='mb-2'>Close Ad <i className="fas fa-times-circle" /></span>
                 <img src="/img/EZ-Cash-loan 2.png" alt="" />
             </div> */}
-      {/* <div>
-                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
-                    crossOrigin="anonymous"></script>
-                <ins className="adsbygoogle" style={{ display: 'block' }} data-ad-client="ca-pub-8526972460998976" data-ad-slot={2804702051} data-ad-format="auto" data-full-width-responsive="true" />
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({ });
-                </script>
-            </div> */}
+      <div>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
+          crossOrigin="anonymous"
+        ></script>
+        <ins
+          className="adsbygoogle"
+          style={{ display: "block" }}
+          data-ad-client="ca-pub-8526972460998976"
+          data-ad-slot={2804702051}
+          data-ad-format="auto"
+          data-full-width-responsive="true"
+        />
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
       {/* <Ad1 /> */}
 
       {/* content  */}
-      {window.location.pathname.includes("/groups") ? (
+      {window.location.pathname.includes("/groups") ||
+      window.location.pathname.includes("/courses") ? (
         ""
       ) : (
         <div className="content">
@@ -374,21 +383,27 @@ function Aside({ view, setView }) {
       )}
 
       {/* courses  */}
-      {/* <div className="courses">
-                <h3>My Courses</h3>
-                <a href className="d-flex align-items-center mb-3"><img src="/img/Vector.png" alt="" />
-                    <h4 className="mb-0">In Progress</h4>
-                </a>
-                <a href className="d-flex align-items-center mb-3"><img src="/img/Vector (1).png" alt="" />
-                    <h4 className="mb-0">Completed</h4>
-                </a>
-                <a href className="d-flex align-items-center mb-0"><img src="/img/Vector (2).png" alt="" />
-                    <h4 className="mb-0">My Certificates</h4>
-                </a>
-            </div> */}
+      {window.location.pathname.includes("/courses") && (
+        <div className="courses">
+          <h3>My Courses</h3>
+          <a href className="d-flex align-items-center mb-3">
+            <img src="/img/Vector.png" alt="" />
+            <h4 className="mb-0">In Progress</h4>
+          </a>
+          <a href className="d-flex align-items-center mb-3">
+            <img src="/img/Vector (1).png" alt="" />
+            <h4 className="mb-0">Completed</h4>
+          </a>
+          <a href className="d-flex align-items-center mb-0">
+            <img src="/img/Vector (2).png" alt="" />
+            <h4 className="mb-0">My Certificates</h4>
+          </a>
+        </div>
+      )}
 
       {/* polls  */}
-      {window.location.pathname.includes("/groups") ? (
+      {window.location.pathname.includes("/groups") ||
+      window.location.pathname.includes("/courses") ? (
         ""
       ) : (
         <div className="polls">
@@ -422,18 +437,18 @@ function Aside({ view, setView }) {
             <div className="feed">
               <button
                 className={`${
-                  view === "feed" && "active"
+                  window.location.pathname === "/groups" && "active"
                 } d-flex align-items-center`}
-                onClick={() => setView("feed")}
+                onClick={() => navigate("/groups")}
               >
                 <GroupFeedSvg />
                 My Feed
               </button>
               <button
                 className={`${
-                  view === "groups" && "active"
+                  window.location.pathname === "/groups-list" && "active"
                 } d-flex align-items-center`}
-                onClick={() => setView("groups")}
+                onClick={() => navigate("/groups-list")}
               >
                 <GroupFindFriendsSvg />
                 Find more Groups

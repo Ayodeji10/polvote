@@ -3,25 +3,11 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../apiRoot";
 
-function LikeNotification({ not }) {
+function FollowNotification({ not }) {
   // history
   const navigate = useNavigate();
 
   const changeStatus = () => {
-    // axios
-    //   .patch(`${API.API_ROOT}/notification/update/${not._id}`, {
-    //     headers: {
-    //       "content-type": "application/json",
-    //       Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
-    //     },
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     // navigate(`/stories/.../${not.itemid}`)
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //   });
     axios({
       url: `${API.API_ROOT}/notification/update/${not._id}`,
       method: "patch",
@@ -30,8 +16,8 @@ function LikeNotification({ not }) {
       },
     }).then(
       (response) => {
-        console.log(response);
-        navigate(`/stories/.../${not.itemid}`);
+        // console.log(response);
+        navigate(`/user/${not.userid}`);
       },
       (error) => {
         console.log(error);
@@ -48,7 +34,6 @@ function LikeNotification({ not }) {
           }`}
         >
           {not.status === 0 && <i className="fa-solid fa-circle" />}
-
           {/* <i className="fa-solid fa-circle" /> */}
           <div className="img-container">
             {not.userimage === null || not.userimage === undefined ? (
@@ -66,8 +51,10 @@ function LikeNotification({ not }) {
       </div>
       <div className="col-lg-9">
         <p>
-          <span>{not.userfullname}</span> liked your post
+          <span>{not.userfullname}</span> followed you{" "}
+          {not.following === true && "back"}
         </p>
+        {not.following === false && <button>Follow back</button>}
       </div>
       <div className="col-lg-1">
         <h4>3d</h4>
@@ -77,4 +64,4 @@ function LikeNotification({ not }) {
   );
 }
 
-export default LikeNotification;
+export default FollowNotification;

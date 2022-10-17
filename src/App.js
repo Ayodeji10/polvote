@@ -26,6 +26,8 @@ import Withdrawal from "./screens/Withdrawal";
 import TermsAndConditions from "./screens/TermsAndConditions";
 import PrivacyPolicy from "./screens/PrivacyPolicy";
 import Groups from "./screens/Group";
+import GroupList from "./screens/GroupList";
+import SingleGroup from "./screens/SingleGroup";
 import Courses from "./screens/Courses";
 import SingleCourse from "./screens/SingleCourse";
 import CoursesDashboardUser from "./screens/CoursesDashboard";
@@ -34,7 +36,6 @@ import CourseQuiz from "./screens/CourseQuiz";
 import QuizReview from "./screens/QuizReview";
 import CourseCertificates from "./screens/CourseCertificates";
 import "./App.css";
-import SingleGroup from "./screens/SingleGroup";
 
 function App() {
   // context
@@ -129,7 +130,8 @@ function App() {
           />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route exact path="/groups" element={<Groups />} />
-          <Route exact path="/groups/single" element={<SingleGroup />} />
+          <Route exact path="/groups-list" element={<GroupList />} />
+          <Route exact path="/groups/:id" element={<SingleGroup />} />
           <Route exact path="/courses" element={<Courses />} />
           <Route exact path="/courses/single" element={<SingleCourse />} />
           <Route

@@ -96,6 +96,16 @@ const Nav = () => {
                 </li>
                 <li
                   className={`nav-item br ${
+                    window.location.pathname.includes("/courses") && "active"
+                  }`}
+                >
+                  <Link to={"/courses"} className="nav-link">
+                    <NavAspirantsSvg />
+                    Courses
+                  </Link>
+                </li>
+                <li
+                  className={`nav-item br ${
                     window.location.pathname.includes("/groups") && "active"
                   }`}
                 >
@@ -115,7 +125,6 @@ const Nav = () => {
                     Notifications
                   </Link>
                 </li>
-                {/* <li className="nav-item br"><a className="nav-link" id="course" href="#">Take Course</a></li> */}
               </ul>
               <ul className="navbar-nav nav2 align-items-center">
                 <li className="nav-item d-flex align-items-center">
