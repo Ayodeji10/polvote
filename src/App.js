@@ -28,9 +28,14 @@ import PrivacyPolicy from "./screens/PrivacyPolicy";
 import Groups from "./screens/Group";
 import GroupList from "./screens/GroupList";
 import SingleGroup from "./screens/SingleGroup";
+import GroupRequests from "./screens/GroupRequests";
+import GroupMembers from "./screens/GroupMembers";
 import Courses from "./screens/Courses";
-import SingleCourse from "./screens/SingleCourse";
 import CoursesDashboardUser from "./screens/CoursesDashboard";
+import CourseDashboardInstructor from "./screens/CourseDashboardInstructor";
+import CreateCourse1 from "./screens/CreateCourse1";
+import CreateCourse2 from "./screens/CreateCourse2";
+import SingleCourse from "./screens/SingleCourse";
 import CourseInProgress from "./screens/CourseInProgress";
 import CourseQuiz from "./screens/CourseQuiz";
 import QuizReview from "./screens/QuizReview";
@@ -132,13 +137,30 @@ function App() {
           <Route exact path="/groups" element={<Groups />} />
           <Route exact path="/groups-list" element={<GroupList />} />
           <Route exact path="/groups/:id" element={<SingleGroup />} />
+          <Route
+            exact
+            path="/groups/:id/requests"
+            element={<GroupRequests />}
+          />
+          <Route exact path="/groups/:id/members" element={<GroupMembers />} />
           <Route exact path="/courses" element={<Courses />} />
-          <Route exact path="/courses/single" element={<SingleCourse />} />
           <Route
             exact
             path="/courses/dashboard"
             element={<CoursesDashboardUser />}
           />
+          <Route
+            exact
+            path="/courses/dashboard/instructor"
+            element={<CourseDashboardInstructor />}
+          />
+          <Route exact path="/create-course/info" element={<CreateCourse1 />} />
+          <Route
+            exact
+            path="/create-course/modules"
+            element={<CreateCourse2 />}
+          />
+          <Route exact path="/courses/single" element={<SingleCourse />} />
           <Route
             exact
             path="/courses/dashboard/single"

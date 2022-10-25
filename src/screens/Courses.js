@@ -4,10 +4,12 @@ import Footer from "../components/footer";
 import Nav from "../components/nav";
 import LoginPrompt from "../components/loginPrompt";
 import AuthModals from "../components/authenticationModlas";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import MyCoursesSvg from "../components/svg/MyLearningSvg.";
 
 function Courses() {
+  const navigate = useNavigate();
+
   // auth modals
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
@@ -39,7 +41,7 @@ function Courses() {
                     Categories
                     <i className="fa-solid fa-angle-down" />
                   </span>
-                  <span>
+                  <span onClick={() => navigate(`/courses/dashboard`)}>
                     <MyCoursesSvg />
                     My Learning
                   </span>
@@ -53,7 +55,11 @@ function Courses() {
                   <h1>Hot Picks for you!</h1>
                   <p>These are popular courses on BallotBox</p>
                 </div>
-                <div className="d-flex align-items-center">
+                <div
+                  className="d-flex align-items-center"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => navigate(`/courses/dashboard/instructor`)}
+                >
                   <label className="switch">
                     <input
                       type="checkbox"

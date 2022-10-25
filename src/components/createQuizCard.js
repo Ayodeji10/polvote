@@ -1,0 +1,353 @@
+import React, { useState, useContext } from "react";
+import { DataContext } from "../dataContext";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
+
+function CreateQuizCard({
+  item,
+  module,
+  modules,
+  setModules,
+  moduleIndex,
+  deleteAsset,
+  quizIndex,
+  setAddBar,
+}) {
+  // context
+  const { context } = useContext(DataContext);
+
+  const [view, setView] = useState(false);
+  const [title, setTitle] = useState("");
+  const [error, setError] = useState("");
+
+  // create question
+  const [createQuizQuestioonModal, setCreateQuizQuestionModal] =
+    useState(false);
+  const [question, setQuestion] = useState("");
+  const [options, setOptions] = useState([
+    { text: "", image: null },
+    { text: "", image: null },
+  ]);
+  const [answer, setAnswer] = useState(null);
+  const [repeatScore, setRepeatScore] = useState("yes");
+
+  // set title
+  const changeTitle = () => {
+    if (title.length < 1) {
+      setError("Please Input Quiz Title");
+    } else {
+      setModules(
+        modules.map((mod, i) => {
+          if (moduleIndex === i) {
+            return {
+              ...mod,
+              assets: mod.assets.map((asset, index) => {
+                if (quizIndex === index) {
+                  return { ...asset, title: title };
+                }
+                return asset;
+              }),
+            };
+          }
+          return mod;
+        })
+      );
+      setView(true);
+      console.log(module);
+    }
+  };
+
+  // add option
+  const addOption = () => {
+    const newOption = { text: "", image: null };
+    setOptions([...options, newOption]);
+  };
+
+  // delete option
+  const deleteOption = (index) => {
+    if (options.length <= 2) {
+      setError("You cant have less than two Options");
+    } else {
+      setOptions((prev) => prev.filter((option) => option !== prev[index]));
+    }
+  };
+
+  // set option inputs
+  const setOptionText = (e, i) => {
+    setOptions(
+      options.map((option, index) => {
+        if (i === index) {
+          return { ...option, text: e.target.value };
+        }
+        return option;
+      })
+    );
+    console.log(options);
+  };
+
+  // handle options input
+  const handleOptionInput = (e, i, type) => {
+    e.preventDefault();
+    setOptions(
+      options.map((each, index) => {
+        if (i !== index) {
+          return each;
+        }
+        if (type === "text") {
+          return { ...each, text: e.target.value };
+        } else {
+          return { ...each, image: e.target.files[0] };
+        }
+      })
+    );
+  };
+
+  // add question
+  const addQuestion = () => {
+    // setModules(
+    //   modules.map((mod, i) => {
+    //     if (moduleIndex === i) {
+    //       return {
+    //         ...mod,
+    //         questions: [
+    //           ...questions,
+    //           { question: question, options: options, answer: answer },
+    //         ],
+    //       };
+    //     }
+    //     return mod;
+    //   })
+    // );
+
+    setModules(
+      modules.map((mod, i) => {
+        if (moduleIndex === i) {
+          return {
+            ...mod,
+            assets: mod.assets.map((asset, index) => {
+              if (quizIndex === index) {
+                return {
+                  ...asset,
+                  questions: [
+                    ...asset.questions,
+                    { question: question, options: options, answer: answer },
+                  ],
+                };
+              }
+              return asset;
+            }),
+          };
+        }
+        return mod;
+      })
+    );
+
+    setQuestion("");
+    setOptions([
+      { text: "", image: null },
+      { text: "", image: null },
+    ]);
+    setAnswer(null);
+    setCreateQuizQuestionModal(false);
+  };
+
+  const deleteQuestion = (i) => {
+    setModules(
+      modules.map((mod, i) => {
+        if (moduleIndex === i) {
+          return {
+            ...mod,
+            assets: mod.assets.map((asset, index) => {
+              if (quizIndex === index) {
+                return {
+                  ...asset,
+                  questions: asset.questions.filter(
+                    (option) => option !== asset.questions[i]
+                  ),
+                };
+              }
+              return asset;
+            }),
+          };
+        }
+        return mod;
+      })
+    );
+  };
+
+  return (
+    <div className="row mt-4">
+      <div className="col-9">
+        <div className="createQuizCard">
+          {view === false ? (
+            <div className="initial">
+              <label htmlFor="title">Quiz Title</label>
+              <input
+                type="text"
+                placeholder="Type Title Here"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+              />
+              <h6 className="error mb-3">{error}</h6>
+              <div className="d-flex justify-content-end">
+                <button id="preview" onClick={() => deleteAsset(quizIndex)}>
+                  Cancel
+                </button>
+                <button id="save" onClick={changeTitle}>
+                  Add Module
+                </button>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="initial d-flex justify-content-between align-items-center">
+                <h3 className="mb-0">
+                  Quiz {quizIndex + 1}:
+                  <i className="fa-regular fa-circle-question" />
+                  {item.title}
+                </h3>
+                {item.questions.length === 0 ? (
+                  <h4
+                    className="mb-0"
+                    onClick={() => setCreateQuizQuestionModal(true)}
+                  >
+                    <i className="fa-solid fa-circle-plus" />
+                    Add Question
+                  </h4>
+                ) : (
+                  <i className="fa-solid fa-angle-down" />
+                )}
+              </div>
+              {item.questions.length !== 0 && (
+                <div className="bottom">
+                  <div className="d-flex justify-content-between mb-3">
+                    <h5 className="mb-0">Questions</h5>
+                    <h4
+                      className="mb-0"
+                      onClick={() => setCreateQuizQuestionModal(true)}
+                    >
+                      <i className="fa-solid fa-circle-plus" />
+                      Add Question
+                    </h4>
+                  </div>
+                  {item.questions.map((q, i) => {
+                    return (
+                      <div className="d-flex align-items-center justify-content-between mb-3">
+                        <h3 className="mb-0">{q.question}</h3>
+                        <div>
+                          <i className="fa-solid fa-pen" />
+                          <i
+                            className="fa-solid fa-trash-can"
+                            onClick={() => deleteQuestion(i)}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+            </>
+          )}
+        </div>
+      </div>
+      <div className="col-1 d-flex justify-content-center">
+        <i className="fa-solid fa-pen" onClick={() => setView(false)} />
+      </div>
+      <div className="col-1 d-flex justify-content-center">
+        <i
+          className="fa-solid fa-trash-can"
+          onClick={(e) => deleteAsset(quizIndex)}
+        />
+      </div>
+      <div className="col-1 d-flex">
+        <i className="fa-solid fa-plus" onClick={() => setAddBar(true)} />
+      </div>
+
+      {/* create question modal  */}
+      <Modal
+        isOpen={createQuizQuestioonModal}
+        onRequestClose={() => setCreateQuizQuestionModal(false)}
+        id="create-quiz-modal"
+        className={`${context.darkMode ? "dm" : ""}`}
+      >
+        <i
+          className="far fa-times-circle"
+          onClick={() => setCreateQuizQuestionModal(false)}
+        />
+        <h2>Question</h2>
+        <label htmlFor="question">Question</label>
+        <input
+          type="text"
+          placeholder="Ask a question"
+          value={question}
+          onChange={(e) => setQuestion(e.target.value)}
+        />
+        <h3>Answers</h3>
+        <p>Click on any of your options to select the correct answer</p>
+        {options.map((q, i) => {
+          return (
+            <>
+              <div className="d-flex align-items-center justify-content-between mb-3">
+                <div className="d-flex align-items-center gap-3">
+                  <input
+                    type="radio"
+                    className="checkbox"
+                    id={`option-${i}`}
+                    checked={answer === i}
+                    onClick={() => setAnswer(i)}
+                  />
+                  <label htmlFor={`option-${i}`} className="option">
+                    Option {i + 1}
+                  </label>
+                </div>
+                <i
+                  className="fa-regular fa-trash-can"
+                  onClick={() => deleteOption(i)}
+                />
+              </div>
+              <input
+                type="text"
+                placeholder={`Option ${i + 1}`}
+                value={q.text}
+                onChange={(e) => handleOptionInput(e, i, "text")}
+              />
+              <label htmlFor={`option-img-${i}`}>
+                Option {i + 1} Image (optional)
+              </label>
+              <input
+                type="file"
+                id={`option-img-${i}`}
+                accept="image/*"
+                onChange={(e) => handleOptionInput(e, i, "image")}
+              />
+            </>
+          );
+        })}
+        <h6 onClick={addOption}>
+          <i className="fa-solid fa-circle-plus" />
+          Add Option
+        </h6>
+        <label htmlFor="score">Score</label>
+        <input
+          type="number"
+          id="score"
+          placeholder="Enter score of this question"
+        />
+        <label htmlFor="">
+          Do you want to use this score for all questions set in this quiz?
+        </label>
+        <select
+          value={repeatScore}
+          onChange={(e) => setRepeatScore(e.target.value)}
+        >
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+        <h6 className="error">{error}</h6>
+        <button onClick={addQuestion}>Add Question</button>
+      </Modal>
+    </div>
+  );
+}
+
+export default CreateQuizCard;

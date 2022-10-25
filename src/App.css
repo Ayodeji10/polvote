@@ -851,7 +851,7 @@ nav .profile-img a {
   background-color: #fff;
 }
 
-/* aside course  */
+/* aside  */
 .aside-sticky {
   position: sticky !important;
   top: 80px !important;
@@ -921,6 +921,41 @@ nav .profile-img a {
   background-color: rgba(0, 122, 243, 1);
 }
 
+/* create course widget  */
+.home-feed .aside .create-course-widget {
+  background-color: rgba(4, 19, 54, 1);
+  border-radius: 10px;
+  padding: 10px 21px;
+}
+
+.home-feed .aside .create-course-widget h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.home-feed .aside .create-course-widget a {
+  display: block;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 19px 10px;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.home-feed .aside .create-course-widget a.active {
+  border-left: 3px solid rgba(0, 122, 243, 1) !important;
+}
+
+.home-feed .aside .create-course-widget a:last-child {
+  border-bottom: none !important;
+}
+
+.home-feed .aside .create-course-widget a i {
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+/* content  */
 .home-feed .aside .content {
   background-color: rgba(4, 19, 54, 1);
   border-radius: 10px;
@@ -5675,6 +5710,132 @@ img#return-btn {
   margin-bottom: 0;
 }
 
+.group-info .input-container {
+  top: 45px;
+  left: 0;
+  width: 100%;
+  background-color: #000b22;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.group-info .input-container input {
+  font-size: 16px;
+  padding: 0 10px;
+}
+
+.group-info .input-container button {
+  background-color: rgba(0, 122, 243, 1);
+  color: #fff;
+}
+
+/* group requests page  */
+.group-requests header {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0px 4px 4px 0px rgba(10, 24, 61, 0.05);
+  padding: 29px 21px;
+  background-color: rgba(10, 24, 61, 1);
+  margin-bottom: 23px;
+}
+
+.group-requests header h4 {
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.group-requests header h4 i {
+  margin-right: 10px;
+}
+
+.group-requests header a {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.group-requests .request {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px;
+  background-color: rgba(4, 19, 54, 1);
+  padding: 26px 16px;
+  margin-bottom: 20px;
+}
+
+.group-requests .request .img-container {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 16px;
+}
+
+.group-requests .request .img-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: top;
+  min-height: 100%;
+}
+
+.group-requests .request h5 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+.group-requests .request span {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.group-requests .request i {
+  font-size: 8px;
+  margin: 0 15px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.group-requests .request button {
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: 30px;
+  padding: 10px 22px;
+  margin-right: 20px;
+}
+
+.group-requests .request button.approve-btn {
+  background-color: rgba(0, 122, 243, 1);
+  color: #fff;
+}
+
+.group-requests .request button.decline-btn {
+  color: rgba(0, 122, 243, 1);
+  background-color: #fff;
+}
+
+.group-requests .request i.fa-ellipsis {
+  font-size: 15px;
+  margin: 0;
+  color: #fff;
+}
+
+.group-requests .request p {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.group-requests .request p:last-child {
+  margin-bottom: 0;
+}
+
+.group-requests .request p span {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff !important;
+}
+
 /* course-home */
 .courses-page .header .searchbar {
   background-color: #fff;
@@ -5697,6 +5858,7 @@ img#return-btn {
 .courses-page .header span {
   font-size: 16px;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .courses-page .header span i {
@@ -5808,143 +5970,32 @@ img#return-btn {
   font-weight: 700;
 }
 
-/* single course page  */
-.courses-page .single-page .header i.fa-arrow-left {
-  color: grey;
-  margin-right: 23px;
-  font-size: 30px;
+/* dashboard, user and instructor */
+.dashboard .header {
+  margin-bottom: 24px;
 }
 
-.courses-page .single-page .header h1 {
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 11px;
-}
-
-.courses-page .single-page .header i {
-  font-size: 14px;
-  color: rgba(254, 192, 6, 1);
-  margin-right: 7px;
-}
-
-.courses-page .single-page .header span {
-  color: rgba(254, 192, 6, 1);
-  font-size: 14px;
-  font-weight: 400;
-  margin-right: 19px;
-}
-
-.courses-page .single-page .header span.ratings {
-  color: #fff;
-  margin-right: 0;
-}
-
-.courses-page .single-page .header button {
-  font-size: 18px;
+.dashboard .header h4 {
+  font-size: 24px;
   font-weight: 700;
-  padding: 19px;
-  width: 100%;
+  cursor: pointer;
 }
 
-.courses-page .single-page .header button i {
-  margin-left: 28px;
-  color: #fff;
+.dashboard .header h4 i {
+  margin-right: 20px;
 }
 
-.courses-page .single-page .video .widget {
-  border: solid 1px rgba(255, 255, 255, 0.5) !important;
-  border-radius: 33px;
-  padding: 25px 20px;
-  background-color: rgba(0, 9, 32, 0.9);
+.dashboard .header .searchbar {
+  width: 400px;
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 16px 20px;
 }
 
-.courses-page .single-page .video .widget section {
-  margin-bottom: 40px;
-}
-
-.courses-page .single-page .video .widget section:last-child {
-  margin-bottom: 0;
-}
-
-.courses-page .single-page .video .widget i,
-.courses-page .single-page .video .widget img {
-  color: #fff;
-  margin-right: 18px;
-}
-
-.courses-page .single-page .video .widget h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 2px;
-}
-
-.courses-page .single-page .video .widget p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.courses-page .single-page .details li {
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 8px;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.courses-page .single-page .details h4 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 9px;
-  line-height: 24px;
-}
-
-.courses-page .single-page .details p {
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 44px;
-  color: rgba(255, 255, 255, 0.9);
-  line-height: 24px;
-}
-
-.courses-page .single-page .details h4#instructor {
-  margin-bottom: 20px;
-}
-
-.courses-page .single-page .details h4#name {
-  margin-bottom: 4px;
-}
-
-.courses-page .single-page .details h6 {
-  font-size: 14px;
-  font-weight: 500;
-  margin-bottom: 14px;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.courses-page .single-page .details .img-container {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 14px;
-}
-
-.courses-page .single-page .details .img-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: top;
-}
-
-/* dashboard, user section for both completed and in progress */
-.dashboard .header span {
+.dashboard .header .searchbar input {
+  background-color: transparent;
   font-size: 16px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.dashboard .header span img {
-  margin-right: 17px;
 }
 
 /* slider for admin toggle  */
@@ -6004,23 +6055,16 @@ input:checked + .slider:before {
 }
 
 /* end of slider  */
-
-.dashboard .header p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-}
-
 .dashboard .board {
   border-radius: 10px;
   background-color: rgba(6, 25, 71, 1);
-  padding: 30px;
-  margin-bottom: 141px;
+  padding: 20px;
+  margin-bottom: 60px;
 }
 
 .dashboard .board section {
   border-radius: 10px;
-  background-color: rgba(4, 19, 54, 1);
+  background-color: #fff;
   padding: 8px;
   margin-bottom: 44px;
 }
@@ -6032,7 +6076,7 @@ input:checked + .slider:before {
   padding: 13px 0;
   border-radius: 10px;
   background-color: transparent;
-  color: rgba(255, 255, 255, 0.4);
+  color: rgba(0, 0, 0, 1);
 }
 
 .dashboard .board section button.active {
@@ -6057,7 +6101,7 @@ input:checked + .slider:before {
 .dashboard .board .course h3 {
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 6px;
 }
 
 .dashboard .board .course span {
@@ -6106,1079 +6150,343 @@ input:checked + .slider:before {
   padding: 10px;
 }
 
-.dashboard section h1 {
-  font-size: 30px;
-}
-
-/* single course page in progress for user */
-.course-page {
-  padding-top: 147px;
-}
-
-.course-page h6 {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  margin-bottom: 36px;
-}
-
-.course-page h6 i {
-  margin-right: 14px;
-}
-
-.course-page .widget {
-  background-color: rgba(6, 25, 71, 1);
-  padding: 21px 23px;
-}
-
-.course-page .widget h1 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 16px;
-}
-
-.course-page .widget h3 {
-  font-size: 12px;
-  font-weight: 400;
-  margin-bottom: 15px;
-  color: rgba(82, 169, 255, 1);
-}
-
-.course-page .widget .bar {
-  height: 3px;
-  width: 18%;
-  background-color: rgba(82, 169, 255, 0.3);
-  margin-bottom: 24px;
-}
-
-.course-page .widget .bar .indicator.done {
-  height: 3px;
-  /* width: 100%; */
-  background-color: rgba(82, 169, 255, 1);
-}
-
-.course-page .widget .bar .indicator.current {
-  height: 3px;
-  width: 30%;
-  background-color: rgba(82, 169, 255, 1);
-}
-
-.course-page .widget .chapters {
-  padding-bottom: 23px;
-  border-bottom: solid 2px rgba(255, 255, 255, 0.2) !important;
-  margin-bottom: 24px;
-}
-
-.course-page .widget .chapter {
-  margin-bottom: 15px;
-}
-
-.course-page .widget .chapter .index {
-  height: 20px;
-  width: 20px;
-  padding: 5px;
-  border-radius: 50%;
-  border: solid 2px rgba(255, 255, 255, 0.5) !important;
-  margin-right: 11px;
-}
-
-.course-page .widget .chapter.done .index {
-  border: solid 2px rgba(82, 169, 255, 1) !important;
-}
-
-.course-page .widget .chapter.current .index {
-  border-top: solid 2px rgba(82, 169, 255, 1) !important;
-  border-right: solid 2px rgba(82, 169, 255, 1) !important;
-}
-
-.course-page .widget .chapter .index span {
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.course-page .widget .chapter.done .index span,
-.course-page .widget .chapter.current .index span {
-  color: rgba(82, 169, 255, 1);
-}
-
-.course-page .widget .chapter h2 {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 20px;
-  margin-bottom: 16px;
-}
-
-.course-page .widget .chapter.done h2,
-.course-page .widget .chapter.current h2 {
-  color: rgba(82, 169, 255, 0.6);
-}
-
-.course-page .widget .chapter i {
-  color: rgba(255, 255, 255, 0.4);
-}
-
-.course-page .widget .discuss h3 {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.course-page .widget .comment {
-  margin-bottom: 50px;
-}
-
-.course-page .widget .comment:last-child {
-  margin-bottom: 0;
-}
-
-.course-page .widget .comment .img-container {
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 14px;
-}
-
-.course-page .widget .comment .img-container img,
-.course-page .widget .comment .replies .img-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: top;
-}
-
-.course-page .widget .comment h4 {
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.course-page .widget .comment p {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 18px;
-}
-
-.course-page .widget .comment .reply img {
-  margin-right: 13px;
-}
-
-.course-page .widget .comment .reply span {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  cursor: pointer;
-}
-
-.course-page .widget .comment .reply i {
-  font-size: 4px;
-  color: rgba(196, 196, 196, 1);
-  margin: 0 18px;
-}
-
-.course-page .widget .comment .replies {
-  border-left: solid 1px rgba(255, 255, 255, 0.5) !important;
-  margin-top: 25px;
-  padding-left: 17px;
-}
-
-.course-page .widget .comment .replies .img-container {
-  height: 35px;
-  width: 35px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 14px;
-}
-
-.course-page .main {
-  padding-top: 48px;
-}
-
-.course-page .main .header {
-  margin-bottom: 40px;
-}
-
-.course-page .main .header p {
+/* create course */
+/* course-info  */
+.create-course.info h3 {
   font-size: 20px;
-  font-weight: 400;
-  margin-bottom: 4px;
-}
-
-.course-page .main .header h1 {
-  font-size: 30px;
-  font-weight: 800;
-  margin-bottom: 4px;
-}
-
-.course-page .main .header h5 {
-  font-size: 18px;
-  font-weight: 400;
-}
-
-.course-page .main .header span {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-  margin-left: 10px;
-}
-
-.course-page .main .header span button {
-  padding: 5px 0;
-  font-size: 10px;
-  height: 19px;
-  width: 19px;
-  color: rgba(255, 255, 255, 0.5);
-  background-color: rgba(0, 122, 243, 0.4);
-}
-
-.course-page .main .header span button.active {
-  color: #fff;
-  background-color: rgba(0, 122, 243, 1);
-}
-
-.course-page .main .header span button#left {
-  border-radius: 50% 0 0 50%;
-}
-
-.course-page .main .header span button#right {
-  border-radius: 0 50% 50% 0;
-}
-
-.course-page .main iframe {
-  margin-bottom: 19px;
-  border-radius: 5px;
-}
-
-.course-page .main .page button {
-  margin-right: 39px;
-  background-color: transparent;
-}
-
-.course-page .main .page button:last-child {
-  margin-right: 0;
-}
-
-.course-page .main .page button span {
-  display: block;
-  font-size: 18px;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  line-height: 24px;
-  margin-bottom: 4px;
-}
-
-.course-page .main .page button.active span {
-  color: rgba(0, 122, 243, 1);
-}
-
-.course-page .main .page button i {
-  font-size: 8px;
-  color: rgba(0, 122, 243, 1);
-}
-
-.course-page .main .page h4 {
-  color: rgba(0, 122, 243, 1);
-  font-size: 16px;
-  font-weight: 600;
-}
-
-.course-page .main .chapter-text p {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 28px;
-}
-
-/* resources  */
-.course-page .ebooks {
-  margin: 25px 0 98px 0;
-}
-
-.course-page .ebooks .ebooks-carousel {
-  display: flex;
-  overflow-x: scroll;
-}
-
-.course-page .ebooks .ebooks-carousel .ebook {
-  width: 178px;
-  min-width: 178px;
-  margin-right: 62px;
-}
-
-.course-page .ebooks .ebooks-carousel .ebook:last-child {
-  margin-right: 0;
-}
-
-.course-page .ebooks .ebooks-carousel::-webkit-scrollbar {
-  height: 5px;
-}
-
-.course-page .ebooks .ebooks-carousel::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
-.course-page .ebooks .ebooks-carousel::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 10px;
-}
-
-.course-page .ebooks h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 36px;
-}
-
-.course-page .ebooks img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-.course-page .ebooks h4 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.course-page .ebooks p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 16px;
-}
-
-.course-page .ebooks .bar {
-  height: 3px;
-  width: 75%;
-  background-color: rgba(0, 122, 243, 0.5);
-}
-
-.course-page .ebooks .indicator {
-  height: 3px;
-  width: 48%;
-  background-color: rgba(0, 122, 243, 1);
-}
-
-.course-page .ebooks span {
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.course-page .videos h2 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 12px;
-}
-
-.course-page .videos img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 20px;
-  border-radius: 5px;
-}
-
-.course-page .videos i {
-  color: rgba(0, 122, 243, 0.3);
-  font-size: 32px;
-  margin-right: 10px;
-}
-
-.course-page .videos h4 {
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 20px;
-  margin-bottom: 6px;
-}
-
-.course-page .videos p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 0;
-}
-
-/* quiz page */
-.course-page .quiz p {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 20px;
-}
-
-.course-page .quiz .body {
-  background-color: rgba(10, 24, 61, 1);
-  border-radius: 10px;
-  padding: 17px 21px 44px 42px;
-  /* margin-bottom: 56px; */
-}
-
-.course-page .quiz h5 {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 0;
-  text-align: right;
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.course-page .quiz .body p {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 10px;
-}
-
-.course-page .quiz .body .input {
-  margin-bottom: 23px;
-}
-
-.course-page .quiz .body .input:last-child {
-  margin-bottom: 0;
-}
-
-.course-page .quiz .body .input input {
-  margin-right: 19px;
-}
-
-.course-page .quiz .body label {
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 30px;
-}
-
-.course-page .quiz .indicators div {
-  width: 100%;
-  height: 3px;
-  background-color: rgba(82, 169, 255, 0.3);
-  margin-right: 10px;
-}
-
-.course-page .quiz .indicators div.check {
-  background-color: rgba(82, 169, 255, 1);
-}
-
-.course-page .quiz button {
-  font-size: 16px;
-  font-weight: 500;
-  background-color: rgba(0, 122, 243, 1);
-  border-radius: 60px;
-  padding: 10px 18px;
-}
-
-/* quiz review page  */
-/* failed widget  */
-.course-page .result-failed,
-.course-page .widget-failed {
-  border-radius: 10px;
-  background-color: rgba(255, 223, 220, 1);
-  padding: 19px 43px;
-  margin-bottom: 60px;
-}
-
-.course-page .result-failed h3 {
-  font-size: 18px;
-  font-weight: 700;
-  color: rgba(255, 0, 0, 1);
-  margin-bottom: 4px;
-}
-
-.course-page .result-failed h4 {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 0, 0, 1);
-}
-
-.course-page .result-failed button {
-  font-size: 16px;
-  font-weight: 500;
-  background-color: rgba(0, 122, 243, 1);
-  border-radius: 60px;
-  padding: 10px 18px;
-}
-
-.course-page .widget-failed i {
-  color: rgba(255, 0, 0, 1);
-  float: left;
-}
-
-.course-page .widget-failed h4 {
-  color: rgba(255, 0, 0, 1);
-  font-size: 16px;
-  font-weight: 400;
-  text-align: center;
-}
-
-/* passed widget  */
-.course-page .result-passed,
-.course-page .widget-passed {
-  border-radius: 10px;
-  background-color: rgba(88, 159, 88, 1);
-  padding: 19px 43px;
-  margin-bottom: 60px;
-}
-
-.course-page .result-passed h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.course-page .result-passed h4 {
-  font-size: 16px;
-  font-weight: 400;
-}
-
-.course-page .result-passed button {
-  font-size: 16px;
-  font-weight: 500;
-  background-color: rgba(0, 122, 243, 1);
-  border-radius: 60px;
-  padding: 10px 18px;
-}
-
-.course-page .widget-passed i {
-  float: left;
-}
-
-.course-page .widget-passed h4 {
-  font-size: 16px;
-  font-weight: 400;
-  text-align: center;
-}
-
-/* certificates page  */
-.certificates {
-  margin-bottom: 115px;
-}
-
-.certificates .row > div {
   margin-bottom: 30px;
 }
 
-.certificates img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 12px;
-}
-
-.certificates h4 {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 4px;
-}
-
-.certificates p {
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 5px;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.certificates a {
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 0;
-  color: rgba(0, 122, 243, 1);
-}
-
-.certificates a i {
+.create-course.info h3 i {
   margin-right: 10px;
 }
 
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-/* endof user section  */
-
-/* course admin page  */
-.admin .button-container {
-  border-radius: 50px;
-  background-color: rgba(6, 25, 71, 1);
-  padding: 8px;
-  margin-bottom: 48px;
-}
-
-.admin .button-container button {
-  width: 100%;
-  border-radius: 50px;
-  padding: 10px 0;
-  font-size: 14px;
-  font-weight: 600;
-  color: rgba(255, 255, 255, 0.5);
-  background-color: transparent;
-}
-
-.admin .button-container button img {
-  margin-right: 10px;
-}
-
-.admin .button-container button.active {
-  color: #fff;
-  background-color: rgba(0, 122, 243, 1);
-}
-
-.admin .courses select {
-  font-size: 18px;
-  font-weight: 600;
-  padding: 10px 18px;
-  border-radius: 40px;
-  border: solid 1px rgba(255, 255, 255, 1) !important;
-  background-color: transparent;
-  color: #fff;
-  margin-bottom: 38px;
-}
-
-/* courses */
-.admin .courses {
-  margin-bottom: 90px;
-}
-
-.admin .courses .course {
+.create-course.info .information {
+  background-color: rgba(4, 19, 54, 1);
   border-radius: 10px;
-  border: solid 1px rgba(255, 255, 255, 0.2) !important;
-  padding: 10px;
-  margin-bottom: 22px;
+  padding: 19px;
 }
 
-.admin .courses .course img {
-  width: 100%;
-  height: auto;
-  border: 10px 0 0 10px;
-}
-
-.admin .courses .course h2 {
-  font-size: 16px;
+.create-course.info .information h3 {
+  font-size: 20px;
   font-weight: 700;
-  margin-bottom: 23px;
-}
-
-.admin .courses .course .bar {
-  height: 8px;
-  background-color: rgba(0, 122, 243, 0.5);
-  border-radius: 80px;
-  margin-bottom: 29px;
-}
-
-.admin .courses .course .indicator {
-  height: 8px;
-  width: 50%;
-  background-color: rgba(0, 122, 243, 1);
-  border-radius: 80px;
-}
-
-.admin .courses .course p {
-  font-size: 12px;
-  font-weight: 400;
-  display: inline-block;
-}
-
-.admin .courses .course button {
-  background-color: rgba(0, 122, 243, 1);
-  padding: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  border-radius: 5px;
-}
-
-.admin .courses .course h4 {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-  margin-left: 12px;
-  display: inline-block;
-}
-
-#edit {
-  width: 100%;
-  height: 100%;
-}
-
-/* create course  */
-.create-course {
-  background-color: rgba(6, 25, 71, 1);
-  border-radius: 10px;
-  padding: 40px 63px;
-}
-
-.create-course h1 {
-  font-size: 22px;
-  font-weight: 600;
-  margin-bottom: 32px;
+  margin-bottom: 40px;
 }
 
 .create-course label {
   display: block;
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .create-course input,
-textarea {
+.create-course textarea {
+  width: 100%;
   font-size: 14px;
   font-weight: 400;
-  padding: 17px 21px;
-  color: #fff;
-  background-color: rgba(255, 255, 255, 0.2);
-  width: 100%;
-  margin-bottom: 51px;
-  border: none;
+  margin-bottom: 30px;
+  padding: 16px 20px;
+  background-color: #fff;
+  border-radius: 30px;
   outline: none;
-}
-
-.create-course input::placeholder,
-textarea::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-}
-
-.create-course input {
-  border-radius: 100px;
 }
 
 .create-course textarea {
   border-radius: 20px;
-  height: 114px;
+  min-height: 114px;
 }
 
-.create-course .input {
-  background-color: rgba(255, 255, 255, 0.2);
-  width: 100%;
-  padding: 17px 21px;
-  border-radius: 100px;
-}
-
-.create-course .input input {
-  background-color: transparent;
-  padding: unset;
-  border-radius: unset;
-  margin-bottom: 0;
-}
-
-.create-course i.fa-circle-plus {
-  margin-top: 10px;
-  color: rgba(0, 122, 243, 1);
-  font-size: 32px;
-}
-
-.create-course h4 {
-  font-size: 16px;
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.create-course p {
-  font-size: 12px;
+.create-course.info .information p {
+  font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, 0.6);
-  max-width: 407px;
+  margin-bottom: 10px;
 }
 
 .create-course button {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
-  background-color: rgba(0, 122, 243, 1);
-  border-radius: 5px;
-  padding: 10px;
+  padding: 6px 23px;
+  border-radius: 30px;
+}
+
+.create-course button#preview {
+  background-color: #fff;
+  color: rgba(0, 122, 243, 1);
+  border: 1px solid rgba(0, 122, 243, 1) !important;
 }
 
 .create-course button#save {
-  font-size: 16px;
-  border-radius: 100px;
-  padding: 12px 14px;
+  background-color: rgba(0, 122, 243, 1);
+  color: #fff;
+  margin-left: 30px;
 }
 
-/* on completion  */
-.create-course .pdf {
-  padding-bottom: 54px;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
-}
-
-.create-course .pdf h2,
-.create-course .videos h2 {
+.create-course #add-module {
   font-size: 16px;
   font-weight: 600;
-}
-
-.create-course .pdf button,
-.create-course .videos button {
-  font-size: 14px;
-  font-weight: 600;
-  background-color: transparent;
   padding: 0;
+  background-color: transparent;
 }
 
-.create-course .pdf button i,
-.create-course .videos button i {
+.create-course #add-module i {
+  margin-right: 10px;
+}
+
+/* module  */
+.create-course .module {
+  background-color: rgba(10, 24, 61, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  padding: 15px 21px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.create-course .module input#title {
+  margin-bottom: 39px;
+}
+
+.create-course .error {
+  text-align: center;
+  color: red;
+}
+
+.create-course .module p {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  color: #fff !important;
+}
+
+.create-course .module i {
+  cursor: pointer;
+}
+
+.create-course .module .top i {
+  margin-left: 20px;
+}
+
+.create-course .module i.fa-trash-can {
+  color: rgba(255, 19, 19, 1);
+}
+
+.create-course .module .add-bar {
+  background-color: #fff;
+  border-radius: 30px;
+  padding: 13px 23px;
+  width: 83%;
+  margin-top: 20px;
+  position: relative;
+}
+
+.create-course .module .add-bar i.fa-xmark {
+  position: absolute;
+  right: -16px;
+  top: -18px;
+}
+
+.create-course .module .add-bar label,
+.create-course .module .add-bar h4 {
+  margin-bottom: 0;
+  color: rgba(0, 122, 243, 1);
   font-size: 16px;
-  margin-right: 12px;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-.create-course .pdf .book h3 {
+.create-course .module .add-bar label i,
+.create-course .module .add-bar h4 i {
+  margin-right: 10px;
+}
+
+.create-course .module .item {
+  border-radius: 30px;
+  background-color: #fff;
+  padding: 14px 20px;
+  width: 100%;
+}
+
+.create-course .module .item p {
+  color: rgba(0, 0, 0, 1) !important;
+  margin-bottom: 0;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+
+.create-course .module .item p i {
+  margin-right: 10px;
+}
+
+.create-course .module .createQuizCard {
+  background-color: #fff;
+  border-radius: 20px;
+}
+
+.create-course .module .createQuizCard .initial,
+.create-course .module .createQuizCard .bottom {
+  padding: 14px 22px;
+}
+
+.create-course .module .createQuizCard .bottom {
+  border-top: 1px solid rgba(0, 0, 0, 0.5) !important;
+}
+
+.create-course .module .createQuizCard .bottom h5 {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 9px;
+  color: rgba(0, 0, 0, 1);
 }
 
-.create-course .pdf .book h4 {
+.create-course .module .createQuizCard .bottom i.fa-pen {
+  color: rgba(0, 0, 0, 1);
+}
+
+.create-course .module .createQuizCard .bottom i.fa-trash-can {
+  color: rgba(255, 0, 0, 1);
+  margin-left: 25px;
+}
+
+.create-course .module .createQuizCard label {
+  color: rgba(10, 24, 61, 1);
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.create-course .module .createQuizCard input {
+  padding: 16px 18px;
+  border: 1px solid rgba(0, 0, 0, 0.5) !important;
   font-size: 14px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
   margin-bottom: 30px;
 }
 
-.create-course .pdf .book h4 {
-  font-size: 14px;
+.create-course .module .createQuizCard h3 {
+  font-size: 16px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 15px;
+  color: rgba(0, 0, 0, 1);
 }
 
-.create-course .pdf .book button,
-.create-course .videos .video button {
+.create-course .module .createQuizCard h3 i,
+.create-course .module .createQuizCard h4 i {
+  margin: 0 10px;
+}
+
+.create-course .module .createQuizCard h4 {
   color: rgba(0, 122, 243, 1);
-  padding: 0;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-/* video */
-.create-course .videos {
-  padding-bottom: 35px;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
-}
-
-.create-course .videos .video iframe {
-  width: 100%;
-  height: 135px;
-  margin-bottom: 18px;
-}
-
-.create-course .videos .video h3 {
   font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 5px;
-}
-
-.create-course .videos .video p {
-  font-size: 14px;
-  font-weight: 400;
-  margin-bottom: 15px;
-}
-
-.create-course .videos .video i {
-  color: rgba(0, 122, 243, 0.3);
-}
-
-/* quiz  */
-.create-course .quiz {
-  padding: 30px 0;
-  border-bottom: solid 1px rgba(255, 255, 255, 0.1) !important;
-}
-
-.create-course .quiz h3 {
-  font-size: 18px;
   font-weight: 600;
-  margin-bottom: 20px;
+  cursor: pointer;
 }
 
-.create-course .quiz p {
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
+#create-quiz-modal {
+  top: 5% !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 669px;
+  height: min-content !important;
+  max-height: 90%;
+  overflow-y: scroll;
+  background-color: #0a183d !important;
+  border-radius: 10px !important;
+  padding: 22px 37px !important;
 }
 
-.create-course .quiz button {
-  padding: 0;
-  font-size: 16px;
-  font-weight: 400;
-  color: rgba(0, 122, 243, 1);
-  background-color: transparent;
+#create-quiz-modal i.fa-times-circle {
+  float: right;
 }
 
-/* facilitator */
-.create-course .instructor {
-  padding: 30px 0 90px;
-}
-
-.create-course .instructor h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
-
-.create-course .instructor .img-container {
-  height: 70px;
-  width: 70px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin-right: 43px;
-}
-
-.create-course .instructor .img-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: top;
-}
-
-.create-course .instructor h4 {
-  font-size: 16px;
-  font-weight: 400;
-  margin-bottom: 9px;
-}
-
-.create-course .instructor p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.5);
-}
-
-/* admin course quiz, ebook and resourses  */
-.admin .quiz .header,
-.admin .ebook .header,
-.admin .videos .header {
-  margin-bottom: 46px;
-}
-
-.admin .quiz .header select,
-.admin .ebook .header select,
-.admin .videos .header select {
-  background-color: transparent;
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.admin .quiz .header button,
-.admin .ebook .header button,
-.admin .videos .header button {
-  background-color: transparent;
-  font-size: 17px;
-  font-weight: 700;
-  padding: 0;
-  margin-right: 0;
-}
-
-.admin .quiz .header button i,
-.admin .ebook .header button i,
-.admin .videos .header button i {
-  margin-right: 13px;
-}
-
-.admin .quiz .quizes {
-  border-radius: 10px;
-  padding: 29px 23px;
-  background-color: rgba(6, 25, 71, 1);
-}
-
-.admin .quiz .quizes h3 {
-  font-size: 14px;
-  font-weight: 600;
-  margin-bottom: 25px;
-}
-
-.admin .quiz .quizes #quiz {
-  margin-right: 19px;
-}
-
-.admin .quiz .quizes h4 {
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 14px;
-  margin-bottom: 25px;
-}
-
-/* ebook  */
-.book {
-  margin-bottom: 25px;
-}
-
-.book img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 15px;
-}
-
-.book h1 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.book p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-/* video  */
-.videos .video h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 13px;
-}
-
-.videos .video p {
-  font-size: 14px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 25px;
-}
-
-/* admin instructorr  */
-.admin .instructor h2 {
-  font-size: 22px;
-  font-weight: 600;
-}
-
-.admin .instructor button {
-  font-size: 16px;
-  font-weight: 700;
-  background-color: transparent;
-}
-
-.admin .instructor button i {
-  margin-right: 13px;
-}
-
-.admin .instructor .instructor {
-  border-radius: 10px;
-  background-color: rgba(6, 25, 71, 1);
-  padding: 15px 20px;
+#create-quiz-modal h2 {
   text-align: center;
-  margin-bottom: 25px;
-}
-
-.admin .instructor .instructor .img-container {
-  height: 100px;
-  width: 100px;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 0 auto 7px;
-}
-
-.admin .instructor .instructor .img-container img.profile-img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  object-position: top;
-}
-
-.admin .instructor .instructor h3 {
-  font-size: 14px;
+  font-size: 24px;
   font-weight: 700;
-  margin-bottom: 6px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  margin-bottom: 21px;
 }
 
-.admin .instructor .instructor h4 {
+#create-quiz-modal label {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+#create-quiz-modal label.option {
+  display: block;
+  margin-bottom: 0;
+}
+
+#create-quiz-modal input,
+#create-quiz-modal select {
+  width: 100%;
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  padding: 14px 25px;
+  border-radius: 30px;
+  background-color: #fff;
+  color: rgba(0, 0, 0, 1);
+}
+
+#create-quiz-modal i.fa-trash-can {
+  color: rgba(255, 19, 19, 1);
+  cursor: pointer;
+}
+
+#create-quiz-modal input.checkbox {
+  width: unset;
+  margin-bottom: 0;
+}
+
+#create-quiz-modal h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 3px;
+}
+
+#create-quiz-modal p {
   font-size: 14px;
   font-weight: 400;
-  margin-bottom: 14px;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
-.admin .instructor .instructor p {
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.6);
+#create-quiz-modal h6 {
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: rgba(0, 122, 243, 1);
+  cursor: pointer;
 }
+
+#create-quiz-modal h6 i {
+  margin-right: 10px;
+}
+
+#create-quiz-modal button {
+  font-size: 16px;
+  font-weight: 700;
+  width: 100%;
+  padding: 14px 0;
+  background-color: #007af3;
+  border-radius: 30px;
+  color: #fff;
+}
+
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
+/* endof user section  */
 
 /* media queries */
 @media (min-width: 1400px) {

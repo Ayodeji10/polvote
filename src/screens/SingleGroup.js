@@ -60,6 +60,103 @@ function SingleGroup() {
     fetchCurrentGroup();
   }, []);
 
+  // update cover image
+  // click cover photo input
+  const coverPhoto = () => {
+    document.getElementById("cover-pic").click();
+  };
+  // cover image and looader
+  const [coverImgae, setCoverImage] = useState(null);
+  const [coverPhotoLoader, setCoverPhotoLoader] = useState(false);
+  // upload cover image
+  useEffect(() => {
+    if (coverImgae !== null) {
+      setCoverPhotoLoader(true);
+      const fd = new FormData();
+      fd.append("image", coverImgae);
+      // console.log(Array.from(fd));
+      axios({
+        url: `${API.API_ROOT}/group/coverimage/${id}`,
+        method: "post",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${context.user.token}`,
+        },
+        data: fd,
+      }).then(
+        (response) => {
+          // console.log(response);
+          setGroup(response.data.data);
+          setCoverPhotoLoader(false);
+        },
+        (error) => {
+          setCoverPhotoLoader(false);
+          console.log(error);
+        }
+      );
+    }
+  }, [coverImgae]);
+
+  // update profile piture
+  // click to update
+  const profilePhoto = () => {
+    document.getElementById("profile-pic-input").click();
+  };
+  // profile image and loader
+  const [profilePic, setProfilePic] = useState(null);
+  const [profilePicLoader, setProfilePicLoader] = useState(false);
+  // // upload profile pic on state change
+  useEffect(() => {
+    if (profilePic !== null) {
+      setProfilePicLoader(true);
+      const fd = new FormData();
+      fd.append("image", profilePic);
+      axios({
+        url: `${API.API_ROOT}/group/addimage/${id}`,
+        method: "post",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${context.user.token}`,
+        },
+        data: fd,
+      }).then(
+        (response) => {
+          // console.log(response);
+          setGroup(response.data.data);
+          setProfilePicLoader(false);
+        },
+        (error) => {
+          setProfilePicLoader(false);
+          console.log(error);
+        }
+      );
+    }
+  }, [profilePic]);
+
+  // update group name
+  const [showNameInput, setShowNameInput] = useState(false);
+  const [newName, setNewName] = useState("");
+  const [nameLoading, setNameLoading] = useState(false);
+
+  const updateName = () => {
+    setNameLoading(true);
+    axios({
+      url: `${API.API_ROOT}/group/editusers/${id}`,
+      method: "patch",
+      data: { groupname: newName },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+      },
+    }).then(
+      (response) => {
+        setGroup(response.data.data);
+        setNameLoading(false);
+        setShowNameInput(false);
+      },
+      (error) => {}
+    );
+  };
+
   return (
     <div className={`container-fluid ${context.darkMode ? "dm" : ""}`}>
       <Nav />
@@ -84,16 +181,27 @@ function SingleGroup() {
                     <div className="top">
                       <img
                         src={
-                          group.coverImage === null ||
-                          group.coverImage === undefined
+                          group.coverimage === null ||
+                          group.coverimage === undefined
                             ? "/img/10162 1.png"
-                            : group.user.image
+                            : group.coverimage
                         }
                         alt=""
                       />
                       {group.userid === context.user._id && (
-                        <button>
-                          <i className="fa-solid fa-pen" />
+                        <button onClick={coverPhoto}>
+                          {coverPhotoLoader ? (
+                            <i className="fa-solid fa-spinner fa-spin" />
+                          ) : (
+                            <i className="fa-solid fa-pen" />
+                          )}
+                          <input
+                            type="file"
+                            accept="image/*"
+                            hidden
+                            id="cover-pic"
+                            onChange={(e) => setCoverImage(e.target.files[0])}
+                          />
                         </button>
                       )}
                     </div>
@@ -101,12 +209,9 @@ function SingleGroup() {
                       <div className="row">
                         <div className="col-5 d-flex align-items-center">
                           <div className="img-container">
-                            {group.profileImage !== null &&
-                            group.profileImageimage !== undefined ? (
-                              <img
-                                src={group.profileImageimage}
-                                alt="profile-img"
-                              />
+                            {group.image !== null &&
+                            group.image !== undefined ? (
+                              <img src={group.image} alt="profile-img" />
                             ) : (
                               <img src="/img/place.jpg" alt="profile-img" />
                             )}
@@ -131,21 +236,26 @@ function SingleGroup() {
                           {dropdown && (
                             <div className="submenu">
                               {group.userid === context.user._id && (
-                                <h4>
+                                <h4
+                                  onClick={() =>
+                                    navigate(`/groups/${id}/requests`)
+                                  }
+                                >
                                   <i className="fa-solid fa-user-group" />
                                   Member Requests
                                 </h4>
                               )}
-                              {group.grouptype === "private" && (
-                                <h4
-                                  onClick={() =>
-                                    setMemberVerificationModal(true)
-                                  }
-                                >
-                                  <i className="fa-solid fa-message" />
-                                  Membership Verification
-                                </h4>
-                              )}
+                              {group.userid === context.user._id &&
+                                group.grouptype === "private" && (
+                                  <h4
+                                    onClick={() =>
+                                      setMemberVerificationModal(true)
+                                    }
+                                  >
+                                    <i className="fa-solid fa-message" />
+                                    Membership Verification
+                                  </h4>
+                                )}
                               {memberVerificationModal && (
                                 <MemberVerificationModal
                                   memberVerificationModal={
@@ -192,15 +302,39 @@ function SingleGroup() {
                     <div className="group-info">
                       <h3>Group Info</h3>
                       {group.userid === context.user._id && (
-                        <div className="d-flex justify-content-between align-items-center mb-3">
+                        <div className="d-flex justify-content-between align-items-center mb-3 position-relative">
                           <div className="d-flex">
                             <i className="fa-solid fa-users-line" />
                             <div>
                               <h4>Group Name</h4>
-                              <p>LASU SUG FORUM</p>
+                              <p>{group.groupname}</p>
                             </div>
                           </div>
-                          <i className="fa-solid fa-pen" />
+                          <i
+                            className="fa-solid fa-pen"
+                            style={{ cursor: "pointer" }}
+                            onClick={() => setShowNameInput(!showNameInput)}
+                          />
+                          {showNameInput && (
+                            <div className="d-flex justify-content-between input-container position-absolute">
+                              <input
+                                type="text"
+                                placeholder="Enter New Name"
+                                value={newName}
+                                onChange={(e) => setNewName(e.target.value)}
+                              />
+                              <button onClick={updateName}>
+                                {nameLoading ? (
+                                  <>
+                                    Loading...{" "}
+                                    <i className="fa-solid fa-spinner fa-spin" />
+                                  </>
+                                ) : (
+                                  "Save"
+                                )}
+                              </button>
+                            </div>
+                          )}
                         </div>
                       )}
                       <div className="d-flex mb-3">
@@ -211,14 +345,29 @@ function SingleGroup() {
                         </div>
                       </div>
                       {group.userid === context.user._id && (
-                        <div className="d-flex justify-content-between align-items-center mb-3">
+                        <div
+                          className="d-flex justify-content-between align-items-center mb-3"
+                          onClick={profilePhoto}
+                          style={{ cursor: "pointer" }}
+                        >
                           <div className="d-flex">
                             <i className="fa-regular fa-image" />
+                            <input
+                              type="file"
+                              accept="image/*"
+                              id="profile-pic-input"
+                              hidden
+                              onChange={(e) => setProfilePic(e.target.files[0])}
+                            />
                             <div>
                               <h4>Group Profile Image</h4>
                             </div>
                           </div>
-                          <i className="fa-solid fa-pen" />
+                          {profilePicLoader ? (
+                            <i className="fa-solid fa-spinner fa-spin" />
+                          ) : (
+                            <i className="fa-solid fa-pen" />
+                          )}
                         </div>
                       )}
                       <div className="d-flex">

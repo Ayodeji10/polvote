@@ -162,7 +162,8 @@ function Aside() {
           </div>
 
           {/* stats  */}
-          {window.location.pathname.includes("/groups") ? (
+          {window.location.pathname.includes("/groups") ||
+          window.location.pathname.includes("/create-course") ? (
             ""
           ) : (
             <div className="stats mb-3">
@@ -286,6 +287,74 @@ function Aside() {
       )}
 
       {/* courses  */}
+      {window.location.pathname.includes("/create-course") && (
+        <div className="create-course-widget">
+          <h3>Course Creation</h3>
+          <Link
+            to={`/create-course/info`}
+            className={window.location.pathname.includes("/info") && "active"}
+          >
+            {window.location.pathname.includes("/info") ? (
+              <i className="fa-regular fa-circle-check" />
+            ) : (
+              <i className="fa-regular fa-circle" />
+            )}
+            <span>Course Information</span>
+          </Link>
+          <Link
+            to={`/create-course/modules`}
+            className={
+              window.location.pathname.includes("/modules") && "active"
+            }
+          >
+            {window.location.pathname.includes("/modules") ? (
+              <i className="fa-regular fa-circle-check" />
+            ) : (
+              <i className="fa-regular fa-circle" />
+            )}
+            <span>Course Modules</span>
+          </Link>
+          <Link
+            to={``}
+            className={
+              window.location.pathname.includes("/instructors") && "active"
+            }
+          >
+            {window.location.pathname.includes("/instructors") ? (
+              <i className="fa-regular fa-circle-check" />
+            ) : (
+              <i className="fa-regular fa-circle" />
+            )}
+            <span>Instructor Profile</span>
+          </Link>
+          <Link
+            to={``}
+            className={
+              window.location.pathname.includes("/pricing") && "active"
+            }
+          >
+            {window.location.pathname.includes("/pricing") ? (
+              <i className="fa-regular fa-circle-check" />
+            ) : (
+              <i className="fa-regular fa-circle" />
+            )}
+            <span>Pricing</span>
+          </Link>
+          <Link
+            to={``}
+            className={
+              window.location.pathname.includes("/coupons") && "active"
+            }
+          >
+            {window.location.pathname.includes("/coupons") ? (
+              <i className="fa-regular fa-circle-check" />
+            ) : (
+              <i className="fa-regular fa-circle" />
+            )}
+            <span>Coupons</span>
+          </Link>
+        </div>
+      )}
       {/* <div className="course">
                 <h3 className="mb-2">Sponsored Courses</h3>
                 <div className="card">
@@ -312,7 +381,8 @@ function Aside() {
                 <span className='mb-2'>Close Ad <i className="fas fa-times-circle" /></span>
                 <img src="/img/EZ-Cash-loan 2.png" alt="" />
             </div> */}
-      <div>
+
+      {/* <div>
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8526972460998976"
@@ -327,12 +397,13 @@ function Aside() {
           data-full-width-responsive="true"
         />
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-      </div>
+      </div> */}
       {/* <Ad1 /> */}
 
       {/* content  */}
       {window.location.pathname.includes("/groups") ||
-      window.location.pathname.includes("/courses") ? (
+      window.location.pathname.includes("/courses") ||
+      window.location.pathname.includes("/create-course") ? (
         ""
       ) : (
         <div className="content">
@@ -403,7 +474,8 @@ function Aside() {
 
       {/* polls  */}
       {window.location.pathname.includes("/groups") ||
-      window.location.pathname.includes("/courses") ? (
+      window.location.pathname.includes("/courses") ||
+      window.location.pathname.includes("/create-course") ? (
         ""
       ) : (
         <div className="polls">
