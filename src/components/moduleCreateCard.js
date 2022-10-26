@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import CreateQuizCard from "./createQuizCard";
+import CreateNoteCard from "./createNoteCard";
 
 function ModuleCreateard({ module, modules, setModules, index, setError }) {
   const [view, setView] = useState(false);
@@ -55,7 +55,26 @@ function ModuleCreateard({ module, modules, setModules, index, setError }) {
         if (index === i) {
           return {
             ...mod,
-            assets: [...mod.assets, { type: "quiz", title: "", questions: [] }],
+            assets: [
+              ...mod.assets,
+              { type: "quiz", title: "", questions: [], generalScore: null },
+            ],
+          };
+        }
+        return mod;
+      })
+    );
+    setAddBar(false);
+  };
+
+  // add note
+  const addNote = () => {
+    setModules(
+      modules.map((mod, i) => {
+        if (index === i) {
+          return {
+            ...mod,
+            assets: [...mod.assets, { type: "note", title: "", note: "" }],
           };
         }
         return mod;
@@ -126,9 +145,6 @@ function ModuleCreateard({ module, modules, setModules, index, setError }) {
             )}
           </div>
           {module.assets.map((item, i) => {
-            {
-              console.log(item);
-            }
             return (
               <div key={i}>
                 {item.type === "video" && (
@@ -191,6 +207,18 @@ function ModuleCreateard({ module, modules, setModules, index, setError }) {
                     setAddBar={setAddBar}
                   />
                 )}
+                {item.type === "note" && (
+                  <CreateNoteCard
+                    item={item}
+                    module={module}
+                    modules={modules}
+                    setModules={setModules}
+                    moduleIndex={index}
+                    deleteAsset={deleteAsset}
+                    noteIndex={i}
+                    setAddBar={setAddBar}
+                  />
+                )}
               </div>
             );
           })}
@@ -222,14 +250,10 @@ function ModuleCreateard({ module, modules, setModules, index, setError }) {
                 <i className="fa-solid fa-plus" />
                 Quiz
               </h4>
-              <h4>
+              <h4 onClick={addNote}>
                 <i className="fa-solid fa-plus" />
                 Note
               </h4>
-              <i
-                className="fa-solid fa-xmark"
-                onClick={() => setAddBar(false)}
-              />
             </div>
           )}
         </>
@@ -245,7 +269,6 @@ function ModuleCreateard({ module, modules, setModules, index, setError }) {
               onChange={(e) => setTitle(e.target.value)}
             />
           </form>
-          <h6 className="error">{titleError}</h6>
           <div className="d-flex justify-content-end">
             <button id="preview">Cancel</button>
             <button id="save" onClick={changeTitle}>

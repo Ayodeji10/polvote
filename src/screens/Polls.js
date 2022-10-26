@@ -111,9 +111,17 @@ function Polls() {
           return each;
         }
         if (type === "text") {
-          return { ...each, [e.target.name]: e.target.value };
+          return {
+            ...each,
+            [e.target.name]: e.target.value,
+            optionId: `${question}_${index}`,
+          };
         } else {
-          return { ...each, [e.target.name]: e.target.files[0] };
+          return {
+            ...each,
+            [e.target.name]: e.target.files[0],
+            optionId: `${question}_${index}`,
+          };
         }
       })
     );

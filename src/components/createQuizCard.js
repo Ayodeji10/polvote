@@ -28,13 +28,20 @@ function CreateQuizCard({
     { text: "", image: null },
     { text: "", image: null },
   ]);
-  const [answer, setAnswer] = useState(null);
   const [repeatScore, setRepeatScore] = useState("yes");
+  const [generalScore, setGeneralScore] = useState(null);
+  const [answer, setAnswer] = useState(null);
+  const [singleScore, setSingleScore] = useState(null);
 
   // set title
   const changeTitle = () => {
     if (title.length < 1) {
       setError("Please Input Quiz Title");
+    } else if (
+      repeatScore === "yes" &&
+      (generalScore === null || generalScore < 0)
+    ) {
+      setError("Please Enter a valid Score for Each Question");
     } else {
       setModules(
         modules.map((mod, i) => {
@@ -43,7 +50,7 @@ function CreateQuizCard({
               ...mod,
               assets: mod.assets.map((asset, index) => {
                 if (quizIndex === index) {
-                  return { ...asset, title: title };
+                  return { ...asset, title: title, generalScore: generalScore };
                 }
                 return asset;
               }),
@@ -59,8 +66,12 @@ function CreateQuizCard({
 
   // add option
   const addOption = () => {
-    const newOption = { text: "", image: null };
-    setOptions([...options, newOption]);
+    if (options.length === 4) {
+      setError("You can't have more than 4 options");
+    } else {
+      const newOption = { text: "", image: null };
+      setOptions([...options, newOption]);
+    }
   };
 
   // delete option
@@ -70,19 +81,6 @@ function CreateQuizCard({
     } else {
       setOptions((prev) => prev.filter((option) => option !== prev[index]));
     }
-  };
-
-  // set option inputs
-  const setOptionText = (e, i) => {
-    setOptions(
-      options.map((option, index) => {
-        if (i === index) {
-          return { ...option, text: e.target.value };
-        }
-        return option;
-      })
-    );
-    console.log(options);
   };
 
   // handle options input
@@ -119,38 +117,50 @@ function CreateQuizCard({
     //   })
     // );
 
-    setModules(
-      modules.map((mod, i) => {
-        if (moduleIndex === i) {
-          return {
-            ...mod,
-            assets: mod.assets.map((asset, index) => {
-              if (quizIndex === index) {
-                return {
-                  ...asset,
-                  questions: [
-                    ...asset.questions,
-                    { question: question, options: options, answer: answer },
-                  ],
-                };
-              }
-              return asset;
-            }),
-          };
-        }
-        return mod;
-      })
-    );
+    if (answer === null) {
+      setError("Please Select which option is the answer to the question");
+    } else {
+      setModules(
+        modules.map((mod, i) => {
+          if (moduleIndex === i) {
+            return {
+              ...mod,
+              assets: mod.assets.map((asset, index) => {
+                if (quizIndex === index) {
+                  return {
+                    ...asset,
+                    questions: [
+                      ...asset.questions,
+                      {
+                        question: question,
+                        options: options,
+                        answer: answer,
+                        ...(repeatScore === "no" && { score: singleScore }),
+                      },
+                    ],
+                  };
+                }
+                return asset;
+              }),
+            };
+          }
+          return mod;
+        })
+      );
 
-    setQuestion("");
-    setOptions([
-      { text: "", image: null },
-      { text: "", image: null },
-    ]);
-    setAnswer(null);
-    setCreateQuizQuestionModal(false);
+      setQuestion("");
+      setOptions([
+        { text: "", image: null },
+        { text: "", image: null },
+      ]);
+      setAnswer(null);
+      setError("");
+      setCreateQuizQuestionModal(false);
+      console.log(module);
+    }
   };
 
+  // delete question
   const deleteQuestion = (i) => {
     setModules(
       modules.map((mod, i) => {
@@ -188,6 +198,28 @@ function CreateQuizCard({
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
               />
+              <label htmlFor="">
+                Do you want to use the same score for all questions set in this
+                quiz?
+              </label>
+              <select
+                value={repeatScore}
+                onChange={(e) => setRepeatScore(e.target.value)}
+              >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+              {repeatScore === "yes" && (
+                <>
+                  <label htmlFor="Score">Score</label>
+                  <input
+                    type="number"
+                    placeholder="Enter score "
+                    value={generalScore}
+                    onChange={(e) => setGeneralScore(e.target.value)}
+                  />
+                </>
+              )}
               <h6 className="error mb-3">{error}</h6>
               <div className="d-flex justify-content-end">
                 <button id="preview" onClick={() => deleteAsset(quizIndex)}>
@@ -327,22 +359,18 @@ function CreateQuizCard({
           <i className="fa-solid fa-circle-plus" />
           Add Option
         </h6>
-        <label htmlFor="score">Score</label>
-        <input
-          type="number"
-          id="score"
-          placeholder="Enter score of this question"
-        />
-        <label htmlFor="">
-          Do you want to use this score for all questions set in this quiz?
-        </label>
-        <select
-          value={repeatScore}
-          onChange={(e) => setRepeatScore(e.target.value)}
-        >
-          <option value="yes">Yes</option>
-          <option value="no">No</option>
-        </select>
+        {repeatScore === "no" && (
+          <>
+            <label htmlFor="score">Score</label>
+            <input
+              type="number"
+              id="score"
+              placeholder="Enter score of this question"
+              value={singleScore}
+              onChange={(e) => setSingleScore(e.target.value)}
+            />
+          </>
+        )}
         <h6 className="error">{error}</h6>
         <button onClick={addQuestion}>Add Question</button>
       </Modal>
