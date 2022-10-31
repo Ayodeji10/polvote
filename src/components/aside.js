@@ -286,7 +286,7 @@ function Aside() {
         </div>
       )}
 
-      {/* courses  */}
+      {/* create courses  */}
       {window.location.pathname.includes("/create-course") && (
         <div className="create-course-widget">
           <h3>Course Creation</h3>
@@ -315,12 +315,12 @@ function Aside() {
             <span>Course Modules</span>
           </Link>
           <Link
-            to={``}
+            to={`/create-course/profiles`}
             className={
-              window.location.pathname.includes("/instructors") && "active"
+              window.location.pathname.includes("/profiles") && "active"
             }
           >
-            {window.location.pathname.includes("/instructors") ? (
+            {window.location.pathname.includes("/profiles") ? (
               <i className="fa-regular fa-circle-check" />
             ) : (
               <i className="fa-regular fa-circle" />
@@ -328,7 +328,7 @@ function Aside() {
             <span>Instructor Profile</span>
           </Link>
           <Link
-            to={``}
+            to={`/create-course/pricing`}
             className={
               window.location.pathname.includes("/pricing") && "active"
             }

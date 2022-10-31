@@ -18,11 +18,11 @@ const Nav = () => {
   const [verificationModal, setVerificationModal] = useState(false);
 
   // toggle nav height
-  // window.addEventListener("scroll", () => {
-  //   let navContainer = document.querySelector(".navigation-container");
-  //   let windowPosition = window.scrollY > 0;
-  //   navContainer.classList.toggle("scroll-active", windowPosition);
-  // });
+  window.addEventListener("scroll", () => {
+    let navContainer = document.querySelector(".navigation-container");
+    let windowPosition = window.scrollY > 0;
+    navContainer.classList.toggle("scroll-active", windowPosition);
+  });
 
   return (
     <div className="navigation-container d-flex align-items-center fixed-top">

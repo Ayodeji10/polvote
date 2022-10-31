@@ -6181,8 +6181,15 @@ input:checked + .slider:before {
   margin-bottom: 10px;
 }
 
+h6.error {
+  font-size: 14px;
+  color: red;
+  text-align: center;
+}
+
 .create-course input,
-.create-course textarea {
+.create-course textarea,
+.create-course select {
   width: 100%;
   font-size: 14px;
   font-weight: 400;
@@ -6191,6 +6198,7 @@ input:checked + .slider:before {
   background-color: #fff;
   border-radius: 30px;
   outline: none;
+  color: rgba(0, 0, 0, 1);
 }
 
 .create-course textarea {
@@ -6436,7 +6444,8 @@ input:checked + .slider:before {
 }
 
 #create-quiz-modal input,
-#create-quiz-modal select {
+#create-quiz-modal select,
+#create-quiz-modal textarea {
   width: 100%;
   font-size: 16px;
   font-weight: 400;
@@ -6544,6 +6553,86 @@ input:checked + .slider:before {
   padding: 12px 25px;
   border-radius: 30px;
   background-color: rgba(0, 122, 243, 1);
+}
+
+/* profiles  */
+.create-course .profiles h3#add-profile {
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.create-course .profiles .instructor {
+  background-color: rgba(10, 24, 61, 1);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 11px 15px;
+  text-align: center;
+  position: relative;
+}
+
+.create-course .profiles .instructor i.fa-ellipsis {
+  color: #fff;
+  float: right;
+  cursor: pointer;
+}
+
+.create-course .profiles .instructor .img-container {
+  height: 87px;
+  width: 87px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.create-course .profiles .instructor .img-container img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: top;
+  min-height: 100%;
+}
+
+.create-course .profiles .instructor h4 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 35px;
+}
+
+.create-course .profiles .instructor p {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 6px;
+}
+
+.create-course .profiles .instructor .sub {
+  position: absolute;
+  top: 30px;
+  right: -20px;
+  text-align: left;
+  background-color: #00091f;
+  box-shadow: 1px 3px 13px 0px rgba(0, 0, 0, 0.08);
+  padding: 17px 20px;
+  width: max-content;
+}
+
+.create-course .profiles .instructor .sub h5 {
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.create-course .profiles .instructor .sub h5:last-child {
+  color: rgba(255, 19, 19, 1);
+}
+
+.create-course .profiles .instructor .sub h5 i {
+  margin-right: 10px;
+}
+
+/* pricing  */
+.create-course .pricing h3 {
+  margin-bottom: 20px !important;
 }
 
 /* endof user section  */

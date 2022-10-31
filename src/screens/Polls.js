@@ -52,7 +52,7 @@ function Polls() {
       })
       .then((response) => {
         setGroups(response.data);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         // console.log(error);
@@ -89,6 +89,7 @@ function Polls() {
   const [pollType, setPollType] = useState("election");
   const [pollOpen, setPollOpen] = useState("public");
   const [group, setGroup] = useState("");
+  const [groupId, setGroupId] = useState("");
 
   // election poll
   const [pollTitle, setPollTitle] = useState("");
@@ -111,17 +112,9 @@ function Polls() {
           return each;
         }
         if (type === "text") {
-          return {
-            ...each,
-            [e.target.name]: e.target.value,
-            optionId: `${question}_${index}`,
-          };
+          return { ...each, [e.target.name]: e.target.value };
         } else {
-          return {
-            ...each,
-            [e.target.name]: e.target.files[0],
-            optionId: `${question}_${index}`,
-          };
+          return { ...each, [e.target.name]: e.target.files[0] };
         }
       })
     );
@@ -145,6 +138,101 @@ function Polls() {
   };
 
   const [createPollError, setCreatePollError] = useState("");
+  const [createPollLoading, setCreatePollLoading] = useState(false);
+
+  // create opinion poll
+  const crreateOpinionPoll = () => {
+    setCreatePollLoading(true);
+    setCreatePollError("");
+    const fd = new FormData();
+    fd.append("category", pollType);
+    fd.append("polltype", pollOpen);
+    if (pollOpen === "private") {
+      fd.append("groupid", groupId);
+    }
+    fd.append("question", question);
+    fd.append("startdate", startDate);
+    fd.append("enddate", endDate);
+    for (const key of Object.keys(pollOptions)) {
+      fd.append(`options[${key}][image]`, pollOptions[key].optionImg);
+      fd.append(`options[${key}][option]`, pollOptions[key].option);
+    }
+    console.log(Array.from(fd));
+
+    axios({
+      url: `${API.API_ROOT}/generalpoll`,
+      method: "post",
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: `Bearer ${context.user.token}`,
+      },
+      data: fd,
+    }).then(
+      (response) => {
+        console.log(response);
+        setCreatePollLoading(false);
+      },
+      (error) => {
+        console.log(error);
+        setCreatePollLoading(false);
+      }
+    );
+
+    // axios
+    //   .post(`${API.API_ROOT}/generalpoll`, {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       Authorization: `Bearer ${context.user.token}`,
+    //     },
+    //     data: fd,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //     setCreatePollLoading(false);
+    //   })
+    //   .catch((error) => {
+    //     console.error(error);
+    //     setCreatePollLoading(false);
+    //   });
+  };
+
+  // const createElection Poll
+  const createElectionPoll = () => {
+    if (pollTitle === "" || startDate === "" || endDate === "") {
+      setCreatePollError("Please fill all Input spaces");
+    } else {
+      setCreatePollError("");
+      setCreatePollLoading(true);
+      const fd = new FormData();
+      fd.append("category", pollType);
+      fd.append("polltitle", pollTitle);
+      fd.append("startdate", startDate);
+      fd.append("enddate", endDate);
+      fd.append("polltype", pollOpen);
+      if (pollOpen === "private") {
+        fd.append("groupid", groupId);
+      }
+
+      axios({
+        url: `${API.API_ROOT}/generalpoll`,
+        method: "post",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${context.user.token}`,
+        },
+        data: fd,
+      }).then(
+        (response) => {
+          console.log(response);
+          setCreatePollLoading(false);
+        },
+        (error) => {
+          console.log(error);
+          setCreatePollLoading(false);
+        }
+      );
+    }
+  };
 
   return (
     <div className={`container-fluid ${context.darkMode ? "dm" : ""}`}>
@@ -257,16 +345,15 @@ function Polls() {
                                       return (
                                         <h5
                                           key={i}
-                                          onClick={() =>
-                                            setGroup(group.groupname)
-                                          }
+                                          onClick={() => {
+                                            setGroup(group.groupname);
+                                            setGroupId(group._id);
+                                          }}
                                         >
                                           {group.groupname}
                                         </h5>
                                       );
                                     })}
-                                  <h5>hello</h5>
-                                  <h5>hey</h5>
                                 </div>
                               )}
                             </div>
@@ -275,7 +362,6 @@ function Polls() {
                         <p id="createPollError">{createPollError}</p>
                         <button
                           onClick={() => {
-                            console.log(pollType);
                             if (pollOpen === "private" && group === "") {
                               setCreatePollError(
                                 "Please Select a Group, Create one or change poll type to public"
@@ -325,7 +411,17 @@ function Polls() {
                             />
                           </div>
                         </div>
-                        <button>Launch Poll</button>
+                        <h6 className="error mb-3">{createPollError}</h6>
+                        <button onClick={createElectionPoll}>
+                          {createPollLoading ? (
+                            <>
+                              Loading...
+                              <i className="fa-solid fa-spinner fa-spin" />
+                            </>
+                          ) : (
+                            "Launch Poll"
+                          )}
+                        </button>
                       </>
                     )}
                   </Modal>
@@ -378,17 +474,17 @@ function Polls() {
                           <label htmlFor={`option-${index}-img`}>
                             Option {index + 1} Image (optional)
                           </label>
-                          {option.optionImg === "" ? (
-                            <input
-                              type="file"
-                              accept="image/*"
-                              id={`option-${index}-img`}
-                              name="optionImg"
-                              onChange={(e) =>
-                                handleHistoryInput(index, e, "image")
-                              }
-                            />
-                          ) : (
+                          <input
+                            type="file"
+                            accept="image/*"
+                            id={`option-${index}-img`}
+                            name="optionImg"
+                            hidden={option.optionImg !== ""}
+                            onChange={(e) =>
+                              handleHistoryInput(index, e, "image")
+                            }
+                          />
+                          {option.optionImg !== "" && (
                             <img
                               src={URL.createObjectURL(option.optionImg)}
                               className="img-fluid mb-3"
@@ -407,17 +503,34 @@ function Polls() {
                     </div>
                     <div className="row">
                       <div className="col-6">
-                        <label htmlFor="">Start Date</label>
-                        <input type="date" />
+                        <label htmlFor="sd">Start Date</label>
+                        <input
+                          type="date"
+                          id="sd"
+                          value={startDate}
+                          onChange={(e) => setStartDate(e.target.value)}
+                        />
                       </div>
                       <div className="col-6">
-                        <label htmlFor="">End Date</label>
-                        <input type="date" />
+                        <label htmlFor="ed">End Date</label>
+                        <input
+                          type="date"
+                          id="ed"
+                          value={endDate}
+                          onChange={(e) => setEndDate(e.target.value)}
+                        />
                       </div>
                     </div>
                     <p id="createPollError">{createPollError}</p>
-                    <button onClick={() => console.log(pollOptions)}>
-                      Launch Poll
+                    <button onClick={crreateOpinionPoll}>
+                      {createPollLoading ? (
+                        <>
+                          Loading...
+                          <i className="fa-solid fa-spinner fa-spin" />
+                        </>
+                      ) : (
+                        "Launch Poll"
+                      )}
                     </button>
                   </Modal>
                 </div>

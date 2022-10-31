@@ -7,7 +7,6 @@ Modal.setAppElement("#root");
 
 function CreateNoteCard({
   item,
-  module,
   modules,
   setModules,
   moduleIndex,
@@ -53,22 +52,11 @@ function CreateNoteCard({
   // test editor mdulr
   const editorModules = {
     toolbar: [
-      // [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
-      // [{ size: [] }],
       ["bold", "italic", "underline", "strike", "blockquote"],
-      [
-        { list: "ordered" },
-        { list: "bullet" },
-        // { 'indent': '-1' }, { 'indent': '+1' }
-      ],
-      [
-        "link",
-        // 'image', 'video'
-      ],
-      // ['clean']
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
     ],
     clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
       matchVisual: false,
     },
   };
@@ -179,7 +167,13 @@ function CreateNoteCard({
                       __html: `${item.note}`,
                     }}
                   ></div>
-                  <i className="fa-solid fa-pen" />
+                  <i
+                    className="fa-solid fa-pen"
+                    onClick={() => {
+                      setNoteText(item.note);
+                      setNoteModal(true);
+                    }}
+                  />
                 </div>
               )}
             </>

@@ -32,6 +32,8 @@ function CreateQuizCard({
   const [generalScore, setGeneralScore] = useState(null);
   const [answer, setAnswer] = useState(null);
   const [singleScore, setSingleScore] = useState(null);
+  const [editBtn, setEditBtn] = useState(false);
+  const [editIndex, setEditInedex] = useState("");
 
   // set title
   const changeTitle = () => {
@@ -60,7 +62,6 @@ function CreateQuizCard({
         })
       );
       setView(true);
-      console.log(module);
     }
   };
 
@@ -102,21 +103,6 @@ function CreateQuizCard({
 
   // add question
   const addQuestion = () => {
-    // setModules(
-    //   modules.map((mod, i) => {
-    //     if (moduleIndex === i) {
-    //       return {
-    //         ...mod,
-    //         questions: [
-    //           ...questions,
-    //           { question: question, options: options, answer: answer },
-    //         ],
-    //       };
-    //     }
-    //     return mod;
-    //   })
-    // );
-
     if (answer === null) {
       setError("Please Select which option is the answer to the question");
     } else {
@@ -158,6 +144,62 @@ function CreateQuizCard({
       setCreateQuizQuestionModal(false);
       console.log(module);
     }
+  };
+
+  // update question
+  const updateQuestion = () => {
+    setModules(
+      modules.map((mod, i) => {
+        if (moduleIndex === i) {
+          return {
+            ...mod,
+            assets: mod.assets.map((asset, index) => {
+              if (quizIndex === index) {
+                let prevQuestions = asset.questions.slice(0, editIndex);
+                let nextQuestions = asset.questions.slice(
+                  editIndex + 1,
+                  asset.questions.length
+                );
+                let updatedQuestion = {
+                  question: question,
+                  options: options,
+                  answer: answer,
+                  ...(repeatScore === "no" && { score: singleScore }),
+                };
+                return {
+                  ...asset,
+                  // questions: asset.questions.splice(editIndex, 1, {
+                  //   question: question,
+                  //   options: options,
+                  //   answer: answer,
+                  //   ...(repeatScore === "no" && { score: singleScore }),
+                  // }),
+                  questions: [
+                    ...prevQuestions,
+                    updatedQuestion,
+                    ...nextQuestions,
+                  ],
+                };
+              }
+              return asset;
+            }),
+          };
+        }
+        return mod;
+      })
+    );
+    setEditBtn(false);
+    setEditBtn("");
+    setQuestion("");
+    setOptions([
+      { text: "", image: null },
+      { text: "", image: null },
+    ]);
+    setAnswer(null);
+    setError("");
+    setSingleScore();
+    setCreateQuizQuestionModal(false);
+    console.log(module);
   };
 
   // delete question
@@ -206,8 +248,12 @@ function CreateQuizCard({
                 value={repeatScore}
                 onChange={(e) => setRepeatScore(e.target.value)}
               >
-                <option value="yes">Yes</option>
-                <option value="no">No</option>
+                <option value="yes" selected={repeatScore === "yes"}>
+                  Yes
+                </option>
+                <option value="no" selected={repeatScore === "no"}>
+                  No
+                </option>
               </select>
               {repeatScore === "yes" && (
                 <>
@@ -247,7 +293,7 @@ function CreateQuizCard({
                     Add Question
                   </h4>
                 ) : (
-                  <i className="fa-solid fa-angle-down" />
+                  <i className="fa-solid fa-angle-up" />
                 )}
               </div>
               {item.questions.length !== 0 && (
@@ -267,7 +313,18 @@ function CreateQuizCard({
                       <div className="d-flex align-items-center justify-content-between mb-3">
                         <h3 className="mb-0">{q.question}</h3>
                         <div>
-                          <i className="fa-solid fa-pen" />
+                          <i
+                            className="fa-solid fa-pen"
+                            onClick={() => {
+                              setEditBtn(true);
+                              setQuestion(q.question);
+                              setOptions(q.options);
+                              setAnswer(q.answer);
+                              setSingleScore(q.score);
+                              setEditInedex(i);
+                              setCreateQuizQuestionModal(true);
+                            }}
+                          />
                           <i
                             className="fa-solid fa-trash-can"
                             onClick={() => deleteQuestion(i)}
@@ -295,16 +352,22 @@ function CreateQuizCard({
         <i className="fa-solid fa-plus" onClick={() => setAddBar(true)} />
       </div>
 
-      {/* create question modal  */}
+      {/* edit and create questions  */}
       <Modal
         isOpen={createQuizQuestioonModal}
-        onRequestClose={() => setCreateQuizQuestionModal(false)}
+        onRequestClose={() => {
+          setEditBtn(false);
+          setCreateQuizQuestionModal(false);
+        }}
         id="create-quiz-modal"
         className={`${context.darkMode ? "dm" : ""}`}
       >
         <i
           className="far fa-times-circle"
-          onClick={() => setCreateQuizQuestionModal(false)}
+          onClick={() => {
+            setEditBtn(false);
+            setCreateQuizQuestionModal(false);
+          }}
         />
         <h2>Question</h2>
         <label htmlFor="question">Question</label>
@@ -372,7 +435,11 @@ function CreateQuizCard({
           </>
         )}
         <h6 className="error">{error}</h6>
-        <button onClick={addQuestion}>Add Question</button>
+        {editBtn ? (
+          <button onClick={updateQuestion}>Update Question</button>
+        ) : (
+          <button onClick={addQuestion}>Add Question</button>
+        )}
       </Modal>
     </div>
   );

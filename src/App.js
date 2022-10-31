@@ -35,6 +35,8 @@ import CoursesDashboardUser from "./screens/CoursesDashboard";
 import CourseDashboardInstructor from "./screens/CourseDashboardInstructor";
 import CreateCourse1 from "./screens/CreateCourse1";
 import CreateCourse2 from "./screens/CreateCourse2";
+import CreateCourse3 from "./screens/CreateCourse3";
+import CreateCourse4 from "./screens/CreateCourse4";
 import SingleCourse from "./screens/SingleCourse";
 import CourseInProgress from "./screens/CourseInProgress";
 import CourseQuiz from "./screens/CourseQuiz";
@@ -159,6 +161,16 @@ function App() {
             exact
             path="/create-course/modules"
             element={<CreateCourse2 />}
+          />
+          <Route
+            exact
+            path="/create-course/profiles"
+            element={<CreateCourse3 />}
+          />
+          <Route
+            exact
+            path="/create-course/pricing"
+            element={<CreateCourse4 />}
           />
           <Route exact path="/courses/single" element={<SingleCourse />} />
           <Route
