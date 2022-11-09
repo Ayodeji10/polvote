@@ -310,7 +310,7 @@ function StoryCard({ story, index, fetchStories }) {
             {!options ? (
               ""
             ) : (
-              // options 
+              // options
               <div className="options">
                 <div
                   className="d-flex align-items-center mb-2"
@@ -350,6 +350,8 @@ function StoryCard({ story, index, fetchStories }) {
                         .replace(/(<([^>]+)>)/gi, "")
                         .replaceAll(" ", "-")
                         .replaceAll("?", "")
+                        .replaceAll("/", "-")
+                        .replaceAll("%", "percent")
                         .substring(0, 45)}/${story._id}`
                     )
                   }

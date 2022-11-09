@@ -142,7 +142,7 @@ function CreateQuizCard({
       setAnswer(null);
       setError("");
       setCreateQuizQuestionModal(false);
-      console.log(module);
+      console.log(modules);
     }
   };
 

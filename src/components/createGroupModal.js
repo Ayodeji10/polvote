@@ -9,9 +9,33 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
   // context
   const { context } = useContext(DataContext);
 
-  const [options, setOptions] = useState(false);
   const [name, setName] = useState("");
-  const [type, setType] = useState("");
+  const [useUnits, setUseUnits] = useState("no");
+  const [units, setUnits] = useState([""]);
+
+  // add unit
+  const addUnit = () => {
+    setUnits([...units, ""]);
+  };
+
+  // delete unit
+  const deleteUnit = (index) => {
+    const newUnits = [...units];
+    newUnits.splice(index, 1);
+    setUnits(newUnits);
+  };
+
+  // handle unit input
+  const handleUnitInput = (index, e) => {
+    setUnits(
+      units.map((unit, i) => {
+        if (i !== index) {
+          return unit;
+        }
+        return e.target.value;
+      })
+    );
+  };
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -26,7 +50,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
           `${API.API_ROOT}/group`,
           {
             groupname: name,
-            grouptype: type,
+            grouptype: "public",
           },
           {
             headers: {
@@ -36,7 +60,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
           }
         )
         .then((response) => {
-          console.log(name, type);
+          console.log(name);
           console.log(response);
           window.location.reload();
           setLoading(false);
@@ -83,54 +107,55 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <label htmlFor="type">Public/Private</label>
-      <div className="drop">
-        <div
-          className="link d-flex justify-content-between"
-          onClick={() => setOptions(!options)}
-        >
-          {type === "" ? (
-            <span>Select Public / Private</span>
-          ) : (
-            <p className="mb-0" id="option">
-              {type}
-            </p>
-          )}
-          <i className="fa-solid fa-angle-down" />
-        </div>
-        {options && (
-          <div className="drop-menu">
-            <div
-              className="d-flex"
-              onClick={() => {
-                setType("public");
-                setOptions(false);
-              }}
-            >
-              <i class="fa-solid fa-earth-americas"></i>
-              <div>
-                <h3>Public</h3>
-                <p>Anyone can see who is in the group and what they post</p>
+      <label htmlFor="unit">Would you like to add units to your group</label>
+      <select
+        name="unit"
+        id="unit"
+        onChange={(e) => setUseUnits(e.target.value)}
+      >
+        <option value="no" selected={useUnits === "no"}>
+          No
+        </option>
+        <option value="yes" selected={useUnits === "yes"}>
+          Yes
+        </option>
+      </select>
+      {useUnits === "yes" && (
+        <>
+          <label htmlFor="add">Add Unit</label>
+          {units.map((unit, index) => {
+            return (
+              <div className="row align-items-center mb-4" key={index}>
+                <div className="col-10">
+                  <input
+                    className="mb-0"
+                    type="text"
+                    placeholder="Enter Unit Name"
+                    value={unit}
+                    onChange={(e) => handleUnitInput(index, e)}
+                  />
+                </div>
+                <div className="col-1">
+                  <img
+                    src="/img/trash.png"
+                    alt="delete"
+                    onClick={() => deleteUnit(index)}
+                  />
+                </div>
+                <div className="col-1">
+                  {index === units.length - 1 && (
+                    <img
+                      src="/img/plus sign.png"
+                      alt="add unit"
+                      onClick={addUnit}
+                    />
+                  )}
+                </div>
               </div>
-            </div>
-            <div
-              className="d-flex"
-              onClick={() => {
-                setType("private");
-                setOptions(false);
-              }}
-            >
-              <i class="fa-solid fa-lock"></i>
-              <div>
-                <h3>Private</h3>
-                <p>
-                  Only members can see who is in the group and what they post
-                </p>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+            );
+          })}
+        </>
+      )}
       <p className="mb-3 text-center">{error}</p>
       <button onClick={createGroup}>
         {loading ? (

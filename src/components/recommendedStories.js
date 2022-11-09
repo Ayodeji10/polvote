@@ -84,6 +84,8 @@ function RecommendedStories() {
                         .replace(/(<([^>]+)>)/gi, "")
                         .replaceAll(" ", "-")
                         .replaceAll("?", "")
+                        .replaceAll("/", "-")
+                        .replaceAll("%", "percent")
                         .substring(0, 45)}/${each._id}`
                     )
                   }

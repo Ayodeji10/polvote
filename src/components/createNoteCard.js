@@ -105,6 +105,7 @@ function CreateNoteCard({
         })
       );
       setNoteModal(false);
+      console.log(modules);
     }
   };
 
