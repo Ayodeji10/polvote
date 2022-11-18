@@ -75,14 +75,13 @@ function Polls() {
     setPolls(polls);
   };
 
-  // dropdoen
+  // dropdown
   const [dropdown, setDropdown] = useState(false);
 
   //   modals
   const [createPollModal, setCreatePollModal] = useState(false);
-  const [createPollView, setCreatePollView] = useState(1);
+  const [createPollView, setCreatePollView] = useState(4);
   const [createGroupModal, setCreateGroupModal] = useState(false);
-  const [opinionPollModal, setOpinionPollModal] = useState(false);
 
   // states
   // general
@@ -90,6 +89,8 @@ function Polls() {
   const [pollOpen, setPollOpen] = useState("public");
   const [group, setGroup] = useState("");
   const [groupId, setGroupId] = useState("");
+  const [useSamePoint, setUseSamePoint] = useState("yes");
+  const [samePoint, setSamePoint] = useState("");
 
   // election poll
   const [pollTitle, setPollTitle] = useState("");
@@ -102,6 +103,20 @@ function Polls() {
     { option: "", optionImg: "" },
     { option: "", optionImg: "" },
   ]);
+
+  const navigatePollView = () => {
+    if (pollOpen === "private" && group === "") {
+      setCreatePollError(
+        "Please Select a Group, Create one or change poll type to public"
+      );
+    } else {
+      if (pollType === "election") {
+        setCreatePollView(2);
+      } else {
+        setCreatePollView(3);
+      }
+    }
+  };
 
   // handle options input
   const handleHistoryInput = (index, e, type) => {
@@ -269,16 +284,24 @@ function Polls() {
                   {/* create poll modal  */}
                   <Modal
                     isOpen={createPollModal}
-                    onRequestClose={() => setCreatePollModal(false)}
+                    onRequestClose={() => {
+                      setCreatePollView(1);
+                      setCreatePollModal(false);
+                    }}
                     id="create-poll-modal"
                     className={`${context.darkMode ? "dm" : ""}`}
                   >
                     <i
                       className="far fa-times-circle"
-                      onClick={() => setCreatePollModal(false)}
+                      onClick={() => {
+                        setCreatePollView(1);
+                        setCreatePollModal(false);
+                      }}
                     />
                     <h1>New Poll</h1>
-                    {createPollView === 1 ? (
+
+                    {/* general settings  */}
+                    {createPollView === 1 && (
                       <>
                         <label htmlFor="type">Poll Type</label>
                         <select
@@ -359,27 +382,51 @@ function Polls() {
                             </div>
                           </div>
                         )}
+                        {pollOpen === "private" && (
+                          <>
+                            <label htmlFor="points">
+                              Would you like to allocate the same point to all
+                              group units?
+                            </label>
+                            <select
+                              name="type"
+                              id="type"
+                              onChange={(e) => setUseSamePoint(e.target.value)}
+                            >
+                              <option
+                                value="yes"
+                                selected={useSamePoint === "yes"}
+                              >
+                                Yes
+                              </option>
+                              <option
+                                value="no"
+                                selected={useSamePoint === "no"}
+                              >
+                                No
+                              </option>
+                            </select>
+                          </>
+                        )}
+                        {pollOpen === "private" && useSamePoint === "yes" && (
+                          <>
+                            <label htmlFor="samepoint">Unit Point</label>
+                            <input
+                              type="number"
+                              id="samepoint"
+                              placeholder="Enter point"
+                              value={samePoint}
+                              onChange={(e) => setSamePoint(e.target.value)}
+                            />
+                          </>
+                        )}
                         <p id="createPollError">{createPollError}</p>
-                        <button
-                          onClick={() => {
-                            if (pollOpen === "private" && group === "") {
-                              setCreatePollError(
-                                "Please Select a Group, Create one or change poll type to public"
-                              );
-                            } else {
-                              if (pollType === "election") {
-                                setCreatePollView(2);
-                              } else {
-                                setCreatePollModal(false);
-                                setOpinionPollModal(true);
-                              }
-                            }
-                          }}
-                        >
-                          Proceed
-                        </button>
+                        <button onClick={navigatePollView}>Proceed</button>
                       </>
-                    ) : (
+                    )}
+
+                    {/* election poll  */}
+                    {createPollView === 2 && (
                       <>
                         <label htmlFor="title">Poll Title</label>
                         <input
@@ -424,115 +471,140 @@ function Polls() {
                         </button>
                       </>
                     )}
+
+                    {/* opinion poll  */}
+                    {createPollView === 3 && (
+                      <>
+                        <label htmlFor="question">Question</label>
+                        <input
+                          type="text"
+                          placeholder="Ask a question"
+                          value={question}
+                          onChange={(e) => setQuestion(e.target.value)}
+                        />
+                        {pollOptions.map((option, index) => {
+                          return (
+                            <div key={index}>
+                              <label htmlFor={`option-${index}`}>
+                                Option {index + 1}
+                              </label>
+                              <div className="option d-flex justify-content-between align-items-center mb-4">
+                                <input
+                                  name="option"
+                                  type="text"
+                                  placeholder={`Option ${index + 1}`}
+                                  id={`option-${index}`}
+                                  value={option.option}
+                                  onChange={(e) =>
+                                    handleHistoryInput(index, e, "text")
+                                  }
+                                />
+                                <i
+                                  class="fa-solid fa-trash-can"
+                                  onClick={() => handleRemoveOption(index)}
+                                />
+                              </div>
+                              <label htmlFor={`option-${index}-img`}>
+                                Option {index + 1} Image (optional)
+                              </label>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                id={`option-${index}-img`}
+                                name="optionImg"
+                                hidden={option.optionImg !== ""}
+                                onChange={(e) =>
+                                  handleHistoryInput(index, e, "image")
+                                }
+                              />
+                              {option.optionImg !== "" && (
+                                <img
+                                  src={URL.createObjectURL(option.optionImg)}
+                                  className="img-fluid mb-3"
+                                  alt=""
+                                />
+                              )}
+                            </div>
+                          );
+                        })}
+                        <div
+                          className="d-flex align-items-center mb-4 add-option"
+                          onClick={handleAddOption}
+                        >
+                          <i className="fa-solid fa-circle-plus" />
+                          <span>Add Option</span>
+                        </div>
+                        <div className="row">
+                          <div className="col-6">
+                            <label htmlFor="sd">Start Date</label>
+                            <input
+                              type="date"
+                              id="sd"
+                              value={startDate}
+                              onChange={(e) => setStartDate(e.target.value)}
+                            />
+                          </div>
+                          <div className="col-6">
+                            <label htmlFor="ed">End Date</label>
+                            <input
+                              type="date"
+                              id="ed"
+                              value={endDate}
+                              onChange={(e) => setEndDate(e.target.value)}
+                            />
+                          </div>
+                        </div>
+                        <p id="createPollError">{createPollError}</p>
+                        <button onClick={crreateOpinionPoll}>
+                          {createPollLoading ? (
+                            <>
+                              Loading...
+                              <i className="fa-solid fa-spinner fa-spin" />
+                            </>
+                          ) : (
+                            "Launch Poll"
+                          )}
+                        </button>
+                      </>
+                    )}
+
+                    {/* unit scores */}
+                    {createPollView === 4 && (
+                      <>
+                        <div className="row">
+                          <div className="col-9">
+                            <label htmlFor="">Group Unit</label>
+                          </div>
+                          <div className="col-3">
+                            <label htmlFor="">Points</label>
+                          </div>
+                        </div>
+                        <div className="row point align-items-center mb-3">
+                          <div className="col-8">
+                            <h4>Law Department</h4>
+                          </div>
+                          <div className="col-4">
+                            <input type="number" placeholder="Enter point" />
+                          </div>
+                        </div>
+                        <div className="row point align-items-center mb-3">
+                          <div className="col-8">
+                            <h4>Law Department</h4>
+                          </div>
+                          <div className="col-4">
+                            <input type="number" placeholder="Enter point" />
+                          </div>
+                        </div>
+                        <button>Proceed</button>
+                      </>
+                    )}
                   </Modal>
-                  {/* create poll modal  */}
+
+                  {/* create group modal  */}
                   <CreateGroupModal
                     createGroupModal={createGroupModal}
                     setCreateGroupModal={setCreateGroupModal}
                   />
-                  {/* opinion poll modal  */}
-                  <Modal
-                    isOpen={opinionPollModal}
-                    onRequestClose={() => setOpinionPollModal(false)}
-                    id="create-poll-modal"
-                    className={`${context.darkMode ? "dm" : ""}`}
-                  >
-                    <i
-                      className="far fa-times-circle"
-                      onClick={() => setOpinionPollModal(false)}
-                    />
-                    <h1>New Poll</h1>
-                    <label htmlFor="question">Question</label>
-                    <input
-                      type="text"
-                      placeholder="Ask a question"
-                      value={question}
-                      onChange={(e) => setQuestion(e.target.value)}
-                    />
-                    {pollOptions.map((option, index) => {
-                      return (
-                        <div key={index}>
-                          <label htmlFor={`option-${index}`}>
-                            Option {index + 1}
-                          </label>
-                          <div className="option d-flex justify-content-between align-items-center mb-4">
-                            <input
-                              name="option"
-                              type="text"
-                              placeholder={`Option ${index + 1}`}
-                              id={`option-${index}`}
-                              value={option.option}
-                              onChange={(e) =>
-                                handleHistoryInput(index, e, "text")
-                              }
-                            />
-                            <i
-                              class="fa-solid fa-trash-can"
-                              onClick={() => handleRemoveOption(index)}
-                            />
-                          </div>
-                          <label htmlFor={`option-${index}-img`}>
-                            Option {index + 1} Image (optional)
-                          </label>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            id={`option-${index}-img`}
-                            name="optionImg"
-                            hidden={option.optionImg !== ""}
-                            onChange={(e) =>
-                              handleHistoryInput(index, e, "image")
-                            }
-                          />
-                          {option.optionImg !== "" && (
-                            <img
-                              src={URL.createObjectURL(option.optionImg)}
-                              className="img-fluid mb-3"
-                              alt=""
-                            />
-                          )}
-                        </div>
-                      );
-                    })}
-                    <div
-                      className="d-flex align-items-center mb-4 add-option"
-                      onClick={handleAddOption}
-                    >
-                      <i className="fa-solid fa-circle-plus" />
-                      <span>Add Option</span>
-                    </div>
-                    <div className="row">
-                      <div className="col-6">
-                        <label htmlFor="sd">Start Date</label>
-                        <input
-                          type="date"
-                          id="sd"
-                          value={startDate}
-                          onChange={(e) => setStartDate(e.target.value)}
-                        />
-                      </div>
-                      <div className="col-6">
-                        <label htmlFor="ed">End Date</label>
-                        <input
-                          type="date"
-                          id="ed"
-                          value={endDate}
-                          onChange={(e) => setEndDate(e.target.value)}
-                        />
-                      </div>
-                    </div>
-                    <p id="createPollError">{createPollError}</p>
-                    <button onClick={crreateOpinionPoll}>
-                      {createPollLoading ? (
-                        <>
-                          Loading...
-                          <i className="fa-solid fa-spinner fa-spin" />
-                        </>
-                      ) : (
-                        "Launch Poll"
-                      )}
-                    </button>
-                  </Modal>
                 </div>
               </div>
             </div>
@@ -566,22 +638,6 @@ function Polls() {
               <Loader pageLoading={pageLoading} />
             ) : (
               <>
-                <div className="header">
-                  <div className="row align-items-center">
-                    <div className="col-4">
-                      <p>Polls</p>
-                    </div>
-                    <div className="col-2">
-                      <p>Votes</p>
-                    </div>
-                    <div className="col-2">
-                      <p>Start Date</p>
-                    </div>
-                    <div className="col-2">
-                      <p>End Date</p>
-                    </div>
-                  </div>
-                </div>
                 {polls
                   .filter(
                     (poll) => poll.status === `${activePolls ? "0" : "1"}`

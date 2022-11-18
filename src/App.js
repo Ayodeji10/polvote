@@ -135,14 +135,14 @@ function App() {
           <Route exact path="/user-profile" element={<UserProfile />} />
           <Route exact path="/withdrawal/:id" element={<Withdrawal />} />
           <Route exact path="/user/:id" element={<User />} />
-          <Route exact path="/notifications" element={<Notifications />} />
+          {/* <Route exact path="/notifications" element={<Notifications />} /> */}
           <Route
             exact
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
           />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route exact path="/groups" element={<Groups />} />
+          {/* <Route exact path="/groups" element={<Groups />} />
           <Route exact path="/groups-list" element={<GroupList />} />
           <Route exact path="/groups/:id" element={<SingleGroup />} />
           <Route
@@ -198,7 +198,7 @@ function App() {
             exact
             path="/courses/certificates"
             element={<CourseCertificates />}
-          />
+          /> */}
         </Routes>
       </DataContext.Provider>
     </Router>

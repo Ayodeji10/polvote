@@ -3,6 +3,7 @@ import { DataContext } from "../dataContext";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import SharePollModal from "./sharePollModal";
 import Modal from "react-modal";
 import HomePollCardAspirant from "./homePollCardAspirant";
 import PollSkeleton from "../skeletons/pollSkeleton";
@@ -370,7 +371,7 @@ function HomePollCard({ pollId }) {
         </div>
       )}
       {/* share modal  */}
-      <Modal
+      {/* <Modal
         isOpen={shareModal}
         onRequestClose={() => setShareModal(false)}
         id="poll-share-modal"
@@ -398,7 +399,14 @@ function HomePollCard({ pollId }) {
           />
           <img src="/img/Group 111.png" alt="copy" onClick={copy} />
         </div>
-      </Modal>
+      </Modal> */}
+      {shareModal && (
+        <SharePollModal
+          isOpen={shareModal}
+          handleShareStoryModal={setShareModal}
+          shareLink={shareLink}
+        />
+      )}
     </>
   );
 }

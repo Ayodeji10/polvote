@@ -94,7 +94,7 @@ const Nav = () => {
                     Aspirants
                   </Link>
                 </li>
-                <li
+                {/* <li
                   className={`nav-item br ${
                     window.location.pathname.includes("/courses") && "active"
                   }`}
@@ -124,7 +124,7 @@ const Nav = () => {
                     <NotificationsSvg />
                     Notifications
                   </Link>
-                </li>
+                </li> */}
               </ul>
               <ul className="navbar-nav nav2 align-items-center">
                 <li className="nav-item d-flex align-items-center">

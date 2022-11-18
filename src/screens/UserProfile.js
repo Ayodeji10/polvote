@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import Footer from "../components/footer";
 import Nav from "../components/nav";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { DataContext } from "../dataContext";
 import { removeUserSession } from "../utils/common";
 import { API } from "../components/apiRoot";
@@ -13,6 +13,11 @@ import Loader from "../components/loader";
 import Modal from "react-modal";
 import MyProfileSvg from "../components/svg/MyProfileSvg";
 import MyWalletSvg from "../components/svg/MyWalletSvg";
+import MyPayoutSettingsSvg from "../components/svg/MyPayoutSettingsSvg";
+import EditPasswordSvg from "../components/svg/EditPasswordSvg";
+import LogoutSvg from "../components/svg/LogoutSvg";
+import PromotionsSvg from "../components/svg/PromotionsSvg";
+import { isContentEditable } from "@testing-library/user-event/dist/utils";
 Modal.setAppElement("#root");
 
 function UserProfile() {
@@ -238,11 +243,33 @@ function UserProfile() {
       });
   };
 
+  // fetch polls and groups
+  const [polls, setPolls] = useState([]);
+  const fetchPolls = async () => {
+    const response = await axios
+      .get(`${API.API_ROOT}/polls`)
+      .catch((error) => [console.log("Err", error)]);
+    setPolls(response.data);
+    // console.log(response.data);
+  };
+
+  // get referrals
+  const [referals, setReferals] = useState([]);
+  const fetchReferrals = async () => {
+    const response = await axios
+      .get(`${API.API_ROOT}/reference/${context.user._id}`)
+      .catch((error) => [console.log("Err", error)]);
+    console.log(response);
+    setReferals(response.data);
+  };
+
   useEffect(() => {
     getUserData();
     fetchCountries();
     fetchHistory();
     fetchFollowers();
+    fetchPolls();
+    fetchReferrals();
   }, []);
 
   // cover picture
@@ -914,7 +941,47 @@ function UserProfile() {
                   </button>
                 </div>
               )}
-
+              {/* promotions */}
+              {context.profileView === "promotions" && (
+                <div className="promotions">
+                  <div className="row">
+                    <div className="col-3">
+                      <h3>Polls</h3>
+                    </div>
+                    <div className="col-7">
+                      <h3 className="text-center">No of Referral Clicks</h3>
+                    </div>
+                  </div>
+                  {polls
+                    .filter((poll) => poll.status === "0")
+                    .map((poll, index) => {
+                      return (
+                        <div className="row" key={index}>
+                          <div className="col-3">
+                            <p>{poll.polltitle}</p>
+                          </div>
+                          <div className="col-7">
+                            <p className="text-center">
+                              {
+                                referals.filter(
+                                  (ref) =>
+                                    ref.pollid === poll._id &&
+                                    ref.referenceid === context.user._id
+                                ).length
+                              }
+                            </p>
+                          </div>
+                          <div className="col-2">
+                            <Link to={`/polls/${poll._id}`}>
+                              Open Poll
+                              <i className="fa-solid fa-angle-right" />
+                            </Link>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              )}
               {/* wallet  */}
               {context.profileView === "wallet" && (
                 <div className="wallet">
@@ -1420,83 +1487,20 @@ function UserProfile() {
                   className={context.profileView === "pay" && "active"}
                   onClick={() => setContext({ ...context, profileView: "pay" })}
                 >
-                  {context.darkMode ? (
-                    <svg
-                      width="28"
-                      height="28"
-                      viewBox="0 0 28 28"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.5">
-                        <path
-                          d="M23.625 3.5H0.875V21H23.625V3.5ZM21.875 19.25H2.625V5.25H21.875V19.25Z"
-                          fill="#0A183D"
-                        />
-                        <path
-                          d="M25.375 7.875V22.75H5.25V24.5H27.125V7.875H25.375Z"
-                          fill="#0A183D"
-                        />
-                        <path
-                          d="M12.25 16.5408C14.4211 16.5408 16.1875 14.6192 16.1875 12.2573C16.1875 9.89543 14.4211 7.97387 12.25 7.97387C10.0789 7.97387 8.3125 9.89538 8.3125 12.2573C8.3125 14.6193 10.0789 16.5408 12.25 16.5408ZM12.25 9.72388C13.4562 9.72388 14.4375 10.8604 14.4375 12.2573C14.4375 13.6543 13.4562 14.7908 12.25 14.7908C11.0438 14.7908 10.0625 13.6543 10.0625 12.2573C10.0625 10.8604 11.0438 9.72388 12.25 9.72388ZM4.375 7.4375H6.125V17.0625H4.375V7.4375ZM18.375 7.4375H20.125V17.0625H18.375V7.4375Z"
-                          fill="#0A183D"
-                        />
-                      </g>
-                    </svg>
-                  ) : (
-                    <svg
-                      width="28"
-                      height="28"
-                      viewBox="0 0 28 28"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <g opacity="0.5">
-                        <path
-                          d="M23.625 3.5H0.875V21H23.625V3.5ZM21.875 19.25H2.625V5.25H21.875V19.25Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M25.375 7.875V22.75H5.25V24.5H27.125V7.875H25.375Z"
-                          fill="white"
-                        />
-                        <path
-                          d="M12.25 16.5408C14.4211 16.5408 16.1875 14.6192 16.1875 12.2573C16.1875 9.89543 14.4211 7.97387 12.25 7.97387C10.0789 7.97387 8.3125 9.89538 8.3125 12.2573C8.3125 14.6193 10.0789 16.5408 12.25 16.5408ZM12.25 9.72388C13.4562 9.72388 14.4375 10.8604 14.4375 12.2573C14.4375 13.6543 13.4562 14.7908 12.25 14.7908C11.0438 14.7908 10.0625 13.6543 10.0625 12.2573C10.0625 10.8604 11.0438 9.72388 12.25 9.72388ZM4.375 7.4375H6.125V17.0625H4.375V7.4375ZM18.375 7.4375H20.125V17.0625H18.375V7.4375Z"
-                          fill="white"
-                        />
-                      </g>
-                    </svg>
-                  )}
+                  <MyPayoutSettingsSvg />
                   Payout Settings
                 </button>
+                <button
+                  className={context.profileView === "promotions" && "active"}
+                  onClick={() =>
+                    setContext({ ...context, profileView: "promotions" })
+                  }
+                >
+                  <PromotionsSvg />
+                  Promotions
+                </button>
                 <button onClick={(e) => setEditPassword(true)}>
-                  {context.darkMode ? (
-                    <svg
-                      width="25"
-                      height="26"
-                      viewBox="0 0 25 26"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M18.75 8.55534H20.8333C21.1096 8.55534 21.3746 8.66509 21.5699 8.86044C21.7653 9.05579 21.875 9.32074 21.875 9.597V22.097C21.875 22.3733 21.7653 22.6382 21.5699 22.8336C21.3746 23.0289 21.1096 23.1387 20.8333 23.1387H4.16667C3.8904 23.1387 3.62545 23.0289 3.4301 22.8336C3.23475 22.6382 3.125 22.3733 3.125 22.097V9.597C3.125 9.32074 3.23475 9.05579 3.4301 8.86044C3.62545 8.66509 3.8904 8.55534 4.16667 8.55534H6.25V7.51367C6.25 5.85607 6.90848 4.26636 8.08058 3.09425C9.25269 1.92215 10.8424 1.26367 12.5 1.26367C14.1576 1.26367 15.7473 1.92215 16.9194 3.09425C18.0915 4.26636 18.75 5.85607 18.75 7.51367V8.55534ZM16.6667 8.55534V7.51367C16.6667 6.4086 16.2277 5.34879 15.4463 4.56739C14.6649 3.78599 13.6051 3.34701 12.5 3.34701C11.3949 3.34701 10.3351 3.78599 9.55372 4.56739C8.77232 5.34879 8.33333 6.4086 8.33333 7.51367V8.55534H16.6667ZM11.4583 14.8053V16.8887H13.5417V14.8053H11.4583ZM7.29167 14.8053V16.8887H9.375V14.8053H7.29167ZM15.625 14.8053V16.8887H17.7083V14.8053H15.625Z"
-                        fill="white"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      width="25"
-                      height="26"
-                      viewBox="0 0 25 26"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M18.75 8.55534H20.8333C21.1096 8.55534 21.3746 8.66509 21.5699 8.86044C21.7653 9.05579 21.875 9.32074 21.875 9.597V22.097C21.875 22.3733 21.7653 22.6382 21.5699 22.8336C21.3746 23.0289 21.1096 23.1387 20.8333 23.1387H4.16667C3.8904 23.1387 3.62545 23.0289 3.4301 22.8336C3.23475 22.6382 3.125 22.3733 3.125 22.097V9.597C3.125 9.32074 3.23475 9.05579 3.4301 8.86044C3.62545 8.66509 3.8904 8.55534 4.16667 8.55534H6.25V7.51367C6.25 5.85607 6.90848 4.26636 8.08058 3.09425C9.25269 1.92215 10.8424 1.26367 12.5 1.26367C14.1576 1.26367 15.7473 1.92215 16.9194 3.09425C18.0915 4.26636 18.75 5.85607 18.75 7.51367V8.55534ZM16.6667 8.55534V7.51367C16.6667 6.4086 16.2277 5.34879 15.4463 4.56739C14.6649 3.78599 13.6051 3.34701 12.5 3.34701C11.3949 3.34701 10.3351 3.78599 9.55372 4.56739C8.77232 5.34879 8.33333 6.4086 8.33333 7.51367V8.55534H16.6667ZM11.4583 14.8053V16.8887H13.5417V14.8053H11.4583ZM7.29167 14.8053V16.8887H9.375V14.8053H7.29167ZM15.625 14.8053V16.8887H17.7083V14.8053H15.625Z"
-                        fill="black"
-                      />
-                    </svg>
-                  )}
+                  <EditPasswordSvg />
                   Edit Password
                 </button>
                 {/* edit password modal */}
@@ -1546,36 +1550,8 @@ function UserProfile() {
                     )}
                   </button>
                 </Modal>
-
                 <button onClick={(e) => setLogoutModal(true)}>
-                  {context.darkMode ? (
-                    <svg
-                      width={22}
-                      height={20}
-                      viewBox="0 0 22 20"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M19.3437 14.7598H17.696C17.5835 14.7598 17.4781 14.8052 17.4078 14.8853C17.2437 15.0692 17.0679 15.2466 16.8828 15.4153C16.1255 16.1151 15.2285 16.6727 14.2414 17.0574C13.2187 17.4561 12.1195 17.6607 11.0093 17.6589C9.88668 17.6589 8.79918 17.4555 7.77731 17.0574C6.79019 16.6727 5.89318 16.1151 5.1359 15.4153C4.37727 14.718 3.77235 13.8914 3.35466 12.9814C2.92106 12.0382 2.70309 11.0365 2.70309 10.0002C2.70309 8.96389 2.92341 7.96221 3.35466 7.01894C3.77184 6.10812 4.37184 5.28817 5.1359 4.58504C5.89996 3.88192 6.78824 3.32807 7.77731 2.94297C8.79918 2.5449 9.88668 2.34153 11.0093 2.34153C12.132 2.34153 13.2195 2.54273 14.2414 2.94297C15.2304 3.32807 16.1187 3.88192 16.8828 4.58504C17.0679 4.75596 17.2414 4.93336 17.4078 5.11509C17.4781 5.19514 17.5859 5.24057 17.696 5.24057H19.3437C19.4914 5.24057 19.5828 5.08913 19.5007 4.97447C17.7031 2.39562 14.5578 0.688645 10.9836 0.697298C5.36793 0.710279 0.865597 4.91822 0.921847 10.0954C0.978097 15.1903 5.4734 19.3031 11.0093 19.3031C14.5742 19.3031 17.7054 17.5983 19.5007 15.0259C19.5804 14.9113 19.4914 14.7598 19.3437 14.7598ZM21.4273 9.86389L18.1015 7.44081C17.9773 7.34995 17.7968 7.43216 17.7968 7.57711V9.22134H10.4375C10.3343 9.22134 10.25 9.29923 10.25 9.39442V10.606C10.25 10.7012 10.3343 10.779 10.4375 10.779H17.7968V12.4233C17.7968 12.5682 17.9796 12.6504 18.1015 12.5596L21.4273 10.1365C21.4497 10.1203 21.4678 10.0996 21.4803 10.076C21.4927 10.0524 21.4992 10.0265 21.4992 10.0002C21.4992 9.97392 21.4927 9.948 21.4803 9.92438C21.4678 9.90077 21.4497 9.88008 21.4273 9.86389Z"
-                        fill="#0A183D"
-                        fillOpacity="0.6"
-                      />
-                    </svg>
-                  ) : (
-                    <svg
-                      width={24}
-                      height={24}
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M20.3437 16.7608H18.696C18.5835 16.7608 18.4781 16.8062 18.4078 16.8863C18.2437 17.0702 18.0679 17.2476 17.8828 17.4163C17.1255 18.116 16.2285 18.6737 15.2414 19.0584C14.2187 19.4571 13.1195 19.6617 12.0093 19.6598C10.8867 19.6598 9.79918 19.4565 8.77731 19.0584C7.79019 18.6737 6.89318 18.116 6.1359 17.4163C5.37727 16.719 4.77235 15.8924 4.35466 14.9824C3.92106 14.0391 3.70309 13.0375 3.70309 12.0012C3.70309 10.9649 3.92341 9.96319 4.35466 9.01992C4.77184 8.1091 5.37184 7.28914 6.1359 6.58602C6.89996 5.88289 7.78824 5.32905 8.77731 4.94395C9.79918 4.54587 10.8867 4.34251 12.0093 4.34251C13.132 4.34251 14.2195 4.54371 15.2414 4.94395C16.2304 5.32905 17.1187 5.88289 17.8828 6.58602C18.0679 6.75693 18.2414 6.93434 18.4078 7.11607C18.4781 7.19612 18.5859 7.24155 18.696 7.24155H20.3437C20.4914 7.24155 20.5828 7.09011 20.5007 6.97544C18.7031 4.39659 15.5578 2.68962 11.9836 2.69827C6.36793 2.71126 1.8656 6.91919 1.92185 12.0964C1.9781 17.1913 6.4734 21.3041 12.0093 21.3041C15.5742 21.3041 18.7054 19.5993 20.5007 17.0269C20.5804 16.9122 20.4914 16.7608 20.3437 16.7608ZM22.4273 11.8649L19.1015 9.44179C18.9773 9.35092 18.7968 9.43314 18.7968 9.57809V11.2223H11.4375C11.3343 11.2223 11.25 11.3002 11.25 11.3954V12.6069C11.25 12.7021 11.3343 12.78 11.4375 12.78H18.7968V14.4242C18.7968 14.5692 18.9796 14.6514 19.1015 14.5605L22.4273 12.1375C22.4497 12.1213 22.4678 12.1006 22.4803 12.077C22.4927 12.0534 22.4992 12.0274 22.4992 12.0012C22.4992 11.9749 22.4927 11.949 22.4803 11.9254C22.4678 11.9017 22.4497 11.8811 22.4273 11.8649Z"
-                        fill="white"
-                      />
-                    </svg>
-                  )}
+                  <LogoutSvg />
                   Logout
                 </button>
                 {/* logout modal  */}

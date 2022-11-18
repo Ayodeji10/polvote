@@ -604,7 +604,7 @@ nav .profile-img a {
   text-align: center;
 }
 
-#verification i {
+#verification i.fa-circle-xmark {
   float: right;
 }
 
@@ -613,7 +613,7 @@ nav .profile-img a {
 }
 
 #verification h1 {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   font-size: 28px;
   font-weight: 700;
   color: #fff;
@@ -622,18 +622,50 @@ nav .profile-img a {
 #verification p {
   font-size: 16px;
   font-weight: 400;
-  color: rgba(255, 255, 255, 0.7);
-  max-width: 329px;
+  color: rgba(255, 255, 255, 1);
+  max-width: 457px;
   margin: 0 auto;
-  margin-bottom: 48px;
+  margin-bottom: 30px;
 }
 
-#verification p span#spam-text {
-  color: red;
+#verification p#resend {
+  margin-bottom: 0;
 }
 
 #verification p span {
   color: #007af3;
+  cursor: pointer;
+}
+
+#verification .otp-input input {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 17px 0;
+  width: 61px;
+  display: block;
+  text-align: center;
+  margin: 0 8px;
+  margin-bottom: 51px;
+  border-radius: 100px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+#verification.dm .otp-input input {
+  background-color: #fff;
+  color: rgba(0, 0, 0, 1);
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+}
+
+#verification button {
+  width: 100%;
+  background-color: rgba(0, 122, 243, 1);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 16px 0;
+  border-radius: 50px;
+  margin-bottom: 20px;
 }
 
 /* forgot password modal */
@@ -1985,6 +2017,20 @@ footer#footer img.social {
   font-weight: 400;
 }
 
+#signupModal .PhoneInput {
+  display: flex;
+  align-items: center;
+}
+
+#signupModal .PhoneInput input {
+  margin-bottom: 0;
+}
+
+#signupModal .PhoneInputCountry {
+  border-radius: 5px;
+  justify-content: center;
+}
+
 #signupModal button#create {
   width: unset;
   display: block;
@@ -2150,6 +2196,21 @@ footer#footer img.social {
   margin-bottom: 0;
 }
 
+#create-poll-modal .point input {
+  margin-bottom: 0;
+  padding: 14px 23px;
+}
+
+#create-poll-modal h4 {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 0;
+  background-color: #fff;
+  border-radius: 30px;
+  color: rgba(0, 0, 0, 1);
+  padding: 14px 26px;
+}
+
 #create-poll-modal .option i {
   margin-left: 20px;
   cursor: pointer;
@@ -2208,16 +2269,8 @@ footer#footer img.social {
   margin-left: 10px;
 }
 
-.polls > .header {
-  padding: 13px 16px;
-  margin: 30px 0 19px 0;
-  background-color: rgba(0, 9, 44, 1);
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  border-radius: 5px;
-}
-
-.polls > .header p {
-  margin-bottom: 0;
+.polls p.tr {
+  margin-bottom: 5px;
   font-size: 16px;
   font-weight: 600;
 }
@@ -5082,6 +5135,28 @@ img#return-btn {
   background-color: rgba(0, 122, 243, 1);
 }
 
+/* promotions  */
+.promotions {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 0 0 10px 10px;
+  padding: 17px 30px;
+}
+
+.promotions h3 {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 29px;
+}
+
+.promotions p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.promotions a i {
+  margin-left: 10px;
+}
+
 .settings header {
   border-radius: 10px 10px 0 0;
   background-color: rgba(0, 122, 243, 1);
@@ -6734,7 +6809,7 @@ h6.error {
     font-size: 12px;
   }
 
-  .polls > .header p {
+  .polls p.tr {
     font-size: 14px;
   }
 
@@ -7123,7 +7198,7 @@ h6.error {
     padding: 11px 15px;
   }
 
-  .polls > .header p {
+  .polls p.tr {
     font-size: 12px;
   }
 
@@ -7987,7 +8062,7 @@ h6.error {
     font-size: 12px;
   }
 
-  .polls > .header p {
+  .polls p.tr {
     font-size: 12px;
   }
 
@@ -8565,6 +8640,15 @@ h6.error {
     width: 496px;
   }
 
+  #verification h1 {
+    margin-bottom: 24px;
+    font-size: 20px;
+  }
+
+  #verification .otp-input input {
+    width: 50px;
+  }
+
   /* forgot password modal  */
   #forgot-password {
     width: 450px !important;
@@ -9062,7 +9146,7 @@ h6.error {
     font-size: 12px;
   }
 
-  .polls > .header p {
+  .polls p.tr {
     font-size: 12px;
   }
 
@@ -9736,6 +9820,15 @@ h6.error {
     font-size: 14px;
   }
 
+  #verification h1 {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
+  #verification .otp-input input {
+    width: 37px;
+  }
+
   /* forgot password modal  */
   #forgot-password {
     width: 370px !important;
@@ -10299,7 +10392,7 @@ h6.error {
     padding: 5px;
   }
 
-  .polls > .header p {
+  .polls p.tr {
     font-size: 12px;
   }
 
@@ -11047,8 +11140,17 @@ h6.error {
     width: 340px;
   }
 
+  #verification h1 {
+    margin-bottom: 20px;
+    font-size: 20px;
+  }
+
   #verification p {
     font-size: 12px;
+  }
+
+  #verification .otp-input input {
+    width: 37px;
   }
 
   /* forgot password modal  */
@@ -11637,7 +11739,7 @@ h6.error {
     padding: 5px;
   }
 
-  .polls > .header p {
+  .polls p.tr {
     font-size: 12px;
   }
 
@@ -12584,11 +12686,6 @@ footer#footer.dm .bottom {
   box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.06);
 }
 
-.dm .polls > .header {
-  border: 1px solid rgba(0, 0, 0, 0.1) !important;
-  background-color: rgba(10, 24, 61, 0.08);
-}
-
 .dm .polls .poll {
   background-color: #fff;
   border: 1px solid rgba(10, 24, 61, 0.1) !important;
@@ -13128,6 +13225,7 @@ footer#footer.dm .bottom {
 
 #poll-share-modal.dm .link {
   box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
+  border: 1px solid rgba(10, 24, 61, 0.1) !important;
 }
 
 /* vote modal  */
