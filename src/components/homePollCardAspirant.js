@@ -28,12 +28,13 @@ function HomePollCardAspirant({
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [verificationModal, setVerificationModal] = useState(false);
+  const [oneMoreStepModal, setOneMoreStepModal] = useState(false);
 
   // chech for duplicate vote
   const [multiple, setMultiple] = useState([{ firstname: "", lastname: "" }]);
   const checkVote = () => {
     if (localStorage.getItem("ballotbox_token") === null) {
-      setLoginModal(true);
+      setOneMoreStepModal(true);
     } else {
       const filteredVotes = currentPoll.aspirant.filter(
         (aspirant) =>
@@ -230,6 +231,33 @@ function HomePollCardAspirant({
           You have successfully revoked your vote for {multiple[0].firstname}{" "}
           {multiple[0].lastname}
         </p>
+      </Modal>
+
+      {/* one more step modal  */}
+      <Modal
+        isOpen={oneMoreStepModal}
+        onRequestClose={() => setOneMoreStepModal(false)}
+        id="oneMoreStepModal"
+        className={`${context.darkMode ? "dm" : ""}`}
+      >
+        <i
+          className="fa-solid fa-circle-xmark"
+          onClick={() => setOneMoreStepModal(false)}
+        />
+        <img src="/img/oneMoreStep.png" alt="one more step" />
+        <h2>Just one more step.....</h2>
+        <p>
+          You need to be logged in to vote for your preferred aspirant. Kindly
+          click on the button below to login and vote.
+        </p>
+        <button
+          onClick={() => {
+            setOneMoreStepModal(false);
+            setLoginModal(true);
+          }}
+        >
+          Login
+        </button>
       </Modal>
 
       {/* authentication */}

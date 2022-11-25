@@ -2022,7 +2022,8 @@ footer#footer img.social {
   align-items: center;
 }
 
-#signupModal .PhoneInput input {
+#signupModal .PhoneInput input,
+.home .signup .PhoneInput input {
   margin-bottom: 0;
 }
 
@@ -2238,6 +2239,54 @@ footer#footer img.social {
   font-weight: 700;
   border-radius: 30px;
   padding: 14px 0;
+}
+
+/* one more step modal  */
+#oneMoreStepModal {
+  top: 15% !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: 520px;
+  height: min-content !important;
+  max-height: 80%;
+  overflow-y: scroll;
+  text-align: center;
+  background-color: #0a183d !important;
+  border-radius: 10px !important;
+  padding: 37px !important;
+}
+
+#oneMoreStepModal i.fa-circle-xmark {
+  float: right;
+}
+
+#oneMoreStepModal img {
+  margin-bottom: 15px;
+}
+
+#oneMoreStepModal h2 {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+#oneMoreStepModal p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+#oneMoreStepModal button {
+  background-color: rgba(0, 122, 243, 1);
+  color: #fff;
+  padding: 7px 0;
+  width: 100%;
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .polls h1 {
@@ -10373,6 +10422,11 @@ h6.error {
   }
 
   /* polls  */
+  #oneMoreStepModal {
+    width: 370px;
+    padding: 15px;
+  }
+
   .polls .searchbar {
     padding: 10px 14px;
     border-radius: 15px;
@@ -11720,6 +11774,11 @@ h6.error {
   }
 
   /* polls  */
+  #oneMoreStepModal {
+    width: 360px;
+    padding: 10px;
+  }
+
   .polls .searchbar {
     padding: 10px 14px;
     border-radius: 15px;
@@ -13226,6 +13285,17 @@ footer#footer.dm .bottom {
 #poll-share-modal.dm .link {
   box-shadow: 0px 4px 4px 0px rgba(0, 122, 243, 0.04);
   border: 1px solid rgba(10, 24, 61, 0.1) !important;
+}
+
+/* one more step modal  */
+#oneMoreStepModal.dm {
+  position: absolute;
+  background-color: rgba(249, 252, 255, 1) !important;
+  overflow: hidden;
+}
+
+#oneMoreStepModal.dm i.fa-circle-xmark {
+  color: #000;
 }
 
 /* vote modal  */

@@ -6,6 +6,8 @@ import { setUserSession } from "../utils/common";
 import axios from "axios";
 import GoogleLogin from "react-google-login";
 import FacebookLogin from "react-facebook-login";
+import PhoneInput from "react-phone-number-input";
+import "react-phone-number-input/style.css";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
@@ -54,7 +56,7 @@ const Login = () => {
       lastName === "" ||
       username === "" ||
       email === "" ||
-      number === "" ||
+      number === undefined ||
       password === ""
     ) {
       setError("Please fill all Input Spaces");
@@ -77,68 +79,173 @@ const Login = () => {
           { headers: { "content-type": "application/json" } }
         )
         .then((response) => {
+          // console.log(response);
+          localStorage.setItem("polvoteActivationId", response.data.userid);
           setLoading(false);
+          // setSignupModal(false);
           setVerificationModal(true);
         })
         .catch((error) => {
           setLoading(false);
           if (error.response.status === 422) {
-            setError("this Email is already registered");
-          } else if (
-            error.response.status === 401 ||
-            error.response.status === 400
-          ) {
-            setError(error.response.data.message);
-          } else {
-            setError("Something went wrong, please try again");
+            setError("This User is already registered");
           }
-          console.error(error);
         });
     }
+  };
+
+  const [otpLoading, setOtpLoading] = useState(false);
+  const [otpError, setOtpError] = useState("");
+
+  // resend otp
+  const [resendOptLoader, setResendotpLoader] = useState(false);
+  const resendOtp = (e) => {
+    setResendotpLoader(true);
+    axios
+      .post(
+        `${API.API_ROOT}/users/resend/${localStorage.getItem(
+          "polvoteActivationId"
+        )}`,
+        {
+          headers: { "content-type": "application/json" },
+        }
+      )
+      .then((response) => {
+        // console.log(response);
+      })
+      .catch((error) => {
+        // console.error(error);
+      });
+  };
+
+  // activate user
+  const activateUser = (e) => {
+    // console.log(otp.join(""));
+    setOtpLoading(true);
+    setOtpError("");
+
+    axios({
+      method: "post",
+      url: `${API.API_ROOT}/users/activate/${localStorage.getItem(
+        "polvoteActivationId"
+      )}`,
+      data: {
+        code: otp.join(""),
+      },
+    }).then(
+      (response) => {
+        setOtp(false);
+        // console.log(response);
+        setUserSession(response.data.token);
+        setContext({ ...context, user: response.data });
+        setVerificationModal(false);
+        navigate("/");
+      },
+      (error) => {
+        setOtpError(
+          "Invalid OTP, kindly reconfirm the OTP from your phone number or email address or press 'Resend OTP' below"
+        );
+        setOtpLoading(false);
+        console.log(error);
+      }
+    );
   };
 
   // login
   const [loginEmail, setLoginEmail] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
 
+  // const handleLogin = (e) => {
+  //   e.preventDefault();
+  //   setError(null);
+  //   setLoading(true);
+  //   axios
+  //     .post(`${API.API_ROOT}/users/signin`, {
+  //       email: loginEmail.toLowerCase(),
+  //       password: loginPassword,
+  //     })
+  //     .then((response) => {
+  //       // console.log(response)
+  //       setLoading(false);
+  //       if (response.status === 422) {
+  //         setError("kindly Check your mail to verify this account");
+  //         setLoginPassword("");
+  //       } else {
+  //         setUserSession(response.data.token);
+  //         setContext({ ...context, user: response.data });
+  //         navigate("/");
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.log(error.response.status);
+  //       setLoading(false);
+  //       if (error.response.status === 401) {
+  //         setError("Invalid email or password");
+  //         setPassword("");
+  //       }
+  //       if (error.response.status === 422) {
+  //         setPassword("");
+  //         setError("Kindly check your mail to verify this account");
+  //         console.error(error);
+  //       }
+  //       if (error.response.status !== 401 && error.response.status !== 422) {
+  //         setError("Something went wrong, please try again later");
+  //         setPassword("");
+  //       }
+  //     });
+  // };
+
   const handleLogin = (e) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    axios
-      .post(`${API.API_ROOT}/users/signin`, {
-        email: loginEmail.toLowerCase(),
-        password: loginPassword,
-      })
-      .then((response) => {
-        // console.log(response)
-        setLoading(false);
-        if (response.status === 422) {
-          setError("kindly Check your mail to verify this account");
-          setLoginPassword("");
-        } else {
-          setUserSession(response.data.token);
-          setContext({ ...context, user: response.data });
-          navigate("/");
-        }
-      })
-      .catch((error) => {
-        console.log(error.response.status);
-        setLoading(false);
-        if (error.response.status === 401) {
-          setError("Invalid email or password");
-          setPassword("");
-        }
-        if (error.response.status === 422) {
-          setPassword("");
-          setError("Kindly check your mail to verify this account");
-          console.error(error);
-        }
-        if (error.response.status !== 401 && error.response.status !== 422) {
-          setError("Something went wrong, please try again later");
-          setPassword("");
-        }
-      });
+    if (loginEmail === "" || loginPassword === "") {
+      setError("Please Enter Email and Password");
+      setLoading(false);
+    } else {
+      axios
+        .post(`${API.API_ROOT}/users/signin`, {
+          email: loginEmail.toLowerCase(),
+          password: loginPassword,
+        })
+        .then((response) => {
+          // console.log(response)
+          setLoading(false);
+          if (response.status === 422) {
+            setError("kindly Check your mail to verify this account");
+            setLoginPassword("");
+          } else {
+            setUserSession(response.data.token);
+            setContext({ ...context, user: response.data });
+            navigate("/");
+          }
+        })
+        .catch((error) => {
+          // console.log(error.response);
+          // console.log(error.response.status);
+          setLoading(false);
+          if (error.response.status === 401) {
+            setError("Invalid email or password");
+            setLoginPassword("");
+          }
+          if (error.response.status === 422) {
+            localStorage.setItem(
+              "polvoteActivationId",
+              error.response.data.userid
+            );
+            setVerificationModal(true);
+          }
+          if (error.response.status !== 401 && error.response.status !== 422) {
+            setError("Something went wrong, please try again later");
+            setLoginPassword("");
+          }
+          if (error.response.status === 403) {
+            setError(
+              "Your account has been blocked, please call +2348184468097"
+            );
+          }
+        });
+    }
   };
 
   // google signup
@@ -574,13 +681,20 @@ const Login = () => {
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                       <label htmlFor="number">Phone Number</label>
-                      <input
+                      <div className="phoneInputCover">
+                        <PhoneInput
+                          placeholder="+2348012345678"
+                          value={number}
+                          onChange={setNumber}
+                        />
+                      </div>
+                      {/* <input
                         id="number"
                         type="tel"
                         placeholder="+234  |   700234567891"
                         value={number}
                         onChange={(e) => setNumber(e.target.value)}
-                      />
+                      /> */}
                     </div>
                     <div className="col-lg-6 col-md-6 col-sm-6 col-12">
                       <label htmlFor="pass">Create Password</label>
@@ -672,13 +786,44 @@ const Login = () => {
           className="fa-solid fa-circle-xmark"
           onClick={() => setVerificationModal(false)}
         />
-        <img src="img/verify.png" alt="email" />
-        <h1>One More Step!</h1>
+        <h1 className="mt-2">Enter (OTP) One Time Password</h1>
         <p>
-          A Verification link has been sent to <span>{email}</span>. Please
-          click on the link to verify your account.{" "}
-          <span id="spam-text">
-            Also check your SPAM folder in case it didn't drop in your Inbox
+          An OTP has been sent to your phone number <span>{number}</span> and
+          email address <span>{email}</span>
+        </p>
+        <div className="otp-input d-flex justify-content-between">
+          {otp.map((data, index) => {
+            return (
+              <input
+                type="text"
+                placeholder={index + 1}
+                maxLength="1"
+                key={index}
+                value={data}
+                onChange={(e) => handleChange(e.target, index)}
+                onFocus={(e) => e.target.select()}
+              />
+            );
+          })}
+        </div>
+        <h6 className="error mb-3">{otpError}</h6>
+        <button onClick={activateUser}>
+          {otpLoading ? (
+            <>
+              Loading... <i className="fa-solid fa-spinner fa-spin" />
+            </>
+          ) : (
+            "Proceed"
+          )}
+        </button>
+        <p id="resend">
+          Didn’t receive any OTP?{" "}
+          <span onClick={resendOtp}>
+            {resendOptLoader ? (
+              <i className="fa-solid fa-spinner fa-spin" />
+            ) : (
+              "Resend OTP"
+            )}
           </span>
         </p>
       </Modal>

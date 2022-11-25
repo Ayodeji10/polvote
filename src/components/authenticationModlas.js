@@ -36,47 +36,54 @@ function AuthModals({
     e.preventDefault();
     setError(null);
     setLoading(true);
-    axios
-      .post(`${API.API_ROOT}/users/signin`, {
-        email: loginEmail.toLowerCase(),
-        password: loginPassword,
-      })
-      .then((response) => {
-        // console.log(response)
-        setLoading(false);
-        if (response.status === 422) {
-          setError("kindly Check your mail to verify this account");
-          setLoginPassword("");
-        } else {
-          setUserSession(response.data.token);
-          setContext({ ...context, user: response.data });
-          setLoginModal(false);
-        }
-      })
-      .catch((error) => {
-        // console.log(error.response);
-        // console.log(error.response.status);
-        setLoading(false);
-        if (error.response.status === 401) {
-          setError("Invalid email or password");
-          setLoginPassword("");
-        }
-        if (error.response.status === 422) {
-          localStorage.setItem(
-            "polvoteActivationId",
-            error.response.data.userid
-          );
-          setLoginModal(false);
-          setVerificationModal(true);
-        }
-        if (error.response.status !== 401 && error.response.status !== 422) {
-          setError("Something went wrong, please try again later");
-          setLoginPassword("");
-        }
-        if (error.response.status === 403) {
-          setError("Your account has been blocked, please call +2348184468097");
-        }
-      });
+    if (loginEmail === "" || loginPassword === "") {
+      setError("Please Enter Email and Password");
+      setLoading(false);
+    } else {
+      axios
+        .post(`${API.API_ROOT}/users/signin`, {
+          email: loginEmail.toLowerCase(),
+          password: loginPassword,
+        })
+        .then((response) => {
+          // console.log(response)
+          setLoading(false);
+          if (response.status === 422) {
+            setError("kindly Check your mail to verify this account");
+            setLoginPassword("");
+          } else {
+            setUserSession(response.data.token);
+            setContext({ ...context, user: response.data });
+            setLoginModal(false);
+          }
+        })
+        .catch((error) => {
+          // console.log(error.response);
+          // console.log(error.response.status);
+          setLoading(false);
+          if (error.response.status === 401) {
+            setError("Invalid email or password");
+            setLoginPassword("");
+          }
+          if (error.response.status === 422) {
+            localStorage.setItem(
+              "polvoteActivationId",
+              error.response.data.userid
+            );
+            setLoginModal(false);
+            setVerificationModal(true);
+          }
+          if (error.response.status !== 401 && error.response.status !== 422) {
+            setError("Something went wrong, please try again later");
+            setLoginPassword("");
+          }
+          if (error.response.status === 403) {
+            setError(
+              "Your account has been blocked, please call +2348184468097"
+            );
+          }
+        });
+    }
   };
 
   // google signup
@@ -426,7 +433,7 @@ function AuthModals({
           className="fa-solid fa-circle-xmark"
           onClick={() => setSignupModal(false)}
         />
-        <form className="signup" onSubmit={(e) => handleSignUp(e)}>
+        <form className="signup" onSubmit={(e) => handleLogin(e)}>
           <h1>Signup on Polvote</h1>
           <h4>
             Votes made on Polvote are only limited to Polvote and does not count
