@@ -3,26 +3,34 @@ import { DataContext } from "../dataContext";
 import Modal from "react-modal";
 import { API } from "../components/apiRoot";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 Modal.setAppElement("#root");
 
 function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
   // context
   const { context } = useContext(DataContext);
 
+  // navigate
+  const navigate = useNavigate();
+
   const [name, setName] = useState("");
   const [useUnits, setUseUnits] = useState("no");
-  const [units, setUnits] = useState([""]);
+  const [units, setUnits] = useState([{ unit: "" }]);
 
   // add unit
   const addUnit = () => {
-    setUnits([...units, ""]);
+    setUnits([...units, { unit: "" }]);
   };
 
   // delete unit
   const deleteUnit = (index) => {
-    const newUnits = [...units];
-    newUnits.splice(index, 1);
-    setUnits(newUnits);
+    if (units.length === 1) {
+      setError("You cant have less than one unit");
+    } else {
+      const newUnits = [...units];
+      newUnits.splice(index, 1);
+      setUnits(newUnits);
+    }
   };
 
   // handle unit input
@@ -32,7 +40,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
         if (i !== index) {
           return unit;
         }
-        return e.target.value;
+        return { unit: e.target.value };
       })
     );
   };
@@ -41,8 +49,11 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
   const [error, setError] = useState("");
 
   const createGroup = () => {
+    console.log(name);
+    console.log(units);
+    setError("");
     if (name === "") {
-      setError("Please Enter Group name and Select Type");
+      setError("Please Enter Group name");
     } else {
       setLoading(true);
       axios
@@ -50,7 +61,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
           `${API.API_ROOT}/group`,
           {
             groupname: name,
-            grouptype: "public",
+            ...(useUnits === "yes" && { units: units }),
           },
           {
             headers: {
@@ -60,9 +71,9 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
           }
         )
         .then((response) => {
-          console.log(name);
           console.log(response);
-          window.location.reload();
+          navigate(`/groups/${response.data.data._id}`);
+          // window.location.reload();
           setLoading(false);
         })
         .catch((error) => {
@@ -131,7 +142,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
                     className="mb-0"
                     type="text"
                     placeholder="Enter Unit Name"
-                    value={unit}
+                    value={unit.unit}
                     onChange={(e) => handleUnitInput(index, e)}
                   />
                 </div>
@@ -156,7 +167,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
           })}
         </>
       )}
-      <p className="mb-3 text-center">{error}</p>
+      <h6 className="error-msg mb-3 text-center">{error}</h6>
       <button onClick={createGroup}>
         {loading ? (
           <>

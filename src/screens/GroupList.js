@@ -67,7 +67,7 @@ function GroupList() {
           {/* main  */}
           <div className="story col-lg-6 col-md-9">
             {/* new Group  */}
-            <div className="stories-header">
+            <div className="stories-header mt-sm-3">
               <div className="row">
                 <div className="col-lg-7 col-md-6 col-sm-6">
                   <div className="searchbar d-flex justify-content-between align-items-center">

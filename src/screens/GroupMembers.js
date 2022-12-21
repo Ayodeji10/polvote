@@ -1,11 +1,15 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Nav from "../components/nav";
 import Aside from "../components/aside";
 import Footer from "../components/footer";
 import AuthModals from "../components/authenticationModlas";
 import LoginPrompt from "../components/loginPrompt";
+import { API } from "../components/apiRoot";
+import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 import { DataContext } from "../dataContext";
+import GroupMemberCard from "../components/groupMemberCard";
+import Loader from "../components/loader";
 
 function GroupMembers() {
   // context
@@ -16,6 +20,32 @@ function GroupMembers() {
 
   // history
   const navigate = useNavigate();
+
+  // fetch current group
+  const [group, setGroup] = useState({});
+  const [loading, setLoading] = useState(true);
+  const fetchCurrentGroup = () => {
+    axios
+      .get(`${API.API_ROOT}/group/${id}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+        },
+      })
+      .then((response) => {
+        setGroup(response.data);
+        console.log(response);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
+  };
+
+  useEffect(() => {
+    fetchCurrentGroup();
+  }, []);
 
   // auth modals
   const [loginModal, setLoginModal] = useState(false);
@@ -32,9 +62,9 @@ function GroupMembers() {
             <Aside />
           </div>
           {/* main  */}
-          <div className="col-9">
+          <div className="col-md-9 col-12">
             <div className="group-requests">
-              <header>
+              <header className="mt-md-0 mt-3">
                 <h4
                   className="mb-0"
                   onClick={() => navigate(`/groups/${id}/requests`)}
@@ -44,48 +74,24 @@ function GroupMembers() {
                 </h4>
               </header>
               {/* members */}
-              <div className="request">
-                <div className="header d-flex align-items-center justify-content-between gap-3">
-                  <div className="d-flex align-items-center">
-                    <div className="img-container">
-                      <img src="/img/candidate.png" alt="profile-img" />
-                    </div>
-                    <div>
-                      <h5>Aaron James</h5>
-                      <div className="d-flex align-items-center">
-                        <span>@AAron</span>
-                        <i className="fa-solid fa-circle" />
-                        <span> Requested 1day ago</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <button className="approve-btn">View Profile</button>
-                    <button className="decline-btn">Remove from Group</button>
-                  </div>
-                </div>
-              </div>
-              <div className="request">
-                <div className="header d-flex align-items-center justify-content-between gap-3">
-                  <div className="d-flex align-items-center">
-                    <div className="img-container">
-                      <img src="/img/candidate.png" alt="profile-img" />
-                    </div>
-                    <div>
-                      <h5>Aaron James</h5>
-                      <div className="d-flex align-items-center">
-                        <span>@AAron</span>
-                        <i className="fa-solid fa-circle" />
-                        <span> Requested 1day ago</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div>
-                    <button className="approve-btn">View Profile</button>
-                    <button className="decline-btn">Remove from Group</button>
-                  </div>
-                </div>
-              </div>
+              {loading ? (
+                <Loader pageLoading={loading} />
+              ) : (
+                <>
+                  {group.members
+                    .filter((member) => member.status === 1)
+                    .map((member, i) => {
+                      return (
+                        <GroupMemberCard
+                          group={group}
+                          member={member}
+                          id={id}
+                          key={i}
+                        />
+                      );
+                    })}
+                </>
+              )}
             </div>
             <Footer />
           </div>

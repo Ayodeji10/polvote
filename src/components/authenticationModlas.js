@@ -396,7 +396,9 @@ function AuthModals({
                 Remember me
               </label>
             </div>
-            <h5 onClick={() => navigate("/login")}>Forgot Password?</h5>
+            <h5 onClick={() => navigate("/forgot-password")}>
+              Forgot Password?
+            </h5>
           </div>
           <p className="error-msg">{error}</p>
           <button id="proceed" onClick={(e) => handleLogin(e)}>

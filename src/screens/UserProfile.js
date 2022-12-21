@@ -17,7 +17,7 @@ import MyPayoutSettingsSvg from "../components/svg/MyPayoutSettingsSvg";
 import EditPasswordSvg from "../components/svg/EditPasswordSvg";
 import LogoutSvg from "../components/svg/LogoutSvg";
 import PromotionsSvg from "../components/svg/PromotionsSvg";
-import { isContentEditable } from "@testing-library/user-event/dist/utils";
+import UserPollCard from "../components/userPollCard";
 Modal.setAppElement("#root");
 
 function UserProfile() {
@@ -253,6 +253,16 @@ function UserProfile() {
     // console.log(response.data);
   };
 
+  // fetch created polls
+  const [newPolls, setNewPolls] = useState([]);
+  const fetchNewPolls = async () => {
+    const response = await axios
+      .get(`${API.API_ROOT}/generalpoll`)
+      .catch((error) => [console.log("Err", error)]);
+    console.log(response);
+    setNewPolls(response.data);
+  };
+
   // get referrals
   const [referals, setReferals] = useState([]);
   const fetchReferrals = async () => {
@@ -269,6 +279,7 @@ function UserProfile() {
     fetchHistory();
     fetchFollowers();
     fetchPolls();
+    fetchNewPolls();
     fetchReferrals();
   }, []);
 
@@ -696,6 +707,14 @@ function UserProfile() {
                       Posts
                     </button>
                     <button
+                      className={context.articleView === "polls" && "active"}
+                      onClick={() =>
+                        setContext({ ...context, articleView: "polls" })
+                      }
+                    >
+                      Polls
+                    </button>
+                    <button
                       className={
                         context.articleView === "aspirants" && "active"
                       }
@@ -764,6 +783,18 @@ function UserProfile() {
                           )}
                         </>
                       )}
+                    </>
+                  )}
+
+                  {context.articleView === "polls" && (
+                    <>
+                      {newPolls
+                        .filter(
+                          (poll) => poll.pollcreatorid === context.user._id
+                        )
+                        .map((poll, index) => {
+                          return <UserPollCard poll={poll} key={index} />;
+                        })}
                     </>
                   )}
 

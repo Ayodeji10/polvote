@@ -157,6 +157,27 @@ function SingleGroup() {
     );
   };
 
+  // security setting
+  const [securityLoading, setSecurityLoading] = useState(false);
+  const handleSecurity = () => {
+    setSecurityLoading(true);
+    axios
+      .patch(`${API.API_ROOT}/group/changeprivacy/${id}`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+        },
+      })
+      .then((response) => {
+        setGroup(response.data.data);
+        setSecurityLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setSecurityLoading(false);
+      });
+  };
+
   return (
     <div className={`container-fluid ${context.darkMode ? "dm" : ""}`}>
       <Nav />
@@ -167,7 +188,7 @@ function SingleGroup() {
             <Aside />
           </div>
           {/* main  */}
-          <div className="col-9">
+          <div className="col-md-9 col-12">
             {/* {loading ? (
             ) : (
               <></>
@@ -177,7 +198,7 @@ function SingleGroup() {
             ) : (
               <div className="row">
                 <div className="col-12 sticky-header">
-                  <div className="single-group-header">
+                  <div className="single-group-header mt-lg-0 mt-md-0 mt-sm-3 mt-3">
                     <div className="top">
                       <img
                         src={
@@ -207,7 +228,7 @@ function SingleGroup() {
                     </div>
                     <footer>
                       <div className="row">
-                        <div className="col-5 d-flex align-items-center">
+                        <div className="col-md-5 col-sm-5 col-12 d-flex align-items-center">
                           <div className="img-container">
                             {group.image !== null &&
                             group.image !== undefined ? (
@@ -225,7 +246,7 @@ function SingleGroup() {
                             </div>
                           </div>
                         </div>
-                        <div className="col-7 d-flex align-items-center justify-content-end">
+                        <div className="col-md-7 col-sm-7 col-12 d-flex align-items-center justify-content-md-end justify-content-sm-end mt-3 mt-md-0 mt-sm-0">
                           <button id="invite-btn">Invite</button>
                           <button id="write-post">Write a Post</button>
                           <i className="fa-solid fa-magnifying-glass" />
@@ -236,26 +257,38 @@ function SingleGroup() {
                           {dropdown && (
                             <div className="submenu">
                               {group.userid === context.user._id && (
-                                <h4
-                                  onClick={() =>
-                                    navigate(`/groups/${id}/requests`)
-                                  }
-                                >
-                                  <i className="fa-solid fa-user-group" />
-                                  Member Requests
-                                </h4>
-                              )}
-                              {group.userid === context.user._id &&
-                                group.grouptype === "private" && (
+                                <>
                                   <h4
                                     onClick={() =>
-                                      setMemberVerificationModal(true)
+                                      navigate(`/groups/${id}/requests`)
                                     }
                                   >
-                                    <i className="fa-solid fa-message" />
-                                    Membership Verification
+                                    <i className="fa-solid fa-user-group" />
+                                    Member Requests
                                   </h4>
-                                )}
+                                </>
+                              )}
+                              {group.status === 1 && (
+                                <h4
+                                  onClick={() =>
+                                    setMemberVerificationModal(true)
+                                  }
+                                >
+                                  <i className="fa-solid fa-message" />
+                                  Membership Verification
+                                </h4>
+                              )}
+                              {group.units.length !== 0 && (
+                                <h4
+                                  onClick={() =>
+                                    navigate(`/groups/${id}/units`)
+                                  }
+                                >
+                                  <i className="fa-solid fa-users-rectangle" />
+                                  Group Units
+                                </h4>
+                              )}
+
                               {memberVerificationModal && (
                                 <MemberVerificationModal
                                   memberVerificationModal={
@@ -337,7 +370,11 @@ function SingleGroup() {
                           )}
                         </div>
                       )}
-                      <div className="d-flex mb-3">
+                      <div
+                        className="d-flex mb-3"
+                        style={{ cursor: "pointer" }}
+                        onClick={() => navigate(`/groups/${id}/members`)}
+                      >
                         <i className="fa-solid fa-user-group" />
                         <div>
                           <h4>Members</h4>
@@ -345,46 +382,67 @@ function SingleGroup() {
                         </div>
                       </div>
                       {group.userid === context.user._id && (
-                        <div
-                          className="d-flex justify-content-between align-items-center mb-3"
-                          onClick={profilePhoto}
-                          style={{ cursor: "pointer" }}
-                        >
-                          <div className="d-flex">
-                            <i className="fa-regular fa-image" />
-                            <input
-                              type="file"
-                              accept="image/*"
-                              id="profile-pic-input"
-                              hidden
-                              onChange={(e) => setProfilePic(e.target.files[0])}
-                            />
-                            <div>
-                              <h4>Group Profile Image</h4>
+                        <>
+                          <div
+                            className="d-flex justify-content-between align-items-center mb-3"
+                            onClick={profilePhoto}
+                            style={{ cursor: "pointer" }}
+                          >
+                            <div className="d-flex">
+                              <i className="fa-regular fa-image" />
+                              <input
+                                type="file"
+                                accept="image/*"
+                                id="profile-pic-input"
+                                hidden
+                                onChange={(e) =>
+                                  setProfilePic(e.target.files[0])
+                                }
+                              />
+                              <div>
+                                <h4>Group Profile Image</h4>
+                              </div>
                             </div>
+                            {profilePicLoader ? (
+                              <i className="fa-solid fa-spinner fa-spin" />
+                            ) : (
+                              <i className="fa-solid fa-pen" />
+                            )}
                           </div>
-                          {profilePicLoader ? (
-                            <i className="fa-solid fa-spinner fa-spin" />
-                          ) : (
-                            <i className="fa-solid fa-pen" />
-                          )}
-                        </div>
+                          <div
+                            className="d-flex justify-content-between align-items-start mb-3"
+                            style={{ cursor: "pointer" }}
+                          >
+                            <div className="d-flex">
+                              <i className="fa-solid fa-lock" />
+                              <div>
+                                <h4>Group Security</h4>
+                                <p>
+                                  Turn on group security to allow only member
+                                  requests you approve to join your group
+                                </p>
+                              </div>
+                            </div>
+                            {securityLoading ? (
+                              <i className="fa-solid fa-spinner fa-spin" />
+                            ) : (
+                              <>
+                                {group.status === 0 ? (
+                                  <i
+                                    className="fa-solid fa-toggle-off"
+                                    onClick={handleSecurity}
+                                  />
+                                ) : (
+                                  <i
+                                    className="fa-solid fa-toggle-on"
+                                    onClick={handleSecurity}
+                                  />
+                                )}
+                              </>
+                            )}
+                          </div>
+                        </>
                       )}
-                      <div className="d-flex">
-                        <i className="fa-solid fa-earth-asia" />
-                        <div>
-                          <h4>
-                            {group.grouptype === "private"
-                              ? "Private"
-                              : "Public"}
-                          </h4>
-                          <p>
-                            {group.grouptype === "private"
-                              ? "Only members can see who is in the group and what they post"
-                              : "Anyone can see who is in the group and what they post"}
-                          </p>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>

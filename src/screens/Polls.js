@@ -13,6 +13,7 @@ import Modal from "react-modal";
 import RecommendedStories from "../components/recommendedStories";
 import RecomendedAspirants from "../components/recomendedAspirants";
 import CreateGroupModal from "../components/createGroupModal";
+import PollCard2 from "../components/newPollCards/pollCard2";
 Modal.setAppElement("#root");
 
 function Polls() {
@@ -23,79 +24,34 @@ function Polls() {
   const [loginModal, setLoginModal] = useState(false);
   const [signupModal, setSignupModal] = useState(false);
   const [verificationModal, setVerificationModal] = useState(false);
+  const [createPollModal, setCreatePollModal] = useState(false);
+  const [createPollView, setCreatePollView] = useState(1);
+  const [createGroupModal, setCreateGroupModal] = useState(false);
 
   // const [filterModal, setFilterModal] = useState(false)
   const [activePolls, setActivePolls] = useState(true);
   const [pageLoading, setPageLoading] = useState(true);
   const [options, setOptions] = useState(false);
 
-  // fetch polls and groups
-  const [polls, setPolls] = useState([]);
-  const [pollsList, setPollsList] = useState([]);
-  const fetchPolls = async () => {
-    const response = await axios
-      .get(`${API.API_ROOT}/polls`)
-      .catch((error) => [console.log("Err", error)]);
-    setPolls(response.data);
-    setPollsList(response.data);
-    setPageLoading(false);
-  };
-
-  const [groups, setGroups] = useState([]);
-  const fetchGroups = () => {
-    axios
-      .get(`${API.API_ROOT}/group`, {
-        headers: {
-          "content-type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
-        },
-      })
-      .then((response) => {
-        setGroups(response.data);
-        // console.log(response);
-      })
-      .catch((error) => {
-        // console.log(error);
-      });
-  };
-
-  useEffect(() => {
-    fetchPolls();
-    fetchGroups();
-  }, []);
-
-  const searchPolls = (e) => {
-    // console.log(e.target.value)
-    const polls = pollsList.filter(
-      (poll) =>
-        poll.polltitle.toLowerCase().includes(e.target.value.toLowerCase()) &&
-        poll.status == 0
-    );
-    // console.log(people)
-    setPolls(polls);
-  };
-
   // dropdown
   const [dropdown, setDropdown] = useState(false);
-
-  //   modals
-  const [createPollModal, setCreatePollModal] = useState(false);
-  const [createPollView, setCreatePollView] = useState(4);
-  const [createGroupModal, setCreateGroupModal] = useState(false);
 
   // states
   // general
   const [pollType, setPollType] = useState("election");
   const [pollOpen, setPollOpen] = useState("public");
+  const [showgeneral, setShowgeneral] = useState(true);
   const [group, setGroup] = useState("");
   const [groupId, setGroupId] = useState("");
   const [useSamePoint, setUseSamePoint] = useState("yes");
   const [samePoint, setSamePoint] = useState("");
+  const [groupUnits, setGroupUnits] = useState([]);
 
   // election poll
   const [pollTitle, setPollTitle] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [aspirantlimit, setAspirantlimit] = useState("");
 
   // opinion poll
   const [question, setQuestion] = useState("");
@@ -105,11 +61,33 @@ function Polls() {
   ]);
 
   const navigatePollView = () => {
-    if (pollOpen === "private" && group === "") {
-      setCreatePollError(
-        "Please Select a Group, Create one or change poll type to public"
-      );
+    if (pollOpen === "private") {
+      if (
+        group === "" ||
+        (useSamePoint === "yes" && samePoint === "")
+        // (groups.filter((group) => group._id === groupId)[0].units.length !==
+        //   0 &&
+        //   useSamePoint === "no")
+      ) {
+        setCreatePollError(
+          "Please Select a Group, Create one or change poll type to public. Also specify unit point if it applies"
+        );
+      } else {
+        if (useSamePoint === "no") {
+          setCreatePollError("");
+          setCreatePollView(4);
+        } else {
+          setCreatePollError("");
+          if (pollType === "election") {
+            setCreatePollView(2);
+          } else {
+            setCreatePollView(3);
+          }
+          // setCreatePollView(2);
+        }
+      }
     } else {
+      setCreatePollError("");
       if (pollType === "election") {
         setCreatePollView(2);
       } else {
@@ -152,81 +130,111 @@ function Polls() {
     }
   };
 
+  // fetch polls and groups
+  const [polls, setPolls] = useState([]);
+  const [pollsList, setPollsList] = useState([]);
+  const fetchPolls = async () => {
+    const response = await axios
+      .get(`${API.API_ROOT}/polls`)
+      .catch((error) => [console.log("Err", error)]);
+    setPolls(response.data);
+    setPollsList(response.data);
+    setPageLoading(false);
+  };
+
+  const [newPolls, setNewPolls] = useState([]);
+  const fetchNewPolls = async () => {
+    const response = await axios
+      .get(`${API.API_ROOT}/generalpoll`)
+      .catch((error) => [console.log("Err", error)]);
+    setNewPolls(response.data);
+  };
+
+  const [groups, setGroups] = useState([]);
+  const fetchGroups = () => {
+    axios
+      .get(`${API.API_ROOT}/group`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+        },
+      })
+      .then((response) => {
+        setGroups(response.data);
+        // console.log(response);
+      })
+      .catch((error) => {
+        // console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchPolls();
+    fetchNewPolls();
+    fetchGroups();
+  }, []);
+
+  const searchPolls = (e) => {
+    // console.log(e.target.value)
+    const polls = pollsList.filter(
+      (poll) =>
+        poll.polltitle.toLowerCase().includes(e.target.value.toLowerCase()) &&
+        poll.status == 0
+    );
+    // console.log(people)
+    setPolls(polls);
+  };
+
+  // create poll
   const [createPollError, setCreatePollError] = useState("");
   const [createPollLoading, setCreatePollLoading] = useState(false);
 
   // create opinion poll
   const crreateOpinionPoll = () => {
-    setCreatePollLoading(true);
-    setCreatePollError("");
-    const fd = new FormData();
-    fd.append("category", pollType);
-    fd.append("polltype", pollOpen);
-    if (pollOpen === "private") {
-      fd.append("groupid", groupId);
-    }
-    fd.append("question", question);
-    fd.append("startdate", startDate);
-    fd.append("enddate", endDate);
-    for (const key of Object.keys(pollOptions)) {
-      fd.append(`options[${key}][image]`, pollOptions[key].optionImg);
-      fd.append(`options[${key}][option]`, pollOptions[key].option);
-    }
-    console.log(Array.from(fd));
-
-    axios({
-      url: `${API.API_ROOT}/generalpoll`,
-      method: "post",
-      headers: {
-        "Content-Type": "multipart/form-data",
-        Authorization: `Bearer ${context.user.token}`,
-      },
-      data: fd,
-    }).then(
-      (response) => {
-        console.log(response);
-        setCreatePollLoading(false);
-      },
-      (error) => {
-        console.log(error);
-        setCreatePollLoading(false);
-      }
-    );
-
-    // axios
-    //   .post(`${API.API_ROOT}/generalpoll`, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //       Authorization: `Bearer ${context.user.token}`,
-    //     },
-    //     data: fd,
-    //   })
-    //   .then((response) => {
-    //     console.log(response);
-    //     setCreatePollLoading(false);
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     setCreatePollLoading(false);
-    //   });
-  };
-
-  // const createElection Poll
-  const createElectionPoll = () => {
-    if (pollTitle === "" || startDate === "" || endDate === "") {
+    if (question === "" || startDate === "" || endDate === "") {
       setCreatePollError("Please fill all Input spaces");
     } else {
-      setCreatePollError("");
       setCreatePollLoading(true);
+      setCreatePollError("");
       const fd = new FormData();
-      fd.append("category", pollType);
-      fd.append("polltitle", pollTitle);
-      fd.append("startdate", startDate);
-      fd.append("enddate", endDate);
+
       fd.append("polltype", pollOpen);
+      fd.append("category", pollType);
+      fd.append("showgeneral", showgeneral);
+      fd.append("startdate", startDate);
+      fd.append("pollcreatorid", context.user._id);
+      fd.append("enddate", endDate);
+      fd.append("question", question);
+      for (const key of Object.keys(pollOptions)) {
+        fd.append(`options[${key}][image]`, pollOptions[key].optionImg);
+        fd.append(`options[${key}][option]`, pollOptions[key].option);
+      }
       if (pollOpen === "private") {
         fd.append("groupid", groupId);
+        fd.append("isGenralunit", useSamePoint);
+        if (
+          useSamePoint === "yes" ||
+          groups.filter((group) => group._id === groupId)[0].units.length === 0
+        ) {
+          fd.append("unitpoint", samePoint);
+        }
+        if (
+          groups.filter((group) => group._id === groupId)[0].units.length !==
+            0 &&
+          useSamePoint === "no"
+        ) {
+          for (const key of Object.keys(groupUnits)) {
+            fd.append(`unitpoints[${key}][unitid]`, groupUnits[key].unitid);
+            fd.append(
+              `unitpoints[${key}][unitpoint]`,
+              groupUnits[key].unitpoint
+            );
+            fd.append(`unitpoints[${key}][unitname]`, groupUnits[key].unitname);
+          }
+        }
       }
+
+      // console.log(Array.from(fd));
 
       axios({
         url: `${API.API_ROOT}/generalpoll`,
@@ -239,7 +247,8 @@ function Polls() {
       }).then(
         (response) => {
           console.log(response);
-          setCreatePollLoading(false);
+          window.location.reload();
+          // setCreatePollLoading(false);
         },
         (error) => {
           console.log(error);
@@ -248,6 +257,73 @@ function Polls() {
       );
     }
   };
+
+  // create Election Poll
+  const createElectionPoll = () => {
+    console.log(pollOpen, pollType, groupUnits, groupId, startDate, endDate);
+    if (pollTitle === "" || startDate === "" || endDate === "") {
+      setCreatePollError("Please fill all Input spaces");
+    } else {
+      setCreatePollError("");
+      setCreatePollLoading(true);
+      const fd = new FormData();
+      fd.append("polltype", pollOpen);
+      fd.append("category", pollType);
+      fd.append("showgeneral", showgeneral);
+      fd.append("polltitle", pollTitle);
+      fd.append("aspirantlimit", aspirantlimit);
+      fd.append("pollcreatorid", context.user._id);
+      fd.append("startdate", startDate);
+      fd.append("enddate", endDate);
+      if (pollOpen === "private") {
+        fd.append("groupid", groupId);
+        fd.append("isGenralunit", useSamePoint);
+        if (
+          useSamePoint === "yes" ||
+          groups.filter((group) => group._id === groupId)[0].units.length === 0
+        ) {
+          fd.append("unitpoint", samePoint);
+        }
+        if (
+          groups.filter((group) => group._id === groupId)[0].units.length !==
+            0 &&
+          useSamePoint === "no"
+        ) {
+          for (const key of Object.keys(groupUnits)) {
+            fd.append(`unitpoints[${key}][unitid]`, groupUnits[key].unitid);
+            fd.append(
+              `unitpoints[${key}][unitpoint]`,
+              groupUnits[key].unitpoint
+            );
+            fd.append(`unitpoints[${key}][unitname]`, groupUnits[key].unitname);
+          }
+        }
+      }
+      // console.log(Array.from(fd));
+
+      axios({
+        url: `${API.API_ROOT}/generalpoll`,
+        method: "post",
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${context.user.token}`,
+        },
+        data: fd,
+      }).then(
+        (response) => {
+          console.log(response);
+          window.location.reload();
+          // setCreatePollLoading(false);
+        },
+        (error) => {
+          console.log(error);
+          setCreatePollLoading(false);
+        }
+      );
+    }
+  };
+
+  // fetch;
 
   return (
     <div className={`container-fluid ${context.darkMode ? "dm" : ""}`}>
@@ -291,6 +367,30 @@ function Polls() {
                     id="create-poll-modal"
                     className={`${context.darkMode ? "dm" : ""}`}
                   >
+                    {/* screens 2 and 4 back button  */}
+                    {createPollView === 2 || createPollView === 4 ? (
+                      <i
+                        className="fa-solid fa-arrow-left"
+                        onClick={() => setCreatePollView(1)}
+                      />
+                    ) : (
+                      ""
+                    )}
+
+                    {/* screen 3 back button  */}
+                    {createPollView === 3 && (
+                      <i
+                        className="fa-solid fa-arrow-left"
+                        onClick={() => {
+                          if (useSamePoint === "no") {
+                            setCreatePollView(4);
+                          } else {
+                            setCreatePollView(1);
+                          }
+                        }}
+                      />
+                    )}
+
                     <i
                       className="far fa-times-circle"
                       onClick={() => {
@@ -322,7 +422,39 @@ function Polls() {
                             Opinion Poll
                           </option>
                         </select>
-                        <label htmlFor="open">Public / Private</label>
+                        <label htmlFor="visibility">
+                          Allow poll visible to everyone?
+                        </label>
+                        <select
+                          id="visibility"
+                          onChange={(e) => setShowgeneral(e.target.value)}
+                        >
+                          <option
+                            value={false}
+                            selected={showgeneral === false}
+                          >
+                            No
+                          </option>
+                          <option value={true} selected={showgeneral === true}>
+                            Yes
+                          </option>
+                        </select>
+                        {pollType === "election" && (
+                          <>
+                            <label htmlFor="amount">
+                              Kindly specify the maximum number of users allowed
+                              to join the poll as aspirants
+                            </label>
+                            <input
+                              type="number"
+                              id="amount"
+                              placeholder="4"
+                              value={aspirantlimit}
+                              onChange={(e) => setAspirantlimit(e.target.value)}
+                            />
+                          </>
+                        )}
+                        <label htmlFor="open">Public / Group</label>
                         <select
                           name="open"
                           id="open"
@@ -338,7 +470,7 @@ function Polls() {
                             value="private"
                             selected={pollOpen === "private"}
                           >
-                            Private
+                            Group
                           </option>
                         </select>
                         {pollOpen === "private" && (
@@ -371,6 +503,15 @@ function Polls() {
                                           onClick={() => {
                                             setGroup(group.groupname);
                                             setGroupId(group._id);
+                                            setGroupUnits(() => {
+                                              return group.units.map((unit) => {
+                                                return {
+                                                  unitname: unit.unit,
+                                                  unitid: unit._id,
+                                                  unitpoint: "",
+                                                };
+                                              });
+                                            });
                                           }}
                                         >
                                           {group.groupname}
@@ -380,45 +521,57 @@ function Polls() {
                                 </div>
                               )}
                             </div>
+                            {groupId && (
+                              <>
+                                {groups.filter(
+                                  (group) => group._id === groupId
+                                )[0].units.length > 1 && (
+                                  <>
+                                    <label htmlFor="points">
+                                      Would you like to allocate the same point
+                                      to all group units?
+                                    </label>
+                                    <select
+                                      name="type"
+                                      id="type"
+                                      onChange={(e) =>
+                                        setUseSamePoint(e.target.value)
+                                      }
+                                    >
+                                      <option
+                                        value="yes"
+                                        selected={useSamePoint === "yes"}
+                                      >
+                                        Yes
+                                      </option>
+                                      <option
+                                        value="no"
+                                        selected={useSamePoint === "no"}
+                                      >
+                                        No
+                                      </option>
+                                    </select>
+                                  </>
+                                )}
+                              </>
+                            )}
+                            {useSamePoint === "yes" ||
+                            groups.filter((group) => group._id === groupId)[0]
+                              .units.length === 0 ? (
+                              <>
+                                <label htmlFor="samepoint">Unit Point</label>
+                                <input
+                                  type="number"
+                                  id="samepoint"
+                                  placeholder="Enter point"
+                                  value={samePoint}
+                                  onChange={(e) => setSamePoint(e.target.value)}
+                                />
+                              </>
+                            ) : (
+                              ""
+                            )}
                           </div>
-                        )}
-                        {pollOpen === "private" && (
-                          <>
-                            <label htmlFor="points">
-                              Would you like to allocate the same point to all
-                              group units?
-                            </label>
-                            <select
-                              name="type"
-                              id="type"
-                              onChange={(e) => setUseSamePoint(e.target.value)}
-                            >
-                              <option
-                                value="yes"
-                                selected={useSamePoint === "yes"}
-                              >
-                                Yes
-                              </option>
-                              <option
-                                value="no"
-                                selected={useSamePoint === "no"}
-                              >
-                                No
-                              </option>
-                            </select>
-                          </>
-                        )}
-                        {pollOpen === "private" && useSamePoint === "yes" && (
-                          <>
-                            <label htmlFor="samepoint">Unit Point</label>
-                            <input
-                              type="number"
-                              id="samepoint"
-                              placeholder="Enter point"
-                              value={samePoint}
-                              onChange={(e) => setSamePoint(e.target.value)}
-                            />
-                          </>
                         )}
                         <p id="createPollError">{createPollError}</p>
                         <button onClick={navigatePollView}>Proceed</button>
@@ -462,7 +615,7 @@ function Polls() {
                         <button onClick={createElectionPoll}>
                           {createPollLoading ? (
                             <>
-                              Loading...
+                              Launching Poll...
                               <i className="fa-solid fa-spinner fa-spin" />
                             </>
                           ) : (
@@ -558,7 +711,7 @@ function Polls() {
                         <button onClick={crreateOpinionPoll}>
                           {createPollLoading ? (
                             <>
-                              Loading...
+                              Launching Poll...
                               <i className="fa-solid fa-spinner fa-spin" />
                             </>
                           ) : (
@@ -579,23 +732,50 @@ function Polls() {
                             <label htmlFor="">Points</label>
                           </div>
                         </div>
-                        <div className="row point align-items-center mb-3">
-                          <div className="col-8">
-                            <h4>Law Department</h4>
-                          </div>
-                          <div className="col-4">
-                            <input type="number" placeholder="Enter point" />
-                          </div>
-                        </div>
-                        <div className="row point align-items-center mb-3">
-                          <div className="col-8">
-                            <h4>Law Department</h4>
-                          </div>
-                          <div className="col-4">
-                            <input type="number" placeholder="Enter point" />
-                          </div>
-                        </div>
-                        <button>Proceed</button>
+                        {groupUnits.map((unit, i) => {
+                          return (
+                            <div
+                              className="row point align-items-center mb-3"
+                              key={i}
+                            >
+                              <div className="col-8">
+                                <h4>{unit.unitname}</h4>
+                              </div>
+                              <div className="col-4">
+                                <input
+                                  type="number"
+                                  placeholder="Enter point"
+                                  value={unit.unitpoint}
+                                  onChange={(e) => {
+                                    setGroupUnits(
+                                      groupUnits.map((each, index) => {
+                                        if (i !== index) {
+                                          return each;
+                                        } else {
+                                          return {
+                                            ...each,
+                                            unitpoint: e.target.value,
+                                          };
+                                        }
+                                      })
+                                    );
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          );
+                        })}
+                        <button
+                          onClick={() => {
+                            if (pollType === "election") {
+                              setCreatePollView(2);
+                            } else {
+                              setCreatePollView(3);
+                            }
+                          }}
+                        >
+                          Proceed
+                        </button>
                       </>
                     )}
                   </Modal>
@@ -672,6 +852,11 @@ function Polls() {
                       />
                     );
                   })}
+
+                {/* new polls  */}
+                {newPolls.map((poll, i) => {
+                  return <PollCard2 key={i} poll={poll} />;
+                })}
               </>
             )}
             {/* footer  */}

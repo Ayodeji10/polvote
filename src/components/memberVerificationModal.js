@@ -81,7 +81,7 @@ function MemberVerificationModal({
       },
     }).then(
       (response) => {
-        // console.log(response);
+        console.log(response);
         window.location.reload();
       },
       (error) => {

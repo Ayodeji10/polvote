@@ -31,6 +31,7 @@ import GroupList from "./screens/GroupList";
 import SingleGroup from "./screens/SingleGroup";
 import GroupRequests from "./screens/GroupRequests";
 import GroupMembers from "./screens/GroupMembers";
+import GroupUnits from "./screens/GroupUnits";
 import Courses from "./screens/Courses";
 import CoursesDashboardUser from "./screens/CoursesDashboard";
 import CourseDashboardInstructor from "./screens/CourseDashboardInstructor";
@@ -91,7 +92,7 @@ function App() {
         <ScrollToTop />
         <Routes>
           <Route exact path="/" element={<Home />} />
-          <Route exact path="/login" element={<Login />} />
+          <Route exact path="/forgot-password" element={<Login />} />
           <Route exact path="/verify/:Id" element={<Verify />} />
           <Route exact path="/polls" element={<Polls />} />
           <Route exact path="/polls/:id" element={<SinglePoll />} />
@@ -142,7 +143,7 @@ function App() {
             element={<TermsAndConditions />}
           />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
-          {/* <Route exact path="/groups" element={<Groups />} />
+          <Route exact path="/groups" element={<Groups />} />
           <Route exact path="/groups-list" element={<GroupList />} />
           <Route exact path="/groups/:id" element={<SingleGroup />} />
           <Route
@@ -151,6 +152,7 @@ function App() {
             element={<GroupRequests />}
           />
           <Route exact path="/groups/:id/members" element={<GroupMembers />} />
+          <Route exact path="/groups/:id/units" element={<GroupUnits />} />
           <Route exact path="/courses" element={<Courses />} />
           <Route
             exact
@@ -198,7 +200,7 @@ function App() {
             exact
             path="/courses/certificates"
             element={<CourseCertificates />}
-          /> */}
+          />
         </Routes>
       </DataContext.Provider>
     </Router>

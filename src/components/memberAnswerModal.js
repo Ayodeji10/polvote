@@ -19,14 +19,6 @@ function MemberAnswerModal({
   const [loading, setLoading] = useState(false);
 
   const setInputValue = (e, i) => {
-    // setQuestions(
-    //   questions.map((q, index) => {
-    //     if (i === index) {
-    //       return { [e.target.name]: e.target.value };
-    //     }
-    //     return q;
-    //   })
-    // );
     setQuestions(
       questions.map((q, index) => {
         if (i === index) {

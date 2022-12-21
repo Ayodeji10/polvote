@@ -26,29 +26,31 @@ function GroupRequests() {
   const [signupModal, setSignupModal] = useState(false);
   const [verificationModal, setVerificationModal] = useState(false);
 
-  const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const getRequests = () => {
+  // fetch current group
+  const [group, setGroup] = useState({});
+  const fetchCurrentGroup = () => {
     axios
-      .get(`${API.API_ROOT}/group/getrequest/${id}`, {
+      .get(`${API.API_ROOT}/group/${id}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
         },
       })
       .then((response) => {
-        // console.log(response);
-        setRequests(response.data.data);
+        setGroup(response.data);
+        console.log(response);
         setLoading(false);
       })
       .catch((error) => {
         console.log(error);
+        setLoading(false);
       });
   };
 
   useEffect(() => {
-    getRequests();
+    fetchCurrentGroup();
   }, []);
 
   return (
@@ -61,7 +63,7 @@ function GroupRequests() {
             <Aside />
           </div>
           {/* main  */}
-          <div className="col-9">
+          <div className="col-md-9 col-12">
             <div className="group-requests">
               <header className="d-flex justify-content-between align-items-center">
                 <h4 className="mb-0" onClick={() => navigate(`/groups/${id}`)}>
@@ -76,10 +78,10 @@ function GroupRequests() {
                 <Loader pageLoading={loading} />
               ) : (
                 <>
-                  {requests
-                    .filter((request) => request.status === 0)
-                    .map((request, i) => {
-                      return <RequestCard request={request} key={i} />;
+                  {group.members
+                    .filter((member) => member.status === 0)
+                    .map((member, i) => {
+                      return <RequestCard member={member} id={id} key={i} />;
                     })}
                 </>
               )}

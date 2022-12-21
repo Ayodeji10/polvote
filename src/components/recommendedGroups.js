@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { API } from "../components/apiRoot";
+import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
 import RecStoriesSkeleton from "../skeletons/recStoriesSkeleton";
 
 function RecommendedGroups() {
+  // context
+  const { context } = useContext(DataContext);
+
   // history
   const navigate = useNavigate();
 
@@ -43,19 +47,18 @@ function RecommendedGroups() {
       ) : (
         <>
           {groups
-            .slice(0)
+            // .slice(0) ///slice(0) at the beginning is to duplicate the stories array
+            .filter((group) => group.userid !== context.user._id)
             .sort(function () {
               return 0.5 - Math.random();
             })
             .slice(0, 5)
             .map((each, index) => {
-              ///slice(0) at the beginning is to duplicate the stories array
               return (
                 <div className="story row" key={index}>
                   <div className="col-2">
                     <div className="img-container">
-                      {each.userimage === null ||
-                      each.userimage === undefined ? (
+                      {/* {each.image === null || each.image === undefined ? (
                         <img
                           src="/img/place.jpg"
                           className="img-fluid"
@@ -63,11 +66,12 @@ function RecommendedGroups() {
                           id="profile-img"
                         />
                       ) : (
-                        <img
-                          src={each.userimage}
-                          alt="avatar"
-                          id="profile-img"
-                        />
+                        <img src={each.image} alt="avatar" id="profile-img" />
+                      )} */}
+                      {each.image !== null && each.image !== undefined ? (
+                        <img src={each.image} alt="profile-img" />
+                      ) : (
+                        <img src="/img/place.jpg" alt="profile-img" />
                       )}
                     </div>
                   </div>

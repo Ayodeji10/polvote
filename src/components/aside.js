@@ -23,7 +23,7 @@ function Aside() {
 
   const [userOPtions, setUserOptions] = useState(false);
 
-  // fetch stories, aspirants, and presidential poll
+  // fetch stories, aspirants, polls and groups
   const [stories, setStories] = useState([]);
   const [storyFetch, setStoryFetch] = useState(true);
   const fetchStories = () => {
@@ -51,9 +51,39 @@ function Aside() {
     setAspirantFetch(false);
   };
 
+  // fetch polls
+  const [polls, setPolls] = useState([]);
+  const fetchPolls = async () => {
+    const response = await axios
+      .get(`${API.API_ROOT}/polls`)
+      .catch((error) => [console.log("Err", error)]);
+    // console.log(response.data)
+    setPolls(response.data);
+  };
+
+  const [groups, setGroups] = useState([]);
+  const fetchGroups = () => {
+    axios
+      .get(`${API.API_ROOT}/group`, {
+        headers: {
+          "content-type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+        },
+      })
+      .then((response) => {
+        // console.log(response);
+        setGroups(response.data);
+      })
+      .catch((error) => {
+        // console.log(error);
+      });
+  };
+
   useEffect(() => {
     fetchStories();
     fetchAspirants();
+    fetchPolls();
+    fetchGroups();
   }, []);
 
   // get story likes
@@ -68,19 +98,6 @@ function Aside() {
   useEffect(() => {
     setUserTotalLikes(storyWallet);
   }, [stories]);
-
-  // fetch polls
-  const [polls, setPolls] = useState([]);
-  const fetchPolls = async () => {
-    const response = await axios
-      .get(`${API.API_ROOT}/polls`)
-      .catch((error) => [console.log("Err", error)]);
-    // console.log(response.data)
-    setPolls(response.data);
-  };
-  useEffect(() => {
-    fetchPolls();
-  }, []);
 
   // modals
   const [writeStoryModal, setWriteStoryModal] = useState(false);
@@ -529,45 +546,28 @@ function Aside() {
             {/* admin  */}
             <div className="group-admin">
               <h2>Groups you’re an admin</h2>
-              <div className="group d-flex">
-                <div className="img-container">
-                  <img src="/img/Candidate.png" />
-                </div>
-                <div>
-                  <h3>LASU STUDENTS FORUM</h3>
-                  <div className="d-flex align-items-center">
-                    <h4>Private</h4>
-                    <i className="fa-solid fa-circle" />
-                    <h4>20k members</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="group d-flex">
-                <div className="img-container">
-                  <img src="/img/Candidate.png" />
-                </div>
-                <div>
-                  <h3>LASU STUDENTS FORUM</h3>
-                  <div className="d-flex align-items-center">
-                    <h4>Private</h4>
-                    <i className="fa-solid fa-circle" />
-                    <h4>20k members</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="group d-flex">
-                <div className="img-container">
-                  <img src="/img/Candidate.png" />
-                </div>
-                <div>
-                  <h3>LASU STUDENTS FORUM</h3>
-                  <div className="d-flex align-items-center">
-                    <h4>Private</h4>
-                    <i className="fa-solid fa-circle" />
-                    <h4>20k members</h4>
-                  </div>
-                </div>
-              </div>
+              {groups
+                .filter((group) => group.userid === context.user._id)
+                .map((group, i) => {
+                  return (
+                    <div
+                      className="group d-flex"
+                      onClick={() => navigate(`/groups/${group._id}`)}
+                    >
+                      <div className="img-container">
+                        {group.image !== null && group.image !== undefined ? (
+                          <img src={group.image} alt="profile-img" />
+                        ) : (
+                          <img src="/img/place.jpg" alt="profile-img" />
+                        )}
+                      </div>
+                      <div>
+                        <h3>{group.groupname}</h3>
+                        <h4>20k members</h4>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
             {/* member  */}
             <div className="group-admin">
