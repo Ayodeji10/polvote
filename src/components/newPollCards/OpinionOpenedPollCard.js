@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import { DataContext } from "../../dataContext";
-import SharePollModal from "../sharePollModal";
 import Modal from "react-modal";
 import OptionsCard from "./optionsCard";
 import Loader from "../loader";
@@ -12,6 +11,17 @@ function OpinionOpenedPollCard({ poll, setOpened, groupLoading, group }) {
 
   // modals
   const [sharePollModal, setSharePollModal] = useState(false);
+  // use ref
+  const inputRef = useRef();
+
+  const [shareLink, setShareLink] = useState(
+    `https://polvote.com/polls/general/${poll._id}`
+  );
+
+  const copy = () => {
+    navigator.clipboard.writeText(shareLink);
+    inputRef.current.select();
+  };
 
   // current unit
   const [currentUnit, setCurrentUnit] = useState(
@@ -38,10 +48,6 @@ function OpinionOpenedPollCard({ poll, setOpened, groupLoading, group }) {
       setTotalPoints(pollTotal);
     }
   }, [poll]);
-
-  const [shareLink, setShareLink] = useState(
-    `https://polvote.com/polls/${poll._id}`
-  );
 
   const handleSharePollModal = (param) => {
     setSharePollModal(param);
@@ -95,35 +101,73 @@ function OpinionOpenedPollCard({ poll, setOpened, groupLoading, group }) {
                         </option>
                       );
                     })}
-                    <option value="summary">Total summary of election</option>
+                    {/* <option value="summary">Total summary of election</option> */}
                   </select>
                 )}
               </div>
             </div>
-            {poll.options
-              .sort((a, b) => b.votes.length - a.votes.length)
-              .map((option, index) => {
-                return (
-                  <OptionsCard
-                    poll={poll}
-                    option={option}
-                    key={index}
-                    currentUnit={currentUnit}
-                    group={group}
-                  />
-                );
-              })}
+            {/* options array  */}
+            {poll.unitpoints.length === 0 ? (
+              <>
+                {poll.options
+                  .sort((a, b) => b.votes.length - a.votes.length)
+                  .map((option, index) => {
+                    return (
+                      <OptionsCard
+                        poll={poll}
+                        option={option}
+                        key={index}
+                        currentUnit={currentUnit}
+                        group={group}
+                      />
+                    );
+                  })}
+              </>
+            ) : (
+              <>
+                {/* sort according to units with most vote */}
+                {poll.options
+                  .sort(
+                    (a, b) =>
+                      b.votes.filter(
+                        (vote) =>
+                          vote.unitid ===
+                          group.units.filter(
+                            (unit) => unit.unit === currentUnit
+                          )[0]._id
+                      ).length -
+                      a.votes.filter(
+                        (vote) =>
+                          vote.unitid ===
+                          group.units.filter(
+                            (unit) => unit.unit === currentUnit
+                          )[0]._id
+                      ).length
+                  )
+                  .map((option, index) => {
+                    return (
+                      <OptionsCard
+                        poll={poll}
+                        option={option}
+                        key={index}
+                        currentUnit={currentUnit}
+                        group={group}
+                      />
+                    );
+                  })}
+              </>
+            )}
           </div>
           <footer className="d-flex justify-content-between align-items-center">
             <p
               onClick={() => {
-                if (localStorage.getItem("ballotbox_token") !== null) {
-                  setShareLink(
-                    `https://polvote.com/polls/${poll._id}/${context.user._id}`
-                  );
-                } else {
-                  setShareLink(`https://polvote.com/polls/${poll._id}`);
-                }
+                // if (localStorage.getItem("ballotbox_token") !== null) {
+                //   setShareLink(
+                //     `https://polvote.com/polls/${poll._id}/${context.user._id}`
+                //   );
+                // } else {
+                //   setShareLink(`https://polvote.com/polls/${poll._id}`);
+                // }
                 setSharePollModal(true);
               }}
               className="mb-0"
@@ -138,13 +182,66 @@ function OpinionOpenedPollCard({ poll, setOpened, groupLoading, group }) {
             )}
           </footer>
           {/* share modal  */}
-          {sharePollModal && (
-            <SharePollModal
-              isOpen={sharePollModal}
-              handleShareStoryModal={handleSharePollModal}
-              shareLink={shareLink}
+          <Modal
+            isOpen={sharePollModal}
+            onRequestClose={() => setSharePollModal(false)}
+            id="poll-share-modal"
+            className={`${context.darkMode ? "dm" : ""}`}
+          >
+            <i
+              className="fas fa-times"
+              onClick={() => setSharePollModal(false)}
             />
-          )}
+            <h1>See who’s Leading the Poll</h1>
+            <p>
+              You can explore Politics, Learn and Share Insights Online on
+              Polvote
+            </p>
+            <h3>Share on:</h3>
+            <div className="row mb-5">
+              <div className="col-3">
+                <a href="https://web.facebook.com" target="_blank">
+                  <img
+                    src="/img/facebook.png"
+                    alt="facebook"
+                    className="img-fluid"
+                  />
+                </a>
+              </div>
+              <div className="col-3">
+                <a href="https://web.whatsapp.com" target="_blank">
+                  <img
+                    src="/img/Whatsapp.png"
+                    alt="whatsapp"
+                    className="img-fluid"
+                  />
+                </a>
+              </div>
+              <div className="col-3">
+                <a href="https://twitter.com/home" target="_blank">
+                  <img
+                    src="/img/twit.png"
+                    alt="twitter"
+                    className="img-fluid"
+                  />
+                </a>
+              </div>
+              <div className="col-3">
+                <a href="https://www.instagram.com" target="_blank">
+                  <img
+                    src="/img/Instagram.png"
+                    alt="instagram"
+                    className="img-fluid"
+                  />
+                </a>
+              </div>
+            </div>
+            <h3>Copy Link</h3>
+            <div className="link d-flex justify-content-between align-items-center">
+              <input type="text" ref={inputRef} value={shareLink} />
+              <img src="/img/Group 111.png" alt="copy" onClick={copy} />
+            </div>
+          </Modal>
         </div>
       )}
     </>

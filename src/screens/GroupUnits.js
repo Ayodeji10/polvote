@@ -103,11 +103,12 @@ function GroupUnits() {
                   <i className="fa-solid fa-arrow-left" />
                   Group Units
                 </h4>
-                <h6 onClick={() => setUnitModal(true)}>
-                  <i className="fa-solid fa-circle-plus" />
-                  Add Group Unit
-                </h6>
-
+                {group.userid === context.user._id && (
+                  <h6 onClick={() => setUnitModal(true)}>
+                    <i className="fa-solid fa-circle-plus" />
+                    Add Group Unit
+                  </h6>
+                )}
                 {/* add unit modal  */}
                 <Modal
                   isOpen={unitModal}
@@ -152,6 +153,7 @@ function GroupUnits() {
                         key={i}
                         id={id}
                         members={group.members}
+                        group={group}
                       />
                     );
                   })}

@@ -3,7 +3,9 @@ import axios from "axios";
 import { API } from "../components/apiRoot";
 import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
+import JoinGroupModals from "./joinGroupModals";
 import RecStoriesSkeleton from "../skeletons/recStoriesSkeleton";
+import RecommendedGroupCard from "./recommendedGroupCard";
 
 function RecommendedGroups() {
   // context
@@ -53,51 +55,8 @@ function RecommendedGroups() {
               return 0.5 - Math.random();
             })
             .slice(0, 5)
-            .map((each, index) => {
-              return (
-                <div className="story row" key={index}>
-                  <div className="col-2">
-                    <div className="img-container">
-                      {/* {each.image === null || each.image === undefined ? (
-                        <img
-                          src="/img/place.jpg"
-                          className="img-fluid"
-                          alt="avatar"
-                          id="profile-img"
-                        />
-                      ) : (
-                        <img src={each.image} alt="avatar" id="profile-img" />
-                      )} */}
-                      {each.image !== null && each.image !== undefined ? (
-                        <img src={each.image} alt="profile-img" />
-                      ) : (
-                        <img src="/img/place.jpg" alt="profile-img" />
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-10 details">
-                    <h3>{each.groupname}</h3>
-                    <div className="mb-2 d-flex align-items-center">
-                      <h4>{each.username}</h4>
-                      <i className="fa-solid fa-circle" />
-                      <h4>20k members</h4>
-                    </div>
-                    <button
-                      onClick={() =>
-                        navigate(
-                          `/stories/${each.story
-                            .replace(/(<([^>]+)>)/gi, "")
-                            .replaceAll(" ", "-")
-                            .replaceAll("?", "")
-                            .substring(0, 45)}/${each._id}`
-                        )
-                      }
-                    >
-                      Join Group
-                    </button>
-                  </div>
-                </div>
-              );
+            .map((group, index) => {
+              return <RecommendedGroupCard group={group} key={index} />;
             })}
         </>
       )}

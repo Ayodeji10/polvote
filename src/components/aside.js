@@ -524,20 +524,20 @@ function Aside() {
         localStorage.getItem("ballotbox_token") !== null && (
           <>
             <div className="feed">
-              <button
+              {/* <button
                 className={`${
-                  window.location.pathname === "/groups" && "active"
+                  window.location.pathname === "/groups-list" && "active"
                 } d-flex align-items-center`}
                 onClick={() => navigate("/groups")}
               >
                 <GroupFeedSvg />
                 My Feed
-              </button>
+              </button> */}
               <button
                 className={`${
-                  window.location.pathname === "/groups-list" && "active"
+                  window.location.pathname === "/groups" && "active"
                 } d-flex align-items-center`}
-                onClick={() => navigate("/groups-list")}
+                onClick={() => navigate("/groups")}
               >
                 <GroupFindFriendsSvg />
                 Find more Groups
@@ -572,45 +572,37 @@ function Aside() {
             {/* member  */}
             <div className="group-admin">
               <h2>Groups you’ve joined</h2>
-              <div className="group d-flex">
-                <div className="img-container">
-                  <img src="/img/Candidate.png" />
-                </div>
-                <div>
-                  <h3>LASU STUDENTS FORUM</h3>
-                  <div className="d-flex align-items-center">
-                    <h4>Private</h4>
-                    <i className="fa-solid fa-circle" />
-                    <h4>20k members</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="group d-flex">
-                <div className="img-container">
-                  <img src="/img/Candidate.png" />
-                </div>
-                <div>
-                  <h3>LASU STUDENTS FORUM</h3>
-                  <div className="d-flex align-items-center">
-                    <h4>Private</h4>
-                    <i className="fa-solid fa-circle" />
-                    <h4>20k members</h4>
-                  </div>
-                </div>
-              </div>
-              <div className="group d-flex">
-                <div className="img-container">
-                  <img src="/img/Candidate.png" />
-                </div>
-                <div>
-                  <h3>LASU STUDENTS FORUM</h3>
-                  <div className="d-flex align-items-center">
-                    <h4>Private</h4>
-                    <i className="fa-solid fa-circle" />
-                    <h4>20k members</h4>
-                  </div>
-                </div>
-              </div>
+              {groups
+                .filter(
+                  (group) =>
+                    group.members.filter(
+                      (member) => member.userid === context.user._id
+                    ).length !== 0
+                )
+                .map((group, index) => {
+                  return (
+                    <div
+                      className="group d-flex"
+                      onClick={() => navigate(`/groups/${group._id}`)}
+                    >
+                      <div className="img-container">
+                        {group.image !== null && group.image !== undefined ? (
+                          <img src={group.image} alt="profile-img" />
+                        ) : (
+                          <img src="/img/place.jpg" alt="profile-img" />
+                        )}
+                      </div>
+                      <div>
+                        <h3>{group.groupname}</h3>
+                        <h4>
+                          {group.members.length} member
+                          {group.members.length === 0 ||
+                            (group.members.length > 1 && "s")}
+                        </h4>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
           </>
         )}

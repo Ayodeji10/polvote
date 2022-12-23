@@ -49,7 +49,7 @@ function SingleGroup() {
           setQuestions(response.data.questions);
         }
         setPageLoading(false);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         console.log(error);
@@ -239,17 +239,16 @@ function SingleGroup() {
                           </div>
                           <div>
                             <h3>{group.groupname}</h3>
-                            <div className="d-flex align-items-center">
-                              <h4>{group.grouptype}</h4>
-                              <i class="fa-solid fa-circle" />
-                              <h4>20k members</h4>
-                            </div>
+                            <h4>
+                              {group.members.length} member
+                              {group.members.length > 1 && "s"}
+                            </h4>{" "}
                           </div>
                         </div>
                         <div className="col-md-7 col-sm-7 col-12 d-flex align-items-center justify-content-md-end justify-content-sm-end mt-3 mt-md-0 mt-sm-0">
-                          <button id="invite-btn">Invite</button>
+                          {/* <button id="invite-btn">Invite</button>
                           <button id="write-post">Write a Post</button>
-                          <i className="fa-solid fa-magnifying-glass" />
+                          <i className="fa-solid fa-magnifying-glass" /> */}
                           <i
                             class="fas fa-ellipsis-h"
                             onClick={() => setDropdown(!dropdown)}
@@ -268,16 +267,17 @@ function SingleGroup() {
                                   </h4>
                                 </>
                               )}
-                              {group.status === 1 && (
-                                <h4
-                                  onClick={() =>
-                                    setMemberVerificationModal(true)
-                                  }
-                                >
-                                  <i className="fa-solid fa-message" />
-                                  Membership Verification
-                                </h4>
-                              )}
+                              {group.status === 1 &&
+                                group.userid === context.user._id && (
+                                  <h4
+                                    onClick={() =>
+                                      setMemberVerificationModal(true)
+                                    }
+                                  >
+                                    <i className="fa-solid fa-message" />
+                                    Membership Verification
+                                  </h4>
+                                )}
                               {group.units.length !== 0 && (
                                 <h4
                                   onClick={() =>

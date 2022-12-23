@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
 import { API } from "../components/apiRoot";
 import axios from "axios";
 
 function GroupMemberCard({ member, group, id }) {
+  // context
+  const { context } = useContext(DataContext);
+
   // history
   const navigate = useNavigate();
 
@@ -72,15 +76,17 @@ function GroupMemberCard({ member, group, id }) {
           >
             View Profile
           </button>
-          <button onClick={remove} className="decline-btn">
-            {loading ? (
-              <>
-                loading... <i className="fa-solid fa-spinner fa-spin" />
-              </>
-            ) : (
-              "Remove from Group"
-            )}
-          </button>
+          {group.userid === context.user._id && (
+            <button onClick={remove} className="decline-btn">
+              {loading ? (
+                <>
+                  loading... <i className="fa-solid fa-spinner fa-spin" />
+                </>
+              ) : (
+                "Remove from Group"
+              )}
+            </button>
+          )}
         </div>
       </div>
     </div>

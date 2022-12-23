@@ -32,7 +32,7 @@ function PollCard2({ poll }) {
         .then((response) => {
           setGroup(response.data);
           setGroupLoading(false);
-          console.log(`${response.data.groupname}: `, response);
+          // console.log(`${response.data.groupname}: `, response);
         })
         .catch((error) => {
           console.log(error);
@@ -55,7 +55,12 @@ function PollCard2({ poll }) {
             setOpened={setOpened}
           />
         ) : (
-          <ElectionOpenedPollCard poll={poll} setOpened={setOpened} />
+          <ElectionOpenedPollCard
+            groupLoading={groupLoading}
+            group={group}
+            poll={poll}
+            setOpened={setOpened}
+          />
         )}
       </>
     );

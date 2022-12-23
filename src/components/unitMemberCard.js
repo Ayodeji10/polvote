@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API } from "../components/apiRoot";
 
-function UnitMemberCard({ member, unit, id }) {
+function UnitMemberCard({ group, member, unit, id }) {
+  // context
+  const { context } = useContext(DataContext);
+
   // history
   const navigate = useNavigate();
 
@@ -61,15 +65,17 @@ function UnitMemberCard({ member, unit, id }) {
         >
           View Profile
         </button>
-        <button className="decline-btn" onClick={removeMember}>
-          {loading ? (
-            <>
-              Loading... <i className="fa-solid fa-spinner fa-spin" />
-            </>
-          ) : (
-            "Remove"
-          )}
-        </button>
+        {group.userid === context.user._id && (
+          <button className="decline-btn" onClick={removeMember}>
+            {loading ? (
+              <>
+                Loading... <i className="fa-solid fa-spinner fa-spin" />
+              </>
+            ) : (
+              "Remove"
+            )}
+          </button>
+        )}
       </div>
     </div>
   );

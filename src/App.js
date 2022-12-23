@@ -7,6 +7,7 @@ import Login from "./screens/Login";
 import Verify from "./screens/Verify";
 import Polls from "./screens/Polls";
 import SinglePoll from "./screens/SinglePoll";
+import SingleGeneralPoll from "./screens/SingleGeneralPoll";
 import Stories from "./screens/Stories";
 import SingleStory from "./screens/SingleStory";
 import SinglePollReferal from "./screens/SinglePollReferal";
@@ -98,6 +99,11 @@ function App() {
           <Route exact path="/polls/:id" element={<SinglePoll />} />
           <Route
             exact
+            path="/polls/general/:id"
+            element={<SingleGeneralPoll />}
+          />
+          <Route
+            exact
             path="/polls/:id/:referalId"
             element={<SinglePollReferal />}
           />
@@ -136,15 +142,15 @@ function App() {
           <Route exact path="/user-profile" element={<UserProfile />} />
           <Route exact path="/withdrawal/:id" element={<Withdrawal />} />
           <Route exact path="/user/:id" element={<User />} />
-          {/* <Route exact path="/notifications" element={<Notifications />} /> */}
+          <Route exact path="/notifications" element={<Notifications />} />
           <Route
             exact
             path="/terms-and-conditions"
             element={<TermsAndConditions />}
           />
           <Route exact path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route exact path="/groups" element={<Groups />} />
-          <Route exact path="/groups-list" element={<GroupList />} />
+          <Route exact path="/groups" element={<GroupList />} />
+          {/* <Route exact path="/groups-list" element={<GroupList />} /> */}
           <Route exact path="/groups/:id" element={<SingleGroup />} />
           <Route
             exact
@@ -153,7 +159,7 @@ function App() {
           />
           <Route exact path="/groups/:id/members" element={<GroupMembers />} />
           <Route exact path="/groups/:id/units" element={<GroupUnits />} />
-          <Route exact path="/courses" element={<Courses />} />
+          {/* <Route exact path="/courses" element={<Courses />} />
           <Route
             exact
             path="/courses/dashboard"
@@ -200,7 +206,7 @@ function App() {
             exact
             path="/courses/certificates"
             element={<CourseCertificates />}
-          />
+          /> */}
         </Routes>
       </DataContext.Provider>
     </Router>

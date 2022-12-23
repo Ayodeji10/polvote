@@ -81,7 +81,11 @@ function GroupCard({ group }) {
             </div>
             <div>
               <h3>{group.groupname}</h3>
-              <h6>20k members</h6>
+              <h6>
+                {group.members.length} member
+                {group.members.length === 0 ||
+                  (group.members.length > 1 && "s")}
+              </h6>
             </div>
           </div>
           <div className="col-lg-5 col-md-5 col-sm-5 col-5 d-flex justify-content-end">

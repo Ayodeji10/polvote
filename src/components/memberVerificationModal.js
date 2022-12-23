@@ -81,7 +81,7 @@ function MemberVerificationModal({
       },
     }).then(
       (response) => {
-        console.log(response);
+        // console.log(response);
         window.location.reload();
       },
       (error) => {
@@ -104,7 +104,7 @@ function MemberVerificationModal({
       />
 
       <h2>Membership Verification</h2>
-      <p>
+      <p className="white mb-3">
         Ask pending members up to two questions before they can join the group
       </p>
       {questions.map((question, index) => {

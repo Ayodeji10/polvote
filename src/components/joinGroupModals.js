@@ -55,7 +55,7 @@ function JoinGroupModals({
       },
     }).then(
       (response) => {
-        console.log(response);
+        // console.log(response);
         setLoading(false);
         window.location.reload();
       },
@@ -165,7 +165,7 @@ function JoinGroupModals({
           />
         )}
         <h2>Membership Verification</h2>
-        <p>
+        <p className="mb-3 white">
           Answer the following questions to help the group admin review your
           request to join the group.
         </p>

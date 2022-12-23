@@ -2206,6 +2206,10 @@ footer#footer img.social {
   padding: 14px 26px;
 }
 
+#create-poll-modal input::placeholder {
+  color: rgba(10, 24, 61, 0.2);
+}
+
 #create-poll-modal .option input {
   margin-bottom: 0;
 }
@@ -2406,6 +2410,10 @@ footer#footer img.social {
   color: #fff;
 }
 
+.dm .open-poll-card .header select {
+  color:rgba(0, 0, 0, 1)
+}
+
 .open-poll-card h6#startdate {
   margin-bottom: 15px;
   text-align: center;
@@ -2430,6 +2438,10 @@ footer#footer img.social {
   width: 80px;
   border-radius: 50%;
   background-color: #03326f;
+}
+
+.dm .open-poll-card .candidate .text-card {
+  background-color: #ced1d8;
 }
 
 .open-poll-card .candidate .text-card h2 {
@@ -5923,9 +5935,13 @@ img#return-btn {
 
 #member-verification-modal p,
 #member-verification-modal .selector i {
-  color: rgba(0, 0, 0, 1);
+  color: #000;
   margin-bottom: 0;
   cursor: pointer;
+}
+
+#member-verification-modal p.white {
+  color: #fff;
 }
 
 #member-verification-modal .dropdown {

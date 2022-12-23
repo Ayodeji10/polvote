@@ -94,7 +94,7 @@ const Nav = () => {
                     Aspirants
                   </Link>
                 </li>
-                <li
+                {/* <li
                   className={`nav-item br ${
                     window.location.pathname.includes("/courses") && "active"
                   }`}
@@ -103,7 +103,7 @@ const Nav = () => {
                     <NavAspirantsSvg />
                     Courses
                   </Link>
-                </li>
+                </li> */}
                 <li
                   className={`nav-item br ${
                     window.location.pathname.includes("/groups") && "active"

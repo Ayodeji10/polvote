@@ -7,7 +7,7 @@ import Modal from "react-modal";
 import UnitMemberCard from "./unitMemberCard";
 Modal.setAppElement("#root");
 
-function UnitCard({ unit, id, members }) {
+function UnitCard({ unit, id, members, group }) {
   // context
   const { context } = useContext(DataContext);
 
@@ -79,18 +79,23 @@ function UnitCard({ unit, id, members }) {
           <p className="mb-0">{unit.unit}</p>
         </div>
         <div className="col-lg-1 col-md-1 col-sm-1 col-1 d-flex justify-content-end">
-          {loading ? (
-            <i className="fa-solid fa-spinner fa-spin" />
-          ) : (
-            <i className="fa-solid fa-trash-can" onClick={deleteUnit} />
+          {group.userid === context.user._id && (
+            <>
+              {loading ? (
+                <i className="fa-solid fa-spinner fa-spin" />
+              ) : (
+                <i className="fa-solid fa-trash-can" onClick={deleteUnit} />
+              )}
+            </>
           )}
         </div>
         <div className="col-lg-3 col-md-3 col-sm-4 col-6 d-flex justify-content-end">
-          <p className="mb-0" onClick={() => setUnitModal(true)}>
-            <i className="fa-solid fa-pen" />
-            Edit Unit Name
-          </p>
-
+          {group.userid === context.user._id && (
+            <p className="mb-0" onClick={() => setUnitModal(true)}>
+              <i className="fa-solid fa-pen" />
+              Edit Unit Name
+            </p>
+          )}
           {/* edit unit modal  */}
           <Modal
             isOpen={unitModal}
@@ -138,7 +143,13 @@ function UnitCard({ unit, id, members }) {
             )
             .map((member, i) => {
               return (
-                <UnitMemberCard member={member} unit={unit} id={id} key={i} />
+                <UnitMemberCard
+                  group={group}
+                  member={member}
+                  unit={unit}
+                  id={id}
+                  key={i}
+                />
               );
             })}
         </>

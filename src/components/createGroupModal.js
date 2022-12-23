@@ -71,7 +71,7 @@ function CreateGroupModal({ createGroupModal, setCreateGroupModal }) {
           }
         )
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           navigate(`/groups/${response.data.data._id}`);
           // window.location.reload();
           setLoading(false);
