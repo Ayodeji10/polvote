@@ -145,7 +145,8 @@ nav li button#signup-nav-btn {
   background-color: rgba(0, 122, 243, 1);
 }
 
-nav li a svg path {
+nav li a svg path,
+.search .toggle button svg path {
   fill: #80848f;
 }
 
@@ -2411,7 +2412,7 @@ footer#footer img.social {
 }
 
 .dm .open-poll-card .header select {
-  color:rgba(0, 0, 0, 1)
+  color: rgba(0, 0, 0, 1);
 }
 
 .open-poll-card h6#startdate {
@@ -3448,7 +3449,8 @@ footer#footer img.social {
 #share-story-modal {
   top: 5% !important;
   width: 684px;
-  max-height: 500px;
+  height: min-content;
+  /* max-height: 500px; */
 }
 
 .story-write-modal .story {
@@ -7534,13 +7536,19 @@ h6.error {
   }
 
   /* polls  */
-  .polls .searchbar {
-    padding: 10px 14px;
+  .polls .polls-header .searchbar {
+    padding: 8px 12px;
     border-radius: 15px;
-    width: 309px;
+    width: 100%;
   }
 
-  .polls .searchbar input {
+  .polls .polls-header button {
+    border-radius: 15px;
+    padding: 8px 0;
+    font-size: 14px;
+  }
+
+  .polls .polls-header .searchbar input {
     font-size: 12px;
   }
 
@@ -7554,6 +7562,25 @@ h6.error {
 
   .polls p.tr {
     font-size: 12px;
+  }
+
+  .open-poll-card .body {
+    padding: 15px;
+  }
+
+  .open-poll-card .candidate .text-card {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+  }
+
+  .open-poll-card .candidate .text-card h2 {
+    font-size: 20px;
+    margin-bottom: 0;
+  }
+
+  .open-poll-card .candidate h2 {
+    font-size: 14px;
   }
 
   .switch {
@@ -8428,10 +8455,16 @@ h6.error {
   }
 
   /* polls  */
-  .polls .searchbar {
-    padding: 10px 14px;
+  .polls .polls-header .searchbar {
+    padding: 8px 12px;
     border-radius: 15px;
-    width: 250px;
+    width: 100%;
+  }
+
+  .polls .polls-header button {
+    border-radius: 15px;
+    padding: 8px 0;
+    font-size: 14px;
   }
 
   .polls .searchbar input {
@@ -11004,10 +11037,17 @@ h6.error {
     padding: 15px;
   }
 
-  .polls .searchbar {
-    padding: 10px 14px;
+  .polls .polls-header .searchbar {
+    padding: 8px 12px;
     border-radius: 15px;
     width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .polls .polls-header button {
+    border-radius: 15px;
+    padding: 8px 0;
+    font-size: 14px;
   }
 
   .polls .searchbar input {
@@ -11067,6 +11107,16 @@ h6.error {
 
   .open-poll-card footer {
     padding: 18px;
+  }
+
+  .open-poll-card .candidate .text-card {
+    height: 60px;
+    width: 60px;
+  }
+
+  .open-poll-card .candidate .text-card h2 {
+    font-size: 20px;
+    margin-bottom: 0;
   }
 
   /* share poll modal  */
@@ -12489,10 +12539,17 @@ h6.error {
     padding: 10px;
   }
 
-  .polls .searchbar {
-    padding: 10px 14px;
+  .polls .polls-header .searchbar {
+    padding: 8px 12px;
     border-radius: 15px;
     width: 100%;
+    margin-bottom: 15px;
+  }
+
+  .polls .polls-header button {
+    border-radius: 15px;
+    padding: 8px 0;
+    font-size: 14px;
   }
 
   .polls .searchbar input {
@@ -12535,6 +12592,16 @@ h6.error {
   .open-poll-card .candidate .aspirant-img {
     height: 40px;
     width: 40px;
+  }
+
+  .open-poll-card .candidate .text-card {
+    height: 50px;
+    width: 50px;
+  }
+
+  .open-poll-card .candidate .text-card h2 {
+    font-size: 20px;
+    margin-bottom: 0;
   }
 
   .polls h1 {

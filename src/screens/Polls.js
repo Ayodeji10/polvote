@@ -143,11 +143,13 @@ function Polls() {
   };
 
   const [newPolls, setNewPolls] = useState([]);
+  const [newPollsList, setNewPollsList] = useState([]);
   const fetchNewPolls = async () => {
     const response = await axios
       .get(`${API.API_ROOT}/generalpoll`)
       .catch((error) => [console.log("Err", error)]);
     setNewPolls(response.data);
+    setNewPollsList(response.data);
   };
 
   const [groups, setGroups] = useState([]);
@@ -175,14 +177,27 @@ function Polls() {
   }, []);
 
   const searchPolls = (e) => {
-    // console.log(e.target.value)
-    const polls = pollsList.filter(
-      (poll) =>
-        poll.polltitle.toLowerCase().includes(e.target.value.toLowerCase()) &&
-        poll.status == 0
-    );
-    // console.log(people)
-    setPolls(polls);
+    if (e.target.value === "") {
+      setPolls(pollsList);
+      setNewPolls(newPollsList);
+    } else {
+      const wordArray = e.target.value.toLowerCase().split(" "); // create array from input
+      const wordSpace = wordArray.filter((word) => word.length > 1); // remove spacing
+      wordSpace.forEach((word) => {
+        const polls = pollsList.filter(
+          (poll) =>
+            poll.polltitle.toLowerCase().indexOf(word) !== -1 &&
+            poll.status == 0
+        );
+        setPolls(polls);
+
+        // new poll filter
+        const polls2 = newPollsList.filter(
+          (poll) => poll.question.toLowerCase().indexOf(word) !== -1
+        );
+        setNewPolls(polls2);
+      });
+    }
   };
 
   // create poll
@@ -322,8 +337,6 @@ function Polls() {
       );
     }
   };
-
-  // fetch;
 
   return (
     <div className={`container-fluid ${context.darkMode ? "dm" : ""}`}>

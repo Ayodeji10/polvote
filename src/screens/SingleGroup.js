@@ -11,6 +11,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import Loader from "../components/loader";
 import Modal from "react-modal";
 import MemberVerificationModal from "../components/memberVerificationModal";
+import WriteGroupStoryModal from "../components/writeGroupStoryModal";
+import GroupStoryCard from "../components/groupStoryCard";
+import cogoToast from "cogo-toast";
+import JoinGroupModals from "../components/joinGroupModals";
 Modal.setAppElement("#root");
 
 function SingleGroup() {
@@ -50,6 +54,30 @@ function SingleGroup() {
         }
         setPageLoading(false);
         // console.log(response);
+        axios({
+          method: "get",
+          url: `${API.API_ROOT}/post/${response.data._id}/?page=1&limit=10`,
+        })
+          .then((response) => {
+            // console.log("first stories: ", response);
+            if (stories.length === 0) {
+              setStories(response.data.stories);
+            } else {
+              setStories((prevStories) => {
+                return [...prevStories, ...response.data.stories];
+              });
+            }
+            if (
+              response.data.next === null ||
+              response.data.next === undefined
+            ) {
+              setLoadMore(false);
+              setStoriesLoading(false);
+            }
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         console.log(error);
@@ -59,6 +87,60 @@ function SingleGroup() {
   useEffect(() => {
     fetchCurrentGroup();
   }, []);
+
+  // write story modal
+  const [writeStoryModal, setWriteStoryModal] = useState(false);
+
+  // useRef and callback
+  const myRef = useRef();
+
+  useEffect(() => {
+    // console.log("my ref", myRef.current)
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0];
+      if (entry.isIntersecting) {
+        setPageNumber((prev) => {
+          return prev + 1;
+        });
+      }
+      // console.log(entry)
+    });
+    observer.observe(myRef.current);
+  }, []);
+
+  const [stories, setStories] = useState([]);
+  const [storiesLoading, setStoriesLoading] = useState(true);
+  const [loadMore, setLoadMore] = useState(true);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  const fetchStories = () => {
+    axios({
+      method: "get",
+      url: `${API.API_ROOT}/post/${group._id}/?page=${pageNumber}&limit=10`,
+    })
+      .then((response) => {
+        console.log(response);
+        if (stories.length === 0) {
+          setStories(response.data.stories);
+        } else {
+          setStories((prevStories) => {
+            return [...prevStories, ...response.data.stories];
+          });
+        }
+        if (response.data.next === null || response.data.next === undefined) {
+          setLoadMore(false);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    if (group._id !== undefined) {
+      fetchStories();
+    }
+  }, [pageNumber]);
 
   // update cover image
   // click cover photo input
@@ -178,6 +260,56 @@ function SingleGroup() {
       });
   };
 
+  // join group
+  const [unitModal, setUnitModal] = useState(false);
+  const [memberAnswerModal, setMemberAnswerModal] = useState(false);
+  const [JoinQuestions, setJoinQuestions] = useState([]);
+
+  // useEffect(() => {
+  //   const newQuestions = group.questions.map((question) => ({
+  //     question: question,
+  //     answer: "",
+  //   }));
+  //   setJoinQuestions(newQuestions);
+  // }, []);
+
+  // join group
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const joinGroup = () => {
+    setLoading(true);
+    axios({
+      url: `${API.API_ROOT}/group/groupjoin`,
+      method: "post",
+      data: {
+        groupid: group._id,
+        groupname: group.groupname,
+        grouptype: group.grouptype,
+      },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
+      },
+    }).then(
+      (response) => {
+        console.log(response);
+        // setLoading(false);
+        navigate(`/groups/${group._id}`);
+        // window.location.reload();
+      },
+      (error) => {
+        // console.log(error);
+        if (error.response.status === 403) {
+          cogoToast.error(
+            "The Group Admin Has blocked you from Joining this Group"
+          );
+        } else {
+          setError("Something went wrong, please try again");
+        }
+        setLoading(false);
+      }
+    );
+  };
+
   return (
     <div className={`container-fluid ${context.darkMode ? "dm" : ""}`}>
       <Nav />
@@ -246,9 +378,65 @@ function SingleGroup() {
                           </div>
                         </div>
                         <div className="col-md-7 col-sm-7 col-12 d-flex align-items-center justify-content-md-end justify-content-sm-end mt-3 mt-md-0 mt-sm-0">
-                          {/* <button id="invite-btn">Invite</button>
-                          <button id="write-post">Write a Post</button>
-                          <i className="fa-solid fa-magnifying-glass" /> */}
+                          <button id="invite-btn">Invite</button>
+                          {group.members.filter(
+                            (member) => member.userid === context.user._id
+                          ).length !== 0 ? (
+                            <button
+                              id="write-post"
+                              onClick={() => {
+                                if (
+                                  localStorage.getItem("ballotbox_token") !==
+                                  null
+                                ) {
+                                  setWriteStoryModal(true);
+                                } else {
+                                  setLoginModal(true);
+                                }
+                              }}
+                            >
+                              Write a Post
+                            </button>
+                          ) : (
+                            <>
+                              <button
+                                id="write-post"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  if (group.units.length !== 0) {
+                                    setUnitModal(true);
+                                  } else {
+                                    if (group.status === 0) {
+                                      joinGroup();
+                                    } else if (group.questions.length !== 0) {
+                                      setMemberAnswerModal(true);
+                                    } else {
+                                      joinGroup();
+                                    }
+                                  }
+                                }}
+                              >
+                                Join
+                              </button>
+                              <JoinGroupModals
+                                unitModal={unitModal}
+                                setUnitModal={setUnitModal}
+                                memberAnswerModal={memberAnswerModal}
+                                setMemberAnswerModal={setMemberAnswerModal}
+                                questions={JoinQuestions}
+                                setQuestions={setJoinQuestions}
+                                group={group}
+                              />
+                            </>
+                          )}
+                          {writeStoryModal && (
+                            <WriteGroupStoryModal
+                              writeStoryModal={writeStoryModal}
+                              setWriteStoryModal={setWriteStoryModal}
+                              group={group}
+                            />
+                          )}
+                          {/* <i className="fa-solid fa-magnifying-glass" /> */}
                           <i
                             class="fas fa-ellipsis-h"
                             onClick={() => setDropdown(!dropdown)}
@@ -328,6 +516,23 @@ function SingleGroup() {
                   </div>
                 </div>
                 <div className="story col-lg-8 col-md-8">
+                  {/* stories  */}
+                  {storiesLoading ? (
+                    <Loader pageLoading={pageLoading} />
+                  ) : (
+                    <>
+                      {stories.map((story, index) => {
+                        return (
+                          <GroupStoryCard
+                            story={story}
+                            index={index}
+                            key={index}
+                          />
+                        );
+                      })}
+                      <Loader pageLoading={loadMore} />
+                    </>
+                  )}
                   <Footer />
                 </div>
                 <div className="col-lg-4">
@@ -449,6 +654,8 @@ function SingleGroup() {
               </div>
             )}
           </div>
+          {/* observer  */}
+          <div ref={myRef}></div>
         </div>
       </div>
       {/* authentication */}

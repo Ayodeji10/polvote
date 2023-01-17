@@ -14,7 +14,7 @@ import ShareStoryModalOut from "./shareStoryModalOut";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
-function StoryCard({ story, index, fetchStories }) {
+function StoryCard({ story, stories, setStories, index, fetchStory }) {
   // context
   const { context } = useContext(DataContext);
 
@@ -34,7 +34,8 @@ function StoryCard({ story, index, fetchStories }) {
 
   // utilities
   const [options, setOptions] = useState(false);
-  const [commentLenght, setCommentLenght] = useState(0);
+  const [commentSummary, setCommentSummary] = useState(true);
+  // const [commentLenght, setCommentLenght] = useState(0);
   const [storyLike, setStoryLike] = useState(false);
   const [seeMore, setSeeMore] = useState(false);
 
@@ -72,7 +73,6 @@ function StoryCard({ story, index, fetchStories }) {
       if ((commentImg !== null) & (commentImg !== undefined)) {
         fd.append("image", commentImg);
       }
-      // console.log(Array.from(fd))
       axios({
         url: `${API.API_ROOT}/story/addcomment/${story._id}`,
         method: "patch",
@@ -86,9 +86,20 @@ function StoryCard({ story, index, fetchStories }) {
           // console.log(response)
           setLoading(false);
           setText("");
-          setCommentLenght((prev) => prev + 1);
-          fetchStories();
-          // window.location.reload()
+          if (window.location.pathname !== "/stories") {
+            fetchStory();
+          } else {
+            axios({
+              method: "GET",
+              url: `${API.API_ROOT}/story?page=1&limit=${stories.length}`,
+            })
+              .then((response) => {
+                setStories(response.data.stories);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
         },
         (error) => {
           // console.log(error)
@@ -565,6 +576,7 @@ function StoryCard({ story, index, fetchStories }) {
           </div>
         )}
       </div>
+      {/* widget  */}
       <div className="widget">
         <div className="row justify-content-md-center">
           <div
@@ -585,7 +597,7 @@ function StoryCard({ story, index, fetchStories }) {
               }
               alt="comment"
             />
-            <span>{story.comments.length + commentLenght}</span>
+            <span>{story.comments.length}</span>
           </div>
           <div className="col-2 d-flex align-items-center justify-content-center">
             <i
@@ -693,25 +705,43 @@ function StoryCard({ story, index, fetchStories }) {
               </div>
             </div>
           </div>
-          {story.comments.length > 0 && (
+          {story.comments.length !== 0 && (
             <div className="comments">
               <h2>Comments</h2>
-              {story.comments.slice(0, commentLength).map((comment, index) => {
-                return (
-                  <Comment
-                    story={story}
-                    comment={comment}
-                    fetchStories={fetchStories}
-                    id={story._id}
-                    key={index}
-                  />
-                );
-              })}
+              {commentSummary ? (
+                <>
+                  {story.comments
+                    .slice(-2)
+                    .map((comment, index) => {
+                      return (
+                        <Comment
+                          story={story}
+                          comment={comment}
+                          id={story._id}
+                          key={index}
+                        />
+                      );
+                    })
+                    .reverse()}
+                </>
+              ) : (
+                <>
+                  {story.comments
+                    .map((comment, index) => {
+                      return (
+                        <Comment
+                          story={story}
+                          comment={comment}
+                          id={story._id}
+                          key={index}
+                        />
+                      );
+                    })
+                    .reverse()}
+                </>
+              )}
               {story.comments.length > 2 && (
-                <h5
-                  id="loadMore"
-                  onClick={() => setCommentLength(story.comments.length)}
-                >
+                <h5 id="loadMore" onClick={() => setCommentSummary(false)}>
                   Load more comments
                 </h5>
               )}

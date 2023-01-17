@@ -146,9 +146,10 @@ function Stories() {
                     return (
                       <StoryCard
                         story={story}
+                        stories={stories}
+                        setStories={setStories}
                         index={index}
                         key={index}
-                        fetchStories={fetchStories}
                       />
                     );
                   })}

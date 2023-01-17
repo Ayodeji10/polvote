@@ -5,15 +5,15 @@ import axios from "axios";
 import { DataContext } from "../dataContext";
 import NewLineText from "../components/newLineText";
 import ShareStoryModal from "./shareStoryModal";
-import EditStoryModal from "./editStoryModal";
-import DeleteStoryModal from "./deleteStoryModal";
 import Comment from "../components/comments";
 import AuthModals from "./authenticationModlas";
 import ShareStoryModalOut from "./shareStoryModalOut";
 import Modal from "react-modal";
+import DeleteGroupStoryModal from "./deleteGroupStoryModal";
+import EditGroupStoryModal from "./editGroupStoryModal";
 Modal.setAppElement("#root");
 
-function GroupStoryCard({ story, index, fetchStories }) {
+function GroupStoryCard({ story, index }) {
   // context
   const { context } = useContext(DataContext);
 
@@ -74,9 +74,8 @@ function GroupStoryCard({ story, index, fetchStories }) {
       if ((commentImg !== null) & (commentImg !== undefined)) {
         fd.append("image", commentImg);
       }
-      // console.log(Array.from(fd))
       axios({
-        url: `${API.API_ROOT}/story/addcomment/${story._id}`,
+        url: `${API.API_ROOT}/post/addcomment/${story._id}`,
         method: "patch",
         headers: {
           "Content-Type": "multipart/form-data",
@@ -85,17 +84,14 @@ function GroupStoryCard({ story, index, fetchStories }) {
         data: fd,
       }).then(
         (response) => {
-          // console.log(response)
+          console.log(response);
           setLoading(false);
           setText("");
-          setCommentLenght((prev) => prev + 1);
-          fetchStories();
-          // window.location.reload()
+          window.location.reload();
         },
         (error) => {
-          // console.log(error)
+          console.log(error);
           setLoading(false);
-          // setError('Something went wrong, please try again')
         }
       );
     } else {
@@ -115,14 +111,14 @@ function GroupStoryCard({ story, index, fetchStories }) {
         setStoryLike(1);
       }
       axios({
-        url: `${API.API_ROOT}/story/likers/${story._id}`,
+        url: `${API.API_ROOT}/post/likers/${story._id}`,
         method: "patch",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
         },
       }).then(
         (response) => {
-          // console.log(response)
+          // console.log(response);
           // if (response.data.message === "New Likes Added Successfully") {
           //     setStoryLike(1)
           // }
@@ -197,11 +193,12 @@ function GroupStoryCard({ story, index, fetchStories }) {
 
   return (
     <div className="story">
+      {/* body  */}
       <div className="body">
         <div className="row mb-3 align-items-center">
           <div className="col-11 d-flex align-items-center gap-lg-3 gap-md-3 gap-sm-2 gap-2 position-relative">
             <div className="img-container">
-              {story.userimage === null || story.userimage === undefined ? (
+              {story.groupimage === null || story.groupimage === undefined ? (
                 <img
                   src="/img/place.jpg"
                   className="img-fluid"
@@ -209,11 +206,15 @@ function GroupStoryCard({ story, index, fetchStories }) {
                   id="profile-img"
                 />
               ) : (
-                <img src={story.userimage} alt="avatar" id="profile-img" />
+                <img src={story.groupimage} alt="avatar" id="profile-img" />
               )}
             </div>
             <div className="poster-img">
-              <img src="/img/candidate.png" alt="user" id="poster-img" />
+              {story.userimage === null || story.userimage === undefined ? (
+                <img src="/img/candidate.png" alt="user" id="poster-img" />
+              ) : (
+                <img src={story.userimage} alt="user" id="poster-img" />
+              )}
             </div>
             <div>
               <h3
@@ -224,51 +225,15 @@ function GroupStoryCard({ story, index, fetchStories }) {
                 }}
               >
                 {story.fullname}
-                <span
+                {/* <span
                   className="d-inline-flex align-items-center"
                   onClick={(e) => {
                     e.stopPropagation();
                     setMemberAnswerModal(true);
                   }}
                 >
-                  {/* member answer modal  */}
-                  <Modal
-                    isOpen={memberAnswerModal}
-                    onRequestClose={() => setMemberAnswerModal(false)}
-                    id="member-verification-modal"
-                    className={`${context.darkMode ? "dm" : ""}`}
-                  >
-                    <i
-                      className="far fa-times-circle"
-                      onClick={() => setMemberAnswerModal(false)}
-                    />
-                    <h2>Membership Verification</h2>
-                    <p>
-                      Answer the following questions to help the group admin
-                      review your request to join the group.
-                    </p>
-                    <div className="mb-4">
-                      <label>
-                        Nibh sed facilisis eu idNibh sed facilisis eu id.Nibh
-                        sed facilisis eu idNibh sed facilisis eu id?
-                      </label>
-                      <input type="text" placeholder="Type your answer here" />
-                    </div>
-                    <div className="mb-4">
-                      <label>
-                        Nibh sed facilisis eu idNibh sed facilisis eu id.Nibh
-                        sed facilisis eu idNibh sed facilisis eu id?
-                      </label>
-                      <input type="text" placeholder="Type your answer here" />
-                    </div>
-                    {/* <h3 className="mb-0">{error}</h3> */}
-                    <div className="d-flex justify-content-between mt-5">
-                      <button id="add">Cancel</button>
-                      <button id="save">Submit</button>
-                    </div>
-                  </Modal>
                   <i class="fa-solid fa-circle"></i>Join
-                </span>
+                </span> */}
               </h3>
               <div className="d-flex">
                 <p className="mb-0">{story.username}</p>
@@ -282,24 +247,23 @@ function GroupStoryCard({ story, index, fetchStories }) {
             {!options ? (
               ""
             ) : (
-              // options
               <div className="options">
                 <div
                   className="d-flex align-items-center mb-2"
-                  onClick={() =>
-                    navigator.clipboard.writeText(
-                      `https://polvote.com/stories/${story.story
-                        .replace(/(<([^>]+)>)/gi, "")
-                        .replaceAll(" ", "-")
-                        .replaceAll("?", "")
-                        .substring(0, 45)}/${story._id}`
-                    )
-                  }
+                  // onClick={() =>
+                  //   navigator.clipboard.writeText(
+                  //     `https://polvote.com/stories/${story.story
+                  //       .replace(/(<([^>]+)>)/gi, "")
+                  //       .replaceAll(" ", "-")
+                  //       .replaceAll("?", "")
+                  //       .substring(0, 45)}/${story._id}`
+                  //   )
+                  // }
                 >
                   <i className="fa-solid fa-copy" />
                   <h4 className="mb-0">Copy Link</h4>
                 </div>
-                <div className="d-flex align-items-center mb-2">
+                {/* <div className="d-flex align-items-center mb-2">
                   <i className="fa-solid fa-retweet" />
                   <h4
                     className="mb-0"
@@ -313,18 +277,10 @@ function GroupStoryCard({ story, index, fetchStories }) {
                   >
                     Re-Post
                   </h4>
-                </div>
+                </div> */}
                 <div
                   className="d-flex align-items-center mb-2"
-                  onClick={() =>
-                    navigate(
-                      `/stories/${story.story
-                        .replace(/(<([^>]+)>)/gi, "")
-                        .replaceAll(" ", "-")
-                        .replaceAll("?", "")
-                        .substring(0, 45)}/${story._id}`
-                    )
-                  }
+                  onClick={() => navigate(`/stories/groups/${story._id}`)}
                 >
                   <i className="fa-solid fa-arrow-up-right-from-square" />
                   <h4 className="mb-0">Open Post</h4>
@@ -352,10 +308,10 @@ function GroupStoryCard({ story, index, fetchStories }) {
             )}
           </div>
         </div>
-        {/* text  */}
+        {/* story text  */}
         <div className="storyText">
-          {story.story.split("\r\n").length > 1 ? (
-            <NewLineText text={story.story} />
+          {story.post.split("\r\n").length > 1 ? (
+            <NewLineText text={story.post} />
           ) : (
             <>
               {!seeMore ? (
@@ -363,13 +319,13 @@ function GroupStoryCard({ story, index, fetchStories }) {
                   <p
                     style={{ display: "inline" }}
                     dangerouslySetInnerHTML={{
-                      __html: `${story.story
+                      __html: `${story.post
                         .replaceAll("<p>", "")
                         .replaceAll("</p>", "")
                         .substring(0, 400)}`,
                     }}
                   ></p>
-                  {story.story.replace(/(<([^>]+)>)/gi, "").length > 400 && (
+                  {story.post.replace(/(<([^>]+)>)/gi, "").length > 400 && (
                     <span style={{ cursor: "pointer" }} onClick={IncreaseViews}>
                       ...see more
                     </span>
@@ -377,7 +333,7 @@ function GroupStoryCard({ story, index, fetchStories }) {
                 </div>
               ) : (
                 <div className="mb-2">
-                  <div dangerouslySetInnerHTML={{ __html: story.story }}></div>
+                  <div dangerouslySetInnerHTML={{ __html: story.post }}></div>
                   <span
                     style={{ cursor: "pointer" }}
                     onClick={() => setSeeMore(false)}
@@ -395,15 +351,6 @@ function GroupStoryCard({ story, index, fetchStories }) {
             <>
               {story.image.length === 1 ? (
                 <div className="col-12" key={index}>
-                  {/* <LazyLoadImage
-                                            // alt={image.alt}
-                                            // height={image.height}
-                                            src={story.image[0]}
-                                            className="single-story-img"
-                                            placeholderSrc={process.env.PUBLIC_URL + 'img/persona.png'}
-                                            onClick={() => setImageModal(true)}
-                                        // width={image.width} 
-                                        /> */}
                   <img
                     src={story.image[0]}
                     alt="img"
@@ -421,7 +368,6 @@ function GroupStoryCard({ story, index, fetchStories }) {
                       className="fas fa-times"
                       onClick={() => setImageModal(false)}
                     />
-                    {/* <img src={aspirant.image === null || aspirant.image === undefined ? `img/user (1) 1.png` : `${aspirant.image}`} onClick={() => setProfileImageModal(true)} alt="profile-img" className="img-fluid" /> */}
                     <img
                       src={story.image[0]}
                       alt="img"
@@ -449,14 +395,14 @@ function GroupStoryCard({ story, index, fetchStories }) {
             </>
           )}
         </div>
-        {/* share  */}
-        {story.storyinfo.length !== 0 && (
+        {/* shared story info  */}
+        {story.postinfo.length !== 0 && (
           <div className="shareStory mt-4">
             <div className="row mb-3 align-items-center">
               <div className="col-2 col-sm-1 col-md-1 col-lg-1">
                 <div className="img-container">
-                  {story.storyinfo[0].userimage === null ||
-                  story.storyinfo[0].userimage === undefined ? (
+                  {story.postinfo[0].userimage === null ||
+                  story.postinfo[0].userimage === undefined ? (
                     <img
                       src="/img/place.jpg"
                       className="img-fluid"
@@ -475,22 +421,21 @@ function GroupStoryCard({ story, index, fetchStories }) {
               <div className="col-10 col-sm-11 col-md-11 col-lg-11 d-flex flex-column justify-content-center">
                 <h3
                   onClick={(e) => {
-                    e.preventDefault();
-                    navigate(`/user/${story.storyinfo[0].userid}`);
+                    // e.preventDefault();
+                    // navigate(`/user/${story.storyinfo[0].userid}`);
                   }}
                 >
-                  {story.storyinfo[0].fullname}
+                  {story.postinfo[0].fullname}
                 </h3>
                 <div className="d-flex">
-                  <p className="mb-0">{story.storyinfo[0].username}</p>
-                  {/* <p className="mb-0">23 Hours Ago</p> */}
+                  <p className="mb-0">{story.postinfo[0].username}</p>
                 </div>
               </div>
             </div>
-            {story.storyinfo[0].image.length <= 1 ? (
+            {story.postinfo[0].image.length <= 1 ? (
               <div className="col-12 mt-4 mb-3" key={index}>
                 <img
-                  src={`${story.storyinfo[0].image[0]}`}
+                  src={`${story.postinfo[0].image[0]}`}
                   alt="img"
                   className="single-story-img"
                   id="story-img"
@@ -498,7 +443,7 @@ function GroupStoryCard({ story, index, fetchStories }) {
               </div>
             ) : (
               <div className="row mb-2">
-                {story.storyinfo[0].image.map((each, index) => {
+                {story.postinfo[0].image.map((each, index) => {
                   return (
                     <div className="col-6 mt-4 mb-3" key={index}>
                       <img
@@ -512,24 +457,24 @@ function GroupStoryCard({ story, index, fetchStories }) {
                 })}
               </div>
             )}
-            {/* <h4>{story.storyinfo[0].story}</h4> */}
-            <NewLineText text={story.storyinfo[0].story} />
+            <NewLineText text={story.postinfo[0].story} />
           </div>
         )}
       </div>
+      {/* widget  */}
       <div className="widget">
         <div className="row justify-content-md-center">
           <div
             className="col-5 d-flex align-items-center justify-content-center"
-            onClick={() =>
-              navigate(
-                `/stories/${story.story
-                  .replace(/(<([^>]+)>)/gi, "")
-                  .replaceAll(" ", "-")
-                  .replaceAll("?", "")
-                  .substring(0, 45)}/${story._id}`
-              )
-            }
+            // onClick={() =>
+            //   navigate(
+            //     `/stories/${story.story
+            //       .replace(/(<([^>]+)>)/gi, "")
+            //       .replaceAll(" ", "-")
+            //       .replaceAll("?", "")
+            //       .substring(0, 45)}/${story._id}`
+            //   )
+            // }
           >
             <img
               src={
@@ -560,40 +505,6 @@ function GroupStoryCard({ story, index, fetchStories }) {
           </div>
         </div>
       </div>
-      {/* share modal  */}
-      {shareStoryModal && (
-        <ShareStoryModal
-          story={story}
-          index={index}
-          openModal={shareStoryModal}
-          setShareStoryModal={setShareStoryModal}
-        />
-      )}
-      {/* edit story modal */}
-      {editStoryModal && (
-        <EditStoryModal
-          story={story}
-          index={index}
-          openModal={editStoryModal}
-          setEditStoryModal={setEditStoryModal}
-        />
-      )}
-      {/* deleteStoryModal  */}
-      {deleteStoryModal && (
-        <DeleteStoryModal
-          story={story}
-          openModal={deleteStoryModal}
-          setDeleteStoryModal={setDeleteStoryModal}
-        />
-      )}
-      {/* share story out modal  */}
-      {shareStoryModalOut && (
-        <ShareStoryModalOut
-          story={story}
-          openModal={shareStoryModalOut}
-          setShareStoryModalOut={setShareStoryModalOut}
-        />
-      )}
       {/* comments  */}
       {window.location.pathname !== "/user-profile" && (
         <>
@@ -618,7 +529,6 @@ function GroupStoryCard({ story, index, fetchStories }) {
                 </div>
               </div>
               <div className="col-8">
-                {/* <input type="text" placeholder="Leave a comment..." value={text} onChange={(e) => setText(e.target.value)} /> */}
                 <div className="input d-flex justify-content-between align-items-center">
                   <input
                     type="text"
@@ -634,7 +544,6 @@ function GroupStoryCard({ story, index, fetchStories }) {
                     onChange={(e) => setCommentImg(e.target.files[0])}
                   />
                   <i className="fa-regular fa-image" onClick={addImage} />
-                  {/* <i class="fa-solid fa-image" ></i> */}
                 </div>
               </div>
               <div className="col-3">
@@ -653,7 +562,6 @@ function GroupStoryCard({ story, index, fetchStories }) {
                   <Comment
                     story={story}
                     comment={comment}
-                    fetchStories={fetchStories}
                     id={story._id}
                     key={index}
                   />
@@ -670,6 +578,41 @@ function GroupStoryCard({ story, index, fetchStories }) {
             </div>
           )}
         </>
+      )}
+
+      {/* share modal  */}
+      {shareStoryModal && (
+        <ShareStoryModal
+          story={story}
+          index={index}
+          openModal={shareStoryModal}
+          setShareStoryModal={setShareStoryModal}
+        />
+      )}
+      {/* edit story modal */}
+      {editStoryModal && (
+        <EditGroupStoryModal
+          story={story}
+          index={index}
+          openModal={editStoryModal}
+          setEditStoryModal={setEditStoryModal}
+        />
+      )}
+      {/* deleteStoryModal  */}
+      {deleteStoryModal && (
+        <DeleteGroupStoryModal
+          story={story}
+          openModal={deleteStoryModal}
+          setDeleteStoryModal={setDeleteStoryModal}
+        />
+      )}
+      {/* share story out modal  */}
+      {shareStoryModalOut && (
+        <ShareStoryModalOut
+          story={story}
+          openModal={shareStoryModalOut}
+          setShareStoryModalOut={setShareStoryModalOut}
+        />
       )}
 
       {/* authentication */}

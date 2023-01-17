@@ -10,6 +10,7 @@ import SinglePoll from "./screens/SinglePoll";
 import SingleGeneralPoll from "./screens/SingleGeneralPoll";
 import Stories from "./screens/Stories";
 import SingleStory from "./screens/SingleStory";
+import SingleGroupStory from "./screens/SingleGroupStory";
 import SinglePollReferal from "./screens/SinglePollReferal";
 import Profiles from "./screens/Profiles";
 import SingleProfile from "./screens/SingleProfile";
@@ -109,6 +110,11 @@ function App() {
           />
           <Route exact path="/stories" element={<Stories />} />
           <Route exact path="/stories/:any/:id" element={<SingleStory />} />
+          <Route
+            exact
+            path="/stories/groups/:id"
+            element={<SingleGroupStory />}
+          />
           <Route exact path="/profiles" element={<Profiles />} />
           <Route exact path="/profiles/:any/:id" element={<SingleProfile />} />
           <Route exact path="/create-aspirant" element={<CreateAspirant1 />} />

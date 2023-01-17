@@ -41,7 +41,7 @@ function GroupList() {
       .then((response) => {
         setGroups(response.data);
         setGroupsLoading(false);
-        console.log(response);
+        // console.log(response);
       })
       .catch((error) => {
         // console.log(error);

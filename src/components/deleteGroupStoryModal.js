@@ -5,7 +5,7 @@ import { DataContext } from "../dataContext";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
-function DeleteStoryModal({ story, openModal, setDeleteStoryModal }) {
+function DeleteGroupStoryModal({ story, openModal, setDeleteStoryModal }) {
   // context
   const { context } = useContext(DataContext);
 
@@ -13,7 +13,7 @@ function DeleteStoryModal({ story, openModal, setDeleteStoryModal }) {
   const deleteStory = async () => {
     setLoading(true);
     axios
-      .delete(`${API.API_ROOT}/story/deletestory/${story._id}`, {
+      .delete(`${API.API_ROOT}/post/deletepost/${story._id}`, {
         headers: {
           "content-type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("ballotbox_token")}`,
@@ -59,4 +59,4 @@ function DeleteStoryModal({ story, openModal, setDeleteStoryModal }) {
   );
 }
 
-export default DeleteStoryModal;
+export default DeleteGroupStoryModal;

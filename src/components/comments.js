@@ -4,7 +4,7 @@ import axios from "axios";
 import { DataContext } from "../dataContext";
 import { useNavigate } from "react-router-dom";
 
-function Comments({ story, comment, fetchStories, id }) {
+function Comments({ story, comment, id }) {
   // context
   const { context } = useContext(DataContext);
 

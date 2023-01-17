@@ -62,6 +62,7 @@ function SingleStory() {
       },
     }).then(
       (response) => {
+        // console.log(response);
         setStory(response.data);
         setPageLoading(false);
         // show like
@@ -177,7 +178,7 @@ function SingleStory() {
                         story={story}
                         index={index}
                         key={index}
-                        fetchStories={fetchStories}
+                        fetchStory={fetchStory}
                       />
                     );
                   })}
