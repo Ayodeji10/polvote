@@ -5,12 +5,12 @@ import axios from "axios";
 import { DataContext } from "../dataContext";
 import NewLineText from "../components/newLineText";
 import ShareStoryModal from "./shareStoryModal";
-import Comment from "../components/comments";
 import AuthModals from "./authenticationModlas";
 import ShareStoryModalOut from "./shareStoryModalOut";
 import Modal from "react-modal";
 import DeleteGroupStoryModal from "./deleteGroupStoryModal";
 import EditGroupStoryModal from "./editGroupStoryModal";
+import GroupStoryComment from "./groupStoryComment";
 Modal.setAppElement("#root");
 
 function GroupStoryCard({ story, index }) {
@@ -559,7 +559,7 @@ function GroupStoryCard({ story, index }) {
               <h2>Comments</h2>
               {story.comments.slice(0, commentLength).map((comment, index) => {
                 return (
-                  <Comment
+                  <GroupStoryComment
                     story={story}
                     comment={comment}
                     id={story._id}

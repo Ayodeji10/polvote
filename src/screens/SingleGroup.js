@@ -371,7 +371,9 @@ function SingleGroup() {
                           </div>
                           <div>
                             <h3>{group.groupname}</h3>
-                            <h4>
+                            <h4
+                              onClick={() => navigate(`/groups/${id}/members`)}
+                            >
                               {group.members.length} member
                               {group.members.length > 1 && "s"}
                             </h4>{" "}

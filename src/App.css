@@ -5804,6 +5804,7 @@ img#return-btn {
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 0;
+  cursor: pointer;
 }
 
 .single-group-header footer i.fa-circle {

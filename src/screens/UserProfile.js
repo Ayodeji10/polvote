@@ -250,7 +250,6 @@ function UserProfile() {
       .get(`${API.API_ROOT}/polls`)
       .catch((error) => [console.log("Err", error)]);
     setPolls(response.data);
-    // console.log(response.data);
   };
 
   // fetch created polls
@@ -269,7 +268,7 @@ function UserProfile() {
     const response = await axios
       .get(`${API.API_ROOT}/reference/${context.user._id}`)
       .catch((error) => [console.log("Err", error)]);
-    console.log(response);
+    // console.log(response);
     setReferals(response.data);
   };
 
@@ -786,6 +785,7 @@ function UserProfile() {
                     </>
                   )}
 
+                  {/* polls  */}
                   {context.articleView === "polls" && (
                     <>
                       {newPolls
@@ -850,6 +850,7 @@ function UserProfile() {
                     </>
                   )}
 
+                  {/* courses  */}
                   {context.articleView == "courses" && (
                     <div className="empty">
                       <h1>Coming Soon!!!</h1>

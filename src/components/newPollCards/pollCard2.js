@@ -32,7 +32,7 @@ function PollCard2({ poll }) {
         .then((response) => {
           setGroup(response.data);
           setGroupLoading(false);
-          // console.log(`${response.data.groupname}: `, response);
+          console.log(`${response.data.groupname}: `, response);
         })
         .catch((error) => {
           console.log(error);

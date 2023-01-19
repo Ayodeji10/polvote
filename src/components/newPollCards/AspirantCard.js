@@ -195,20 +195,130 @@ function AspirantCard({ aspirant, poll, currentUnit, group }) {
                 {poll.votes.length === 0 ? (
                   <div className="indicator" style={{ width: "0%" }}></div>
                 ) : (
-                  // conditional statements for units bar display
-                  <div
-                    className="indicator"
-                    style={{
-                      width:
-                        poll.votes.filter(
+                  <>
+                    {/* indicator if poll has unit point */}
+                    {poll.unitpoints.length === 0 ? (
+                      <div
+                        className="indicator"
+                        style={{
+                          width:
+                            poll.votes.filter(
+                              (vote) =>
+                                vote.unitid ===
+                                group.units.filter(
+                                  (unit) => unit.unit === currentUnit
+                                )[0]
+                            ).length === 0
+                              ? "0%"
+                              : `${
+                                  (aspirant.votes.filter(
+                                    (vote) =>
+                                      vote.unitid ===
+                                      group.units.filter(
+                                        (unit) => unit.unit === currentUnit
+                                      )[0]
+                                  ).length /
+                                    poll.votes.filter(
+                                      (vote) =>
+                                        vote.unitid ===
+                                        group.units.filter(
+                                          (unit) => unit.unit === currentUnit
+                                        )[0]
+                                    ).length) *
+                                  100
+                                }%`,
+                        }}
+                      ></div>
+                    ) : (
+                      <div
+                        className="indicator"
+                        style={{
+                          width:
+                            poll.votes.filter(
+                              (vote) =>
+                                vote.unitid ===
+                                group.units.filter(
+                                  (unit) => unit.unit === currentUnit
+                                )[0]._id
+                            ).length === 0
+                              ? "0%"
+                              : `${
+                                  (aspirant.votes.filter(
+                                    (vote) =>
+                                      vote.unitid ===
+                                      group.units.filter(
+                                        (unit) => unit.unit === currentUnit
+                                      )[0]._id
+                                  ).length /
+                                    poll.votes.filter(
+                                      (vote) =>
+                                        vote.unitid ===
+                                        group.units.filter(
+                                          (unit) => unit.unit === currentUnit
+                                        )[0]._id
+                                    ).length) *
+                                  100
+                                }%`,
+                        }}
+                      ></div>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+            <div className="col-lg-3 col-md-3 col-sm-3 col-4 d-flex justify-content-between align-items-center">
+              <div>
+                {poll.votes.length === 0 ? (
+                  <h2>0.00%</h2>
+                ) : (
+                  <>
+                    {/* if poll has unit points  */}
+                    {poll.unitpoints.length === 0 ? (
+                      <>
+                        {poll.votes.filter(
+                          (vote) =>
+                            vote.unitid ===
+                            group.units.filter(
+                              (unit) => unit.unit === currentUnit
+                            )[0]
+                        ).length === 0 ? (
+                          <h2>0.00%</h2>
+                        ) : (
+                          <h2>
+                            {(
+                              (aspirant.votes.filter(
+                                (vote) =>
+                                  vote.unitid ===
+                                  group.units.filter(
+                                    (unit) => unit.unit === currentUnit
+                                  )[0]
+                              ).length /
+                                poll.votes.filter(
+                                  (vote) =>
+                                    vote.unitid ===
+                                    group.units.filter(
+                                      (unit) => unit.unit === currentUnit
+                                    )[0]
+                                ).length) *
+                              100
+                            ).toFixed(1)}
+                            %
+                          </h2>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {poll.votes.filter(
                           (vote) =>
                             vote.unitid ===
                             group.units.filter(
                               (unit) => unit.unit === currentUnit
                             )[0]._id
-                        ).length === 0
-                          ? "0%"
-                          : `${
+                        ).length === 0 ? (
+                          <h2>0.00%</h2>
+                        ) : (
+                          <h2>
+                            {(
                               (aspirant.votes.filter(
                                 (vote) =>
                                   vote.unitid ===
@@ -224,86 +334,91 @@ function AspirantCard({ aspirant, poll, currentUnit, group }) {
                                     )[0]._id
                                 ).length) *
                               100
-                            }%`,
-                    }}
-                  ></div>
-                )}
-              </div>
-            </div>
-            <div className="col-lg-3 col-md-3 col-sm-3 col-4 d-flex justify-content-between align-items-center">
-              <div>
-                {poll.votes.length === 0 ? (
-                  <h2>0.00%</h2>
-                ) : (
-                  <>
-                    {poll.votes.filter(
-                      (vote) =>
-                        vote.unitid ===
-                        group.units.filter(
-                          (unit) => unit.unit === currentUnit
-                        )[0]._id
-                    ).length === 0 ? (
-                      <h2>0.00%</h2>
-                    ) : (
-                      <h2>
-                        {(
-                          (aspirant.votes.filter(
-                            (vote) =>
-                              vote.unitid ===
-                              group.units.filter(
-                                (unit) => unit.unit === currentUnit
-                              )[0]._id
-                          ).length /
-                            poll.votes.filter(
-                              (vote) =>
-                                vote.unitid ===
-                                group.units.filter(
-                                  (unit) => unit.unit === currentUnit
-                                )[0]._id
-                            ).length) *
-                          100
-                        ).toFixed(1)}
-                        %
-                      </h2>
+                            ).toFixed(1)}
+                            %
+                          </h2>
+                        )}
+                      </>
                     )}
                   </>
                 )}
                 <h5 className="mb-0">
-                  {
-                    aspirant.votes.filter(
-                      (vote) =>
-                        vote.unitid ===
-                        group.units.filter(
-                          (unit) => unit.unit === currentUnit
-                        )[0]._id
-                    ).length
-                  }{" "}
+                  {/* if poll has unit points  */}
+                  {poll.unitpoints.length === 0 ? (
+                    <>
+                      {
+                        aspirant.votes.filter(
+                          (vote) =>
+                            vote.unitid ===
+                            group.units.filter(
+                              (unit) => unit.unit === currentUnit
+                            )[0]
+                        ).length
+                      }
+                    </>
+                  ) : (
+                    <>
+                      {
+                        aspirant.votes.filter(
+                          (vote) =>
+                            vote.unitid ===
+                            group.units.filter(
+                              (unit) => unit.unit === currentUnit
+                            )[0]._id
+                        ).length
+                      }
+                    </>
+                  )}{" "}
                   Vote{aspirant.votes.length > 1 && "s"}
                 </h5>
               </div>
+              {/* if user is member of group  */}
               {group.members.filter(
-                (member) => member.userid === context.user._id
-              ).length !== 0 &&
-                group.members.filter(
-                  (member) => member.userid === context.user._id
-                )[0].unitname ===
-                  poll.unitpoints.filter(
-                    (unit) => unit.unitname === currentUnit
-                  )[0].unitname && (
-                  <button
-                    className={`d-flex justify-content-center flex-column align-items-center ${
-                      aspirant.votes.filter(
+                (member) =>
+                  member.userid === context.user._id && member.status === 1
+              ).length !== 0 && (
+                <>
+                  {/* if poll has unit points  */}
+                  {poll.unitpoints.length === 0 ? (
+                    <button
+                      className={`d-flex justify-content-center flex-column align-items-center ${
+                        aspirant.votes.filter(
+                          (vote) => vote.voterid === context.user._id
+                        ).length === 0 && "voted"
+                      }`}
+                      onClick={checkVote}
+                    >
+                      {aspirant.votes.filter(
                         (vote) => vote.voterid === context.user._id
-                      ).length === 0 && "voted"
-                    }`}
-                    onClick={checkVote}
-                  >
-                    {aspirant.votes.filter(
-                      (vote) => vote.voterid === context.user._id
-                    ).length !== 0 && <i className="fa-solid fa-check" />}
-                    <span>Vote</span>
-                  </button>
-                )}
+                      ).length !== 0 && <i className="fa-solid fa-check" />}
+                      <span>Vote</span>
+                    </button>
+                  ) : (
+                    <>
+                      {group.members.filter(
+                        (member) => member.userid === context.user._id
+                      )[0].unitname ===
+                        poll.unitpoints.filter(
+                          (unit) => unit.unitname === currentUnit
+                        )[0].unitname && (
+                        <button
+                          className={`d-flex justify-content-center flex-column align-items-center ${
+                            aspirant.votes.filter(
+                              (vote) => vote.voterid === context.user._id
+                            ).length === 0 && "voted"
+                          }`}
+                          onClick={checkVote}
+                        >
+                          {aspirant.votes.filter(
+                            (vote) => vote.voterid === context.user._id
+                          ).length !== 0 && <i className="fa-solid fa-check" />}
+                          <span>Vote</span>
+                        </button>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
             </div>
           </div>
         </div>
