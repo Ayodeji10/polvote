@@ -212,7 +212,7 @@ const Home = () => {
                     }}
                   >
                     <i className="fas fa-edit" />
-                    New Post
+                    Write New Story
                   </h4>
                   {/* write story modal  */}
                   {writeStoryModal && (

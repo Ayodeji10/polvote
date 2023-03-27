@@ -1722,6 +1722,46 @@ footer#footer img.social {
   margin-top: 44px;
 }
 
+/* widget */
+#widget-trigger {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  background-color: rgba(0, 122, 243, 1);
+  position: fixed;
+  bottom: 17px;
+  right: 17px;
+  display: none;
+}
+
+#widget {
+  position: fixed !important;
+  top: unset !important;
+  bottom: 75px !important;
+  left: unset !important;
+  width: 166px;
+  height: min-content !important;
+  overflow-y: scroll;
+  background-color: #0a183d !important;
+  border-radius: 10px !important;
+  padding: 0 !important;
+}
+
+#widget button {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background-color: transparent;
+}
+
+#widget button:last-child {
+  border-bottom: none !important;
+}
+
 /* .profile-widget  */
 /* stats  */
 .stats {
@@ -2070,7 +2110,7 @@ footer#footer img.social {
 .polls .polls-header {
   margin-bottom: 34px;
   position: sticky;
-  top: 70px;
+  top: 65px;
   z-index: 2;
   background-color: #000019;
 }
@@ -2358,12 +2398,13 @@ footer#footer img.social {
 .polls .poll h6 {
   font-size: 14px;
   font-weight: 400;
-  color: #fff;
+  color: rgba(255, 255, 255, 0.7);
   margin-bottom: 0;
 }
 
 .polls .poll h6#open-poll {
   cursor: pointer;
+  color: #fff;
 }
 
 .polls .poll h6 i {
@@ -2743,7 +2784,7 @@ footer#footer img.social {
   margin-left: auto !important;
   margin-right: auto !important;
   width: 442px;
-  height: 310px;
+  height: min-content !important;
   background-color: rgba(6, 25, 71, 1) !important;
   border-radius: 20px !important;
   border: solid 1px rgba(255, 255, 255, 0.1) !important;
@@ -2770,7 +2811,8 @@ footer#footer img.social {
 #vote-modal button {
   font-size: 14px;
   font-weight: 700;
-  border-radius: 5px;
+  border-radius: 30px;
+  margin-bottom: 15px;
 }
 
 #vote-modal button#cancel {
@@ -2827,7 +2869,7 @@ footer#footer img.social {
 .story .stories-header {
   margin-bottom: 34px;
   position: sticky;
-  top: 70px;
+  top: 65px;
   z-index: 2;
   background-color: #000019;
 }
@@ -3078,7 +3120,7 @@ footer#footer img.social {
 
 .story .story .comment .input {
   padding: 10px 17px;
-  border-radius: 5px;
+  border-radius: 30px;
   background-color: #fff;
 }
 
@@ -3098,7 +3140,7 @@ footer#footer img.social {
   font-size: 16px;
   font-weight: 700;
   padding: 10px 17px;
-  border-radius: 5px;
+  border-radius: 30px;
   background-color: rgba(0, 122, 243, 1);
 }
 
@@ -4173,7 +4215,7 @@ img#return-btn {
 
 .single-profile .main .header {
   position: sticky;
-  top: 70px;
+  top: 65px;
   z-index: 2;
   background-color: #00091f !important;
 }
@@ -7707,6 +7749,10 @@ h6.error {
     margin-bottom: 15px;
   }
 
+  .single-profile .main .header button {
+    font-size: 14px;
+  }
+
   .single-profile .main h2 {
     font-size: 25px;
   }
@@ -8302,7 +8348,7 @@ h6.error {
 
   /* stories  */
   .story .stories-header {
-    top: 80px;
+    top: 74px;
   }
 
   .story .stories-header .searchbar {
@@ -8456,6 +8502,10 @@ h6.error {
   }
 
   /* polls  */
+  .polls .polls-header {
+    top: 74px;
+  }
+
   .polls .polls-header .searchbar {
     padding: 8px 12px;
     border-radius: 15px;
@@ -8581,6 +8631,10 @@ h6.error {
   }
 
   /* single aspirant page  */
+  .single-profile .main .header {
+    top: 74px;
+  }
+
   .single-profile .aside .poll-active,
   .single-profile .aside .history {
     padding: 12px;
@@ -8627,12 +8681,6 @@ h6.error {
 
   .single-profile .main button#manage-profile > i {
     margin-right: 5px;
-  }
-
-  .single-profile .main button#manage-profile {
-    font-size: 12px;
-    padding: 10px;
-    border-radius: 10px;
   }
 
   .single-profile .main .info h3 {
@@ -9447,7 +9495,7 @@ h6.error {
   /* stories  */
   .story .stories-header {
     margin-bottom: 20px;
-    top: 80px;
+    top: 74px;
   }
 
   .story .stories-header .searchbar {
@@ -9655,6 +9703,10 @@ h6.error {
   }
 
   /* polls  */
+  .polls .polls-header {
+    top: 74px;
+  }
+
   .polls .searchbar {
     padding: 10px 14px;
     border-radius: 15px;
@@ -9821,6 +9873,10 @@ h6.error {
   }
 
   /* single aspirant page  */
+  .single-profile .main .header {
+    top: 74px;
+  }
+
   .single-profile .aside .poll-active,
   .single-profile .aside .history {
     padding: 15px;
@@ -9862,12 +9918,6 @@ h6.error {
 
   .single-profile .main button#manage-profile > i {
     margin-right: 5px;
-  }
-
-  .single-profile .main button#manage-profile {
-    font-size: 12px;
-    padding: 10px;
-    border-radius: 10px;
   }
 
   .single-profile .main .info h3 {
@@ -10592,7 +10642,7 @@ h6.error {
 
   .home-feed .main .searchbar {
     padding: 10px 20px;
-    border-radius: 20px;
+    margin-bottom: 20px;
   }
 
   .home-feed .main .header input {
@@ -10601,7 +10651,7 @@ h6.error {
 
   .home-feed .main .poll .main,
   .single-poll .poll .body {
-    padding: 20px;
+    padding: 19px 12px;
   }
 
   .home-feed .main .poll .main .header,
@@ -10611,7 +10661,7 @@ h6.error {
 
   .home-feed .main .poll .main .header h3,
   .single-poll .poll .header h3 {
-    font-size: 15px;
+    font-size: 16px;
   }
 
   .home-feed .main .poll .main .header p,
@@ -10642,13 +10692,13 @@ h6.error {
   }
 
   .home-feed .main .poll .main .candidate .aspirant-img {
-    height: 50px;
-    width: 50px;
+    height: 60px;
+    width: 60px;
   }
 
   .home-feed .main .poll .main .candidate h4,
   .single-poll .poll .candidate h3 {
-    font-size: 15px;
+    font-size: 16px;
     margin-bottom: 0;
   }
 
@@ -10660,7 +10710,7 @@ h6.error {
 
   .home-feed .main .poll .main .candidate h3,
   .single-poll .poll .candidate h2 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .home-feed .main .poll .main .candidate h6,
@@ -10697,7 +10747,7 @@ h6.error {
   }
 
   .home-feed .main .stories .header h3 {
-    font-size: 15px;
+    font-size: 20px;
   }
 
   .home-feed .main .stories .header h4 {
@@ -10720,6 +10770,10 @@ h6.error {
 
   footer#footer .top img.logo {
     width: 60px;
+  }
+
+  #widget-trigger {
+    display: block;
   }
 
   /* profile widget  */
@@ -10799,25 +10853,30 @@ h6.error {
   /* stories  */
   .story .stories-header {
     margin-bottom: 20px;
-    top: 80px;
+    top: 74px;
   }
 
   .story .stories-header .searchbar {
-    border-radius: 20px;
-    padding: 11px;
-    margin-bottom: 10px;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-bottom: 0;
+  }
+
+  .story .stories-header .searchbar input {
+    font-size: 14px;
   }
 
   .story .stories-header button {
-    font-size: 14px;
-    border-radius: 20px;
+    /* font-size: 14px;
+    border-radius: 20px; */
+    display: none !important;
   }
 
   .story .story .img-container,
   .story .story .comment .img-container,
   .search .story .img-container {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
   }
 
   .story .story h3 {
@@ -10848,7 +10907,7 @@ h6.error {
   }
 
   .story .story .body {
-    padding: 15px;
+    padding: 19px 12px;
   }
 
   .story .story .comment {
@@ -10856,7 +10915,7 @@ h6.error {
   }
 
   .story .story .comment .input {
-    padding: 5px;
+    padding: 15px;
   }
 
   .story .story .comment button img,
@@ -10867,7 +10926,7 @@ h6.error {
   .story .story .comment button,
   .story .comments .comment .replies button {
     font-size: 12px;
-    padding: 5px;
+    padding: 15px 5px;
   }
 
   .story-recomentdations {
@@ -11033,26 +11092,29 @@ h6.error {
   }
 
   /* polls  */
+  .polls .polls-header {
+    top: 74px;
+    margin-bottom: 20px;
+  }
+
   #oneMoreStepModal {
     width: 370px;
     padding: 15px;
   }
 
   .polls .polls-header .searchbar {
-    padding: 8px 12px;
-    border-radius: 15px;
+    padding: 10px 20px;
+    border-radius: 30px;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 0;
   }
 
   .polls .polls-header button {
-    border-radius: 15px;
-    padding: 8px 0;
-    font-size: 14px;
+    display: none !important;
   }
 
-  .polls .searchbar input {
-    font-size: 12px;
+  .polls .polls-header .searchbar input {
+    font-size: 14px;
   }
 
   .polls h1 {
@@ -11082,16 +11144,33 @@ h6.error {
   }
 
   .polls h1 {
-    font-size: 25px;
+    font-size: 20px;
+  }
+
+  .polls .poll {
+    padding: 14px 10px;
+  }
+
+  .polls .poll .row > div {
+    padding-left: 5px !important;
+    padding-right: 0 !important;
   }
 
   .polls .poll h3 {
-    font-size: 12px;
-    margin-bottom: 7px;
+    font-size: 14px;
+    margin-bottom: 4px;
   }
 
   .polls .poll h6 {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .polls .poll h6#open-poll {
+    font-size: 10px;
+  }
+
+  .polls .poll h6 i {
+    margin-left: 5px;
   }
 
   .open-poll-card .body {
@@ -11146,9 +11225,9 @@ h6.error {
 
   /* vote modal  */
   #vote-modal {
-    width: 400px;
+    width: 370px;
     height: 240px;
-    padding: 30px !important;
+    padding: 20px !important;
   }
 
   /* vote confirmation modal  */
@@ -11191,19 +11270,20 @@ h6.error {
   }
 
   .profile .header .searchbar {
-    padding: 10px 15px;
-    border-radius: 10px;
-    margin-bottom: 10px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin-bottom: 0;
   }
 
   .profile .header .searchbar input {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .profile .header button {
-    padding: 10px;
+    /* padding: 10px;
     font-size: 13px;
-    border-radius: 10px;
+    border-radius: 10px; */
+    display: none;
   }
 
   .profile .profile {
@@ -11238,6 +11318,10 @@ h6.error {
   }
 
   /* single aspirant page  */
+  .single-profile .main .header {
+    top: 74px;
+  }
+
   .single-profile .aside .poll-active,
   .single-profile .aside .history {
     padding: 15px;
@@ -11245,13 +11329,13 @@ h6.error {
   }
 
   .single-profile .aside .poll-active h3 {
-    font-size: 15px;
-    margin-bottom: 9px;
+    font-size: 18px;
+    margin-bottom: 10px;
   }
 
   .single-profile .aside .poll-active p {
-    font-size: 12px;
-    margin-bottom: 20px;
+    font-size: 16px;
+    margin-bottom: 18px;
   }
 
   .single-profile .aside .poll-active img {
@@ -11260,17 +11344,31 @@ h6.error {
   }
 
   .single-profile .aside .poll-active h6 {
-    font-size: 10px;
+    font-size: 14px;
     line-height: 16px;
   }
 
   .single-profile .aside .history h2 {
-    font-size: 15px;
+    font-size: 18px;
     margin-bottom: 15px;
   }
 
+  .single-profile .main .header .searchbar {
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin-bottom: 0 !important;
+  }
+
+  .single-profile .main .header .searchbar input {
+    font-size: 14px;
+  }
+
+  .single-profile .main .header button {
+    display: none !important;
+  }
+
   .single-profile .main h2 {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   .single-profile .main .fa-share-nodes {
@@ -11282,23 +11380,21 @@ h6.error {
   }
 
   .single-profile .main button#manage-profile {
-    font-size: 12px;
-    padding: 10px;
-    border-radius: 10px;
+    padding: 7px 20px;
   }
 
   .single-profile .main .info {
-    padding: 15px;
-    margin-bottom: 35px;
+    padding: 14px 9px;
+    margin-bottom: 30px;
   }
 
   .single-profile .main .info h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
 
   .single-profile .main .info p {
-    font-size: 12px;
-    margin-bottom: 25px;
+    font-size: 14px;
+    margin-bottom: 20px;
     line-height: 22px;
   }
 
@@ -12214,6 +12310,10 @@ h6.error {
     width: 40px;
   }
 
+  #widget-trigger {
+    display: block;
+  }
+
   /* profile widget  */
   .profile-widget {
     display: none;
@@ -12291,30 +12391,31 @@ h6.error {
   /* stories  */
   .story .stories-header {
     margin-bottom: 20px;
-    top: 80px;
+    top: 74px;
   }
 
   .story .stories-header .searchbar {
-    border-radius: 10px;
-    padding: 10px 15px;
-    margin-bottom: 10px;
+    border-radius: 30px;
+    padding: 10px 20px;
+    margin-bottom: 0;
   }
 
   .story .stories-header .searchbar input {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .story .stories-header button {
-    font-size: 13px;
+    /* font-size: 13px;
     border-radius: 10px;
-    padding: 10px;
+    padding: 10px; */
+    display: none !important;
   }
 
   .story .story .img-container,
   .story .story .comment .img-container,
   .search .story .img-container {
-    height: 30px;
-    width: 30px;
+    height: 40px;
+    width: 40px;
   }
 
   .story .story h3 {
@@ -12535,26 +12636,29 @@ h6.error {
   }
 
   /* polls  */
+  .polls .polls-header {
+    top: 74px;
+    margin-bottom: 20px;
+  }
+
   #oneMoreStepModal {
     width: 360px;
     padding: 10px;
   }
 
   .polls .polls-header .searchbar {
-    padding: 8px 12px;
-    border-radius: 15px;
+    padding: 10px 20px;
+    border-radius: 30px;
     width: 100%;
-    margin-bottom: 15px;
+    margin-bottom: 0;
   }
 
   .polls .polls-header button {
-    border-radius: 15px;
-    padding: 8px 0;
-    font-size: 14px;
+    display: none !important;
   }
 
-  .polls .searchbar input {
-    font-size: 12px;
+  .polls .polls-header .searchbar input {
+    font-size: 14px;
   }
 
   .polls h1 {
@@ -12606,16 +12710,33 @@ h6.error {
   }
 
   .polls h1 {
-    font-size: 25px;
+    font-size: 20px;
+  }
+
+  .polls .poll {
+    padding: 14px 10px;
+  }
+
+  .polls .poll .row > div {
+    padding-left: 5px !important;
+    padding-right: 0 !important;
   }
 
   .polls .poll h3 {
-    font-size: 12px;
+    font-size: 14px;
     margin-bottom: 7px;
   }
 
   .polls .poll h6 {
-    font-size: 14px;
+    font-size: 12px;
+  }
+
+  .polls .poll h6#open-poll {
+    font-size: 10px;
+  }
+
+  .polls .poll h6 i {
+    margin-left: 5px;
   }
 
   .open-poll-card .candidate h2 {
@@ -12784,6 +12905,24 @@ h6.error {
     margin-bottom: 15px;
   }
 
+  .single-profile .main .header {
+    top: 74px;
+  }
+
+  .single-profile .main .header .searchbar {
+    padding: 10px 20px;
+    border-radius: 30px;
+    margin-bottom: 0 !important;
+  }
+
+  .single-profile .main .header .searchbar input {
+    font-size: 14px;
+  }
+
+  .single-profile .main .header button {
+    display: none !important;
+  }
+
   .single-profile .main h2 {
     font-size: 20px;
   }
@@ -12799,7 +12938,7 @@ h6.error {
   .single-profile .main button#manage-profile {
     font-size: 12px;
     padding: 10px;
-    border-radius: 10px;
+    /* border-radius: 10px; */
   }
 
   .single-profile .main .info {

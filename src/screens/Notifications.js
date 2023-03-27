@@ -37,7 +37,7 @@ function Notifications() {
         },
       })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setNotifications(response.data);
         setNotificationLoading(false);
       })

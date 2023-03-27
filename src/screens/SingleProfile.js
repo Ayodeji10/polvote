@@ -644,13 +644,13 @@ function SingleProfile() {
                           28
                         )}`
                   }
-                  className="mb-4"
+                  className="mb-2 mb-sm-2 mb-md-4 mb-lg-4"
                   title="YouTube video player"
                   frameBorder={0}
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
                 ></iframe>
-                <div className="d-flex justify-content-between align-items-center mb-5">
+                <div className="d-flex justify-content-between align-items-center mb-3 mb-sm-3 mb-md-5 mb-lg-5">
                   <h2 className="mb-0">
                     {aspirant.firstname} {aspirant.lastname}
                   </h2>
@@ -684,7 +684,7 @@ function SingleProfile() {
                             id="manage-profile"
                             onClick={() => setRedirectToPollModal(true)}
                           >
-                            <i className="fa-solid fa-thumbs-up"></i>Vote
+                            Vote
                           </button>
                         </div>
                       )}

@@ -285,6 +285,7 @@ function StoryCard({ story, stories, setStories, index, fetchStory }) {
 
   return (
     <div className="story">
+      {/* body  */}
       <div className="body">
         <div className="row mb-3 align-items-center">
           <div className="col-11 d-flex align-items-center gap-lg-3 gap-md-3 gap-sm-2 gap-2">
@@ -659,7 +660,7 @@ function StoryCard({ story, stories, setStories, index, fetchStory }) {
         <>
           <div className="comment">
             <div className="row align-items-center">
-              <div className="col-1">
+              <div className="col-2 col-sm-1 col-md-1">
                 <div className="img-container">
                   {context.user.image !== null &&
                   context.user.image !== undefined ? (
@@ -677,7 +678,7 @@ function StoryCard({ story, stories, setStories, index, fetchStory }) {
                   )}
                 </div>
               </div>
-              <div className="col-8">
+              <div className="col-7 col-sm-8 col-md-8">
                 {/* <input type="text" placeholder="Leave a comment..." value={text} onChange={(e) => setText(e.target.value)} /> */}
                 <div className="input d-flex justify-content-between align-items-center">
                   <input
@@ -697,7 +698,7 @@ function StoryCard({ story, stories, setStories, index, fetchStory }) {
                   {/* <i class="fa-solid fa-image" ></i> */}
                 </div>
               </div>
-              <div className="col-3">
+              <div className="col-3 col-sm-3 col-md-3">
                 <button onClick={comment}>
                   <img src="/img/send.png" alt="send" />
                   {loading ? "loading" : "Send"}
